@@ -118,9 +118,11 @@ section{padding:90px 5%}
 
 /* Clinic gallery grid */
 .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-.gallery-item{aspect-ratio:1;border-radius:16px;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:2.8rem;cursor:pointer;transition:transform .2s}
+.gallery-item{aspect-ratio:1;border-radius:16px;background:var(--white);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .2s;display:flex;flex-direction:column}
 .gallery-item:hover{transform:scale(1.03)}
 .gallery-item.span2{grid-column:span 2;aspect-ratio:2/1}
+.gallery-item img{width:100%;flex:1;object-fit:cover;display:block;min-height:0}
+.gallery-caption{font-size:0.75rem;color:var(--muted);text-align:center;padding:8px 10px;background:var(--white);flex-shrink:0}
 
 /* BEFORE/AFTER SLIDER */
 .ba-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
@@ -228,6 +230,20 @@ footer ul a:hover{color:#fff}
   .hero-stats{gap:1.25rem}
   .booking-form{padding:1.5rem}
 }
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,18,30,0.95);align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}
+.lightbox-inner{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lightbox-inner img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;display:block}
+.lightbox-caption{font-size:0.85rem;color:rgba(255,255,255,0.6);letter-spacing:.06em;text-align:center}
+.lightbox-close{position:fixed;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1;opacity:0.7;transition:opacity .2s}
+.lightbox-close:hover{opacity:1}
+.lightbox-prev,.lightbox-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:16px 14px;border-radius:8px;transition:background .2s;line-height:1}
+.lightbox-prev{left:16px}
+.lightbox-next{right:16px}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.2)}
+.gallery-item{cursor:zoom-in}
 </style>
 </head>
 <body>
@@ -332,9 +348,7 @@ footer ul a:hover{color:#fff}
   <div class="section-title">Лікарі, яким ви довіряєте</div>
   <div class="section-sub">Кожен наш спеціаліст — сертифікований фахівець із багаторічним клінічним досвідом.</div>
   <div class="team-grid">
-    <div class="doctor-avatar">
-  <img src="photos/doctor1.jpg" style="width:100%; height:100%; object-fit:cover; object-position: top;">
-</div><div class="doctor-info"><h3>Олена Коваленко</h3><div class="spec">Головний лікар · Терапевт</div><div class="exp">Стаж: 18 років</div></div></div>
+    <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><h3>Олена Коваленко</h3><div class="spec">Головний лікар · Терапевт</div><div class="exp">Стаж: 18 років</div></div></div>
     <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><h3>Андрій Мороз</h3><div class="spec">Хірург · Імплантолог</div><div class="exp">Стаж: 12 років</div></div></div>
     <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><h3>Тетяна Лисенко</h3><div class="spec">Ортодонт</div><div class="exp">Стаж: 9 років</div></div></div>
     <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><h3>Іван Петренко</h3><div class="spec">Естетична стоматологія</div><div class="exp">Стаж: 14 років</div></div></div>
@@ -352,12 +366,30 @@ footer ul a:hover{color:#fff}
 
   <div id="gallery-clinic">
     <div class="gallery-grid">
-      <div class="gallery-item span2">🏥<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Зал очікування</span></div>
-      <div class="gallery-item">🦷<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Кабінет 1</span></div>
-      <div class="gallery-item">🔬<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Лабораторія</span></div>
-      <div class="gallery-item">💉<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Хірургія</span></div>
-      <div class="gallery-item">🪞<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Кабінет 3</span></div>
-      <div class="gallery-item span2">🌟<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Панорамний рентген</span></div>
+      <div class="gallery-item span2">
+        <img src="photos/clinic1.jpg" alt="Зал очікування">
+        <div class="gallery-caption">Зал очікування</div>
+      </div>
+      <div class="gallery-item">
+        <img src="photos/clinic2.jpg" alt="Кабінет 1">
+        <div class="gallery-caption">Кабінет 1</div>
+      </div>
+      <div class="gallery-item">
+        <img src="photos/clinic3.jpg" alt="Лабораторія">
+        <div class="gallery-caption">Лабораторія</div>
+      </div>
+      <div class="gallery-item">
+        <img src="photos/clinic4.jpg" alt="Хірургія">
+        <div class="gallery-caption">Хірургія</div>
+      </div>
+      <div class="gallery-item">
+        <img src="photos/clinic5.jpg" alt="Кабінет 3">
+        <div class="gallery-caption">Кабінет 3</div>
+      </div>
+      <div class="gallery-item span2">
+        <img src="photos/clinic6.jpg" alt="Панорамний рентген">
+        <div class="gallery-caption">Панорамний рентген</div>
+      </div>
     </div>
   </div>
 
@@ -581,6 +613,66 @@ document.getElementById('appointment-form').addEventListener('submit',async func
     }else{btn.disabled=false;btn.textContent='Підтвердити запис →';alert('Помилка. Спробуйте ще раз або зателефонуйте нам.');}
   }catch{btn.disabled=false;btn.textContent='Підтвердити запис →';alert('Помилка. Спробуйте ще раз або зателефонуйте нам.');}
 });
+
+// Lightbox
+let lightboxItems = [];
+let lightboxIndex = 0;
+
+function buildLightbox(){
+  lightboxItems = [];
+  document.querySelectorAll('.gallery-item img').forEach(img => {
+    lightboxItems.push({src: img.src, caption: img.alt});
+  });
+  document.querySelectorAll('.gallery-item').forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(i));
+  });
+}
+
+function openLightbox(index){
+  lightboxIndex = index;
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = lightboxItems[index].src;
+  document.getElementById('lightbox-caption').textContent = lightboxItems[index].caption;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightboxBtn(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightbox(e){
+  if(e.target === document.getElementById('lightbox')) closeLightboxBtn();
+}
+
+function lightboxNav(dir){
+  lightboxIndex = (lightboxIndex + dir + lightboxItems.length) % lightboxItems.length;
+  document.getElementById('lightbox-img').src = lightboxItems[lightboxIndex].src;
+  document.getElementById('lightbox-caption').textContent = lightboxItems[lightboxIndex].caption;
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if(!lb.classList.contains('open')) return;
+  if(e.key === 'Escape') closeLightboxBtn();
+  if(e.key === 'ArrowLeft') lightboxNav(-1);
+  if(e.key === 'ArrowRight') lightboxNav(1);
+});
+
+buildLightbox();
+
 </script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1);event.stopPropagation()">&#8249;</button>
+  <button class="lightbox-next" onclick="lightboxNav(1);event.stopPropagation()">&#8250;</button>
+  <div class="lightbox-inner">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
 </body>
 </html>
