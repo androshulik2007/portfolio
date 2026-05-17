@@ -102,13 +102,11 @@ section{padding:90px 5%}
 /* TEAM */
 .team{background:var(--white)}
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
-.doctor-card{background:var(--bg);border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:transform .2s}
+.doctor-card{background:var(--white);border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:transform .2s;display:flex;flex-direction:column}
 .doctor-card:hover{transform:translateY(-4px)}
-.doctor-avatar{height:180px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:3.8rem}
-.doctor-info{padding:1.15rem}
-.doctor-info h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;margin-bottom:.25rem}
-.doctor-info .spec{font-size:0.78rem;color:var(--accent);font-weight:500}
-.doctor-info .exp{font-size:0.75rem;color:var(--muted);margin-top:.2rem}
+.doctor-avatar{height:240px;overflow:hidden;border-radius:20px 20px 0 0;flex-shrink:0;background:var(--accent-light)}
+.doctor-avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 38%;display:block}
+.doctor-info{padding:1.15rem;background:var(--white)}
 
 /* GALLERY */
 .gallery{background:var(--bg)}
@@ -348,13 +346,25 @@ footer ul a:hover{color:#fff}
   <div class="section-title">Лікарі, яким ви довіряєте</div>
   <div class="section-sub">Кожен наш спеціаліст — сертифікований фахівець із багаторічним клінічним досвідом.</div>
   <div class="team-grid">
-    <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><h3>Олена Коваленко</h3><div class="spec">Головний лікар · Терапевт</div><div class="exp">Стаж: 18 років</div></div></div>
-    <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><h3>Андрій Мороз</h3><div class="spec">Хірург · Імплантолог</div><div class="exp">Стаж: 12 років</div></div></div>
-    <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><h3>Тетяна Лисенко</h3><div class="spec">Ортодонт</div><div class="exp">Стаж: 9 років</div></div></div>
-    <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><h3>Іван Петренко</h3><div class="spec">Естетична стоматологія</div><div class="exp">Стаж: 14 років</div></div></div>
+    <div class="doctor-card">
+      <div class="doctor-avatar"><img src="photos/doctor1.jpg" alt="Олена Коваленко"></div>
+      <div class="doctor-info"><h3>Олена Коваленко</h3><div class="spec">Головний лікар · Терапевт</div><div class="exp">Стаж: 18 років</div></div>
+    </div>
+    <div class="doctor-card">
+      <div class="doctor-avatar"><img src="photos/doctor2.jpg" alt="Андрій Мороз"></div>
+      <div class="doctor-info"><h3>Андрій Мороз</h3><div class="spec">Хірург · Імплантолог</div><div class="exp">Стаж: 12 років</div></div>
+    </div>
+    <div class="doctor-card">
+      <div class="doctor-avatar"><img src="photos/doctor3.jpg" alt="Тетяна Лисенко"></div>
+      <div class="doctor-info"><h3>Тетяна Лисенко</h3><div class="spec">Ортодонт</div><div class="exp">Стаж: 9 років</div></div>
+    </div>
+    <div class="doctor-card">
+      <div class="doctor-avatar"><img src="photos/doctor4.jpg" alt="Іван Петренко"></div>
+      <div class="doctor-info"><h3>Іван Петренко</h3><div class="spec">Естетична стоматологія</div><div class="exp">Стаж: 14 років</div></div>
+    </div>
   </div>
 </section>
-
+ 
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
   <div class="section-tag">Галерея</div>
