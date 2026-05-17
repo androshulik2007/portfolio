@@ -130,11 +130,13 @@ section{padding:90px 5%}
 .ba-card{background:var(--white);border-radius:20px;overflow:hidden;border:1px solid var(--border);padding:1.25rem}
 .ba-card-title{font-size:0.82rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
 .ba-slider-wrap{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;cursor:ew-resize;user-select:none}
-.ba-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem}
+.ba-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;overflow:hidden}
+.ba-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .ba-img-before{background:linear-gradient(135deg,#f0f4f8 0%,#dce8f0 100%)}
 .ba-img-after{background:linear-gradient(135deg,#e0f5f4 0%,#b8e8e6 100%)}
 .ba-clip{position:absolute;inset:0;overflow:hidden}
-.ba-img-after-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,#e0f5f4 0%,#b8e8e6 100%)}
+.ba-img-after-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,#e0f5f4 0%,#b8e8e6 100%);overflow:hidden}
+.ba-img-after-inner img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
 .ba-divider{position:absolute;top:0;bottom:0;width:3px;background:#fff;cursor:ew-resize;z-index:10;transform:translateX(-50%)}
 .ba-divider::before,.ba-divider::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:36px;height:36px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 .ba-divider::before{top:50%;transform:translate(-50%,-50%)}
@@ -428,56 +430,72 @@ footer ul a:hover{color:#fff}
       <div class="ba-card">
         <div class="ba-card-title">Відбілювання зубів</div>
         <div class="ba-slider-wrap" id="slider1">
-          <div class="ba-img ba-img-before">😬</div>
-          <div class="ba-clip" id="clip1" style="clip-path:inset(0 50% 0 0)">
-            <div class="ba-img-after-inner">😁</div>
-          </div>
-          <div class="ba-divider" id="div1" style="left:50%">
-            <div class="ba-handle">◀▶</div>
-          </div>
-        </div>
+  <div class="ba-img ba-img-before">
+    <img src="photos/after1.jpg" alt="До">
+  </div>
+  <div class="ba-clip" id="clip1" style="clip-path:inset(0 50% 0 0)">
+    <div class="ba-img-after-inner">
+      <img src="photos/before1.jpg" alt="Після">
+    </div>
+  </div>
+  <div class="ba-divider" id="div1" style="left:50%">
+    <div class="ba-handle">◀▶</div>
+  </div>
+</div>
         <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
       </div>
 
       <div class="ba-card">
         <div class="ba-card-title">Вініри E.max</div>
         <div class="ba-slider-wrap" id="slider2">
-          <div class="ba-img ba-img-before">🦷</div>
-          <div class="ba-clip" id="clip2" style="clip-path:inset(0 50% 0 0)">
-            <div class="ba-img-after-inner">💎</div>
-          </div>
-          <div class="ba-divider" id="div2" style="left:50%">
-            <div class="ba-handle">◀▶</div>
-          </div>
-        </div>
+  <div class="ba-img ba-img-before">
+    <img src="photos/after2.jpg" alt="До">
+  </div>
+  <div class="ba-clip" id="clip2" style="clip-path:inset(0 50% 0 0)">
+    <div class="ba-img-after-inner">
+      <img src="photos/before2.jpg" alt="Після">
+    </div>
+  </div>
+  <div class="ba-divider" id="div2" style="left:50%">
+    <div class="ba-handle">◀▶</div>
+  </div>
+</div>
         <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
       </div>
 
       <div class="ba-card">
         <div class="ba-card-title">Ортодонтія</div>
         <div class="ba-slider-wrap" id="slider3">
-          <div class="ba-img ba-img-before">😬</div>
-          <div class="ba-clip" id="clip3" style="clip-path:inset(0 50% 0 0)">
-            <div class="ba-img-after-inner">😄</div>
-          </div>
-          <div class="ba-divider" id="div3" style="left:50%">
-            <div class="ba-handle">◀▶</div>
-          </div>
-        </div>
+  <div class="ba-img ba-img-before">
+    <img src="photos/after3.jpg" alt="До">
+  </div>
+  <div class="ba-clip" id="clip3" style="clip-path:inset(0 50% 0 0)">
+    <div class="ba-img-after-inner">
+      <img src="photos/before3.jpg" alt="Після">
+    </div>
+  </div>
+  <div class="ba-divider" id="div3" style="left:50%">
+    <div class="ba-handle">◀▶</div>
+  </div>
+</div>
         <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
       </div>
 
       <div class="ba-card">
         <div class="ba-card-title">Імплантація</div>
         <div class="ba-slider-wrap" id="slider4">
-          <div class="ba-img ba-img-before">😕</div>
-          <div class="ba-clip" id="clip4" style="clip-path:inset(0 50% 0 0)">
-            <div class="ba-img-after-inner">😊</div>
-          </div>
-          <div class="ba-divider" id="div4" style="left:50%">
-            <div class="ba-handle">◀▶</div>
-          </div>
-        </div>
+  <div class="ba-img ba-img-before">
+    <img src="photos/after4.jpg" alt="До">
+  </div>
+  <div class="ba-clip" id="clip4" style="clip-path:inset(0 50% 0 0)">
+    <div class="ba-img-after-inner">
+      <img src="photos/before4.jpg" alt="Після">
+    </div>
+  </div>
+  <div class="ba-divider" id="div4" style="left:50%">
+    <div class="ba-handle">◀▶</div>
+  </div>
+</div>
         <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
       </div>
 
