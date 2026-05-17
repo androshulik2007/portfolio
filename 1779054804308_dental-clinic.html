@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>СмайлКлінік — Стоматологія</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #3B8F3B;
+    --green-light: #5CB85C;
+    --green-pale: #EAF5EA;
+    --green-mid: #C8E6C8;
+    --white: #ffffff;
+    --gray-light: #f7f9f7;
+    --gray: #6b7280;
+    --dark: #1a2e1a;
+    --radius: 50px;
+    --radius-card: 20px;
+    --shadow: 0 4px 24px rgba(59,143,59,0.10);
+    --shadow-hover: 0 8px 36px rgba(59,143,59,0.18);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--green-mid);
+    padding: 0 5%;
+    height: 68px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(59,143,59,0.12); }
+  .nav-logo {
+    font-size: 22px; font-weight: 800; color: var(--green);
+    text-decoration: none; letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--dark); }
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--dark); font-weight: 600; font-size: 14px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-phone { font-weight: 700; color: var(--green); font-size: 14px; text-decoration: none; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--green); color: white;
+    padding: 10px 24px; border-radius: var(--radius);
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 14px;
+    border: none; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  }
+  .btn:hover { background: var(--green-light); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+  .btn:active { transform: translateY(0); }
+  .btn-outline {
+    background: transparent; color: var(--green);
+    border: 2px solid var(--green);
+  }
+  .btn-outline:hover { background: var(--green-pale); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: 0.3s; }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 100px 5% 0;
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #f0faf0 0%, #ffffff 60%);
+  }
+  .wave-bg {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 0;
+    line-height: 0;
+  }
+  .wave-top {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 0;
+  }
+  .hero-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center; width: 100%; max-width: 1200px; margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-pale); border: 1px solid var(--green-mid);
+    border-radius: 50px; padding: 6px 16px;
+    font-size: 13px; font-weight: 700; color: var(--green);
+    margin-bottom: 20px;
+  }
+  .hero-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); display: block; }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 60px); font-weight: 800;
+    line-height: 1.1; color: var(--dark);
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--green); }
+  .hero p {
+    font-size: 18px; color: var(--gray); line-height: 1.7;
+    margin-bottom: 36px; max-width: 480px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-visual {
+    position: relative; display: flex; justify-content: center;
+  }
+  .hero-img-wrap {
+    width: 100%; max-width: 480px;
+    position: relative;
+  }
+  .hero-img-bg {
+    width: 100%; padding-bottom: 110%;
+    background: linear-gradient(135deg, var(--green-pale) 0%, var(--green-mid) 100%);
+    border-radius: 40% 60% 60% 40% / 50% 40% 60% 50%;
+    position: relative; overflow: hidden;
+  }
+  .doctor-placeholder {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 85%; height: 95%;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .doctor-svg { width: 100%; height: 100%; }
+  .hero-float-card {
+    position: absolute; bottom: 10%; left: -10%;
+    background: white; border-radius: 18px;
+    padding: 14px 20px; box-shadow: var(--shadow);
+    display: flex; align-items: center; gap: 12px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .hero-float-card2 {
+    position: absolute; top: 10%; right: -8%;
+    background: white; border-radius: 18px;
+    padding: 14px 20px; box-shadow: var(--shadow);
+    animation: float 3.5s ease-in-out infinite reverse;
+  }
+  .float-icon { font-size: 28px; }
+  .float-text { font-size: 13px; font-weight: 700; color: var(--dark); }
+  .float-sub { font-size: 11px; color: var(--gray); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ===== WAVE DIVIDER ===== */
+  .wave-divider { display: block; width: 100%; line-height: 0; }
+  .wave-divider svg { display: block; width: 100%; }
+
+  /* ===== STATS ===== */
+  .stats {
+    background: var(--green);
+    padding: 48px 5%;
+  }
+  .stats-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; text-align: center;
+  }
+  .stat-item { color: white; }
+  .stat-icon { font-size: 36px; margin-bottom: 8px; }
+  .stat-num {
+    font-size: clamp(32px, 4vw, 48px); font-weight: 800;
+    line-height: 1; margin-bottom: 4px;
+  }
+  .stat-label { font-size: 14px; font-weight: 500; opacity: 0.85; }
+
+  /* ===== SECTION BASE ===== */
+  section { padding: 60px 5%; }
+  .section-tag {
+    display: inline-block; background: var(--green-pale);
+    color: var(--green); font-weight: 700; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    padding: 5px 16px; border-radius: 50px; margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: clamp(26px, 3.5vw, 42px); font-weight: 800;
+    color: var(--dark); line-height: 1.15; margin-bottom: 12px;
+  }
+  .section-title span { color: var(--green); }
+  .section-sub { font-size: 16px; color: var(--gray); line-height: 1.7; max-width: 560px; }
+  .section-header { margin-bottom: 40px; }
+  .center { text-align: center; }
+  .center .section-sub { margin: 0 auto; }
+
+  /* ===== SERVICES ===== */
+  .services { background: var(--gray-light); position: relative; overflow: hidden; }
+  .services-wave-top { position: absolute; top: 0; left: 0; right: 0; }
+  .services-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .service-card {
+    background: white; border-radius: var(--radius-card);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    display: flex; flex-direction: column;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--green), var(--green-light));
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+  .service-icon {
+    width: 58px; height: 58px; border-radius: 16px;
+    background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; margin-bottom: 16px;
+  }
+  .service-title { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
+  .service-desc { font-size: 14px; color: var(--gray); line-height: 1.6; flex: 1; margin-bottom: 20px; }
+  .service-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .service-btns .btn { padding: 9px 18px; font-size: 13px; flex: 1; min-width: 120px; }
+
+  /* ===== ABOUT ===== */
+  .about { background: white; }
+  .about-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1.2fr;
+    gap: 60px; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-bg {
+    width: 100%; padding-bottom: 120%;
+    background: linear-gradient(135deg, var(--green-pale), var(--green-mid));
+    border-radius: 30% 70% 70% 30% / 50% 50% 50% 50%;
+    position: relative; overflow: hidden;
+  }
+  .about-badges {
+    position: absolute; bottom: 8%; right: -5%;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .about-badge {
+    background: white; border-radius: 14px; padding: 10px 16px;
+    box-shadow: var(--shadow); font-size: 13px; font-weight: 700;
+    color: var(--dark); display: flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+  .about-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+  .about-content .section-sub { max-width: 100%; margin-bottom: 28px; }
+  .about-list { list-style: none; margin-bottom: 32px; }
+  .about-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 8px 0; font-size: 15px; color: var(--dark); font-weight: 600;
+  }
+  .about-list li::before {
+    content: '✓'; width: 22px; height: 22px; min-width: 22px;
+    background: var(--green); color: white;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800;
+  }
+
+  /* ===== REVIEWS ===== */
+  .reviews { background: var(--gray-light); position: relative; overflow: hidden; }
+  .carousel-wrap { max-width: 1200px; margin: 0 auto; position: relative; }
+  .carousel-track-wrap { overflow: hidden; }
+  .carousel-track {
+    display: flex; gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .review-card {
+    min-width: calc(33.33% - 14px); background: white;
+    border-radius: var(--radius-card); padding: 28px 24px;
+    box-shadow: var(--shadow); flex-shrink: 0;
+  }
+  .review-stars { color: #f59e0b; font-size: 18px; margin-bottom: 12px; }
+  .review-text { font-size: 15px; color: var(--dark); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .review-author { display: flex; align-items: center; gap: 12px; }
+  .review-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--green-pale); display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 800; color: var(--green);
+  }
+  .review-name { font-weight: 700; font-size: 14px; color: var(--dark); }
+  .review-date { font-size: 12px; color: var(--gray); }
+  .carousel-controls {
+    display: flex; justify-content: center; gap: 12px; margin-top: 32px;
+  }
+  .car-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: white; border: 2px solid var(--green-mid);
+    cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; color: var(--green);
+  }
+  .car-btn:hover { background: var(--green); color: white; border-color: var(--green); }
+  .carousel-dots { display: flex; align-items: center; gap: 8px; }
+  .dot-indicator {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-mid); cursor: pointer; transition: all 0.2s;
+    border: none;
+  }
+  .dot-indicator.active { background: var(--green); width: 24px; border-radius: 4px; }
+
+  /* ===== PRICES ===== */
+  .prices { background: white; }
+  .prices-inner { max-width: 900px; margin: 0 auto; }
+  .price-table { width: 100%; border-collapse: collapse; }
+  .price-table thead th {
+    background: var(--green); color: white;
+    padding: 14px 20px; text-align: left; font-size: 14px; font-weight: 700;
+  }
+  .price-table thead th:first-child { border-radius: 14px 0 0 0; }
+  .price-table thead th:last-child { border-radius: 0 14px 0 0; text-align: right; }
+  .price-table tbody tr:nth-child(even) { background: var(--gray-light); }
+  .price-table tbody tr:hover { background: var(--green-pale); }
+  .price-table td {
+    padding: 13px 20px; font-size: 14px; border-bottom: 1px solid var(--green-mid);
+  }
+  .price-table td:last-child { text-align: right; font-weight: 700; color: var(--green); }
+  .price-cat {
+    padding: 10px 20px; font-size: 12px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--green);
+    background: var(--green-pale); border-left: 3px solid var(--green);
+  }
+  .prices-note { margin-top: 20px; text-align: center; font-size: 13px; color: var(--gray); }
+
+  /* ===== FLOATING BTN ===== */
+  .float-cta {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--green); color: white;
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; box-shadow: 0 4px 20px rgba(59,143,59,0.4);
+    animation: pulse 2s ease-in-out infinite;
+    transition: transform 0.2s;
+  }
+  .float-cta:hover { transform: scale(1.1); animation-play-state: paused; }
+  .float-cta-tooltip {
+    position: fixed; bottom: 98px; right: 28px; z-index: 999;
+    background: var(--dark); color: white;
+    font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 8px 14px; border-radius: 12px; white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s;
+  }
+  .float-cta:hover + .float-cta-tooltip,
+  .float-cta-tooltip:hover { opacity: 1; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(59,143,59,0.4); }
+    50% { box-shadow: 0 4px 20px rgba(59,143,59,0.4), 0 0 0 12px rgba(59,143,59,0.12); }
+  }
+
+  /* ===== POPUP ===== */
+  .popup-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.45);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.4s ease;
+  }
+  .popup-overlay.hidden { display: none; }
+  .popup {
+    background: white; border-radius: 24px;
+    max-width: 480px; width: 100%; padding: 40px 36px;
+    position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    animation: slideUp 0.4s ease;
+  }
+  .popup-close {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--gray-light); border: none; cursor: pointer;
+    width: 36px; height: 36px; border-radius: 50%;
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    color: var(--gray); transition: background 0.2s;
+  }
+  .popup-close:hover { background: var(--green-pale); color: var(--green); }
+  .popup-icon { font-size: 48px; text-align: center; margin-bottom: 16px; }
+  .popup h3 { font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 8px; }
+  .popup p { font-size: 15px; color: var(--gray); text-align: center; margin-bottom: 24px; line-height: 1.6; }
+  .popup-form { display: flex; flex-direction: column; gap: 12px; }
+  .popup-form input {
+    width: 100%; padding: 13px 18px; border: 2px solid var(--green-mid);
+    border-radius: var(--radius); font-family: 'Nunito', sans-serif; font-size: 15px;
+    outline: none; transition: border-color 0.2s; color: var(--dark);
+  }
+  .popup-form input:focus { border-color: var(--green); }
+  .popup-form .btn { width: 100%; padding: 14px; font-size: 16px; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--dark); color: white;
+    padding: 28px 5%; text-align: center;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+  .footer-logo { font-size: 18px; font-weight: 800; color: var(--green-light); }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green-light); }
+
+  /* ===== SCROLL ANIMATION ===== */
+  .fade-in {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in.delay-1 { transition-delay: 0.1s; }
+  .fade-in.delay-2 { transition-delay: 0.2s; }
+  .fade-in.delay-3 { transition-delay: 0.3s; }
+  .fade-in.delay-4 { transition-delay: 0.4s; }
+  .fade-in.delay-5 { transition-delay: 0.5s; }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 900px) {
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-inner { grid-template-columns: 1fr; }
+    .about-img-wrap { max-width: 340px; margin: 0 auto; }
+    .about-badges { right: 0; }
+    .review-card { min-width: calc(50% - 10px); }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-visual { display: none; }
+    .hero { padding-top: 90px; min-height: auto; padding-bottom: 60px; }
+    .hero p { max-width: 100%; }
+    .hero-btns { justify-content: center; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .nav-phone { display: none; }
+    .hamburger { display: flex; }
+    .nav-right { gap: 12px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .review-card { min-width: 100%; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .hero h1 { font-size: 32px; }
+    section { padding: 48px 4%; }
+  }
+  @media (max-width: 400px) {
+    .popup { padding: 28px 20px; }
+    .float-cta { bottom: 20px; right: 20px; width: 52px; height: 52px; font-size: 20px; }
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(255,255,255,0.98); backdrop-filter: blur(12px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 22px; font-weight: 700; color: var(--dark); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--green); }
+  .mobile-menu-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; font-size: 28px; cursor: pointer; color: var(--dark);
+  }
+</style>
+</head>
+<body>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div class="popup-icon">🦷</div>
+    <h3>Запишіться на перший огляд!</h3>
+    <p>Безкоштовна консультація для нових пацієнтів. Залиште свій номер — ми зателефонуємо вам протягом 15 хвилин.</p>
+    <div class="popup-form">
+      <input type="text" placeholder="Ваше ім'я">
+      <input type="tel" placeholder="Ваш номер телефону">
+      <button class="btn" onclick="closePopup()">Записатись безкоштовно</button>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  <a href="#services" onclick="closeMobileMenu()">Послуги</a>
+  <a href="#about" onclick="closeMobileMenu()">Лікар</a>
+  <a href="#reviews" onclick="closeMobileMenu()">Відгуки</a>
+  <a href="#prices" onclick="closeMobileMenu()">Ціни</a>
+  <a href="tel:+380991234567" class="nav-phone">+38 (099) 123-45-67</a>
+  <button class="btn" onclick="closeMobileMenu(); openPopup()">Записатись</button>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Смайл<span>Клінік</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#services">Послуги</a></li>
+      <li><a href="#about">Лікар</a></li>
+      <li><a href="#reviews">Відгуки</a></li>
+      <li><a href="#prices">Ціни</a></li>
+    </ul>
+    <a href="tel:+380991234567" class="nav-phone">+38 (099) 123-45-67</a>
+    <button class="btn" onclick="openPopup()">Записатись</button>
+    <button class="hamburger" onclick="openMobileMenu()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content fade-in">
+      <div class="hero-badge">✦ Понад 10 років досвіду</div>
+      <h1>Ваша <span>здорова усмішка</span> — наша головна мета</h1>
+      <p>Сучасна стоматологія з турботою про кожного пацієнта. Безболісне лікування, індивідуальний підхід і гарантія результату.</p>
+      <div class="hero-btns">
+        <button class="btn" onclick="openPopup()">Записатись на прийом</button>
+        <a href="#services" class="btn btn-outline">Наші послуги</a>
+      </div>
+    </div>
+    <div class="hero-visual fade-in delay-2">
+      <div class="hero-img-wrap">
+        <div class="hero-img-bg">
+          <div class="doctor-placeholder">
+            <svg class="doctor-svg" viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
+              <!-- White coat body -->
+              <ellipse cx="160" cy="380" rx="110" ry="80" fill="#ffffff" opacity="0.9"/>
+              <rect x="70" y="240" width="220" height="180" rx="30" fill="#ffffff" opacity="0.9"/>
+              <!-- Green trim -->
+              <rect x="70" y="240" width="30" height="180" rx="10" fill="#3B8F3B" opacity="0.2"/>
+              <rect x="220" y="240" width="30" height="180" rx="10" fill="#3B8F3B" opacity="0.2"/>
+              <!-- Stethoscope -->
+              <path d="M120 270 Q140 300 160 290 Q180 280 190 270" stroke="#3B8F3B" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <circle cx="160" cy="290" r="10" fill="#3B8F3B" opacity="0.5"/>
+              <!-- Head -->
+              <ellipse cx="160" cy="180" rx="65" ry="75" fill="#f5d0a9"/>
+              <!-- Hair -->
+              <ellipse cx="160" cy="120" rx="65" ry="40" fill="#4a3728"/>
+              <rect x="95" y="120" width="130" height="30" fill="#4a3728"/>
+              <!-- Eyes -->
+              <ellipse cx="135" cy="175" rx="8" ry="9" fill="white"/>
+              <ellipse cx="185" cy="175" rx="8" ry="9" fill="white"/>
+              <circle cx="137" cy="177" r="5" fill="#2c1810"/>
+              <circle cx="187" cy="177" r="5" fill="#2c1810"/>
+              <circle cx="139" cy="175" r="2" fill="white"/>
+              <circle cx="189" cy="175" r="2" fill="white"/>
+              <!-- Smile -->
+              <path d="M140 200 Q160 215 180 200" stroke="#c0876a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <!-- Mask hanging -->
+              <rect x="120" y="215" width="80" height="35" rx="10" fill="#3B8F3B" opacity="0.3"/>
+              <!-- Name tag -->
+              <rect x="115" y="290" width="90" height="30" rx="8" fill="#EAF5EA" stroke="#3B8F3B" stroke-width="1.5"/>
+              <rect x="122" y="298" width="60" height="4" rx="2" fill="#3B8F3B" opacity="0.5"/>
+              <rect x="122" y="308" width="40" height="3" rx="1.5" fill="#3B8F3B" opacity="0.3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="hero-float-card">
+          <div class="float-icon">😁</div>
+          <div>
+            <div class="float-text">1200+ пацієнтів</div>
+            <div class="float-sub">задоволені результатом</div>
+          </div>
+        </div>
+        <div class="hero-float-card2">
+          <div style="font-size:13px; font-weight:700; color:var(--dark)">⭐ 4.9</div>
+          <div style="font-size:11px; color:var(--gray); margin-top:2px">Google Reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wave-bg">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#3B8F3B"/>
+    </svg>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-icon">🦷</div>
+      <div class="stat-num" data-target="1200">0</div>
+      <div class="stat-label">Щасливих пацієнтів</div>
+    </div>
+    <div class="stat-item fade-in delay-1">
+      <div class="stat-icon">📅</div>
+      <div class="stat-num" data-target="10">0</div>
+      <div class="stat-label">Років досвіду</div>
+    </div>
+    <div class="stat-item fade-in delay-2">
+      <div class="stat-icon">🏆</div>
+      <div class="stat-num" data-target="15">0</div>
+      <div class="stat-label">Нагород та сертифікатів</div>
+    </div>
+    <div class="stat-item fade-in delay-3">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-num" data-target="49" data-decimal>0</div>
+      <div class="stat-label">Середній рейтинг</div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,0 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="#f7f9f7"/>
+  </svg>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header center fade-in">
+    <div class="section-tag">Наші послуги</div>
+    <h2 class="section-title">Все для вашої <span>здорової усмішки</span></h2>
+    <p class="section-sub">Сучасне обладнання та індивідуальний підхід до кожного пацієнта</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in delay-1">
+      <div class="service-icon">🔬</div>
+      <div class="service-title">Діагностика та огляд</div>
+      <div class="service-desc">Комплексна діагностика стану зубів із цифровим рентгеном та 3D-скануванням. Знайдемо проблеми на ранній стадії.</div>
+      <div class="service-btns">
+        <button class="btn" onclick="openPopup()">Записатись на прийом</button>
+        <button class="btn btn-outline">Детальніше</button>
+      </div>
+    </div>
+    <div class="service-card fade-in delay-2">
+      <div class="service-icon">✨</div>
+      <div class="service-title">Відбілювання зубів</div>
+      <div class="service-desc">Професійне відбілювання системою Zoom 4 та Home Bleaching. Результат до 10 тонів за одне відвідування.</div>
+      <div class="service-btns">
+        <button class="btn" onclick="openPopup()">Записатись на прийом</button>
+        <button class="btn btn-outline">Детальніше</button>
+      </div>
+    </div>
+    <div class="service-card fade-in delay-3">
+      <div class="service-icon">🦷</div>
+      <div class="service-title">Лікування карієсу</div>
+      <div class="service-desc">Безболісне лікування з анестезією. Використовуємо тільки сучасні фотополімерні матеріали провідних виробників.</div>
+      <div class="service-btns">
+        <button class="btn" onclick="openPopup()">Записатись на прийом</button>
+        <button class="btn btn-outline">Детальніше</button>
+      </div>
+    </div>
+    <div class="service-card fade-in delay-1">
+      <div class="service-icon">👑</div>
+      <div class="service-title">Протезування</div>
+      <div class="service-desc">Коронки, вініри, мости та знімні протези. Відновимо зуби так, що ніхто не помітить різниці.</div>
+      <div class="service-btns">
+        <button class="btn" onclick="openPopup()">Записатись на прийом</button>
+        <button class="btn btn-outline">Детальніше</button>
+      </div>
+    </div>
+    <div class="service-card fade-in delay-2">
+      <div class="service-icon">🔩</div>
+      <div class="service-title">Імплантація</div>
+      <div class="service-desc">Дентальні імпланти провідних брендів з гарантією 10 років. Повне відновлення жувальної функції та естетики.</div>
+      <div class="service-btns">
+        <button class="btn" onclick="openPopup()">Записатись на прийом</button>
+        <button class="btn btn-outline">Детальніше</button>
+      </div>
+    </div>
+    <div class="service-card fade-in delay-3">
+      <div class="service-icon">🧒</div>
+      <div class="service-title">Дитяча стоматологія</div>
+      <div class="service-desc">Лікування зубів у дітей в ігровій атмосфері. Наші лікарі знають, як знайти підхід до найменших пацієнтів.</div>
+      <div class="service-btns">
+        <button class="btn" onclick="openPopup()">Записатись на прийом</button>
+        <button class="btn btn-outline">Детальніше</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,30 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="white"/>
+  </svg>
+</div>
+
+<!-- ABOUT DOCTOR -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap fade-in">
+      <div class="about-img-bg">
+        <div class="doctor-placeholder" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80%;height:92%;">
+          <svg viewBox="0 0 280 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <ellipse cx="140" cy="360" rx="100" ry="60" fill="white" opacity="0.8"/>
+            <rect x="55" y="220" width="190" height="160" rx="28" fill="white" opacity="0.85"/>
+            <rect x="55" y="220" width="26" height="160" rx="8" fill="#3B8F3B" opacity="0.15"/>
+            <rect x="199" y="220" width="26" height="160" rx="8" fill="#3B8F3B" opacity="0.15"/>
+            <path d="M100 248 Q120 278 140 270 Q160 260 170 248" stroke="#3B8F3B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <circle cx="140" cy="270" r="8" fill="#3B8F3B" opacity="0.4"/>
+            <ellipse cx="140" cy="162" rx="58" ry="66" fill="#f5d0a9"/>
+            <ellipse cx="140" cy="108" rx="58" ry="36" fill="#5c3d2e"/>
+            <rect x="82" y="108" width="116" height="26" fill="#5c3d2e"/>
+            <ellipse cx="117" cy="157" rx="7" ry="8" fill="white"/>
+            <ellipse cx="163" cy="157" rx="7" ry="8" fill="white"/>
+            <circle cx="119" cy="159" r="4.5" fill="#2c1810"/>
+            <circle cx="165" cy="159" r="4.5" fill="#2c1810"/>
+            <circle cx="121" cy="157" r="1.5" fill="white"/>
+            <circle cx="167" cy="157" r="1.5" fill="white"/>
+            <path d="M122 181 Q140 194 158 181" stroke="#c0876a" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <rect x="105" y="272" width="70" height="26" rx="7" fill="#EAF5EA" stroke="#3B8F3B" stroke-width="1.5"/>
+            <rect x="112" y="280" width="46" height="3" rx="1.5" fill="#3B8F3B" opacity="0.5"/>
+            <rect x="112" y="288" width="30" height="2.5" rx="1.2" fill="#3B8F3B" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="about-badges">
+        <div class="about-badge"><div class="dot"></div>Лікар-стоматолог</div>
+        <div class="about-badge"><div class="dot"></div>10 років практики</div>
+      </div>
+    </div>
+    <div class="about-content fade-in delay-2">
+      <div class="section-tag">Про лікаря</div>
+      <h2 class="section-title">Олена Коваленко — <span>ваш стоматолог</span></h2>
+      <p class="section-sub">Лікар-стоматолог вищої категорії з 10-річним досвідом роботи. Спеціалізація — естетична стоматологія, імплантологія та ортопедія. Постійно підвищує кваліфікацію на міжнародних конференціях.</p>
+      <ul class="about-list">
+        <li>Кандидат медичних наук, автор 12 наукових публікацій</li>
+        <li>Сертифікований спеціаліст Nobel Biocare та Straumann</li>
+        <li>Учасниця міжнародних конгресів у Берліні, Відні, Барселоні</li>
+        <li>Більше 500 успішно встановлених імплантів</li>
+      </ul>
+      <button class="btn" onclick="openPopup()">Записатись до лікаря</button>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave-divider" style="background:white;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,20 C480,60 960,0 1440,40 L1440,60 L0,60 Z" fill="#f7f9f7"/>
+  </svg>
+</div>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="section-header center fade-in">
+    <div class="section-tag">Відгуки</div>
+    <h2 class="section-title">Що кажуть наші <span>пацієнти</span></h2>
+    <p class="section-sub">Понад 500 відгуків із рейтингом 4.9⭐ на Google Maps</p>
+  </div>
+  <div class="carousel-wrap fade-in">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Нарешті знайшла свого стоматолога! Олена Миколаївна — справжній професіонал. Лікування абсолютно безболісне, а результат перевершив усі очікування. Рекомендую всім без вагань!"</div>
+          <div class="review-author">
+            <div class="review-avatar">М</div>
+            <div>
+              <div class="review-name">Марина Дяченко</div>
+              <div class="review-date">Квітень 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Поставили імплант — навіть не відчув болю! Сервіс на рівні кращих клінік Європи. Персонал дуже уважний і турботливий. Ціни адекватні якості. Буду приходити тільки сюди."</div>
+          <div class="review-author">
+            <div class="review-avatar">А</div>
+            <div>
+              <div class="review-name">Андрій Мороз</div>
+              <div class="review-date">Березень 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Приводжу сюди всю сім'ю, включаючи дітей. Дитяча стоматологія тут — це окремий рівень! Дочка більше не боїться зубного. Дякую команді за таке відношення!"</div>
+          <div class="review-author">
+            <div class="review-avatar">О</div>
+            <div>
+              <div class="review-name">Оксана Іваненко</div>
+              <div class="review-date">Лютий 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Відбілювання Zoom 4 — зуби стали на 8 тонів світліші! Результат тримається вже пів року. Лікар детально пояснила весь процес і дала рекомендації по догляду. Дякую!"</div>
+          <div class="review-author">
+            <div class="review-avatar">В</div>
+            <div>
+              <div class="review-name">Вікторія Пономаренко</div>
+              <div class="review-date">Січень 2025</div>
+            </div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">"Поставили вініри — відчуваю себе зовсім іншою людиною! Посмішка змінилася кардинально. Технологія та якість матеріалів — топ. Окремо хочу подякувати за турботу та увагу."</div>
+          <div class="review-author">
+            <div class="review-avatar">К</div>
+            <div>
+              <div class="review-name">Катерина Литвин</div>
+              <div class="review-date">Грудень 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="car-btn" id="carPrev">&#8592;</button>
+      <div class="carousel-dots">
+        <button class="dot-indicator active" data-idx="0"></button>
+        <button class="dot-indicator" data-idx="1"></button>
+        <button class="dot-indicator" data-idx="2"></button>
+      </div>
+      <button class="car-btn" id="carNext">&#8594;</button>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave-divider" style="background:#f7f9f7;">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,0 1080,60 1440,20 L1440,60 L0,60 Z" fill="white"/>
+  </svg>
+</div>
+
+<!-- PRICES -->
+<section class="prices" id="prices">
+  <div class="section-header center fade-in">
+    <div class="section-tag">Прайс-лист</div>
+    <h2 class="section-title">Прозорі <span>ціни</span></h2>
+    <p class="section-sub">Без прихованих доплат. Точна вартість — після безкоштовного огляду</p>
+  </div>
+  <div class="prices-inner fade-in">
+    <table class="price-table">
+      <thead>
+        <tr><th>Послуга</th><th>Час</th><th>Вартість</th></tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="3" class="price-cat">Діагностика</td></tr>
+        <tr><td>Первинний огляд</td><td>30 хв</td><td>Безкоштовно</td></tr>
+        <tr><td>Рентген (1 зуб)</td><td>5 хв</td><td>від 150 грн</td></tr>
+        <tr><td>Панорамний знімок (ОПГ)</td><td>10 хв</td><td>від 500 грн</td></tr>
+
+        <tr><td colspan="3" class="price-cat">Лікування</td></tr>
+        <tr><td>Лікування карієсу</td><td>60 хв</td><td>від 1 200 грн</td></tr>
+        <tr><td>Лікування пульпіту</td><td>90 хв</td><td>від 2 500 грн</td></tr>
+        <tr><td>Видалення зуба</td><td>30–60 хв</td><td>від 800 грн</td></tr>
+
+        <tr><td colspan="3" class="price-cat">Естетична стоматологія</td></tr>
+        <tr><td>Відбілювання Zoom 4</td><td>90 хв</td><td>від 6 500 грн</td></tr>
+        <tr><td>Вінір (1 зуб)</td><td>—</td><td>від 8 000 грн</td></tr>
+        <tr><td>Кераміко-металева коронка</td><td>—</td><td>від 4 500 грн</td></tr>
+
+        <tr><td colspan="3" class="price-cat">Імплантологія</td></tr>
+        <tr><td>Дентальний імплант (Nobel)</td><td>—</td><td>від 25 000 грн</td></tr>
+        <tr><td>Коронка на імплант</td><td>—</td><td>від 8 000 грн</td></tr>
+      </tbody>
+    </table>
+    <p class="prices-note">* Точна вартість визначається після огляду. Можлива оплата частинами.</p>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div style="background: linear-gradient(135deg, #2d6e2d 0%, #3B8F3B 50%, #5CB85C 100%); padding: 60px 5%; text-align: center; position: relative; overflow: hidden;">
+  <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;background:rgba(255,255,255,0.05);border-radius:50%;"></div>
+  <div style="position:absolute;bottom:-60px;left:-20px;width:250px;height:250px;background:rgba(255,255,255,0.04);border-radius:50%;"></div>
+  <div style="position:relative;z-index:1;">
+    <h2 style="font-size:clamp(24px,3vw,38px);font-weight:800;color:white;margin-bottom:12px;">Перший крок до ідеальної усмішки</h2>
+    <p style="color:rgba(255,255,255,0.85);font-size:16px;margin-bottom:28px;">Запишіться на безкоштовний огляд прямо зараз</p>
+    <button class="btn" style="background:white;color:var(--green);font-size:16px;padding:14px 36px;" onclick="openPopup()">Записатись безкоштовно →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">СмайлКлінік</div>
+    <div class="footer-copy">© 2025 СмайлКлінік. Усі права захищені.</div>
+    <div class="footer-links">
+      <a href="#">Конфіденційність</a>
+      <a href="tel:+380991234567">+38 (099) 123-45-67</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTON -->
+<button class="float-cta" onclick="openPopup()" title="Записатись на прийом">📅</button>
+<div class="float-cta-tooltip">Записатись на прийом</div>
+
+<script>
+  // Popup
+  function openPopup() {
+    document.getElementById('popup').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePopup() {
+    document.getElementById('popup').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('popup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+  // Show popup after 4s
+  setTimeout(openPopup, 4000);
+
+  // Mobile menu
+  function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+
+  // Navbar scroll
+  window.addEventListener('scroll', function() {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Counter animation
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const isDecimal = el.dataset.decimal !== undefined;
+    const duration = 1800;
+    const start = performance.now();
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const val = Math.round(target * eased);
+      el.textContent = isDecimal ? (val / 10).toFixed(1) : val + (target >= 1000 ? '+' : (target >= 10 && !isDecimal ? '+' : ''));
+      if (progress < 1) requestAnimationFrame(update);
+      else el.textContent = isDecimal ? (target / 10).toFixed(1) : target + (target >= 1000 ? '+' : '+');
+    }
+    requestAnimationFrame(update);
+  }
+
+  // Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const counters = entry.target.querySelectorAll('[data-target]');
+        counters.forEach(c => animateCounter(c));
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.stats-inner').forEach(el => observer.observe(el));
+
+  // Carousel
+  const track = document.getElementById('carouselTrack');
+  const cards = track.querySelectorAll('.review-card');
+  const dots = document.querySelectorAll('.dot-indicator');
+  let current = 0;
+  let perView = window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
+
+  function getPerView() {
+    return window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
+  }
+  function maxIdx() { return Math.max(0, cards.length - getPerView()); }
+
+  function goTo(idx) {
+    current = Math.max(0, Math.min(idx, maxIdx()));
+    const cardW = cards[0].offsetWidth + 20;
+    track.style.transform = `translateX(-${current * cardW}px)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  document.getElementById('carPrev').onclick = () => goTo(current - 1);
+  document.getElementById('carNext').onclick = () => goTo(current + 1);
+  dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.idx))));
+
+  window.addEventListener('resize', () => { goTo(0); });
+
+  // Auto-advance carousel
+  setInterval(() => {
+    goTo(current >= maxIdx() ? 0 : current + 1);
+  }, 5000);
+</script>
+</body>
+</html>

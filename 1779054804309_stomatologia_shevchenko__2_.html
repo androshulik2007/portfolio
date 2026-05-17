@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стоматологія імені Т. Шевченка</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#ffffff;
+  --bg:#F4F8FB;
+  --bg2:#EAF2F8;
+  --charcoal:#1A2332;
+  --muted:#5A6A7A;
+  --accent:#1A7AB0;
+  --accent-dark:#0F5A85;
+  --accent-light:#D6EAF5;
+  --accent-mid:#4DA3D4;
+  --teal:#0EA5A0;
+  --teal-light:#D0F0EE;
+  --border:rgba(26,122,176,0.12);
+  --border2:rgba(26,122,176,0.22);
+  --silver:#E8EFF5;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--charcoal);font-size:16px;line-height:1.7}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(244,248,251,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  height:70px;
+}
+.logo{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:600;color:var(--charcoal);letter-spacing:-0.01em}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.875rem;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:100px;font-size:0.875rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:background .2s}
+.nav-cta:hover{background:var(--accent-dark)}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--charcoal)}
+.nav-burger svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:rgba(244,248,251,0.98);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:1.5rem 5%;z-index:99;flex-direction:column;gap:1rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{text-decoration:none;color:var(--charcoal);font-size:1rem;padding:.5rem 0;border-bottom:1px solid var(--border)}
+.mobile-menu .nav-cta{margin-top:.5rem;text-align:center}
+
+/* HERO */
+.hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 5% 60px;gap:4rem}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,3.8rem);font-weight:500;line-height:1.15;letter-spacing:-0.03em;margin-bottom:1.5rem}
+.hero-text h1 em{font-style:italic;color:var(--accent)}
+.hero-text p{font-size:1.05rem;color:var(--muted);max-width:440px;margin-bottom:2.5rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:14px 28px;border-radius:100px;font-size:0.95rem;font-family:'DM Sans',sans-serif;font-weight:500;cursor:pointer;transition:background .2s,transform .15s}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px)}
+.btn-ghost{background:none;color:var(--charcoal);border:1.5px solid var(--border2);padding:13px 26px;border-radius:100px;font-size:0.95rem;font-family:'DM Sans',sans-serif;font-weight:400;cursor:pointer;transition:border-color .2s}
+.btn-ghost:hover{border-color:var(--accent)}
+.hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.hero-stat strong{display:block;font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:500;color:var(--accent)}
+.hero-stat span{font-size:0.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.hero-visual{display:flex;flex-direction:column;gap:1rem}
+.hero-card-main{background:var(--white);border-radius:24px;border:1px solid var(--border);height:320px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-card-main::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--accent-light);border-radius:50%;opacity:.5}
+.tooth-illustration{width:140px;height:140px;background:var(--accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;z-index:1}
+.hero-badge{position:absolute;top:20px;right:20px;background:var(--teal);color:#fff;padding:7px 15px;border-radius:100px;font-size:0.78rem;font-weight:500;z-index:1}
+.hero-cards-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.hero-mini-card{background:var(--white);border-radius:16px;padding:1.25rem;border:1px solid var(--border)}
+.hero-mini-card .icon{font-size:1.4rem;margin-bottom:.5rem}
+.hero-mini-card strong{display:block;font-size:0.875rem;font-weight:500}
+.hero-mini-card span{font-size:0.775rem;color:var(--muted)}
+
+/* SECTIONS */
+section{padding:90px 5%}
+.section-tag{display:inline-block;font-size:0.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-weight:500;margin-bottom:.75rem;background:var(--accent-light);padding:4px 12px;border-radius:100px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500;line-height:1.2;letter-spacing:-.02em;margin-bottom:1rem}
+.section-sub{font-size:1rem;color:var(--muted);max-width:520px;font-weight:300;margin-bottom:3rem}
+
+/* SERVICES */
+.services{background:var(--white)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.service-card{background:var(--bg);border-radius:20px;padding:1.75rem;transition:transform .2s,box-shadow .2s;border:1px solid var(--border)}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(26,122,176,.1);border-color:var(--accent-mid)}
+.service-icon{width:50px;height:50px;background:var(--accent-light);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.1rem}
+.service-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:500;margin-bottom:.5rem}
+.service-card p{font-size:0.85rem;color:var(--muted);font-weight:300}
+.service-price{margin-top:.9rem;font-size:0.85rem;font-weight:500;color:var(--accent)}
+
+/* PRICES */
+.prices{background:var(--bg)}
+.prices-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:20px;overflow:hidden;border:1px solid var(--border)}
+.prices-table th{padding:1.1rem 1.4rem;text-align:left;background:var(--accent);color:#fff;font-size:0.82rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.prices-table td{padding:.95rem 1.4rem;font-size:0.875rem;border-bottom:1px solid var(--border);color:var(--charcoal)}
+.prices-table tr:last-child td{border-bottom:none}
+.prices-table tr:nth-child(even) td{background:rgba(26,122,176,.03)}
+.price-amount{font-weight:500;color:var(--accent)}
+
+/* TEAM */
+.team{background:var(--white)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.doctor-card{background:var(--bg);border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:transform .2s}
+.doctor-card:hover{transform:translateY(-4px)}
+.doctor-avatar{height:180px;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:3.8rem}
+.doctor-info{padding:1.15rem}
+.doctor-info h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:500;margin-bottom:.25rem}
+.doctor-info .spec{font-size:0.78rem;color:var(--accent);font-weight:500}
+.doctor-info .exp{font-size:0.75rem;color:var(--muted);margin-top:.2rem}
+
+/* GALLERY */
+.gallery{background:var(--bg)}
+.gallery-tabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.tab{padding:8px 20px;border-radius:100px;border:1.5px solid var(--border2);background:none;font-family:'DM Sans',sans-serif;font-size:0.875rem;cursor:pointer;color:var(--muted);transition:all .2s}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* Clinic gallery grid */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.gallery-item{aspect-ratio:1;border-radius:16px;background:var(--white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:2.8rem;cursor:pointer;transition:transform .2s}
+.gallery-item:hover{transform:scale(1.03)}
+.gallery-item.span2{grid-column:span 2;aspect-ratio:2/1}
+
+/* BEFORE/AFTER SLIDER */
+.ba-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.ba-card{background:var(--white);border-radius:20px;overflow:hidden;border:1px solid var(--border);padding:1.25rem}
+.ba-card-title{font-size:0.82rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
+.ba-slider-wrap{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;cursor:ew-resize;user-select:none}
+.ba-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem}
+.ba-img-before{background:linear-gradient(135deg,#f0f4f8 0%,#dce8f0 100%)}
+.ba-img-after{background:linear-gradient(135deg,#e0f5f4 0%,#b8e8e6 100%)}
+.ba-clip{position:absolute;inset:0;overflow:hidden}
+.ba-img-after-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,#e0f5f4 0%,#b8e8e6 100%)}
+.ba-divider{position:absolute;top:0;bottom:0;width:3px;background:#fff;cursor:ew-resize;z-index:10;transform:translateX(-50%)}
+.ba-divider::before,.ba-divider::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:36px;height:36px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.ba-divider::before{top:50%;transform:translate(-50%,-50%)}
+.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:11;pointer-events:none;font-size:.85rem;color:var(--accent);font-weight:700}
+.ba-labels{display:flex;justify-content:space-between;margin-top:.6rem}
+.ba-label{font-size:0.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500;padding:3px 10px;border-radius:100px}
+.ba-label.before{background:#fee8e8;color:#c0392b}
+.ba-label.after{background:var(--teal-light);color:var(--teal)}
+
+/* REVIEWS */
+.reviews{background:var(--white)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.review-card{background:var(--bg);border-radius:20px;padding:1.6rem;border:1px solid var(--border);position:relative}
+.stars{font-size:.95rem;color:#F4A800;margin-bottom:.9rem}
+.review-card p{font-size:0.875rem;color:var(--charcoal);font-weight:300;line-height:1.7;margin-bottom:1.1rem}
+.reviewer{display:flex;align-items:center;gap:.75rem}
+.reviewer-avatar{width:38px;height:38px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.reviewer-name{font-weight:500;font-size:0.85rem}
+.reviewer-date{font-size:0.72rem;color:var(--muted)}
+.review-quote{position:absolute;top:1.25rem;right:1.5rem;font-family:'Playfair Display',serif;font-size:3rem;color:var(--accent-light);line-height:1}
+
+/* BOOKING */
+.booking{background:var(--accent)}
+.booking .section-tag{color:var(--accent-light);background:rgba(255,255,255,.15)}
+.booking .section-title{color:#fff}
+.booking .section-sub{color:rgba(255,255,255,.7)}
+.booking-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.booking-form{background:rgba(255,255,255,.1);border-radius:24px;padding:2.25rem;border:1px solid rgba(255,255,255,.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:0.78rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.7);margin-bottom:.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:0.875rem;color:#fff;outline:none;transition:border-color .2s}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.4)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(255,255,255,.5)}
+.form-group select option{background:var(--accent);color:#fff}
+.form-group textarea{resize:none;height:85px}
+.btn-submit{width:100%;background:#fff;color:var(--accent);border:none;padding:14px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:500;cursor:pointer;margin-top:.5rem;transition:background .2s,transform .15s}
+.btn-submit:hover{background:#e8f4fb;transform:translateY(-2px)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-success{text-align:center;padding:2rem;color:#fff}
+.form-success .checkmark{font-size:3rem;margin-bottom:1rem}
+.form-success h3{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:.5rem}
+.form-success p{color:rgba(255,255,255,.7);font-size:.9rem}
+.booking-info h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:500;color:#fff;margin-bottom:1.5rem}
+.info-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.4rem}
+.info-icon{width:42px;height:42px;background:rgba(255,255,255,.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.info-item strong{display:block;font-size:0.875rem;color:#fff;font-weight:500}
+.info-item span{font-size:0.82rem;color:rgba(255,255,255,.6)}
+
+/* FOOTER */
+footer{background:#0F1C2B;color:rgba(255,255,255,.55);padding:60px 5% 36px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:.9rem}
+.footer-logo span{color:var(--accent-mid)}
+.footer-desc{font-size:0.85rem;line-height:1.7;max-width:250px}
+footer h4{color:#fff;font-size:0.85rem;font-weight:500;margin-bottom:1rem;letter-spacing:.03em}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.55rem}
+footer ul a{color:rgba(255,255,255,.45);text-decoration:none;font-size:0.85rem;transition:color .2s}
+footer ul a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;font-size:0.78rem;flex-wrap:wrap;gap:.5rem}
+
+/* MOBILE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .nav-burger{display:block}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:60px 5% 50px;gap:2.5rem}
+  .hero-visual{order:-1}
+  .hero-card-main{height:240px}
+  .hero-cards-row{grid-template-columns:1fr 1fr}
+  .hero-stats{gap:1.5rem}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .booking-layout{grid-template-columns:1fr;gap:2rem}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
+  .ba-gallery{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item.span2{grid-column:span 2}
+}
+@media(max-width:600px){
+  nav{padding:0 4%}
+  section{padding:70px 4%}
+  .hero{padding:50px 4% 40px}
+  .services-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .prices-table th:nth-child(2),.prices-table td:nth-child(2){display:none}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .gallery-item.span2{grid-column:span 2}
+  .reviews-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1.25rem}
+  .booking-form{padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Стоматологія <span>ім. Т. Шевченка</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Послуги</a></li>
+    <li><a href="#prices">Ціни</a></li>
+    <li><a href="#team">Лікарі</a></li>
+    <li><a href="#gallery">Галерея</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Записатися</button>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Меню">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" onclick="toggleMenu()">Послуги</a>
+  <a href="#prices" onclick="toggleMenu()">Ціни</a>
+  <a href="#team" onclick="toggleMenu()">Лікарі</a>
+  <a href="#gallery" onclick="toggleMenu()">Галерея</a>
+  <a href="#reviews" onclick="toggleMenu()">Відгуки</a>
+  <button class="nav-cta" onclick="toggleMenu();document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Записатися на прийом</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="section-tag">Сучасна стоматологія</div>
+    <h1>Ваша посмішка — <em>наше покликання</em></h1>
+    <p>Турботлива стоматологія у серці України. Стерильне середовище, сучасне обладнання та комфорт для кожного пацієнта.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Записатися на прийом</button>
+      <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Наші послуги</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>15+</strong><span>Років досвіду</span></div>
+      <div class="hero-stat"><strong>3 200+</strong><span>Щасливих пацієнтів</span></div>
+      <div class="hero-stat"><strong>12</strong><span>Лікарів-фахівців</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-main">
+      <div class="tooth-illustration">🦷</div>
+      <span class="hero-badge">✓ Стерильно та безпечно</span>
+    </div>
+    <div class="hero-cards-row">
+      <div class="hero-mini-card">
+        <div class="icon">🏥</div>
+        <strong>Сучасна клініка</strong>
+        <span>Обладнання нового покоління</span>
+      </div>
+      <div class="hero-mini-card">
+        <div class="icon">🕐</div>
+        <strong>Пн–Нд 8:00–20:00</strong>
+        <span>Зручний графік роботи</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-tag">Послуги</div>
+  <div class="section-title">Повний спектр стоматологічної допомоги</div>
+  <div class="section-sub">Від профілактичних оглядів до складних реставрацій — ми піклуємося про ваше здоров'я на кожному кроці.</div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon">🦷</div><h3>Лікування зубів</h3><p>Лікування карієсу, пульпіту та інших захворювань з використанням сучасних матеріалів.</p><div class="service-price">від 650 грн</div></div>
+    <div class="service-card"><div class="service-icon">✨</div><h3>Відбілювання</h3><p>Професійне відбілювання ZOOM 4 та домашні системи для білосніжної посмішки.</p><div class="service-price">від 3 200 грн</div></div>
+    <div class="service-card"><div class="service-icon">💎</div><h3>Вініри та коронки</h3><p>Ультратонкі вініри та цирконієві коронки для ідеальної естетики.</p><div class="service-price">від 4 500 грн</div></div>
+    <div class="service-card"><div class="service-icon">🔩</div><h3>Імплантація</h3><p>Імплантати провідних виробників, процедура без болю під анестезією, гарантія на роботу.</p><div class="service-price">від 12 000 грн</div></div>
+    <div class="service-card"><div class="service-icon">😁</div><h3>Брекети та елайнери</h3><p>Виправлення прикусу для дітей і дорослих. Естетичні та прозорі системи.</p><div class="service-price">від 8 000 грн</div></div>
+    <div class="service-card"><div class="service-icon">🧹</div><h3>Чистка та профілактика</h3><p>Ультразвукове видалення нальоту та каменю, Air Flow, фторування емалі.</p><div class="service-price">від 1 200 грн</div></div>
+  </div>
+</section>
+
+<!-- PRICES -->
+<section class="prices" id="prices">
+  <div class="section-tag">Прайс-лист</div>
+  <div class="section-title">Прозорі ціни без сюрпризів</div>
+  <div class="section-sub">Всі вартості фіксовані та зазначені до початку лікування.</div>
+  <table class="prices-table">
+    <thead><tr><th>Послуга</th><th>Опис</th><th>Вартість</th></tr></thead>
+    <tbody>
+      <tr><td>Консультація лікаря</td><td>Огляд, діагностика, план лікування</td><td class="price-amount">безкоштовно</td></tr>
+      <tr><td>Лікування карієсу</td><td>1 поверхня, світлова пломба</td><td class="price-amount">від 650 грн</td></tr>
+      <tr><td>Лікування пульпіту</td><td>1-канальний зуб, до 3 каналів</td><td class="price-amount">від 1 800 грн</td></tr>
+      <tr><td>Видалення зуба</td><td>Просте / складне хірургічне</td><td class="price-amount">від 700 / 1 500 грн</td></tr>
+      <tr><td>Ультразвукова чистка</td><td>Повний рот + Air Flow</td><td class="price-amount">від 1 200 грн</td></tr>
+      <tr><td>Відбілювання ZOOM 4</td><td>1 сеанс, результат до 8 тонів</td><td class="price-amount">від 3 200 грн</td></tr>
+      <tr><td>Вінір керамічний</td><td>1 одиниця, E.max</td><td class="price-amount">від 7 500 грн</td></tr>
+      <tr><td>Імплант + коронка</td><td>Nobel / Straumann, все включно</td><td class="price-amount">від 22 000 грн</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-tag">Наша команда</div>
+  <div class="section-title">Лікарі, яким ви довіряєте</div>
+  <div class="section-sub">Кожен наш спеціаліст — сертифікований фахівець із багаторічним клінічним досвідом.</div>
+  <div class="team-grid">
+    <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><h3>Олена Коваленко</h3><div class="spec">Головний лікар · Терапевт</div><div class="exp">Стаж: 18 років</div></div></div>
+    <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><h3>Андрій Мороз</h3><div class="spec">Хірург · Імплантолог</div><div class="exp">Стаж: 12 років</div></div></div>
+    <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><h3>Тетяна Лисенко</h3><div class="spec">Ортодонт</div><div class="exp">Стаж: 9 років</div></div></div>
+    <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><h3>Іван Петренко</h3><div class="spec">Естетична стоматологія</div><div class="exp">Стаж: 14 років</div></div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="section-tag">Галерея</div>
+  <div class="section-title">Наша клініка та результати</div>
+  <div class="gallery-tabs">
+    <button class="tab active" onclick="switchTab(this,'clinic')">Клініка</button>
+    <button class="tab" onclick="switchTab(this,'ba')">До / Після</button>
+  </div>
+
+  <div id="gallery-clinic">
+    <div class="gallery-grid">
+      <div class="gallery-item span2">🏥<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Зал очікування</span></div>
+      <div class="gallery-item">🦷<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Кабінет 1</span></div>
+      <div class="gallery-item">🔬<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Лабораторія</span></div>
+      <div class="gallery-item">💉<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Хірургія</span></div>
+      <div class="gallery-item">🪞<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Кабінет 3</span></div>
+      <div class="gallery-item span2">🌟<br><span style="font-size:.72rem;color:var(--muted);margin-top:8px;display:block">Панорамний рентген</span></div>
+    </div>
+  </div>
+
+  <div id="gallery-ba" style="display:none">
+    <div class="ba-gallery">
+
+      <div class="ba-card">
+        <div class="ba-card-title">Відбілювання зубів</div>
+        <div class="ba-slider-wrap" id="slider1">
+          <div class="ba-img ba-img-before">😬</div>
+          <div class="ba-clip" id="clip1" style="clip-path:inset(0 50% 0 0)">
+            <div class="ba-img-after-inner">😁</div>
+          </div>
+          <div class="ba-divider" id="div1" style="left:50%">
+            <div class="ba-handle">◀▶</div>
+          </div>
+        </div>
+        <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+      </div>
+
+      <div class="ba-card">
+        <div class="ba-card-title">Вініри E.max</div>
+        <div class="ba-slider-wrap" id="slider2">
+          <div class="ba-img ba-img-before">🦷</div>
+          <div class="ba-clip" id="clip2" style="clip-path:inset(0 50% 0 0)">
+            <div class="ba-img-after-inner">💎</div>
+          </div>
+          <div class="ba-divider" id="div2" style="left:50%">
+            <div class="ba-handle">◀▶</div>
+          </div>
+        </div>
+        <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+      </div>
+
+      <div class="ba-card">
+        <div class="ba-card-title">Ортодонтія</div>
+        <div class="ba-slider-wrap" id="slider3">
+          <div class="ba-img ba-img-before">😬</div>
+          <div class="ba-clip" id="clip3" style="clip-path:inset(0 50% 0 0)">
+            <div class="ba-img-after-inner">😄</div>
+          </div>
+          <div class="ba-divider" id="div3" style="left:50%">
+            <div class="ba-handle">◀▶</div>
+          </div>
+        </div>
+        <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+      </div>
+
+      <div class="ba-card">
+        <div class="ba-card-title">Імплантація</div>
+        <div class="ba-slider-wrap" id="slider4">
+          <div class="ba-img ba-img-before">😕</div>
+          <div class="ba-clip" id="clip4" style="clip-path:inset(0 50% 0 0)">
+            <div class="ba-img-after-inner">😊</div>
+          </div>
+          <div class="ba-divider" id="div4" style="left:50%">
+            <div class="ba-handle">◀▶</div>
+          </div>
+        </div>
+        <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="section-tag">Відгуки</div>
+  <div class="section-title">Що говорять наші пацієнти</div>
+  <div class="section-sub">Більше 3 000 задоволених пацієнтів довіряють нам свої посмішки.</div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <span class="review-quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>Нарешті знайшла стоматологію, де не страшно! Лікарка Олена дуже уважна і пояснила кожен крок. Ставила пломбу — навіть не відчула болю.</p>
+      <div class="reviewer"><div class="reviewer-avatar">👩</div><div><div class="reviewer-name">Марія Савченко</div><div class="reviewer-date">Березень 2025</div></div></div>
+    </div>
+    <div class="review-card">
+      <span class="review-quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>Робив імплант у доктора Мороза. Процедура пройшла ідеально — зараз уже забув, що зуб штучний. Результат через рік тримається відмінно!</p>
+      <div class="reviewer"><div class="reviewer-avatar">👨</div><div><div class="reviewer-name">Олексій Бондаренко</div><div class="reviewer-date">Лютий 2025</div></div></div>
+    </div>
+    <div class="review-card">
+      <span class="review-quote">"</span>
+      <div class="stars">★★★★★</div>
+      <p>Відбілювання ZOOM зробило посмішку на 7 тонів світліше! Весь персонал надзвичайно привітний, клініка дуже чиста й сучасна.</p>
+      <div class="reviewer"><div class="reviewer-avatar">👩</div><div><div class="reviewer-name">Ірина Дяченко</div><div class="reviewer-date">Квітень 2025</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="section-tag">Запис</div>
+  <div class="section-title">Запишіться на прийом</div>
+  <div class="section-sub">Оберіть зручний час і фахівця. Консультація — безкоштовна.</div>
+  <div class="booking-layout">
+    <div class="booking-form">
+      <div id="form-container">
+        <form id="appointment-form">
+          <div class="form-row">
+            <div class="form-group"><label>Ім'я</label><input type="text" name="name" placeholder="Ваше ім'я" required></div>
+            <div class="form-group"><label>Телефон</label><input type="tel" name="phone" placeholder="+38 (0__)" required></div>
+          </div>
+          <div class="form-group">
+            <label>Послуга</label>
+            <select name="service" required>
+              <option value="">Оберіть послугу</option>
+              <option>Консультація (безкоштовно)</option>
+              <option>Лікування карієсу</option>
+              <option>Відбілювання</option>
+              <option>Імплантація</option>
+              <option>Ортодонтія</option>
+              <option>Чистка зубів</option>
+              <option>Вініри та коронки</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Дата</label><input type="date" name="date" required></div>
+            <div class="form-group">
+              <label>Час</label>
+              <select name="time" required>
+                <option value="">Оберіть час</option>
+                <option>08:00</option><option>09:00</option><option>10:00</option>
+                <option>11:00</option><option>12:00</option><option>14:00</option>
+                <option>15:00</option><option>16:00</option><option>17:00</option>
+                <option>18:00</option><option>19:00</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label>Коментар</label><textarea name="message" placeholder="Опишіть ваш запит..."></textarea></div>
+          <button type="submit" class="btn-submit" id="submit-btn">Підтвердити запис →</button>
+        </form>
+      </div>
+    </div>
+    <div class="booking-info">
+      <h3>Ми тут для вас</h3>
+      <div class="info-item"><div class="info-icon">📍</div><div><strong>Адреса</strong><span>вул. Шевченка, 1, Чернівці</span></div></div>
+      <div class="info-item"><div class="info-icon">📞</div><div><strong>Телефон</strong><span>+38 (0372) 00-00-00</span></div></div>
+      <div class="info-item"><div class="info-icon">🕐</div><div><strong>Графік роботи</strong><span>Пн–Пт: 8:00–20:00 · Сб–Нд: 9:00–18:00</span></div></div>
+      <div class="info-item"><div class="info-icon">✉️</div><div><strong>Email</strong><span>info@shevchenko-dent.ua</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Стоматологія <span>ім. Т. Шевченка</span></div>
+      <p class="footer-desc">Сучасна стоматологічна клініка у Чернівцях. Турбуємося про вашу посмішку з 2009 року.</p>
+    </div>
+    <div><h4>Послуги</h4><ul><li><a href="#">Лікування</a></li><li><a href="#">Відбілювання</a></li><li><a href="#">Імплантація</a></li><li><a href="#">Ортодонтія</a></li></ul></div>
+    <div><h4>Клініка</h4><ul><li><a href="#">Про нас</a></li><li><a href="#">Команда</a></li><li><a href="#">Галерея</a></li><li><a href="#">Ціни</a></li></ul></div>
+    <div><h4>Контакти</h4><ul><li><a href="#">вул. Шевченка, 1</a></li><li><a href="#">+38 (0372) 00-00-00</a></li><li><a href="#">info@shevchenko-dent.ua</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Стоматологія ім. Т. Шевченка. Всі права захищено.</span>
+    <span>Чернівці, Україна 🇺🇦</span>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+function toggleMenu(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+// Gallery tabs
+function switchTab(btn,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('gallery-clinic').style.display=id==='clinic'?'block':'none';
+  document.getElementById('gallery-ba').style.display=id==='ba'?'block':'none';
+}
+
+// Before/After slider
+function initSlider(wrapperId,clipId,divId){
+  const wrap=document.getElementById(wrapperId);
+  const clip=document.getElementById(clipId);
+  const div=document.getElementById(divId);
+  if(!wrap||!clip||!div)return;
+
+  function setPos(pct){
+    pct=Math.max(0,Math.min(100,pct));
+    div.style.left=pct+'%';
+    clip.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';
+  }
+
+  function getPos(e){
+    const rect=wrap.getBoundingClientRect();
+    const x=(e.touches?e.touches[0].clientX:e.clientX)-rect.left;
+    return(x/rect.width)*100;
+  }
+
+  let dragging=false;
+  wrap.addEventListener('mousedown',e=>{dragging=true;setPos(getPos(e));e.preventDefault()});
+  wrap.addEventListener('touchstart',e=>{dragging=true;setPos(getPos(e))},{passive:true});
+  window.addEventListener('mousemove',e=>{if(dragging)setPos(getPos(e))});
+  window.addEventListener('touchmove',e=>{if(dragging)setPos(getPos(e))},{passive:true});
+  window.addEventListener('mouseup',()=>dragging=false);
+  window.addEventListener('touchend',()=>dragging=false);
+}
+
+initSlider('slider1','clip1','div1');
+initSlider('slider2','clip2','div2');
+initSlider('slider3','clip3','div3');
+initSlider('slider4','clip4','div4');
+
+// Formspree
+document.getElementById('appointment-form').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='Надсилаємо...';
+  const formData=new FormData(this);
+  try{
+    const r=await fetch('https://formspree.io/f/mrejnnzw',{method:'POST',body:formData,headers:{'Accept':'application/json'}});
+    if(r.ok){
+      document.getElementById('form-container').innerHTML=`<div class="form-success"><div class="checkmark">✅</div><h3>Запис підтверджено!</h3><p>Дякуємо! Ми зв'яжемося з вами найближчим часом для підтвердження прийому.</p></div>`;
+    }else{btn.disabled=false;btn.textContent='Підтвердити запис →';alert('Помилка. Спробуйте ще раз або зателефонуйте нам.');}
+  }catch{btn.disabled=false;btn.textContent='Підтвердити запис →';alert('Помилка. Спробуйте ще раз або зателефонуйте нам.');}
+});
+</script>
+</body>
+</html>
