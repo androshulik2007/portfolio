@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Блог — LvivDent Стоматологія Львів</title>
+<meta name="description" content="Корисні статті від стоматологів LvivDent: догляд за зубами, новини медицини, поради батькам, технології лікування у Львові.">
+<meta name="keywords" content="блог стоматолога, поради по догляду за зубами, статті стоматологія Львів, здоров'я зубів">
+<meta name="author" content="LvivDent">
+<meta property="og:title" content="Блог — LvivDent Львів">
+<meta property="og:description" content="Корисні статті від стоматологів про здоров'я зубів і сучасні технології.">
+<meta property="og:url" content="https://lvivdent.com.ua/blog.html">
+<meta property="og:type" content="blog">
+<link rel="canonical" href="https://lvivdent.com.ua/blog.html">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#faf8f4;--cream2:#f4f0e8;--cream3:#ede8dc;--white:#fff;--charcoal:#1a1814;--dark:#2d2a24;--mid:#5c5648;--muted:#8c8274;--faint:#c4b9a8;--gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f0e4c4;--gold-wash:#faf4e4;--border:rgba(184,146,42,.15);--border2:rgba(184,146,42,.3);--shadow:0 4px 32px rgba(26,24,20,.06);--shadow-lg:0 16px 64px rgba(26,24,20,.12);--nav-h:76px}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.7}
+nav{position:sticky;top:0;z-index:200;height:var(--nav-h);background:rgba(250,248,244,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--charcoal);text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff!important;padding:10px 22px;border-radius:100px}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--charcoal)}
+.nav-burger svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:2rem 5%;flex-direction:column;gap:1.25rem;z-index:199}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:.9rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+.page-hero{padding:80px 5% 60px;background:var(--cream2);border-bottom:1px solid var(--border)}
+.breadcrumb{font-size:.72rem;color:var(--muted);margin-bottom:1.5rem;display:flex;gap:.5rem;align-items:center}
+.breadcrumb a{color:var(--gold);text-decoration:none}
+.breadcrumb span{color:var(--faint)}
+.page-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.page-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:1rem}
+.page-desc{font-size:1rem;color:var(--mid);max-width:540px;font-weight:300;line-height:1.8}
+
+.blog-section{padding:80px 5%;min-height:50vh}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1300px;margin:0 auto}
+.blog-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--white);transition:all .2s;cursor:pointer;display:block;text-decoration:none;color:inherit}
+.blog-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.blog-thumb{height:220px;background:var(--cream2);display:flex;align-items:center;justify-content:center;color:var(--faint);overflow:hidden}
+.blog-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.blog-body{padding:1.75rem}
+.blog-tag{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;display:block}
+.blog-card h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);line-height:1.3;margin-bottom:.6rem}
+.blog-card p{font-size:.85rem;color:var(--mid);font-weight:300;line-height:1.75}
+.blog-date{font-size:.72rem;color:var(--muted);margin-top:.9rem;display:flex;align-items:center;gap:.5rem}
+.blog-date::before{content:'';width:14px;height:1px;background:var(--faint)}
+
+.empty-state,.loading-state{text-align:center;padding:4rem 2rem;color:var(--muted);grid-column:1/-1}
+.empty-state h3,.loading-state h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--dark);margin-bottom:.5rem}
+.spinner{width:32px;height:32px;border:2px solid var(--gold-pale);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(16,12,8,.85);align-items:flex-start;justify-content:center;padding:60px 20px;overflow-y:auto}
+.modal.open{display:flex}
+.modal-inner{background:var(--white);border-radius:24px;max-width:780px;width:100%;padding:3rem 3.5rem;position:relative;box-shadow:var(--shadow-lg)}
+.modal-close{position:absolute;top:1rem;right:1.25rem;background:none;border:none;color:var(--muted);font-size:1.6rem;cursor:pointer;line-height:1;padding:.5rem;transition:color .2s}
+.modal-close:hover{color:var(--charcoal)}
+.modal-tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-wash);padding:4px 12px;border-radius:100px;margin-bottom:1rem}
+.modal-inner h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1.2;color:var(--charcoal);margin-bottom:.75rem;letter-spacing:-.02em}
+.modal-date{font-size:.78rem;color:var(--muted);margin-bottom:1.75rem}
+.modal-body{font-size:.95rem;color:var(--dark);font-weight:300;line-height:1.85;white-space:pre-wrap}
+
+footer{background:#120f0a;color:rgba(255,255,255,.4);padding:60px 5% 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem}
+.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.83rem;line-height:1.75;max-width:240px}
+footer h4{color:rgba(255,255,255,.6);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.5rem}
+footer ul a{color:rgba(255,255,255,.3);text-decoration:none;font-size:.83rem;transition:color .2s}
+footer ul a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;font-size:.78rem;flex-wrap:wrap;gap:.5rem}
+
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:block}.blog-grid{grid-template-columns:1fr 1fr}.modal-inner{padding:2rem 1.5rem}.footer-top{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:600px){.blog-section{padding:60px 4%}.page-hero{padding:60px 4% 40px}.blog-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Lviv<span>Dent</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Послуги</a></li>
+    <li><a href="prices.html">Ціни</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="blog.html" class="active">Блог</a></li>
+    <li><a href="index.html#booking" class="nav-cta">Записатися</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMenu()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="services.html" onclick="toggleMenu()">Послуги</a>
+  <a href="prices.html" onclick="toggleMenu()">Ціни</a>
+  <a href="gallery.html" onclick="toggleMenu()">Галерея</a>
+  <a href="blog.html" onclick="toggleMenu()">Блог</a>
+  <a href="index.html#booking" onclick="toggleMenu()" style="color:var(--gold)">Записатися →</a>
+</div>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Головна</a><span>/</span>Блог</div>
+  <div class="page-eyebrow">Блог</div>
+  <h1>Корисні статті від лікарів</h1>
+  <p class="page-desc">Поради про здоров'я зубів, новини стоматології та відповіді на найпоширеніші питання пацієнтів.</p>
+</div>
+
+<section class="blog-section">
+  <div class="blog-grid" id="posts-list">
+    <div class="loading-state"><div class="spinner"></div><h3>Завантаження статей...</h3></div>
+  </div>
+</section>
+
+<div class="modal" id="post-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span class="modal-tag" id="m-tag"></span>
+    <h2 id="m-title"></h2>
+    <div class="modal-date" id="m-date"></div>
+    <div class="modal-body" id="m-body"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">Lviv<span>Dent</span></div><p class="footer-desc">Преміальна стоматологічна клініка у Львові. Дбаємо про вашу посмішку з 2012 року.</p></div>
+    <div><h4>Послуги</h4><ul><li><a href="services.html">Лікування</a></li><li><a href="services.html">Імплантація</a></li><li><a href="services.html">Ортодонтія</a></li></ul></div>
+    <div><h4>Клініка</h4><ul><li><a href="gallery.html">Галерея</a></li><li><a href="prices.html">Ціни</a></li><li><a href="blog.html">Блог</a></li></ul></div>
+    <div><h4>Контакти</h4><ul><li><a href="#">вул. Городоцька, 1</a></li><li><a href="#">+38 (032) 000-00-00</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 LvivDent. Всі права захищено.</span><span>Львів 🇺🇦</span></div>
+  <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05)"><a href="admin.html" style="font-size:.68rem;color:rgba(255,255,255,.2);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='#b8922a'" onmouseout="this.style.color='rgba(255,255,255,.2)'">Адмін-панель</a></div>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBYF_3t84vTJYaPeFOPyOiSEaAGEeQdzqw",
+  authDomain: "lvivdent.firebaseapp.com",
+  projectId: "lvivdent",
+  storageBucket: "lvivdent.firebasestorage.app",
+  messagingSenderId: "267260669030",
+  appId: "1:267260669030:web:2fc4df55432b8fac2491a7"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.toggleMenu = function(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+};
+
+const samplePosts = [
+  {id:'s1',title:'Як правильно чистити зуби: повний гайд від лікаря',tag:'Поради',date:'15 травня 2025',excerpt:'Більшість людей чистять зуби неправильно. Дізнайтесь техніку Bass — золотий стандарт догляду, рекомендований стоматологами всього світу.',body:'Більшість людей чистять зуби неправильно, навіть не підозрюючи про це. Стоматологи всього світу рекомендують техніку Bass — і ось чому вона працює.\n\nТЕХНІКА BASS — КРОК ЗА КРОКОМ\n\n1. Розташуйте щітку під кутом 45° до ясен.\n2. Робіть короткі вібруючі рухи на місці — без сильного тиску.\n3. Кожну ділянку чистите 8–10 секунд.\n4. Рухайтесь систематично: зовнішня поверхня → внутрішня → жувальна.\n5. Не забудьте про язик — там накопичується 60% бактерій.\n\nЯКА ЩІТКА КРАЩА?\n\nМ\'яка або середня. Жорстка травмує ясна та емаль. Електричні щітки ефективніші — особливо з осциляційною головкою.\n\nСКІЛЬКИ ЧАСУ ЧИСТИТИ?\n\nМінімум 2 хвилини, двічі на день. Поставте таймер — більшість людей не вистачає й 45 секунд.\n\nЩО ЩЕ ВАЖЛИВО?\n\n— Зубна нитка щодня перед сном\n— Іригатор 2-3 рази на тиждень\n— Ополіскувач без спирту після чистки\n— Заміна щітки кожні 3 місяці\n\nПам\'ятайте: профілактичний огляд кожні 6 місяців — це найкраща інвестиція у здоров\'я ваших зубів.'},
+  {id:'s2',title:'Імплантація зубів: що потрібно знати перед процедурою',tag:'Імплантація',date:'2 травня 2025',excerpt:'Відповідаємо на найпоширеніші питання пацієнтів про імплантацію зубів. Скільки це болить, як довго служить, чи варто переплачувати.',body:'Імплантація — найпрогресивніший метод відновлення втрачених зубів. Розповідаємо все, що варто знати перед процедурою.\n\nЯК ЦЕ ВІДБУВАЄТЬСЯ?\n\nЕтап 1 — діагностика. Робимо КТ-знімок, плануємо встановлення в 3D.\nЕтап 2 — встановлення імплантату. Процедура триває 30-60 хвилин під анестезією.\nЕтап 3 — приживлення (3-6 місяців). Імплантат зростається з кісткою.\nЕтап 4 — коронка. Встановлюємо постійну реставрацію.\n\nЧИ ЦЕ БОЛИТЬ?\n\nПід час процедури — ні. Сучасна анестезія повністю знеболює.'},
+  {id:'s3',title:'Відбілювання ZOOM 4: реальний результат за одне відвідування',tag:'Відбілювання',date:'20 квітня 2025',excerpt:'Розповідаємо як проходить процедура відбілювання ZOOM 4, скільки тонів можна досягти і як зберегти результат надовго.',body:'ZOOM 4 — найпопулярніша система офісного відбілювання у світі. Розповідаємо як це працює і чого очікувати.'},
+];
+
+async function loadPosts(){
+  try {
+    const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  } catch(e){
+    console.error('Firebase error:', e);
+    return [];
+  }
+}
+
+async function renderPosts(){
+  const stored = await loadPosts();
+  const all = [...stored, ...samplePosts];
+  const list = document.getElementById('posts-list');
+  
+  if(all.length === 0){
+    list.innerHTML = '<div class="empty-state"><h3>Поки немає статей</h3><p>Скоро ми опублікуємо корисні матеріали.</p></div>';
+    return;
+  }
+  
+  list.innerHTML = all.map((p, i) => `
+    <article class="blog-card" data-idx="${i}">
+      <div class="blog-thumb">${p.image ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}">` : '<svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 9 4-4 4 4 4-4 4 4"/></svg>'}</div>
+      <div class="blog-body">
+        <span class="blog-tag">${escapeHtml(p.tag||'Стаття')}</span>
+        <h3>${escapeHtml(p.title)}</h3>
+        <p>${escapeHtml(p.excerpt||'')}</p>
+        <div class="blog-date">${escapeHtml(p.date||'')}</div>
+      </div>
+    </article>`).join('');
+  
+  list.querySelectorAll('.blog-card').forEach((card, i) => {
+    card.addEventListener('click', () => openPost(all[i]));
+  });
+}
+
+function openPost(p){
+  document.getElementById('m-tag').textContent = p.tag || 'Стаття';
+  document.getElementById('m-title').textContent = p.title;
+  document.getElementById('m-date').textContent = p.date || '';
+  document.getElementById('m-body').textContent = p.body || p.excerpt;
+  document.getElementById('post-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+window.closeModal = function(){
+  document.getElementById('post-modal').classList.remove('open');
+  document.body.style.overflow = '';
+};
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') window.closeModal();
+});
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+renderPosts();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBYF_3t84vTJYaPeFOPyOiSEaAGEeQdzqw",
+  authDomain: "lvivdent.firebaseapp.com",
+  projectId: "lvivdent",
+  storageBucket: "lvivdent.firebasestorage.app",
+  messagingSenderId: "267260669030",
+  appId: "1:267260669030:web:2fc4df55432b8fac2491a7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadPosts(){
+  const list = document.getElementById('posts-list');
+  try {
+    const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    const posts = [];
+    snap.forEach(d => posts.push({id: d.id, ...d.data()}));
+    
+    if(posts.length === 0){
+      list.innerHTML = '<div class="empty-state"><h3>Поки немає статей</h3><p>Скоро тут з\'являться корисні матеріали від наших лікарів</p></div>';
+      return;
+    }
+    
+    list.innerHTML = posts.map(p => `
+      <article class="blog-card" data-id="${p.id}">
+        <div class="blog-thumb">${p.image ? `<img src="${escapeAttr(p.image)}" alt="${escapeAttr(p.title)}" onerror="this.style.display='none'">` : '<svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 9 4-4 4 4 4-4 4 4"/></svg>'}</div>
+        <div class="blog-body">
+          <span class="blog-tag">${escapeHtml(p.tag||'Стаття')}</span>
+          <h3>${escapeHtml(p.title)}</h3>
+          <p>${escapeHtml(p.excerpt||'')}</p>
+          <div class="blog-date">${escapeHtml(p.date||'')}</div>
+        </div>
+      </article>`).join('');
+    
+    list.querySelectorAll('.blog-card').forEach(card => {
+      const id = card.dataset.id;
+      const post = posts.find(p => p.id === id);
+      card.addEventListener('click', () => openPost(post));
+    });
+  } catch(err){
+    console.error(err);
+    list.innerHTML = '<div class="empty-state"><h3>Не вдалося завантажити статті</h3><p>Спробуйте оновити сторінку</p></div>';
+  }
+}
+
+function openPost(p){
+  document.getElementById('m-tag').textContent = p.tag || 'Стаття';
+  document.getElementById('m-title').textContent = p.title;
+  document.getElementById('m-date').textContent = p.date || '';
+  document.getElementById('m-body').textContent = p.body || p.excerpt;
+  document.getElementById('post-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function escapeAttr(s){return String(s).replace(/"/g,'&quot;')}
+
+loadPosts();
+</script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Галерея — LvivDent Стоматологія Львів</title>
+<meta name="description" content="Фотогалерея клініки LvivDent та результати лікування До/Після. Дивіться роботи наших стоматологів у Львові.">
+<meta name="keywords" content="галерея стоматологія Львів, до після зуби, результати лікування, фото клініки LvivDent">
+<meta name="author" content="LvivDent">
+<meta property="og:title" content="Галерея — LvivDent Львів">
+<meta property="og:description" content="Фото клініки та результати лікування наших пацієнтів.">
+<meta property="og:url" content="https://lvivdent.com.ua/gallery.html">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://lvivdent.com.ua/gallery.html">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#faf8f4;--cream2:#f4f0e8;--cream3:#ede8dc;--white:#fff;--charcoal:#1a1814;--dark:#2d2a24;--mid:#5c5648;--muted:#8c8274;--faint:#c4b9a8;--gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f0e4c4;--gold-wash:#faf4e4;--teal:#0d7377;--teal-light:#d4f0f0;--border:rgba(184,146,42,.15);--border2:rgba(184,146,42,.3);--shadow:0 4px 32px rgba(26,24,20,.06);--shadow-lg:0 16px 64px rgba(26,24,20,.12);--nav-h:76px}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.7}
+nav{position:sticky;top:0;z-index:200;height:var(--nav-h);background:rgba(250,248,244,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--charcoal);text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff!important;padding:10px 22px;border-radius:100px}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--charcoal)}
+.nav-burger svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:2rem 5%;flex-direction:column;gap:1.25rem;z-index:199}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:.9rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+.page-hero{padding:80px 5% 60px;background:var(--cream2);border-bottom:1px solid var(--border)}
+.breadcrumb{font-size:.72rem;color:var(--muted);margin-bottom:1.5rem;display:flex;gap:.5rem;align-items:center}
+.breadcrumb a{color:var(--gold);text-decoration:none}
+.breadcrumb span{color:var(--faint)}
+.page-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.page-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:1rem}
+.page-desc{font-size:1rem;color:var(--mid);max-width:540px;font-weight:300;line-height:1.8}
+
+.gallery-section{padding:80px 5%}
+.section-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold)}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,2.5vw,2.25rem);font-weight:600;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:2rem}
+
+/* CLINIC GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.gallery-item{border-radius:16px;overflow:hidden;background:var(--cream2);border:1px solid var(--border);cursor:zoom-in;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.gallery-item:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
+.gallery-item.span2{grid-column:span 2;aspect-ratio:2/1}
+.gallery-item:not(.span2){aspect-ratio:1}
+.gallery-img{flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--faint);background:var(--cream3);position:relative}
+.gallery-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.gallery-caption{font-size:.72rem;font-weight:500;letter-spacing:.06em;color:var(--muted);text-align:center;padding:8px 12px;background:var(--white);border-top:1px solid var(--border)}
+
+/* BEFORE/AFTER */
+.ba-section{padding:80px 5%;background:var(--white)}
+.ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.ba-card{background:var(--cream);border:1px solid var(--border);border-radius:20px;padding:1.5rem}
+.ba-title{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.ba-wrap{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;cursor:ew-resize;user-select:none}
+.ba-before,.ba-after-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--faint);overflow:hidden}
+.ba-before{background:var(--cream2)}
+.ba-after-inner{background:linear-gradient(135deg,#e8f4f0,#c8e8e0)}
+.ba-after-inner img,.ba-before img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.ba-clip{position:absolute;inset:0;overflow:hidden}
+.ba-divider{position:absolute;top:0;bottom:0;width:3px;background:var(--white);z-index:10;transform:translateX(-50%)}
+.ba-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.2);z-index:11;pointer-events:none;font-size:.85rem;color:var(--gold);font-weight:700}
+.ba-labels{display:flex;justify-content:space-between;margin-top:.75rem}
+.ba-label{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 12px;border-radius:100px}
+.ba-label.before{background:#fee8e8;color:#c0392b}
+.ba-label.after{background:var(--teal-light);color:var(--teal)}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:999;background:rgba(16,12,8,.96);align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}
+.lightbox-inner{position:relative;max-width:90vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lightbox-inner img{max-width:90vw;max-height:80vh;object-fit:contain;border-radius:12px;display:block}
+.lightbox-caption{font-size:.82rem;color:rgba(255,255,255,.5);letter-spacing:.06em;text-align:center}
+.lightbox-close{position:fixed;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:.6;transition:opacity .2s}
+.lightbox-close:hover{opacity:1}
+.lightbox-prev,.lightbox-next{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);border:none;color:#fff;font-size:1.5rem;cursor:pointer;padding:16px 14px;border-radius:8px;transition:background .2s}
+.lightbox-prev{left:16px}.lightbox-next{right:16px}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(184,146,42,.25)}
+
+.cta-strip{background:var(--charcoal);padding:80px 5%;text-align:center}
+.cta-strip h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:#fff;margin-bottom:1rem}
+.cta-strip p{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:2rem;font-weight:300}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,146,42,.3)}
+
+footer{background:#120f0a;color:rgba(255,255,255,.4);padding:60px 5% 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem}
+.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.83rem;line-height:1.75;max-width:240px}
+footer h4{color:rgba(255,255,255,.6);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.5rem}
+footer ul a{color:rgba(255,255,255,.3);text-decoration:none;font-size:.83rem;transition:color .2s}
+footer ul a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;font-size:.78rem;flex-wrap:wrap;gap:.5rem}
+
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:block}.gallery-grid{grid-template-columns:repeat(2,1fr)}.ba-grid{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:600px){.gallery-section,.ba-section{padding:60px 4%}.page-hero{padding:60px 4% 40px}.gallery-grid{grid-template-columns:1fr 1fr}.footer-top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Lviv<span>Dent</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Послуги</a></li>
+    <li><a href="prices.html">Ціни</a></li>
+    <li><a href="gallery.html" class="active">Галерея</a></li>
+    <li><a href="blog.html">Блог</a></li>
+    <li><a href="index.html#booking" class="nav-cta">Записатися</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMenu()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="services.html" onclick="toggleMenu()">Послуги</a>
+  <a href="prices.html" onclick="toggleMenu()">Ціни</a>
+  <a href="gallery.html" onclick="toggleMenu()">Галерея</a>
+  <a href="blog.html" onclick="toggleMenu()">Блог</a>
+  <a href="index.html#booking" onclick="toggleMenu()" style="color:var(--gold)">Записатися →</a>
+</div>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Головна</a><span>/</span>Галерея</div>
+  <div class="page-eyebrow">Галерея</div>
+  <h1>Клініка та результати</h1>
+  <p class="page-desc">Фотографії нашої клініки та реальні результати лікування пацієнтів. Натисніть на фото для перегляду.</p>
+</div>
+
+<section class="gallery-section">
+  <div class="section-eyebrow">Клініка</div>
+  <h2>Наш простір</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item span2">
+      <div class="gallery-img"><img src="photos/clinic1.jpg" alt="Зал очікування LvivDent" onerror="this.style.display='none'"></div>
+      <div class="gallery-caption">Зал очікування</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img"><img src="photos/clinic2.jpg" alt="Стоматологічний кабінет 1" onerror="this.style.display='none'"></div>
+      <div class="gallery-caption">Кабінет 1</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img"><img src="photos/clinic3.jpg" alt="Хірургічний кабінет LvivDent" onerror="this.style.display='none'"></div>
+      <div class="gallery-caption">Хірургічний кабінет</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img"><img src="photos/clinic4.jpg" alt="Зуботехнічна лабораторія" onerror="this.style.display='none'"></div>
+      <div class="gallery-caption">Лабораторія</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-img"><img src="photos/clinic5.jpg" alt="Рентген-кабінет" onerror="this.style.display='none'"></div>
+      <div class="gallery-caption">Рентген-кабінет</div>
+    </div>
+    <div class="gallery-item span2">
+      <div class="gallery-img"><img src="photos/clinic6.jpg" alt="Ресепшн клініки LvivDent" onerror="this.style.display='none'"></div>
+      <div class="gallery-caption">Ресепшн та вхід</div>
+    </div>
+  </div>
+</section>
+
+<section class="ba-section">
+  <div class="section-eyebrow">Результати</div>
+  <h2>До та Після лікування</h2>
+  <div class="ba-grid">
+    <div class="ba-card">
+      <div class="ba-title">Відбілювання ZOOM 4</div>
+      <div class="ba-wrap" id="s1">
+        <div class="ba-before"><img src="photos/before1.jpg" alt="До відбілювання ZOOM 4" onerror="this.style.display='none'"></div>
+        <div class="ba-clip" id="c1" style="clip-path:inset(0 50% 0 0)">
+          <div class="ba-after-inner"><img src="photos/after1.jpg" alt="Після відбілювання ZOOM 4" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="ba-divider" id="d1" style="left:50%"><div class="ba-handle">◀▶</div></div>
+      </div>
+      <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-title">Керамічні вініри E.max</div>
+      <div class="ba-wrap" id="s2">
+        <div class="ba-before"><img src="photos/before2.jpg" alt="До встановлення вінірів" onerror="this.style.display='none'"></div>
+        <div class="ba-clip" id="c2" style="clip-path:inset(0 50% 0 0)">
+          <div class="ba-after-inner"><img src="photos/after2.jpg" alt="Після встановлення вінірів E.max" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="ba-divider" id="d2" style="left:50%"><div class="ba-handle">◀▶</div></div>
+      </div>
+      <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-title">Ортодонтія (елайнери)</div>
+      <div class="ba-wrap" id="s3">
+        <div class="ba-before"><img src="photos/before3.jpg" alt="До ортодонтичного лікування" onerror="this.style.display='none'"></div>
+        <div class="ba-clip" id="c3" style="clip-path:inset(0 50% 0 0)">
+          <div class="ba-after-inner"><img src="photos/after3.jpg" alt="Після ортодонтичного лікування елайнерами" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="ba-divider" id="d3" style="left:50%"><div class="ba-handle">◀▶</div></div>
+      </div>
+      <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-title">Імплантація Nobel Biocare</div>
+      <div class="ba-wrap" id="s4">
+        <div class="ba-before"><img src="photos/before4.jpg" alt="До імплантації Nobel Biocare" onerror="this.style.display='none'"></div>
+        <div class="ba-clip" id="c4" style="clip-path:inset(0 50% 0 0)">
+          <div class="ba-after-inner"><img src="photos/after4.jpg" alt="Після імплантації Nobel Biocare" onerror="this.style.display='none'"></div>
+        </div>
+        <div class="ba-divider" id="d4" style="left:50%"><div class="ba-handle">◀▶</div></div>
+      </div>
+      <div class="ba-labels"><span class="ba-label before">До</span><span class="ba-label after">Після</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Хочете такий результат?</h2>
+  <p>Запишіться на безкоштовну консультацію і дізнайтеся план лікування</p>
+  <a class="btn btn-gold" href="index.html#booking">Записатися онлайн →</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+  <button class="lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+  <div class="lightbox-inner">
+    <img id="lb-img" src="" alt="">
+    <div class="lightbox-caption" id="lb-cap"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">Lviv<span>Dent</span></div><p class="footer-desc">Преміальна стоматологічна клініка у Львові. Дбаємо про вашу посмішку з 2012 року.</p></div>
+    <div><h4>Послуги</h4><ul><li><a href="services.html">Лікування</a></li><li><a href="services.html">Імплантація</a></li><li><a href="services.html">Ортодонтія</a></li></ul></div>
+    <div><h4>Клініка</h4><ul><li><a href="gallery.html">Галерея</a></li><li><a href="prices.html">Ціни</a></li><li><a href="blog.html">Блог</a></li></ul></div>
+    <div><h4>Контакти</h4><ul><li><a href="#">вул. Городоцька, 1</a></li><li><a href="#">+38 (032) 000-00-00</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 LvivDent. Всі права захищено.</span><span>Львів 🇺🇦</span></div>
+
+  <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05)"><a href="admin.html" style="font-size:.68rem;color:rgba(255,255,255,.2);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='#b8922a'" onmouseout="this.style.color='rgba(255,255,255,.2)'">Адмін-панель</a></div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open')}
+
+// Before/After sliders
+function initSlider(wId,cId,dId){
+  const w=document.getElementById(wId),c=document.getElementById(cId),d=document.getElementById(dId);
+  if(!w)return;
+  function setPos(p){p=Math.max(0,Math.min(100,p));d.style.left=p+'%';c.style.clipPath='inset(0 '+(100-p)+'% 0 0)'}
+  function getP(e){const r=w.getBoundingClientRect();return((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width*100}
+  let drag=false;
+  w.addEventListener('mousedown',e=>{drag=true;setPos(getP(e));e.preventDefault()});
+  w.addEventListener('touchstart',e=>{drag=true;setPos(getP(e))},{passive:true});
+  window.addEventListener('mousemove',e=>{if(drag)setPos(getP(e))});
+  window.addEventListener('touchmove',e=>{if(drag)setPos(getP(e))},{passive:true});
+  window.addEventListener('mouseup',()=>drag=false);
+  window.addEventListener('touchend',()=>drag=false);
+}
+initSlider('s1','c1','d1');initSlider('s2','c2','d2');initSlider('s3','c3','d3');initSlider('s4','c4','d4');
+
+// Lightbox
+let lbItems=[],lbIdx=0;
+function buildLightbox(){
+  lbItems=[];
+  document.querySelectorAll('.gallery-item').forEach(item=>{
+    const cap=item.querySelector('.gallery-caption');
+    lbItems.push({src:item.querySelector('img')?.src||'',caption:cap?.textContent||''});
+  });
+  document.querySelectorAll('.gallery-item').forEach((item,i)=>{
+    item.addEventListener('click',()=>openLightbox(i));
+  });
+}
+function openLightbox(i){
+  lbIdx=i;
+  document.getElementById('lb-img').src=lbItems[i].src||'';
+  document.getElementById('lb-cap').textContent=lbItems[i].caption;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lightboxNav(dir){lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length;openLightbox(lbIdx)}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lightbox').classList.contains('open'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowLeft')lightboxNav(-1);
+  if(e.key==='ArrowRight')lightboxNav(1);
+});
+buildLightbox();
+</script>
+</body>
+</html>

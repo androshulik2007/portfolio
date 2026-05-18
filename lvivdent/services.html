@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Послуги — LvivDent Стоматологія Львів</title>
+<meta name="description" content="Повний спектр стоматологічних послуг у Львові: лікування, відбілювання, імплантація, ортодонтія, дитяча стоматологія. Безкоштовна консультація.">
+<meta name="keywords" content="послуги стоматології Львів, лікування зубів Львів, імплантація, відбілювання, ортодонтія Львів">
+<meta name="author" content="LvivDent">
+<meta property="og:title" content="Послуги — LvivDent Львів">
+<meta property="og:description" content="Повний спектр стоматологічних послуг у Львові.">
+<meta property="og:url" content="https://lvivdent.com.ua/services.html">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://lvivdent.com.ua/services.html">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#faf8f4;--cream2:#f4f0e8;--cream3:#ede8dc;--white:#fff;--charcoal:#1a1814;--dark:#2d2a24;--mid:#5c5648;--muted:#8c8274;--faint:#c4b9a8;--gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f0e4c4;--gold-wash:#faf4e4;--border:rgba(184,146,42,.15);--border2:rgba(184,146,42,.3);--shadow:0 4px 32px rgba(26,24,20,.06);--shadow-lg:0 16px 64px rgba(26,24,20,.12);--nav-h:76px}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.7}
+nav{position:sticky;top:0;z-index:200;height:var(--nav-h);background:rgba(250,248,244,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--charcoal);text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff!important;padding:10px 22px;border-radius:100px}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--charcoal)}
+.nav-burger svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:2rem 5%;flex-direction:column;gap:1.25rem;z-index:199}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:.9rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+.page-hero{padding:80px 5% 60px;background:var(--cream2);border-bottom:1px solid var(--border)}
+.breadcrumb{font-size:.72rem;color:var(--muted);margin-bottom:1.5rem;display:flex;gap:.5rem;align-items:center}
+.breadcrumb a{color:var(--gold);text-decoration:none}
+.breadcrumb span{color:var(--faint)}
+.page-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.page-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:1rem}
+.page-desc{font-size:1rem;color:var(--mid);max-width:540px;font-weight:300;line-height:1.8}
+
+.svc-section{padding:80px 5%}
+.svc-section:nth-child(even){background:var(--white)}
+.svc-row{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start;max-width:1200px;margin:0 auto}
+.svc-row.rev{grid-template-columns:1.4fr 1fr}
+.svc-row.rev .svc-text{order:2}
+.svc-row.rev .svc-visual{order:1}
+.svc-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.svc-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold)}
+.svc-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,2.8vw,2.5rem);font-weight:600;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:1rem;line-height:1.15}
+.svc-text > p{font-size:.95rem;color:var(--mid);font-weight:300;line-height:1.85;margin-bottom:1.5rem}
+.svc-features{list-style:none;margin-bottom:1.75rem}
+.svc-features li{position:relative;padding-left:1.75rem;margin-bottom:.65rem;font-size:.875rem;color:var(--dark);font-weight:300;line-height:1.7}
+.svc-features li::before{content:'';position:absolute;left:0;top:9px;width:10px;height:10px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 4px var(--gold-wash)}
+.svc-price-tag{display:inline-flex;align-items:center;gap:.75rem;background:var(--gold-wash);border:1px solid var(--gold-pale);padding:.85rem 1.25rem;border-radius:14px}
+.svc-price-tag span{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.svc-price-tag strong{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--gold)}
+.svc-visual{position:relative;aspect-ratio:1;background:var(--cream3);border-radius:24px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;color:var(--faint);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden}
+.svc-visual::before{content:attr(data-num);position:absolute;top:1.5rem;right:1.75rem;font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:700;color:var(--gold-pale);line-height:1}
+.svc-visual span{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase}
+
+.cta-strip{background:var(--charcoal);padding:80px 5%;text-align:center}
+.cta-strip h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:#fff;margin-bottom:1rem}
+.cta-strip p{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:2rem;font-weight:300}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,146,42,.3)}
+
+footer{background:#120f0a;color:rgba(255,255,255,.4);padding:60px 5% 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem}
+.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.83rem;line-height:1.75;max-width:240px}
+footer h4{color:rgba(255,255,255,.6);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.5rem}
+footer ul a{color:rgba(255,255,255,.3);text-decoration:none;font-size:.83rem;transition:color .2s}
+footer ul a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;font-size:.78rem;flex-wrap:wrap;gap:.5rem}
+
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:block}.svc-row,.svc-row.rev{grid-template-columns:1fr;gap:2rem}.svc-row.rev .svc-text{order:1}.svc-row.rev .svc-visual{order:0}.footer-top{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:600px){.svc-section{padding:60px 4%}.page-hero{padding:60px 4% 40px}.footer-top{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Lviv<span>Dent</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html" class="active">Послуги</a></li>
+    <li><a href="prices.html">Ціни</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="blog.html">Блог</a></li>
+    <li><a href="index.html#booking" class="nav-cta">Записатися</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMenu()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="services.html" onclick="toggleMenu()">Послуги</a>
+  <a href="prices.html" onclick="toggleMenu()">Ціни</a>
+  <a href="gallery.html" onclick="toggleMenu()">Галерея</a>
+  <a href="blog.html" onclick="toggleMenu()">Блог</a>
+  <a href="index.html#booking" onclick="toggleMenu()" style="color:var(--gold)">Записатися →</a>
+</div>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Головна</a><span>/</span>Послуги</div>
+  <div class="page-eyebrow">Наші послуги</div>
+  <h1>Повний спектр стоматології</h1>
+  <p class="page-desc">Від профілактичних оглядів до складних хірургічних втручань — ми вирішуємо будь-які стоматологічні завдання з гарантією якості.</p>
+</div>
+
+<section class="svc-section">
+  <div class="svc-row">
+    <div class="svc-text">
+      <div class="svc-eyebrow">Терапевтична стоматологія</div>
+      <h2>Лікування зубів</h2>
+      <p>Сучасні матеріали, точна діагностика та м'яка анестезія. Лікуємо карієс на будь-якій стадії, відновлюємо складні випадки пульпіту та періодонтиту з повним збереженням природного зуба.</p>
+      <ul class="svc-features">
+        <li>Лікування карієсу світловими композитами</li>
+        <li>Ендодонтія під мікроскопом</li>
+        <li>Реставрація зруйнованих зубів</li>
+        <li>Лікування захворювань ясен</li>
+      </ul>
+      <div class="svc-price-tag"><span>Вартість</span><strong>від 650 грн</strong></div>
+    </div>
+    <div class="svc-visual" data-num="01"><span>Фото процедури</span></div>
+  </div>
+</section>
+
+<section class="svc-section">
+  <div class="svc-row rev">
+    <div class="svc-text">
+      <div class="svc-eyebrow">Естетична стоматологія</div>
+      <h2>Відбілювання зубів</h2>
+      <p>Професійне відбілювання ZOOM 4 — найпопулярніша система у світі. До 8 тонів світліше за одне відвідування. Безпечно для емалі, перевірено мільйонами пацієнтів.</p>
+      <ul class="svc-features">
+        <li>ZOOM 4 — офісне відбілювання (1 година)</li>
+        <li>Домашні системи з індивідуальними капами</li>
+        <li>Безпечно для емалі та ясен</li>
+        <li>Стабільний результат до 2 років</li>
+      </ul>
+      <div class="svc-price-tag"><span>Вартість</span><strong>від 3 200 грн</strong></div>
+    </div>
+    <div class="svc-visual" data-num="02"><span>Фото процедури</span></div>
+  </div>
+</section>
+
+<section class="svc-section">
+  <div class="svc-row">
+    <div class="svc-text">
+      <div class="svc-eyebrow">Хірургічна стоматологія</div>
+      <h2>Імплантація зубів</h2>
+      <p>Імпланти Nobel Biocare та Straumann — світові лідери з гарантією на 10 років. Процедура під сучасною анестезією, мінімальна травматичність, швидке відновлення.</p>
+      <ul class="svc-features">
+        <li>3D-планування на КТ-томографі</li>
+        <li>Імплантати Nobel Biocare, Straumann</li>
+        <li>Безкровна методика встановлення</li>
+        <li>Гарантія на імплант — 10 років</li>
+      </ul>
+      <div class="svc-price-tag"><span>Вартість</span><strong>від 12 000 грн</strong></div>
+    </div>
+    <div class="svc-visual" data-num="03"><span>Фото процедури</span></div>
+  </div>
+</section>
+
+<section class="svc-section">
+  <div class="svc-row rev">
+    <div class="svc-text">
+      <div class="svc-eyebrow">Ортопедична стоматологія</div>
+      <h2>Вініри та коронки</h2>
+      <p>Керамічні вініри E.max та цирконієві коронки — преміальна естетика, що тримається десятиліттями. Виготовляємо у власній цифровій лабораторії за технологією CAD/CAM.</p>
+      <ul class="svc-features">
+        <li>Ультратонкі вініри E.max (0.3 мм)</li>
+        <li>Цирконієві коронки повного циклу</li>
+        <li>Цифрове моделювання CAD/CAM</li>
+        <li>Природний вигляд, неможливо відрізнити</li>
+      </ul>
+      <div class="svc-price-tag"><span>Вартість</span><strong>від 4 500 грн</strong></div>
+    </div>
+    <div class="svc-visual" data-num="04"><span>Фото процедури</span></div>
+  </div>
+</section>
+
+<section class="svc-section">
+  <div class="svc-row">
+    <div class="svc-text">
+      <div class="svc-eyebrow">Ортодонтія</div>
+      <h2>Виправлення прикусу</h2>
+      <p>Брекет-системи та прозорі елайнери Invisalign для дітей і дорослих. Виправлення будь-якого прикусу — від легких до складних випадків.</p>
+      <ul class="svc-features">
+        <li>Металеві та сапфірові брекети</li>
+        <li>Прозорі елайнери Invisalign</li>
+        <li>Лікування дітей з 6 років</li>
+        <li>Ретейнери для збереження результату</li>
+      </ul>
+      <div class="svc-price-tag"><span>Вартість</span><strong>від 8 000 грн</strong></div>
+    </div>
+    <div class="svc-visual" data-num="05"><span>Фото процедури</span></div>
+  </div>
+</section>
+
+<section class="svc-section">
+  <div class="svc-row rev">
+    <div class="svc-text">
+      <div class="svc-eyebrow">Профілактика</div>
+      <h2>Гігієна та профілактика</h2>
+      <p>Регулярна професійна чистка — найкращий захист від карієсу і пародонтиту. Рекомендуємо відвідувати гігієніста кожні 6 місяців.</p>
+      <ul class="svc-features">
+        <li>Ультразвукове видалення каменя</li>
+        <li>Air Flow — полірування пігментації</li>
+        <li>Фторування емалі</li>
+        <li>Герметизація фісур у дітей</li>
+      </ul>
+      <div class="svc-price-tag"><span>Вартість</span><strong>від 1 200 грн</strong></div>
+    </div>
+    <div class="svc-visual" data-num="06"><span>Фото процедури</span></div>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h2>Запишіться на безкоштовну консультацію</h2>
+  <p>Розкажемо який план лікування підійде саме вам — без зобов'язань</p>
+  <a class="btn btn-gold" href="index.html#booking">Записатися онлайн →</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">Lviv<span>Dent</span></div><p class="footer-desc">Преміальна стоматологічна клініка у Львові. Дбаємо про вашу посмішку з 2012 року.</p></div>
+    <div><h4>Послуги</h4><ul><li><a href="services.html">Лікування</a></li><li><a href="services.html">Імплантація</a></li><li><a href="services.html">Ортодонтія</a></li></ul></div>
+    <div><h4>Клініка</h4><ul><li><a href="gallery.html">Галерея</a></li><li><a href="prices.html">Ціни</a></li><li><a href="blog.html">Блог</a></li></ul></div>
+    <div><h4>Контакти</h4><ul><li><a href="#">вул. Городоцька, 1</a></li><li><a href="#">+38 (032) 000-00-00</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 LvivDent. Всі права захищено.</span><span>Львів 🇺🇦</span></div>
+
+  <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05)"><a href="admin.html" style="font-size:.68rem;color:rgba(255,255,255,.2);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='#b8922a'" onmouseout="this.style.color='rgba(255,255,255,.2)'">Адмін-панель</a></div>
+</footer>
+<script>function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open')}</script>
+</body>
+</html>

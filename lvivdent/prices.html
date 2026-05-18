@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ціни на стоматологічні послуги — LvivDent Львів</title>
+<meta name="description" content="Прозорий прайс-лист LvivDent. Ціни на лікування, імплантацію, відбілювання, ортодонтію у Львові. Консультація безкоштовна.">
+<meta name="keywords" content="ціни стоматологія Львів, прайс стоматолог, скільки коштує імплант Львів, ціна відбілювання зубів">
+<meta name="author" content="LvivDent">
+<meta property="og:title" content="Ціни — LvivDent Львів">
+<meta property="og:description" content="Прозорий прайс-лист стоматологічних послуг. Фіксовані ціни, жодних прихованих доплат.">
+<meta property="og:url" content="https://lvivdent.com.ua/prices.html">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://lvivdent.com.ua/prices.html">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#faf8f4;--cream2:#f4f0e8;--white:#fff;--charcoal:#1a1814;--dark:#2d2a24;--mid:#5c5648;--muted:#8c8274;--faint:#c4b9a8;--gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f0e4c4;--gold-wash:#faf4e4;--border:rgba(184,146,42,.15);--border2:rgba(184,146,42,.3);--shadow:0 4px 32px rgba(26,24,20,.06);--shadow-lg:0 16px 64px rgba(26,24,20,.12);--nav-h:76px}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.7}
+nav{position:sticky;top:0;z-index:200;height:var(--nav-h);background:rgba(250,248,244,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--charcoal);text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff!important;padding:10px 22px;border-radius:100px}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--charcoal)}
+.nav-burger svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:2rem 5%;flex-direction:column;gap:1.25rem;z-index:199}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:.9rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+.page-hero{padding:80px 5% 60px;background:var(--cream2);border-bottom:1px solid var(--border)}
+.breadcrumb{font-size:.72rem;color:var(--muted);margin-bottom:1.5rem;display:flex;gap:.5rem;align-items:center}
+.breadcrumb a{color:var(--gold);text-decoration:none}
+.breadcrumb span{color:var(--faint)}
+.page-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.page-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,4rem);font-weight:600;line-height:1.1;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:1rem}
+.page-desc{font-size:1rem;color:var(--mid);max-width:540px;font-weight:300;line-height:1.8}
+
+.prices-section{padding:80px 5%}
+.prices-section:nth-child(even){background:var(--white)}
+.section-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold)}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,2.5vw,2.25rem);font-weight:600;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:1.5rem}
+.prices-table{width:100%;border-collapse:collapse;border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--white)}
+.prices-table th{padding:1rem 1.5rem;text-align:left;background:var(--charcoal);color:rgba(255,255,255,.85);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.prices-table th:last-child{text-align:right}
+.prices-table td{padding:.95rem 1.5rem;font-size:.875rem;border-bottom:1px solid var(--border);color:var(--charcoal);font-weight:300}
+.prices-table tr:last-child td{border-bottom:none}
+.prices-table tr:hover td{background:var(--gold-wash)}
+.price-amount{font-weight:600;color:var(--gold);text-align:right;white-space:nowrap}
+.price-note{font-size:.72rem;color:var(--muted);display:block;margin-top:.15rem}
+
+.prices-note{background:var(--gold-wash);border:1px solid var(--gold-pale);border-radius:16px;padding:1.5rem 2rem;margin-top:2rem;font-size:.875rem;color:var(--mid);font-weight:300;line-height:1.75}
+.prices-note strong{color:var(--gold);font-weight:600}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all .2s;border:none}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,146,42,.3)}
+.cta-strip{background:var(--charcoal);padding:80px 5%;text-align:center}
+.cta-strip h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:#fff;margin-bottom:1rem}
+.cta-strip p{font-size:.95rem;color:rgba(255,255,255,.5);margin-bottom:2rem;font-weight:300}
+
+footer{background:#120f0a;color:rgba(255,255,255,.4);padding:60px 5% 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem}
+.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.83rem;line-height:1.75;max-width:240px}
+footer h4{color:rgba(255,255,255,.6);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.5rem}
+footer ul a{color:rgba(255,255,255,.3);text-decoration:none;font-size:.83rem;transition:color .2s}
+footer ul a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;font-size:.78rem;flex-wrap:wrap;gap:.5rem}
+
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:block}.footer-top{grid-template-columns:1fr 1fr;gap:2rem}}
+@media(max-width:600px){.prices-section{padding:60px 4%}.page-hero{padding:60px 4% 40px}.footer-top{grid-template-columns:1fr}.prices-table th:nth-child(2),.prices-table td:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Lviv<span>Dent</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Послуги</a></li>
+    <li><a href="prices.html" class="active">Ціни</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="blog.html">Блог</a></li>
+    <li><a href="index.html#booking" class="nav-cta">Записатися</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMenu()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="services.html" onclick="toggleMenu()">Послуги</a>
+  <a href="prices.html" onclick="toggleMenu()">Ціни</a>
+  <a href="gallery.html" onclick="toggleMenu()">Галерея</a>
+  <a href="blog.html" onclick="toggleMenu()">Блог</a>
+  <a href="index.html#booking" onclick="toggleMenu()" style="color:var(--gold)">Записатися →</a>
+</div>
+
+<div class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Головна</a><span>/</span>Ціни</div>
+  <div class="page-eyebrow">Прайс-лист</div>
+  <h1>Прозорі ціни без сюрпризів</h1>
+  <p class="page-desc">Всі вартості фіксовані та узгоджуються до початку лікування. Жодних прихованих доплат.</p>
+</div>
+
+<section class="prices-section">
+  <div class="section-eyebrow">Діагностика</div>
+  <h2>Консультація та діагностика</h2>
+  <table class="prices-table">
+    <thead><tr><th>Послуга</th><th>Опис</th><th>Вартість</th></tr></thead>
+    <tbody>
+      <tr><td>Первинна консультація<span class="price-note">Огляд, діагностика, план лікування</span></td><td>До 60 хв з лікарем</td><td class="price-amount">Безкоштовно</td></tr>
+      <tr><td>Цифровий рентген<span class="price-note">1 знімок</span></td><td>Точна діагностика</td><td class="price-amount">від 150 грн</td></tr>
+      <tr><td>Панорамний знімок<span class="price-note">Ортопантомограма</span></td><td>Повна картина щелепи</td><td class="price-amount">від 450 грн</td></tr>
+      <tr><td>3D КТ-томографія<span class="price-note">Конусно-променева</span></td><td>Для імплантації та хірургії</td><td class="price-amount">від 900 грн</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prices-section">
+  <div class="section-eyebrow">Терапія</div>
+  <h2>Лікування зубів</h2>
+  <table class="prices-table">
+    <thead><tr><th>Послуга</th><th>Опис</th><th>Вартість</th></tr></thead>
+    <tbody>
+      <tr><td>Лікування карієсу<span class="price-note">1 поверхня, світлова пломба</span></td><td>Composite реставрація</td><td class="price-amount">від 650 грн</td></tr>
+      <tr><td>Лікування карієсу<span class="price-note">2–3 поверхні</span></td><td>Складна реставрація</td><td class="price-amount">від 950 грн</td></tr>
+      <tr><td>Лікування пульпіту<span class="price-note">1-канальний зуб</span></td><td>Ендодонтія</td><td class="price-amount">від 1 800 грн</td></tr>
+      <tr><td>Лікування пульпіту<span class="price-note">2–3 канали</span></td><td>Складна ендодонтія</td><td class="price-amount">від 2 800 грн</td></tr>
+      <tr><td>Видалення зуба<span class="price-note">Просте</span></td><td>Включає анестезію</td><td class="price-amount">від 700 грн</td></tr>
+      <tr><td>Видалення зуба<span class="price-note">Складне хірургічне</span></td><td>Зуб мудрості та ін.</td><td class="price-amount">від 1 500 грн</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prices-section">
+  <div class="section-eyebrow">Гігієна</div>
+  <h2>Профілактика та гігієна</h2>
+  <table class="prices-table">
+    <thead><tr><th>Послуга</th><th>Опис</th><th>Вартість</th></tr></thead>
+    <tbody>
+      <tr><td>Ультразвукова чистка<span class="price-note">Повний рот</span></td><td>Видалення нальоту та каменю</td><td class="price-amount">від 1 200 грн</td></tr>
+      <tr><td>Air Flow<span class="price-note">Пескоструминна полірування</span></td><td>Видалення пігментації</td><td class="price-amount">від 800 грн</td></tr>
+      <tr><td>Фторування емалі<span class="price-note">Профілактичне</span></td><td>Укріплення зубів</td><td class="price-amount">від 400 грн</td></tr>
+      <tr><td>Герметизація фісур<span class="price-note">1 зуб</span></td><td>Захист від карієсу</td><td class="price-amount">від 350 грн</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prices-section">
+  <div class="section-eyebrow">Естетика</div>
+  <h2>Відбілювання та естетика</h2>
+  <table class="prices-table">
+    <thead><tr><th>Послуга</th><th>Опис</th><th>Вартість</th></tr></thead>
+    <tbody>
+      <tr><td>Відбілювання ZOOM 4<span class="price-note">Офісне, 1 сеанс</span></td><td>До 8 тонів, результат одразу</td><td class="price-amount">від 3 200 грн</td></tr>
+      <tr><td>Домашнє відбілювання<span class="price-note">Капа + гель</span></td><td>Поступовий результат</td><td class="price-amount">від 1 800 грн</td></tr>
+      <tr><td>Вінір керамічний E.max<span class="price-note">1 одиниця</span></td><td>Довговічна естетика</td><td class="price-amount">від 7 500 грн</td></tr>
+      <tr><td>Вінір композитний<span class="price-note">1 одиниця</span></td><td>Реставрація за 1 візит</td><td class="price-amount">від 2 500 грн</td></tr>
+      <tr><td>Коронка цирконієва<span class="price-note">1 одиниця</span></td><td>Найміцніша реставрація</td><td class="price-amount">від 5 500 грн</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prices-section">
+  <div class="section-eyebrow">Хірургія</div>
+  <h2>Імплантація</h2>
+  <table class="prices-table">
+    <thead><tr><th>Послуга</th><th>Опис</th><th>Вартість</th></tr></thead>
+    <tbody>
+      <tr><td>Імплант Nobel Biocare<span class="price-note">Без коронки</span></td><td>Преміум якість, гарантія 10 р.</td><td class="price-amount">від 18 000 грн</td></tr>
+      <tr><td>Імплант Straumann<span class="price-note">Без коронки</span></td><td>Швейцарська якість</td><td class="price-amount">від 16 000 грн</td></tr>
+      <tr><td>Коронка на імплант<span class="price-note">Цирконієва</span></td><td>Повна реставрація</td><td class="price-amount">від 6 000 грн</td></tr>
+      <tr><td>Кістковий матеріал<span class="price-note">При необхідності</span></td><td>Синус-ліфтинг, аугментація</td><td class="price-amount">від 4 000 грн</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="prices-section">
+  <div class="section-eyebrow">Ортодонтія</div>
+  <h2>Виправлення прикусу</h2>
+  <table class="prices-table">
+    <thead><tr><th>Послуга</th><th>Опис</th><th>Вартість</th></tr></thead>
+    <tbody>
+      <tr><td>Металеві брекети<span class="price-note">Повна система</span></td><td>Класика, надійність</td><td class="price-amount">від 18 000 грн</td></tr>
+      <tr><td>Сапфірові брекети<span class="price-note">Напівпрозорі</span></td><td>Естетика + ефективність</td><td class="price-amount">від 24 000 грн</td></tr>
+      <tr><td>Елайнери Invisalign<span class="price-note">Повний курс</span></td><td>Прозорі, знімні</td><td class="price-amount">від 35 000 грн</td></tr>
+      <tr><td>Ретейнер<span class="price-note">Після лікування</span></td><td>Фіксація результату</td><td class="price-amount">від 2 500 грн</td></tr>
+    </tbody>
+  </table>
+  <div class="prices-note"><strong>Зверніть увагу:</strong> наведені ціни є орієнтовними. Точна вартість лікування визначається після огляду та залежить від складності клінічного випадку. Консультація — безкоштовно.</div>
+</section>
+
+<div class="cta-strip">
+  <h2>Запишіться на безкоштовну консультацію</h2>
+  <p>Дізнайтеся точну вартість вашого лікування — без зобов'язань</p>
+  <a class="btn btn-gold" href="index.html#booking">Записатися онлайн →</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">Lviv<span>Dent</span></div><p class="footer-desc">Преміальна стоматологічна клініка у Львові. Дбаємо про вашу посмішку з 2012 року.</p></div>
+    <div><h4>Послуги</h4><ul><li><a href="services.html">Лікування</a></li><li><a href="services.html">Відбілювання</a></li><li><a href="services.html">Імплантація</a></li></ul></div>
+    <div><h4>Клініка</h4><ul><li><a href="gallery.html">Галерея</a></li><li><a href="prices.html">Ціни</a></li><li><a href="blog.html">Блог</a></li></ul></div>
+    <div><h4>Контакти</h4><ul><li><a href="#">вул. Городоцька, 1</a></li><li><a href="#">+38 (032) 000-00-00</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 LvivDent. Всі права захищено.</span><span>Львів 🇺🇦</span></div>
+
+  <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05)"><a href="admin.html" style="font-size:.68rem;color:rgba(255,255,255,.2);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='#b8922a'" onmouseout="this.style.color='rgba(255,255,255,.2)'">Адмін-панель</a></div>
+</footer>
+<script>function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open')}</script>
+</body>
+</html>
