@@ -5,20 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Адмін-панель — LvivDent</title>
 <meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--cream:#faf8f4;--cream2:#f4f0e8;--white:#fff;--charcoal:#1a1814;--dark:#2d2a24;--mid:#5c5648;--muted:#8c8274;--faint:#c4b9a8;--gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f0e4c4;--gold-wash:#faf4e4;--red:#c0392b;--red-light:#fee8e8;--green:#2d8659;--green-light:#d4f0e0;--border:rgba(184,146,42,.15);--border2:rgba(184,146,42,.3)}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.6;min-height:100vh}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.6;min-height:100vh}
 
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
 .login-box{background:var(--white);border:1px solid var(--border);border-radius:24px;padding:3rem;max-width:420px;width:100%;box-shadow:0 16px 64px rgba(26,24,20,.1)}
 .login-logo{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--charcoal);text-align:center;margin-bottom:.5rem}
 .login-logo span{color:var(--gold)}
 .login-sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:2rem}
-.login-box input{width:100%;padding:14px 18px;border:1px solid var(--border2);border-radius:12px;font-family:'Jost',sans-serif;font-size:.95rem;background:var(--cream);color:var(--charcoal);outline:none;transition:border-color .2s}
+.login-box input{width:100%;padding:14px 18px;border:1px solid var(--border2);border-radius:12px;font-family:'Inter',sans-serif;font-size:.95rem;background:var(--cream);color:var(--charcoal);outline:none;transition:border-color .2s}
 .login-box input:focus{border-color:var(--gold)}
-.login-box button{width:100%;padding:14px;background:var(--gold);color:#fff;border:none;border-radius:100px;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:1rem;transition:background .2s,transform .15s}
+.login-box button{width:100%;padding:14px;background:var(--gold);color:#fff;border:none;border-radius:100px;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:1rem;transition:background .2s,transform .15s}
 .login-box button:hover{background:var(--gold-light);transform:translateY(-1px)}
 .login-error{color:var(--red);font-size:.82rem;text-align:center;margin-top:1rem;display:none}
 .login-hint{font-size:.72rem;color:var(--faint);text-align:center;margin-top:1.5rem}
@@ -31,14 +31,14 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal)
 .admin-nav .actions{display:flex;gap:1rem;align-items:center}
 .admin-link{color:rgba(255,255,255,.6);text-decoration:none;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
 .admin-link:hover{color:var(--gold)}
-.logout-btn{background:rgba(184,146,42,.15);border:1px solid rgba(184,146,42,.3);color:var(--gold);padding:8px 16px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.logout-btn{background:rgba(184,146,42,.15);border:1px solid rgba(184,146,42,.3);color:var(--gold);padding:8px 16px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
 .logout-btn:hover{background:rgba(184,146,42,.25)}
 
 .admin-content{max-width:1200px;margin:0 auto;padding:3rem 3%}
 .admin-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
 .admin-header h1{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:var(--charcoal);letter-spacing:-.02em}
 .admin-header p{font-size:.85rem;color:var(--muted)}
-.btn-add{background:var(--gold);color:#fff;border:none;padding:12px 24px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s}
+.btn-add{background:var(--gold);color:#fff;border:none;padding:12px 24px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s}
 .btn-add:hover{background:var(--gold-light);transform:translateY(-1px)}
 
 .status-bar{background:var(--green-light);border:1px solid var(--green);color:var(--green);padding:10px 18px;border-radius:100px;font-size:.78rem;display:inline-flex;align-items:center;gap:8px;margin-bottom:2rem}
@@ -52,15 +52,15 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal)
 .editor h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:1.5rem;color:var(--charcoal)}
 .field{margin-bottom:1.25rem}
 .field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.field input,.field textarea,.field select{width:100%;padding:12px 16px;border:1px solid var(--border2);border-radius:10px;font-family:'Jost',sans-serif;font-size:.9rem;background:var(--cream);color:var(--charcoal);outline:none;transition:border-color .2s}
+.field input,.field textarea,.field select{width:100%;padding:12px 16px;border:1px solid var(--border2);border-radius:10px;font-family:'Inter',sans-serif;font-size:.9rem;background:var(--cream);color:var(--charcoal);outline:none;transition:border-color .2s}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
-.field textarea{resize:vertical;min-height:200px;font-family:'Jost',sans-serif;line-height:1.7}
+.field textarea{resize:vertical;min-height:200px;font-family:'Inter',sans-serif;line-height:1.7}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .editor-actions{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
-.btn-save{background:var(--gold);color:#fff;border:none;padding:12px 28px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.btn-save{background:var(--gold);color:#fff;border:none;padding:12px 28px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
 .btn-save:hover{background:var(--gold-light)}
 .btn-save:disabled{opacity:.6;cursor:not-allowed}
-.btn-cancel{background:none;color:var(--mid);border:1px solid var(--border2);padding:12px 24px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s}
+.btn-cancel{background:none;color:var(--mid);border:1px solid var(--border2);padding:12px 24px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s}
 .btn-cancel:hover{border-color:var(--gold);color:var(--gold)}
 
 .posts-list{display:grid;gap:1rem}
@@ -70,7 +70,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal)
 .post-row h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--charcoal);margin-bottom:.3rem}
 .post-row .meta{font-size:.78rem;color:var(--muted)}
 .post-actions{display:flex;gap:.5rem}
-.btn-edit,.btn-del{padding:8px 14px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid;transition:all .2s}
+.btn-edit,.btn-del{padding:8px 14px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid;transition:all .2s}
 .btn-edit{background:none;color:var(--gold);border-color:var(--border2)}
 .btn-edit:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
 .btn-del{background:none;color:var(--red);border-color:var(--red-light)}
@@ -147,8 +147,18 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal)
           <textarea id="f-body" required placeholder="Повний текст статті..."></textarea>
         </div>
         <div class="field">
-          <label>URL фото (необов'язково)</label>
-          <input type="text" id="f-image" placeholder="photos/blog1.jpg">
+          <label>Фото статті (необов'язково)</label>
+          <div id="img-preview-wrap" style="display:none;margin-bottom:.75rem">
+            <img id="img-preview" style="max-width:100%;max-height:240px;border-radius:12px;display:block;border:1px solid var(--border)">
+            <button type="button" onclick="window.clearImage()" style="margin-top:.5rem;background:none;border:1px solid var(--red-light);color:var(--red);padding:6px 14px;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer">Видалити фото</button>
+          </div>
+          <label for="f-file" style="display:flex;align-items:center;justify-content:center;gap:.5rem;padding:14px;border:2px dashed var(--border2);border-radius:12px;background:var(--cream);cursor:pointer;font-size:.85rem;color:var(--mid);transition:border-color .2s,background .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.background='var(--gold-wash)'" onmouseout="this.style.borderColor='var(--border2)';this.style.background='var(--cream)'">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span id="file-label">Обрати фото з комп'ютера</span>
+          </label>
+          <input type="file" id="f-file" accept="image/*" style="display:none" onchange="window.handleFileSelect(event)">
+          <input type="hidden" id="f-image">
+          <div style="font-size:.7rem;color:var(--muted);margin-top:.5rem">Фото автоматично стиснеться до ~800px ширини</div>
         </div>
         <input type="hidden" id="f-id">
         <div class="editor-actions">
@@ -266,7 +276,70 @@ window.openEditor = function(post){
   document.getElementById('f-excerpt').value = post?.excerpt || '';
   document.getElementById('f-body').value = post?.body || '';
   document.getElementById('f-image').value = post?.image || '';
+  const prevWrap = document.getElementById('img-preview-wrap');
+  const prev = document.getElementById('img-preview');
+  if(post?.image){
+    prev.src = post.image;
+    prevWrap.style.display = 'block';
+    document.getElementById('file-label').textContent = 'Замінити фото';
+  } else {
+    prevWrap.style.display = 'none';
+    document.getElementById('file-label').textContent = 'Обрати фото з комп\'ютера';
+  }
   document.getElementById('editor').scrollIntoView({behavior:'smooth'});
+};
+
+// File upload handler with compression
+window.handleFileSelect = function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ toast('Файл має бути зображенням'); return; }
+  
+  document.getElementById('file-label').textContent = 'Обробка...';
+  
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    const img = new Image();
+    img.onload = function(){
+      // Compress to max 800px width
+      const maxW = 800;
+      const ratio = Math.min(maxW / img.width, 1);
+      const w = Math.round(img.width * ratio);
+      const h = Math.round(img.height * ratio);
+      
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+      
+      // Check size
+      const sizeKb = Math.round(dataUrl.length * 0.75 / 1024);
+      if(sizeKb > 900){
+        // Re-compress with lower quality
+        const dataUrl2 = canvas.toDataURL('image/jpeg', 0.5);
+        document.getElementById('f-image').value = dataUrl2;
+      } else {
+        document.getElementById('f-image').value = dataUrl;
+      }
+      
+      document.getElementById('img-preview').src = document.getElementById('f-image').value;
+      document.getElementById('img-preview-wrap').style.display = 'block';
+      document.getElementById('file-label').textContent = 'Замінити фото';
+      toast('Фото готове · ' + Math.round(document.getElementById('f-image').value.length * 0.75 / 1024) + ' КБ');
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+window.clearImage = function(){
+  document.getElementById('f-image').value = '';
+  document.getElementById('f-file').value = '';
+  document.getElementById('img-preview-wrap').style.display = 'none';
+  document.getElementById('file-label').textContent = 'Обрати фото з комп\'ютера';
 };
 
 window.closeEditor = function(){
@@ -425,7 +498,70 @@ window.openEditor = function(post){
   document.getElementById('f-excerpt').value = post?.excerpt || '';
   document.getElementById('f-body').value = post?.body || '';
   document.getElementById('f-image').value = post?.image || '';
+  const prevWrap = document.getElementById('img-preview-wrap');
+  const prev = document.getElementById('img-preview');
+  if(post?.image){
+    prev.src = post.image;
+    prevWrap.style.display = 'block';
+    document.getElementById('file-label').textContent = 'Замінити фото';
+  } else {
+    prevWrap.style.display = 'none';
+    document.getElementById('file-label').textContent = 'Обрати фото з комп\'ютера';
+  }
   document.getElementById('editor').scrollIntoView({behavior:'smooth'});
+};
+
+// File upload handler with compression
+window.handleFileSelect = function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  if(!file.type.startsWith('image/')){ toast('Файл має бути зображенням'); return; }
+  
+  document.getElementById('file-label').textContent = 'Обробка...';
+  
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    const img = new Image();
+    img.onload = function(){
+      // Compress to max 800px width
+      const maxW = 800;
+      const ratio = Math.min(maxW / img.width, 1);
+      const w = Math.round(img.width * ratio);
+      const h = Math.round(img.height * ratio);
+      
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
+      
+      // Check size
+      const sizeKb = Math.round(dataUrl.length * 0.75 / 1024);
+      if(sizeKb > 900){
+        // Re-compress with lower quality
+        const dataUrl2 = canvas.toDataURL('image/jpeg', 0.5);
+        document.getElementById('f-image').value = dataUrl2;
+      } else {
+        document.getElementById('f-image').value = dataUrl;
+      }
+      
+      document.getElementById('img-preview').src = document.getElementById('f-image').value;
+      document.getElementById('img-preview-wrap').style.display = 'block';
+      document.getElementById('file-label').textContent = 'Замінити фото';
+      toast('Фото готове · ' + Math.round(document.getElementById('f-image').value.length * 0.75 / 1024) + ' КБ');
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+window.clearImage = function(){
+  document.getElementById('f-image').value = '';
+  document.getElementById('f-file').value = '';
+  document.getElementById('img-preview-wrap').style.display = 'none';
+  document.getElementById('file-label').textContent = 'Обрати фото з комп\'ютера';
 };
 
 window.closeEditor = function(){
@@ -481,338 +617,6 @@ function toast(msg){
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2200);
-}
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-</script>E html>
-<html lang="uk">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Адмін-панель — LvivDent</title>
-<meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--cream:#faf8f4;--cream2:#f4f0e8;--white:#fff;--charcoal:#1a1814;--dark:#2d2a24;--mid:#5c5648;--muted:#8c8274;--faint:#c4b9a8;--gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f0e4c4;--gold-wash:#faf4e4;--red:#c0392b;--red-light:#fee8e8;--green:#2d8659;--green-light:#d4f0e0;--border:rgba(184,146,42,.15);--border2:rgba(184,146,42,.3)}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.6;min-height:100vh}
-
-.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.login-box{background:var(--white);border:1px solid var(--border);border-radius:24px;padding:3rem;max-width:420px;width:100%;box-shadow:0 16px 64px rgba(26,24,20,.1)}
-.login-logo{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--charcoal);text-align:center;margin-bottom:.5rem}
-.login-logo span{color:var(--gold)}
-.login-sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:2rem}
-.login-box input{width:100%;padding:14px 18px;border:1px solid var(--border2);border-radius:12px;font-family:'Jost',sans-serif;font-size:.95rem;background:var(--cream);color:var(--charcoal);outline:none;transition:border-color .2s}
-.login-box input:focus{border-color:var(--gold)}
-.login-box button{width:100%;padding:14px;background:var(--gold);color:#fff;border:none;border-radius:100px;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:1rem;transition:background .2s,transform .15s}
-.login-box button:hover{background:var(--gold-light);transform:translateY(-1px)}
-.login-error{color:var(--red);font-size:.82rem;text-align:center;margin-top:1rem;display:none}
-.login-hint{font-size:.72rem;color:var(--faint);text-align:center;margin-top:1.5rem}
-
-.dashboard{display:none}
-.dashboard.active{display:block}
-.admin-nav{height:72px;background:var(--charcoal);display:flex;align-items:center;justify-content:space-between;padding:0 3%;position:sticky;top:0;z-index:50}
-.admin-nav .logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff}
-.admin-nav .logo span{color:var(--gold)}
-.admin-nav .actions{display:flex;gap:1rem;align-items:center}
-.admin-link{color:rgba(255,255,255,.6);text-decoration:none;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
-.admin-link:hover{color:var(--gold)}
-.logout-btn{background:rgba(184,146,42,.15);border:1px solid rgba(184,146,42,.3);color:var(--gold);padding:8px 16px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
-.logout-btn:hover{background:rgba(184,146,42,.25)}
-
-.admin-content{max-width:1200px;margin:0 auto;padding:3rem 3%}
-.admin-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
-.admin-header h1{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:var(--charcoal);letter-spacing:-.02em}
-.admin-header p{font-size:.85rem;color:var(--muted)}
-.btn-add{background:var(--gold);color:#fff;border:none;padding:12px 24px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .15s}
-.btn-add:hover{background:var(--gold-light);transform:translateY(-1px)}
-
-.status-bar{background:var(--green-light);border:1px solid var(--green);color:var(--green);padding:10px 18px;border-radius:100px;font-size:.78rem;display:inline-flex;align-items:center;gap:8px;margin-bottom:2rem}
-.status-bar.loading{background:var(--gold-wash);border-color:var(--gold-pale);color:var(--gold)}
-.status-bar.error{background:var(--red-light);border-color:var(--red);color:var(--red)}
-.status-dot{width:8px;height:8px;border-radius:50%;background:currentColor;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-
-.editor{background:var(--white);border:1px solid var(--border);border-radius:24px;padding:2.5rem;margin-bottom:2.5rem;display:none}
-.editor.open{display:block}
-.editor h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;margin-bottom:1.5rem;color:var(--charcoal)}
-.field{margin-bottom:1.25rem}
-.field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
-.field input,.field textarea,.field select{width:100%;padding:12px 16px;border:1px solid var(--border2);border-radius:10px;font-family:'Jost',sans-serif;font-size:.9rem;background:var(--cream);color:var(--charcoal);outline:none;transition:border-color .2s}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
-.field textarea{resize:vertical;min-height:200px;font-family:'Jost',sans-serif;line-height:1.7}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.editor-actions{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
-.btn-save{background:var(--gold);color:#fff;border:none;padding:12px 28px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:background .2s}
-.btn-save:hover{background:var(--gold-light)}
-.btn-save:disabled{opacity:.6;cursor:not-allowed}
-.btn-cancel{background:none;color:var(--mid);border:1px solid var(--border2);padding:12px 24px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:border-color .2s}
-.btn-cancel:hover{border-color:var(--gold);color:var(--gold)}
-
-.posts-list{display:grid;gap:1rem}
-.post-row{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.5rem;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;transition:border-color .2s}
-.post-row:hover{border-color:var(--border2)}
-.post-row .tag{display:inline-block;font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--gold-wash);padding:3px 10px;border-radius:100px;margin-bottom:.5rem}
-.post-row h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--charcoal);margin-bottom:.3rem}
-.post-row .meta{font-size:.78rem;color:var(--muted)}
-.post-actions{display:flex;gap:.5rem}
-.btn-edit,.btn-del{padding:8px 14px;border-radius:100px;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid;transition:all .2s}
-.btn-edit{background:none;color:var(--gold);border-color:var(--border2)}
-.btn-edit:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
-.btn-del{background:none;color:var(--red);border-color:var(--red-light)}
-.btn-del:hover{background:var(--red);color:#fff;border-color:var(--red)}
-
-.empty{text-align:center;padding:4rem 2rem;color:var(--muted)}
-.empty h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--dark);margin-bottom:.5rem}
-
-.toast{position:fixed;bottom:24px;right:24px;background:var(--charcoal);color:#fff;padding:14px 24px;border-radius:100px;font-size:.85rem;box-shadow:0 8px 32px rgba(0,0,0,.2);z-index:1000;opacity:0;transform:translateY(20px);transition:opacity .25s,transform .25s}
-.toast.show{opacity:1;transform:translateY(0)}
-.toast.error{background:var(--red)}
-
-@media(max-width:600px){.admin-content{padding:2rem 4%}.editor{padding:1.5rem}.field-row{grid-template-columns:1fr}.post-row{grid-template-columns:1fr}.post-actions{justify-content:flex-end}}
-</style>
-</head>
-<body>
-
-<div class="login-screen" id="login">
-  <div class="login-box">
-    <div class="login-logo">Lviv<span>Dent</span></div>
-    <div class="login-sub">Адмін-панель</div>
-    <form onsubmit="event.preventDefault();doLogin()">
-      <div class="field"><input type="password" id="pwd" placeholder="Пароль" autofocus></div>
-      <button type="submit">Увійти</button>
-      <div class="login-error" id="err">Невірний пароль</div>
-    </form>
-    <div class="login-hint">Підказка: пароль за замовчуванням — <strong>admin123</strong> (зміни його в коді)</div>
-  </div>
-</div>
-
-<div class="dashboard" id="dash">
-  <div class="admin-nav">
-    <div class="logo">Lviv<span>Dent</span></div>
-    <div class="actions">
-      <a class="admin-link" href="blog.html" target="_blank">Переглянути блог →</a>
-      <button class="logout-btn" onclick="logout()">Вийти</button>
-    </div>
-  </div>
-
-  <div class="admin-content">
-    <div class="admin-header">
-      <div>
-        <h1>Управління статтями</h1>
-        <p>Статті синхронізуються з Firebase і одразу видимі всім відвідувачам</p>
-      </div>
-      <button class="btn-add" onclick="openEditor()">+ Нова стаття</button>
-    </div>
-
-    <div class="status-bar" id="status"><span class="status-dot"></span><span id="status-text">З'єднання з Firebase...</span></div>
-
-    <div class="editor" id="editor">
-      <h2 id="editor-title">Нова стаття</h2>
-      <form onsubmit="event.preventDefault();savePost()">
-        <div class="field">
-          <label>Заголовок</label>
-          <input type="text" id="f-title" required placeholder="Як правильно чистити зуби">
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Категорія / тег</label>
-            <input type="text" id="f-tag" placeholder="Поради" required>
-          </div>
-          <div class="field">
-            <label>Дата</label>
-            <input type="text" id="f-date" placeholder="15 травня 2025">
-          </div>
-        </div>
-        <div class="field">
-          <label>Короткий опис (показується в картці)</label>
-          <textarea id="f-excerpt" style="min-height:80px" required placeholder="Декілька речень про що стаття..."></textarea>
-        </div>
-        <div class="field">
-          <label>Текст статті</label>
-          <textarea id="f-body" required placeholder="Повний текст статті..."></textarea>
-        </div>
-        <div class="field">
-          <label>URL фото (необов'язково)</label>
-          <input type="text" id="f-image" placeholder="photos/blog1.jpg">
-        </div>
-        <input type="hidden" id="f-id">
-        <div class="editor-actions">
-          <button type="submit" class="btn-save" id="save-btn">Зберегти</button>
-          <button type="button" class="btn-cancel" onclick="closeEditor()">Скасувати</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="posts-list" id="list"></div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-// ════════════════════════════════════
-// FIREBASE CONFIG
-const firebaseConfig = {
-  apiKey: "AIzaSyBYF_3t84vTJYaPeFOPyOiSEaAGEeQdzqw",
-  authDomain: "lvivdent.firebaseapp.com",
-  projectId: "lvivdent",
-  storageBucket: "lvivdent.firebasestorage.app",
-  messagingSenderId: "267260669030",
-  appId: "1:267260669030:web:2fc4df55432b8fac2491a7"
-};
-// ЗМІНИ ПАРОЛЬ ТУТ:
-const ADMIN_PASSWORD = 'admin123';
-// ════════════════════════════════════
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const postsCol = collection(db, 'posts');
-
-// Make functions available to inline HTML handlers
-window.doLogin = function(){
-  if(document.getElementById('pwd').value === ADMIN_PASSWORD){
-    sessionStorage.setItem('lvivdent_auth','1');
-    showDash();
-  } else {
-    document.getElementById('err').style.display='block';
-  }
-};
-window.logout = function(){
-  sessionStorage.removeItem('lvivdent_auth');
-  location.reload();
-};
-
-function showDash(){
-  document.getElementById('login').style.display='none';
-  document.getElementById('dash').classList.add('active');
-  loadPosts();
-}
-
-if(sessionStorage.getItem('lvivdent_auth')) showDash();
-
-function setStatus(text, type){
-  const bar = document.getElementById('status');
-  bar.className = 'status-bar' + (type ? ' ' + type : '');
-  document.getElementById('status-text').textContent = text;
-}
-
-async function loadPosts(){
-  setStatus('Завантаження статей...', 'loading');
-  try {
-    const q = query(postsCol, orderBy('createdAt', 'desc'));
-    const snap = await getDocs(q);
-    const posts = [];
-    snap.forEach(d => posts.push({id: d.id, ...d.data()}));
-    renderList(posts);
-    setStatus(`Підключено · ${posts.length} ${posts.length===1?'стаття':'статей'} у Firebase`);
-  } catch(err){
-    console.error(err);
-    setStatus('Помилка з\'єднання з Firebase', 'error');
-  }
-}
-
-function renderList(posts){
-  const list = document.getElementById('list');
-  if(posts.length === 0){
-    list.innerHTML = '<div class="empty"><h3>Поки немає статей</h3><p>Натисніть "Нова стаття" щоб додати першу публікацію</p></div>';
-    return;
-  }
-  list.innerHTML = posts.map(p => `
-    <div class="post-row" data-id="${p.id}">
-      <div>
-        <span class="tag">${escapeHtml(p.tag||'Стаття')}</span>
-        <h3>${escapeHtml(p.title)}</h3>
-        <div class="meta">${escapeHtml(p.date||'')} · ${(p.body||p.excerpt||'').length} символів</div>
-      </div>
-      <div class="post-actions">
-        <button class="btn-edit">Редагувати</button>
-        <button class="btn-del">Видалити</button>
-      </div>
-    </div>`).join('');
-  
-  list.querySelectorAll('.post-row').forEach(row => {
-    const id = row.dataset.id;
-    const post = posts.find(p => p.id === id);
-    row.querySelector('.btn-edit').onclick = () => openEditor(post);
-    row.querySelector('.btn-del').onclick = () => delPost(id);
-  });
-}
-
-window.openEditor = function(post){
-  document.getElementById('editor').classList.add('open');
-  document.getElementById('editor-title').textContent = post ? 'Редагування статті' : 'Нова стаття';
-  document.getElementById('f-id').value = post?.id || '';
-  document.getElementById('f-title').value = post?.title || '';
-  document.getElementById('f-tag').value = post?.tag || 'Поради';
-  document.getElementById('f-date').value = post?.date || new Date().toLocaleDateString('uk-UA',{day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('f-excerpt').value = post?.excerpt || '';
-  document.getElementById('f-body').value = post?.body || '';
-  document.getElementById('f-image').value = post?.image || '';
-  document.getElementById('editor').scrollIntoView({behavior:'smooth'});
-};
-
-window.closeEditor = function(){
-  document.getElementById('editor').classList.remove('open');
-};
-
-window.savePost = async function(){
-  const id = document.getElementById('f-id').value;
-  const data = {
-    title: document.getElementById('f-title').value.trim(),
-    tag: document.getElementById('f-tag').value.trim(),
-    date: document.getElementById('f-date').value.trim(),
-    excerpt: document.getElementById('f-excerpt').value.trim(),
-    body: document.getElementById('f-body').value.trim(),
-    image: document.getElementById('f-image').value.trim(),
-  };
-  
-  const btn = document.getElementById('save-btn');
-  btn.disabled = true;
-  btn.textContent = 'Збереження...';
-  
-  try {
-    if(id){
-      await updateDoc(doc(db, 'posts', id), data);
-      toast('Оновлено!');
-    } else {
-      data.createdAt = serverTimestamp();
-      await addDoc(postsCol, data);
-      toast('Опубліковано!');
-    }
-    closeEditor();
-    loadPosts();
-  } catch(err){
-    console.error(err);
-    toast('Помилка збереження', 'error');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Зберегти';
-  }
-};
-
-async function delPost(id){
-  if(!confirm('Видалити цю статтю? Її більше не буде на сайті.')) return;
-  try {
-    await deleteDoc(doc(db, 'posts', id));
-    toast('Видалено');
-    loadPosts();
-  } catch(err){
-    console.error(err);
-    toast('Помилка видалення', 'error');
-  }
-}
-
-function toast(msg, type){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (type === 'error' ? ' error' : '');
-  setTimeout(() => t.classList.remove('show'), 2500);
 }
 
 function escapeHtml(s){
