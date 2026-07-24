@@ -729,7 +729,6 @@
     font-size:0.72rem;
     color:#5c574a;
   }
-  /* Нормальна видима кнопка для переходу на сторінку адмін-панелі */
   .admin-panel-btn {
     border: 1px solid var(--brass-dim);
     padding: 0.45rem 1.1rem;
@@ -1016,14 +1015,14 @@
     </div>
     <div class="footer-bottom-row">
       <div class="footer-copy">© 2026 ЛОРНЕТ Boutique Hotel. Усі права захищено.</div>
-      <!-- Повноцінна видима кнопка для переходу на адмін-панель -->
       <a href="admin-login.html" class="admin-panel-btn">Адмін-панель</a>
     </div>
   </div>
 </footer>
 
 <script>
-  const BACKEND_URL = 'http://localhost:5000';
+  // ЗАМІНЕНО НА ВАШ РЕАЛЬНИЙ СЕРВЕР НА RENDER:
+  const BACKEND_URL = 'https://portfolio-jvl5.onrender.com';
 
   async function loadRoomsToForm() {
     try {
@@ -1114,7 +1113,7 @@
     { src: 'images/4.jpg', caption: 'Ранкова кава' },
     { src: 'images/5.jpg', caption: 'Мансарда, вид на дзвіниці' },
     { src: 'images/6.jpg', caption: 'Внутрішній двір' },
-    { src: 'bytes/7.jpg', caption: 'Кабінет директора' },
+    { src: 'images/7.jpg', caption: 'Кабінет директора' }, // Виправлено шлях з bytes/7.jpg на images/7.jpg
   ];
 
   (function initCarousel(){
