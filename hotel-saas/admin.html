@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмін-панель — ЛОРНЕТ</title>
+    <!-- Захист сторінки: перевірка чи користувач авторизований -->
+    <script>
+        if (localStorage.getItem('admin_logged') !== 'true') {
+            window.location.href = 'admin-login.html';
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #0f0a0d;
+            --ink-2: #1d1116;
+            --brass: #d9b45c;
+            --brass-light: #f4dfa0;
+            --brass-dim: #9c7a34;
+            --cream: #f1e8d6;
+            --stone: #a1937d;
+            --hair: rgba(217,180,92,0.25);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--ink);
+            color: var(--cream);
+            font-family: 'Jost', sans-serif;
+            padding: 40px 6vw;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        h2 {
+            font-family: 'Fraunces', serif;
+            font-size: 2rem;
+            color: var(--brass);
+            margin-bottom: 0.5rem;
+        }
+        p.subtitle {
+            color: var(--stone);
+            font-size: 0.9rem;
+        }
+        .btn-logout {
+            background: transparent;
+            color: var(--stone);
+            border: 1px solid var(--hair);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'Jost', sans-serif;
+        }
+        .btn-logout:hover {
+            border-color: var(--brass);
+            color: var(--brass);
+        }
+        .table-container {
+            background: var(--ink-2);
+            border: 1px solid var(--hair);
+            overflow-x: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--hair);
+            font-size: 0.95rem;
+        }
+        th {
+            background: rgba(217,180,92,0.08);
+            color: var(--brass);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        tr:hover {
+            background: rgba(217,180,92,0.03);
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.6rem;
+            background: rgba(217,180,92,0.12);
+            border: 1px solid var(--brass);
+            color: var(--brass);
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <div>
+            <h2>Керування бронюваннями</h2>
+            <p class="subtitle">Актуальний список усіх заїздів у готель «ЛОРНЕТ»</p>
+        </div>
+        <button onclick="logout()" class="btn-logout">Вийти</button>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Гість</th>
+                    <th>Номер</th>
+                    <th>Заїзд</th>
+                    <th>Виїзд</th>
+                </tr>
+            </thead>
+            <tbody id="bookingsList">
+                <tr><td colspan="5" style="text-align:center; color: var(--stone);">Завантаження даних...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'http://localhost:5000';
+
+        function logout() {
+            localStorage.removeItem('admin_logged');
+            window.location.href = 'admin-login.html';
+        }
+
+        async function loadAdminBookings() {
+            try {
+                const response = await fetch('http://localhost:5000/api/bookings');
+                const bookings = await response.json();
+                const tbody = document.getElementById('bookingsList');
+                
+                tbody.innerHTML = '';
+
+                if (bookings.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--stone);">Ще немає жодного бронювання</td></tr>`;
+                    return;
+                }
+
+                bookings.forEach(b => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>#${b.id}</td>
+                        <td><strong>${b.guest_name}</strong></td>
+                        <td><span class="badge">${b.room_name}</span></td>
+                        <td>${b.check_in}</td>
+                        <td>${b.check_out}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) {
+                console.error(e);
+                document.getElementById('bookingsList').innerHTML = `<tr><td colspan="5" style="text-align:center; color: #ff6b6b;">Помилка завантаження даних із сервера</td></tr>`;
+            }
+        }
+
+        loadAdminBookings();
+    </script>
+</body>
+</html>

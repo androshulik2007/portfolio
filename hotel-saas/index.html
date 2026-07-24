@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЛОРНЕТ — Бутік-готель у серці міста</title>
+<meta name="description" content="ЛОРНЕТ — бутік-готель у історичному центрі міста. Номери з характером, ресторан, індивідуальний сервіс.">
+<meta name="keywords" content="бутік готель, готель центр міста, номери, бронювання, розкішний готель">
+<meta name="author" content="ЛОРНЕТ Boutique Hotel">
+<meta property="og:title" content="ЛОРНЕТ — Бутік-готель у серці міста">
+<meta property="og:description" content="Дев'ятнадцять номерів. Один погляд. Бутік-готель у історичному центрі.">
+<meta property="og:image" content="">
+<meta property="og:url" content="">
+<meta property="og:type" content="website">
+<link rel="canonical" href="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f0a0d;
+    --ink-2:#1d1116;
+    --brass:#d9b45c;
+    --brass-light:#f4dfa0;
+    --brass-dim:#9c7a34;
+    --wine:#6b0f22;
+    --wine-deep:#3a0813;
+    --purple:#2a0e2e;
+    --cream:#f1e8d6;
+    --stone:#a1937d;
+    --hair:rgba(217,180,92,0.28);
+    --hair-strong:rgba(217,180,92,0.5);
+    --gold-glow:0 0 0 1px rgba(217,180,92,0.35), 0 18px 50px rgba(0,0,0,0.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(107,15,34,0.28), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(217,180,92,0.06), transparent 60%),
+      var(--ink);
+    background-attachment:fixed;
+    color:var(--cream);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    opacity:0.5;
+    background-image:
+      repeating-linear-gradient(135deg, rgba(217,180,92,0.025) 0 2px, transparent 2px 46px),
+      repeating-linear-gradient(45deg, rgba(217,180,92,0.02) 0 2px, transparent 2px 46px);
+  }
+  header, section, footer{position:relative; z-index:1;}
+  .flourish{
+    display:flex; align-items:center; justify-content:center;
+    gap:0.7rem;
+    color:var(--brass);
+  }
+  .flourish::before, .flourish::after{
+    content:'';
+    height:1px; width:38px;
+    background:linear-gradient(to right, transparent, var(--brass-dim));
+  }
+  .flourish::after{background:linear-gradient(to left, transparent, var(--brass-dim));}
+  .corner-frame{position:relative;}
+  .corner-frame::before, .corner-frame::after,
+  .corner-frame .cf-br, .corner-frame .cf-bl{
+    content:'';
+    position:absolute;
+    width:22px; height:22px;
+    border:1px solid var(--brass);
+    opacity:0.85;
+    pointer-events:none;
+  }
+  .corner-frame::before{top:-8px;left:-8px;border-right:none;border-bottom:none;}
+  .corner-frame::after{top:-8px;right:-8px;border-left:none;border-bottom:none;}
+  .corner-frame .cf-bl{bottom:-8px;left:-8px;border-right:none;border-top:none;}
+  .corner-frame .cf-br{bottom:-8px;right:-8px;border-left:none;border-top:none;}
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:400;
+    letter-spacing:0.01em;
+    text-shadow:0 2px 24px rgba(217,180,92,0.12);
+  }
+  a{color:inherit;text-decoration:none;}
+  .eyebrow{
+    font-size:0.72rem;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:inline-block;
+    margin-bottom:1rem;
+  }
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 6vw;
+  }
+  ::selection{background:var(--brass);color:var(--ink);}
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:1.6rem 6vw;
+    background:linear-gradient(to bottom, rgba(20,17,13,0.92), transparent);
+    transition:background 0.3s;
+  }
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:1.3rem;
+    letter-spacing:0.28em;
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+  }
+  .logo .crown{
+    color:var(--brass);
+    font-size:1rem;
+    filter:drop-shadow(0 0 6px rgba(217,180,92,0.5));
+  }
+  nav ul{
+    display:flex;
+    gap:2.4rem;
+    list-style:none;
+  }
+  nav a{
+    font-size:0.76rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--stone);
+    transition:color 0.25s;
+    position:relative;
+  }
+  nav a:hover{color:var(--brass);}
+  .nav-cta{
+    border:1px solid var(--brass-dim);
+    padding:0.55rem 1.3rem;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    transition:all 0.25s;
+    background:linear-gradient(180deg, rgba(217,180,92,0.08), transparent);
+  }
+  .nav-cta:hover{
+    background:linear-gradient(135deg, var(--brass-light), var(--brass), var(--brass-dim));
+    color:var(--ink);
+    box-shadow:0 4px 20px rgba(217,180,92,0.35);
+    border-color:var(--brass-light);
+  }
+  .burger{display:none;background:none;border:0;color:var(--cream);font-size:1.4rem;cursor:pointer;}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    padding:0 6vw;
+    background:
+      radial-gradient(ellipse 60% 50% at 78% 20%, rgba(92,31,39,0.35), transparent),
+      radial-gradient(ellipse 50% 60% at 10% 90%, rgba(201,162,74,0.08), transparent),
+      var(--ink);
+  }
+  .hero-rule{
+    position:absolute;
+    left:6vw; top:0; bottom:0;
+    width:1px;
+    background:linear-gradient(to bottom, transparent, var(--hair) 20%, var(--hair) 80%, transparent);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.7fr;
+    gap:4vw;
+    align-items:end;
+    width:100%;
+    padding-top:6rem;
+  }
+  .hero h1{
+    font-size:clamp(3rem, 6.4vw, 6.2rem);
+    line-height:0.98;
+    color:var(--cream);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--brass);
+    font-weight:300;
+  }
+  .hero-sub{
+    max-width:30ch;
+    color:var(--stone);
+    font-size:1rem;
+    line-height:1.7;
+    margin-top:1.6rem;
+  }
+  .hero-actions{
+    display:flex;
+    gap:1rem;
+    margin-top:2.4rem;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg, var(--brass-light), var(--brass) 45%, var(--brass-dim));
+    color:var(--ink);
+    padding:0.95rem 2.1rem;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    transition:transform 0.25s, box-shadow 0.25s;
+    border:1px solid var(--brass-light);
+    box-shadow:0 6px 22px rgba(217,180,92,0.25);
+    cursor:pointer;
+  }
+  .btn-primary::after{
+    content:'';
+    position:absolute; top:0; left:-60%;
+    width:40%; height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform:skewX(-20deg);
+    transition:left 0.6s ease;
+  }
+  .btn-primary:hover::after{left:130%;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(217,180,92,0.4);}
+  .btn-ghost{
+    padding:0.95rem 2.1rem;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    border:1px solid var(--hair-strong);
+    color:var(--cream);
+    transition:all 0.25s;
+    background:linear-gradient(180deg, rgba(217,180,92,0.05), transparent);
+  }
+  .btn-ghost:hover{border-color:var(--brass);color:var(--brass-light);box-shadow:0 4px 16px rgba(217,180,92,0.18);}
+
+  .hero-lens{
+    justify-self:end;
+    text-align:right;
+  }
+  .lens{
+    width:min(22vw, 220px);
+    aspect-ratio:1;
+    margin-left:auto;
+    border-radius:50%;
+    border:1.5px solid var(--brass);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;
+    background:radial-gradient(circle at 35% 30%, rgba(217,180,92,0.2), transparent 60%);
+    box-shadow:0 0 0 6px rgba(217,180,92,0.06), 0 0 40px rgba(217,180,92,0.15);
+  }
+  .lens::before{
+    content:'';
+    position:absolute;inset:14px;
+    border:1px solid var(--hair-strong);
+    border-radius:50%;
+  }
+  .lens::after{
+    content:'';
+    position:absolute;inset:-10px;
+    border:1px solid var(--hair);
+    border-radius:50%;
+  }
+  .lens span{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:0.85rem;
+    color:var(--brass);
+    letter-spacing:0.06em;
+  }
+  .lens-caption{
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--stone);
+    margin-top:1rem;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:2.4rem; left:6vw;
+    font-size:0.68rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--stone);
+    display:flex;
+    align-items:center;
+    gap:0.7rem;
+  }
+  .scroll-cue::after{
+    content:'';
+    width:34px;height:1px;
+    background:var(--brass-dim);
+  }
+
+  section{padding:8rem 0;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:2rem;
+    margin-bottom:4rem;
+    border-bottom:1px solid var(--hair);
+    padding-bottom:2rem;
+    position:relative;
+  }
+  .section-head::after{
+    content:'❦';
+    position:absolute;
+    left:50%; bottom:-0.9rem;
+    transform:translateX(-50%);
+    background:var(--ink);
+    padding:0 1rem;
+    color:var(--brass);
+    font-size:0.9rem;
+  }
+  .section-head h2{
+    font-size:clamp(2.1rem, 3.4vw, 3rem);
+  }
+  .section-note{
+    max-width:32ch;
+    color:var(--stone);
+    font-size:0.92rem;
+    line-height:1.7;
+    text-align:right;
+  }
+
+  /* ===== ABOUT ===== */
+  .about{padding-top:6rem;}
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:5vw;
+    align-items:center;
+  }
+  .about-art{
+    aspect-ratio:4/5;
+    border:1px solid var(--hair-strong);
+    position:relative;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(107,15,34,0.35), transparent 60%),
+      linear-gradient(160deg, var(--ink-2), var(--ink)),
+      repeating-linear-gradient(45deg, transparent 0 22px, rgba(217,180,92,0.045) 22px 23px);
+    box-shadow:var(--gold-glow);
+  }
+  .about-art::after{
+    content:'МDCCCXCI';
+    position:absolute;
+    bottom:1.4rem;right:1.4rem;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    color:var(--brass-dim);
+    font-size:0.85rem;
+    letter-spacing:0.08em;
+  }
+  .about-art .frame{
+    position:absolute;inset:1.6rem;
+    border:1px solid var(--hair);
+  }
+  .about-copy p{
+    color:var(--stone);
+    line-height:1.85;
+    font-size:1rem;
+    margin-bottom:1.4rem;
+  }
+  .about-copy h2{font-size:clamp(2.1rem,3.6vw,3rem); margin-bottom:1.6rem;}
+  .stat-row{
+    display:flex;
+    gap:3rem;
+    margin-top:2.2rem;
+    padding-top:2.2rem;
+    border-top:1px solid var(--hair);
+  }
+  .stat-num{font-family:'Fraunces',serif;font-size:2rem;color:var(--brass);}
+  .stat-label{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone);margin-top:0.3rem;}
+
+  /* ===== ROOMS ===== */
+  .rooms-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .room-row{
+    display:grid;
+    grid-template-columns:90px 1.3fr 1.6fr auto auto;
+    gap:2rem;
+    align-items:center;
+    padding:2.2rem 0;
+    border-bottom:1px solid var(--hair);
+    transition:padding-left 0.3s, background 0.3s;
+  }
+  .room-row:hover{
+    padding-left:1rem;
+    background:linear-gradient(to right, rgba(201,162,74,0.05), transparent);
+  }
+  .room-badge{
+    width:64px;height:64px;
+    border:1.5px solid var(--brass);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    color:var(--brass);
+    font-size:1.1rem;
+    box-shadow:0 0 0 4px rgba(217,180,92,0.08), 0 4px 16px rgba(0,0,0,0.4);
+    background:radial-gradient(circle at 35% 30%, rgba(217,180,92,0.12), transparent 65%);
+  }
+  .room-name{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    color:var(--cream);
+  }
+  .room-desc{
+    color:var(--stone);
+    font-size:0.9rem;
+    line-height:1.6;
+    max-width:46ch;
+  }
+  .room-price{
+    text-align:right;
+  }
+  .room-price .amount{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    color:var(--brass);
+  }
+  .room-price .per{
+    font-size:0.68rem;
+    color:var(--stone);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .room-select{
+    border:1px solid var(--brass-dim);
+    padding:0.7rem 1.4rem;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+    white-space:nowrap;
+    transition:all 0.25s;
+    background:none;
+    cursor:pointer;
+    font-family:'Jost',sans-serif;
+  }
+  .room-select:hover{background:var(--brass);color:var(--ink);}
+
+  /* ===== GALLERY ===== */
+  .carousel{
+    position:relative;
+    max-width:980px;
+    margin:0 auto;
+    padding:0 4.6rem;
+  }
+  .carousel-viewport{
+    position:relative;
+    overflow:hidden;
+    aspect-ratio:16/9;
+    border:1.5px solid var(--brass-dim);
+    box-shadow:var(--gold-glow);
+    background:var(--ink-2);
+  }
+  .carousel-track{
+    display:flex;
+    height:100%;
+    transition:transform 0.6s cubic-bezier(.65,0,.24,1);
+  }
+  .carousel-slide{
+    position:relative;
+    flex:0 0 100%;
+    height:100%;
+    overflow:hidden;
+  }
+  .carousel-slide img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+    filter:saturate(1.05) contrast(1.02);
+  }
+  .carousel-slide .tex{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(217,180,92,0.18), transparent 55%),
+      linear-gradient(200deg, var(--ink-2), var(--ink));
+    display:none;
+    align-items:center;justify-content:center;
+    text-align:center;
+  }
+  .carousel-slide.img-missing .tex{display:flex;}
+  .carousel-slide.img-missing img{display:none;}
+  .carousel-slide .tex .ph-caption{
+    font-family:'Fraunces',serif;font-style:italic;color:var(--brass-dim);font-size:0.85rem;
+    letter-spacing:0.04em;
+  }
+  .carousel-slide::after{
+    content:'';
+    position:absolute;left:0;right:0;bottom:0;height:55%;
+    background:linear-gradient(to top, rgba(15,10,13,0.88), transparent);
+    pointer-events:none;
+  }
+  .carousel-caption{
+    position:absolute;
+    left:1.8rem; bottom:1.4rem;
+    z-index:2;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.15rem;
+    color:var(--brass-light);
+    text-shadow:0 2px 10px rgba(0,0,0,0.6);
+  }
+  .carousel-arrow{
+    position:absolute;
+    top:50%; transform:translateY(-50%);
+    width:52px;height:52px;
+    border-radius:50%;
+    border:1px solid var(--brass);
+    background:linear-gradient(160deg, rgba(217,180,92,0.14), rgba(0,0,0,0.3));
+    color:var(--brass-light);
+    font-size:1.2rem;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:all 0.25s;
+    z-index:3;
+  }
+  .carousel-arrow:hover{background:linear-gradient(160deg, var(--brass-light), var(--brass));color:var(--ink);box-shadow:0 6px 20px rgba(217,180,92,0.35);}
+  .carousel-arrow.prev{left:0;}
+  .carousel-arrow.next{right:0;}
+  .carousel-dots{
+    display:flex;justify-content:center;gap:0.7rem;
+    margin-top:1.8rem;
+  }
+  .carousel-dot{
+    width:9px;height:9px;
+    border-radius:50%;
+    border:1px solid var(--brass-dim);
+    background:transparent;
+    cursor:pointer;
+    padding:0;
+    transition:all 0.25s;
+  }
+  .carousel-dot.active{background:var(--brass);border-color:var(--brass-light);box-shadow:0 0 8px rgba(217,180,92,0.6);}
+
+  /* ===== BOOKING ===== */
+  .booking{
+    background:var(--ink-2);
+    position:relative;
+  }
+  .booking::before{
+    content:'';
+    position:absolute;top:0;left:0;right:0;height:1px;
+    background:var(--hair);
+  }
+  .booking-grid{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:5vw;
+  }
+  .booking .section-head::after{background:var(--ink-2);}
+  .booking-copy p{color:var(--stone);line-height:1.85;margin-bottom:1.4rem;}
+  .booking-quote{
+    margin-top:2.4rem;
+    padding-left:1.4rem;
+    border-left:1px solid var(--brass-dim);
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    color:var(--brass);
+    font-size:1.15rem;
+    line-height:1.6;
+  }
+  form.booking-form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem;
+    background:linear-gradient(165deg, rgba(217,180,92,0.05), transparent 60%);
+    border:1px solid var(--hair);
+    padding:2.2rem;
+  }
+  .field{display:flex;flex-direction:column;gap:0.5rem;}
+  .field.full{grid-column:1/-1;}
+  .field label{
+    font-size:0.68rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+  .field input, .field select, .field textarea{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--hair);
+    color:var(--cream);
+    font-family:'Jost',sans-serif;
+    font-size:0.95rem;
+    padding:0.6rem 0;
+    outline:none;
+    transition:border-color 0.25s;
+  }
+  .field input::placeholder, .field textarea::placeholder{color:#5c574a;}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--brass);}
+  .field select option{background:var(--ink);}
+  .booking-form .submit{
+    grid-column:1/-1;
+    margin-top:0.6rem;
+  }
+  .form-note{
+    grid-column:1/-1;
+    font-size:0.85rem;
+    color:var(--brass);
+    margin-top:0.4rem;
+    display:none;
+  }
+  .form-note.show{display:block;}
+
+  /* ===== REVIEWS ===== */
+  .reviews-track{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:3rem;
+  }
+  .review{
+    border-top:2px solid var(--brass-dim);
+    padding-top:1.8rem;
+    position:relative;
+  }
+  .review::before{
+    content:'"';
+    position:absolute;
+    top:-0.4rem; left:0;
+    transform:translateY(-100%);
+    font-family:'Fraunces',serif;
+    font-size:3rem;
+    color:var(--brass);
+    opacity:0.5;
+    line-height:1;
+  }
+  .review .quote{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:1.15rem;
+    line-height:1.65;
+    color:var(--cream);
+    margin-bottom:1.4rem;
+  }
+  .review .stars{color:var(--brass);letter-spacing:0.2em;font-size:0.85rem;margin-bottom:0.8rem;}
+  .review .who{
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:5vw;
+    align-items:stretch;
+  }
+  .map-frame{
+    border:1.5px solid var(--brass-dim);
+    position:relative;
+    overflow:hidden;
+    min-height:380px;
+    background:var(--ink-2);
+    box-shadow:var(--gold-glow);
+  }
+  .map-frame svg{width:100%;height:100%;display:block;}
+  .contact-info h2{font-size:clamp(2.1rem,3.4vw,3rem);margin-bottom:1.8rem;}
+  .contact-line{
+    display:flex;
+    justify-content:space-between;
+    padding:1.2rem 0;
+    border-bottom:1px solid var(--hair);
+    font-size:0.92rem;
+  }
+  .contact-line .k{color:var(--stone);letter-spacing:0.08em;text-transform:uppercase;font-size:0.72rem;}
+  .contact-line .v{color:var(--cream);text-align:right;}
+
+  /* ===== FOOTER ===== */
+  footer{
+    border-top:1px solid var(--hair);
+    padding:3.4rem 0 2.4rem;
+  }
+  .footer-grid{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1.6rem;
+  }
+  .footer-logo{
+    font-family:'Fraunces',serif;
+    font-size:1.1rem;
+    letter-spacing:0.28em;
+    display:flex;align-items:center;gap:0.6rem;
+  }
+  .footer-logo .crown{color:var(--brass);font-size:0.9rem;}
+  .footer-links{
+    display:flex;
+    gap:2rem;
+    list-style:none;
+  }
+  .footer-links a{
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--stone);
+  }
+  .footer-links a:hover{color:var(--brass);}
+  .footer-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.6rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-copy{
+    font-size:0.72rem;
+    color:#5c574a;
+  }
+  /* Нормальна видима кнопка для переходу на сторінку адмін-панелі */
+  .admin-panel-btn {
+    border: 1px solid var(--brass-dim);
+    padding: 0.45rem 1.1rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brass);
+    text-decoration: none;
+    transition: all 0.25s;
+    background: linear-gradient(180deg, rgba(217,180,92,0.08), transparent);
+    font-family: 'Jost', sans-serif;
+  }
+  .admin-panel-btn:hover {
+    background: linear-gradient(135deg, var(--brass-light), var(--brass), var(--brass-dim));
+    color: var(--ink);
+    box-shadow: 0 4px 16px rgba(217,180,92,0.3);
+    border-color: var(--brass-light);
+  }
+
+  @media (max-width:860px){
+    nav, .nav-cta{display:none;}
+    .burger{display:block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-lens{justify-self:start;text-align:left;margin-top:2rem;}
+    .lens{margin-left:0;}
+    .about-grid, .booking-grid, .contact-grid{grid-template-columns:1fr;}
+    .room-row{grid-template-columns:1fr;text-align:left;gap:0.8rem;}
+    .room-price{text-align:left;}
+    .carousel{padding:0 0 3.4rem;}
+    .carousel-viewport{aspect-ratio:4/3;}
+    .carousel-arrow{width:40px;height:40px;font-size:1rem;}
+    .carousel-arrow.prev{left:0.4rem;}
+    .carousel-arrow.next{right:0.4rem;}
+    .carousel-caption{font-size:0.95rem;left:1.1rem;bottom:1rem;}
+    .reviews-track{grid-template-columns:1fr;}
+    form.booking-form{grid-template-columns:1fr;}
+    .section-head{flex-direction:column;align-items:flex-start;}
+    .section-note{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="logo"><span class="crown">&#9813;</span>ЛОРНЕТ</div>
+  <nav>
+    <ul>
+      <li><a href="#rooms">Номери</a></li>
+      <li><a href="#gallery">Галерея</a></li>
+      <li><a href="#booking">Бронювання</a></li>
+      <li><a href="#reviews">Відгуки</a></li>
+      <li><a href="#contact">Контакти</a></li>
+    </ul>
+  </nav>
+  <a href="#booking" class="nav-cta">Забронювати</a>
+  <button class="burger" aria-label="Меню">☰</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-rule"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Бутік-готель · Історичний центр</span>
+      <h1>Дев'ятнадцять<br>номерів.<br><em>Один погляд.</em></h1>
+      <p class="hero-sub">Кожен номер ЛОРНЕТ — це окрема оптика на місто: свій вид, свій колір світла, своя тиша за старовинними вікнами в двох кроках від Ринку.</p>
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">Обрати дати</a>
+        <a href="#rooms" class="btn-ghost">Переглянути номери</a>
+      </div>
+    </div>
+    <div class="hero-lens">
+      <div class="lens"><span>est. 1891</span></div>
+      <div class="lens-caption">Будівля кінця XIX ст.</div>
+    </div>
+  </div>
+  <div class="scroll-cue">Гортайте</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="wrap about-grid">
+    <div class="about-art"><div class="frame"></div></div>
+    <div class="about-copy">
+      <span class="eyebrow">Про готель</span>
+      <h2>Старий дім,<br>нове прочитання</h2>
+      <p>ЛОРНЕТ розташований у кам'яниці, яка пам'ятає інший ритм міста. Ми зберегли ліпнину, паркет і високі стелі — і додали те, чого не було: тишу, увагу до дрібницях і сервіс, що впізнає гостя з першого дзвінка.</p>
+      <p>Дев'ятнадцять номерів. Жодного конвеєра. Кожен гість — це один погляд у деталь, як крізь старовинний лорнет.</p>
+      <div class="stat-row">
+        <div><div class="stat-num">19</div><div class="stat-label">Номерів</div></div>
+        <div><div class="stat-num">1891</div><div class="stat-label">Рік будівлі</div></div>
+        <div><div class="stat-num">24/7</div><div class="stat-label">Консьєрж</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROOMS -->
+<section id="rooms">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Номери та ціни</h2>
+      <p class="section-note">Ціни вказано за добу, включно зі сніданком та податками.</p>
+    </div>
+    <div class="rooms-list">
+
+      <div class="room-row">
+        <div class="room-badge">01</div>
+        <div class="room-name">Кабінет</div>
+        <div class="room-desc">22 м². Робочий куточок, вікно у внутрішній двір, латунні деталі.</div>
+        <div class="room-price"><div class="amount">€1200</div><div class="per">за ніч</div></div>
+        <button class="room-select" onclick="selectRoomType('Стандарт #101')">Обрати</button>
+      </div>
+
+      <div class="room-row">
+        <div class="room-badge">02</div>
+        <div class="room-name">Бельетаж</div>
+        <div class="room-desc">30 м². Високі стелі, еркерне вікно з видом на бруковану вуличку.</div>
+        <div class="room-price"><div class="amount">€1200</div><div class="per">за ніч</div></div>
+        <button class="room-select" onclick="selectRoomType('Стандарт #102')">Обрати</button>
+      </div>
+
+      <div class="room-row">
+        <div class="room-badge">03</div>
+        <div class="room-name">Кабінет Директора</div>
+        <div class="room-desc">42 м². Окрема вітальня, камін (декоративний), ванна з мідною лійкою.</div>
+        <div class="room-price"><div class="amount">€2500</div><div class="per">за ніч</div></div>
+        <button class="room-select" onclick="selectRoomType('Люкс #201')">Обрати</button>
+      </div>
+
+      <div class="room-row">
+        <div class="room-badge">04</div>
+        <div class="room-name">Мансарда Лорнет</div>
+        <div class="room-desc">55 м². Панорамний дах-вихід, найкращий вид на дзвіниці міста.</div>
+        <div class="room-price"><div class="amount">€4000</div><div class="per">за ніч</div></div>
+        <button class="room-select" onclick="selectRoomType('Апартаменти #301')">Обрати</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Галерея</h2>
+      <p class="section-note">Фрагменти інтер'єру — від сходової клітки до ранкової кави в номері.</p>
+    </div>
+    <div class="carousel" id="gallery-carousel">
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carouselTrack"></div>
+      </div>
+      <button class="carousel-arrow prev" id="carouselPrev" aria-label="Попереднє фото">&#10094;</button>
+      <button class="carousel-arrow next" id="carouselNext" aria-label="Наступне фото">&#10095;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="booking">
+  <div class="wrap booking-grid">
+    <div class="booking-copy">
+      <span class="eyebrow">Бронювання</span>
+      <h2 style="margin-bottom:1.2rem;">Оберіть дати —<br>ми підготуємо номер</h2>
+      <p>Підтвердження бронювання надходить протягом години. Для групових заїздів і подій пишіть напряму консьєржу.</p>
+      <div class="booking-quote">«Найтихіший готель у центрі — і найуважніший персонал, якого я зустрічала.»</div>
+    </div>
+    <form class="booking-form" id="bookingForm">
+      <div class="field">
+        <label for="checkin">Заїзд</label>
+        <input type="date" id="checkin" required>
+      </div>
+      <div class="field">
+        <label for="checkout">Виїзд</label>
+        <input type="date" id="checkout" required>
+      </div>
+      <div class="field">
+        <label for="guests">Гостей</label>
+        <select id="guests">
+          <option>1 гість</option>
+          <option>2 гості</option>
+          <option>3 гості</option>
+          <option>4+ гостей</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="roomtype">Номер</label>
+        <select id="roomtype" required>
+          <option value="">Завантаження кімнат...</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label for="name">Ім'я</label>
+        <input type="text" id="name" placeholder="Ваше ім'я" required>
+      </div>
+      <div class="field full">
+        <label for="email">Пошта або телефон</label>
+        <input type="text" id="email" placeholder="you@example.com" required>
+      </div>
+      <div class="field full">
+        <label for="notes">Побажання (необов'язково)</label>
+        <textarea id="notes" rows="2" placeholder="Пізній заїзд, дитяче ліжко, тощо"></textarea>
+      </div>
+      <div class="submit">
+        <button type="submit" class="btn-primary" style="border:1px solid var(--brass);">Надіслати запит</button>
+      </div>
+      <div class="form-note" id="formNote"></div>
+    </form>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Відгуки гостей</h2>
+      <p class="section-note">Слова тих, хто вже дивився на місто крізь наші вікна.</p>
+    </div>
+    <div class="reviews-track">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="quote">Прокинулась від дзвону дзвіниці за вікном мансарди — і зрозуміла, що це найкращий будильник, який у мене був.</div>
+        <div class="who">Марта Ковальська</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="quote">Персонал запам'ятав, що я п'ю чорну каву без цукру, ще з першого ранку. Дрібниця, яка вирішує все.</div>
+        <div class="who">Андрій Петренко</div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <div class="quote">Кабінет Директора — це не номер, а окрема квартира зі смаком. Повернуся з усією родиною.</div>
+        <div class="who">Олена Дмитрук</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="map-frame">
+      <svg viewBox="0 0 400 380" preserveAspectRatio="none">
+        <rect width="400" height="380" fill="#1c1812"/>
+        <g stroke="rgba(201,162,74,0.18)" stroke-width="1" fill="none">
+          <line x1="0" y1="60" x2="400" y2="40"/>
+          <line x1="0" y1="140" x2="400" y2="160"/>
+          <line x1="0" y1="240" x2="400" y2="220"/>
+          <line x1="0" y1="320" x2="400" y2="340"/>
+          <line x1="70" y1="0" x2="50" y2="380"/>
+          <line x1="180" y1="0" x2="200" y2="380"/>
+          <line x1="300" y1="0" x2="320" y2="380"/>
+        </g>
+        <circle cx="200" cy="190" r="7" fill="#c9a24a"/>
+        <circle cx="200" cy="190" r="18" fill="none" stroke="#c9a24a" stroke-width="1" opacity="0.5"/>
+        <circle cx="200" cy="190" r="32" fill="none" stroke="#c9a24a" stroke-width="1" opacity="0.25"/>
+        <text x="200" y="230" fill="#c9a24a" font-family="Fraunces, serif" font-style="italic" font-size="13" text-anchor="middle">вул. Площа Ринок, 4</text>
+      </svg>
+    </div>
+    <div class="contact-info">
+      <span class="eyebrow">Контакти</span>
+      <h2>Знайти нас<br>неважко</h2>
+      <div class="contact-line"><span class="k">Адреса</span><span class="v">пл. Ринок, 4, історичний центр</span></div>
+      <div class="contact-line"><span class="k">Телефон</span><span class="v">+380 32 000 00 00</span></div>
+      <div class="contact-line"><span class="k">Пошта</span><span class="v">reception@lornet-hotel.example</span></div>
+      <div class="contact-line"><span class="k">Заїзд / виїзд</span><span class="v">14:00 / 11:00</span></div>
+      <div class="contact-line"><span class="k">Рецепція</span><span class="v">Цілодобово</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-logo"><span class="crown">&#9813;</span>ЛОРНЕТ</div>
+      <ul class="footer-links">
+        <li><a href="#rooms">Номери</a></li>
+        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="#booking">Бронювання</a></li>
+        <li><a href="#contact">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom-row">
+      <div class="footer-copy">© 2026 ЛОРНЕТ Boutique Hotel. Усі права захищено.</div>
+      <!-- Повноцінна видима кнопка для переходу на адмін-панель -->
+      <a href="admin-login.html" class="admin-panel-btn">Адмін-панель</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const BACKEND_URL = 'http://localhost:5000';
+
+  async function loadRoomsToForm() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/rooms`);
+      const rooms = await response.json();
+      const select = document.getElementById('roomtype');
+      select.innerHTML = '';
+      
+      rooms.forEach(room => {
+        const option = document.createElement('option');
+        option.value = room.id;
+        option.textContent = `${room.name} (${room.type}) — ₴${room.price}`;
+        select.appendChild(option);
+      });
+    } catch (e) {
+      console.error('Не вдалося завантажити кімнати з сервера:', e);
+      document.getElementById('roomtype').innerHTML = '<option>Помилка звʼязку з сервером</option>';
+    }
+  }
+
+  loadRoomsToForm();
+
+  function selectRoomType(roomName) {
+    const select = document.getElementById('roomtype');
+    for (let option of select.options) {
+      if (option.textContent.includes(roomName)) {
+        select.value = option.value;
+        break;
+      }
+    }
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.style.background = window.scrollY > 40
+      ? 'rgba(20,17,13,0.92)'
+      : 'linear-gradient(to bottom, rgba(20,17,13,0.92), transparent)';
+  });
+
+  const form = document.getElementById('bookingForm');
+  const note = document.getElementById('formNote');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const bookingData = {
+      room_id: document.getElementById('roomtype').value,
+      guest_name: document.getElementById('name').value,
+      check_in: document.getElementById('checkin').value,
+      check_out: document.getElementById('checkout').value
+    };
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        note.textContent = 'Дякуємо! Бронювання успішно збережено в базі даних готелю!';
+        note.classList.add('show');
+        form.reset();
+        loadRoomsToForm();
+      } else {
+        note.textContent = 'Помилка: ' + (result.error || 'Спробуйте ще раз');
+        note.classList.add('show');
+      }
+    } catch (err) {
+      note.textContent = 'Не вдалося підключитися до сервера бронювання.';
+      note.classList.add('show');
+    }
+
+    note.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  const ci = document.getElementById('checkin');
+  const co = document.getElementById('checkout');
+  ci.addEventListener('change', () => { co.min = ci.value; });
+
+  const GALLERY_IMAGES = [
+    { src: 'images/1.jpg', caption: 'Сходова клітка' },
+    { src: 'images/2.jpg', caption: 'Бельетаж, вікно' },
+    { src: 'images/3.jpg', caption: 'Латунні деталі' },
+    { src: 'images/4.jpg', caption: 'Ранкова кава' },
+    { src: 'images/5.jpg', caption: 'Мансарда, вид на дзвіниці' },
+    { src: 'images/6.jpg', caption: 'Внутрішній двір' },
+    { src: 'bytes/7.jpg', caption: 'Кабінет директора' },
+  ];
+
+  (function initCarousel(){
+    const track  = document.getElementById('carouselTrack');
+    const dots   = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const root    = document.getElementById('gallery-carousel');
+    if (!track) return;
+
+    GALLERY_IMAGES.forEach((item, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.caption;
+      img.loading = 'lazy';
+      img.onerror = () => slide.classList.add('img-missing');
+
+      const tex = document.createElement('div');
+      tex.className = 'tex';
+      tex.innerHTML = `<span class="ph-caption">Додайте фото ${i + 1}<br>у папку images/</span>`;
+
+      const caption = document.createElement('div');
+      caption.className = 'carousel-caption';
+      caption.textContent = item.caption;
+
+      slide.appendChild(img);
+      slide.appendChild(tex);
+      slide.appendChild(caption);
+      track.appendChild(slide);
+
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Слайд ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dots.appendChild(dot);
+    });
+
+    const slideCount = GALLERY_IMAGES.length;
+    let current = 0;
+    let autoplayTimer = null;
+
+    function render(){
+      track.style.transform = `translateX(-${current * 100}%)`;
+      [...dots.children].forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+    function goTo(i){
+      current = (i + slideCount) % slideCount;
+      render();
+    }
+    function next(){ goTo(current + 1); }
+    function prev(){ goTo(current - 1); }
+
+    nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
+    prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
+
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+
+    let touchStartX = null;
+    const viewport = root.querySelector('.carousel-viewport');
+    viewport.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
+    viewport.addEventListener('touched', (e) => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); restartAutoplay(); }
+      touchStartX = null;
+    });
+
+    function startAutoplay(){ autoplayTimer = setInterval(next, 6000); }
+    function stopAutoplay(){ clearInterval(autoplayTimer); }
+    function restartAutoplay(){ stopAutoplay(); startAutoplay(); }
+    root.addEventListener('mouseenter', stopAutoplay);
+    root.addEventListener('mouseleave', startAutoplay);
+
+    render();
+    startAutoplay();
+  })();
+</script>
+
+</body>
+</html>
