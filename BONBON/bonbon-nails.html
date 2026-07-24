@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Скрипт віджета Altegio -->
+<script type="text/javascript" src="https://w1455950.alteg.io/widgetJS" charset="UTF-8"></script>
+
 <style>
   :root{
     --cream:#FBF1EA;
@@ -91,6 +95,8 @@
     font-size:14px; font-weight:600; letter-spacing:0.02em;
     transition:transform .3s ease, background .3s ease;
     white-space:nowrap;
+    cursor:pointer;
+    border: none;
   }
   .nav-cta:hover{background:var(--pink-deep); transform:translateY(-2px);}
   .burger{display:none; background:none; border:none; cursor:pointer; padding:6px;}
@@ -129,6 +135,8 @@
     padding:16px 32px; border-radius:100px; font-weight:600; font-size:15px;
     transition:transform .3s ease, background .3s ease, box-shadow .3s ease;
     box-shadow:0 12px 30px -10px rgba(62,36,29,0.4);
+    cursor:pointer;
+    border:none;
   }
   .btn-primary:hover{background:var(--pink-deep); transform:translateY(-3px);}
   .btn-ghost{
@@ -266,70 +274,6 @@
   }
   .service-price span.from{font-weight:400; color:var(--cacao-light); font-size:12px;}
 
-  /* ---------- BOOKING MODAL ---------- */
-  .modal-backdrop{
-    position:fixed; inset:0; z-index:200;
-    background:rgba(62,36,29,0.45);
-    backdrop-filter:blur(4px);
-    display:flex; align-items:center; justify-content:center;
-    padding:20px;
-    opacity:0; pointer-events:none;
-    transition:opacity .35s ease;
-  }
-  .modal-backdrop.open{opacity:1; pointer-events:auto;}
-  .modal-card{
-    background:var(--white); border-radius:28px;
-    width:100%; max-width:420px;
-    padding:40px 36px 32px;
-    position:relative;
-    box-shadow:0 30px 70px -20px rgba(62,36,29,0.5);
-    transform:translateY(18px) scale(0.97);
-    transition:transform .4s ease;
-  }
-  .modal-backdrop.open .modal-card{transform:translateY(0) scale(1);}
-  .modal-close{
-    position:absolute; top:18px; right:18px;
-    width:34px; height:34px; border-radius:50%; border:1px solid var(--line);
-    background:none; cursor:pointer; font-size:15px; color:var(--cacao-light);
-    display:flex; align-items:center; justify-content:center;
-    transition:background .3s ease, color .3s ease;
-  }
-  .modal-close:hover{background:var(--pink-soft); color:var(--cacao-dark);}
-  .modal-eyebrow{font-size:12.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--pink-deep); font-weight:700; margin-bottom:10px;}
-  .modal-card h3{font-size:24px; margin-bottom:8px;}
-  .modal-card p.sub{font-size:14px; color:var(--cacao-light); line-height:1.6; margin-bottom:26px;}
-  .field{margin-bottom:16px;}
-  .field label{display:block; font-size:12.5px; font-weight:700; color:var(--cacao-dark); margin-bottom:7px; letter-spacing:0.02em;}
-  .field input{
-    width:100%; padding:14px 16px; border-radius:14px;
-    border:1.5px solid var(--line); background:var(--cream);
-    font-family:'Manrope',sans-serif; font-size:15px; color:var(--cacao-dark);
-    transition:border-color .3s ease, background .3s ease;
-  }
-  .field input::placeholder{color:#C7ACA1;}
-  .field input:focus{outline:none; border-color:var(--pink-deep); background:var(--white);}
-  .field .error-msg{font-size:12px; color:#B5453B; margin-top:6px; display:none;}
-  .field.invalid input{border-color:#B5453B;}
-  .field.invalid .error-msg{display:block;}
-  .modal-submit{
-    width:100%; background:var(--cacao-dark); color:var(--white);
-    padding:15px; border:none; border-radius:100px; font-weight:700; font-size:15px;
-    cursor:pointer; margin-top:8px;
-    transition:background .3s ease, transform .3s ease;
-  }
-  .modal-submit:hover{background:var(--pink-deep); transform:translateY(-2px);}
-  .modal-note{font-size:11.5px; color:var(--cacao-light); text-align:center; margin-top:14px; line-height:1.5;}
-  .modal-success{display:none; text-align:center; padding:14px 0 4px;}
-  .modal-success.show{display:block;}
-  .modal-form.hide{display:none;}
-  .success-icon{
-    width:64px; height:64px; border-radius:50%; margin:0 auto 20px;
-    background:linear-gradient(160deg,var(--pink-soft),var(--pink-rose));
-    display:flex; align-items:center; justify-content:center; font-size:26px; color:var(--white);
-  }
-  .modal-success h3{margin-bottom:10px;}
-  .modal-success p{font-size:14.5px; color:var(--cacao-light); line-height:1.65;}
-
   /* ---------- RESULTS GALLERY ---------- */
   .results{background:var(--cream);}
   .look-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
@@ -359,14 +303,12 @@
   .look-info span{font-size:12.5px; color:var(--cacao-light);}
 
   .look-powder .nail{background:linear-gradient(160deg,#F9E6E8,#EFC9CD);}
-
   .look-french .nail{background:#FBF1EA; position:relative;}
   .look-french .nail::before{
     content:''; position:absolute; left:8%; right:8%; bottom:-4%; height:34%;
     background:var(--white); border-radius:50%/70%;
     box-shadow:0 -1px 0 var(--pink-deep);
   }
-
   .look-ombre .nail:nth-child(1){background:linear-gradient(180deg,#F6D3D8,#E8A7AE);}
   .look-ombre .nail:nth-child(2){background:linear-gradient(180deg,#E8A7AE,#D98790);}
   .look-ombre .nail:nth-child(3){background:linear-gradient(180deg,#D98790,#B97A6E);}
@@ -471,7 +413,6 @@
     box-shadow:var(--shadow);
   }
   .cta-banner h2{font-size:clamp(26px,3vw,38px); max-width:460px; color:var(--cacao-dark);}
-  .cta-banner .btn-primary{background:var(--cacao-dark);}
 
   /* ---------- FOOTER ---------- */
   footer{background:var(--cacao-dark); color:var(--pink-soft); padding:80px 0 30px;}
@@ -533,7 +474,8 @@
       <li><a href="#reviews">Відгуки</a></li>
       <li><a href="#contact">Контакти</a></li>
     </ul>
-    <button type="button" class="nav-cta" onclick="openBooking()">Записатись</button>
+    <!-- Кнопка запису у шапці (посилання з класами Altegio) -->
+    <a href="https://b1455950.alteg.io/" class="nav-cta b-widget-button" target="_blank" rel="nofollow">Записатись</a>
     <button class="burger" aria-label="Меню" id="burgerBtn"><span></span><span></span><span></span></button>
   </nav>
 </header>
@@ -545,7 +487,8 @@
       <h1>Ніжність кольору троянди<br><em>і смак какао</em><br>на кінчиках пальців</h1>
       <p class="lead">BONBON — це манікюрна студія, де кожен відтінок підібраний як цукерка в коробці: пудрові рожеві, карамель, молочний шоколад. Доглянуті руки — маленька щоденна розкіш.</p>
       <div class="hero-actions">
-        <button type="button" class="btn-primary" onclick="openBooking()">Записатися на манікюр</button>
+        <!-- Головна кнопка запису -->
+        <a href="https://b1455950.alteg.io/" class="btn-primary b-widget-button" target="_blank" rel="nofollow">Записатися на манікюр</a>
         <a href="#services" class="btn-ghost"><span class="circle">↓</span> Переглянути послуги</a>
       </div>
     </div>
@@ -650,7 +593,6 @@
       <p>Кожен набір — маленька історія: від пудрової класики до карамельного мармуру. Наведіть курсор, щоб побачити деталі роботи.</p>
     </div>
     <div class="look-grid">
-
       <div class="look-card reveal">
         <div class="nail-row look-powder">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -660,7 +602,6 @@
           <span>Гель-лак · без дизайну</span>
         </div>
       </div>
-
       <div class="look-card reveal" style="transition-delay:.06s">
         <div class="nail-row look-french">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -670,7 +611,6 @@
           <span>Гель-лак · тонка лінія усмішки</span>
         </div>
       </div>
-
       <div class="look-card reveal" style="transition-delay:.12s">
         <div class="nail-row look-ombre">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -680,7 +620,6 @@
           <span>Гель-лак · градієнт вручну</span>
         </div>
       </div>
-
       <div class="look-card reveal">
         <div class="nail-row look-marble">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -690,7 +629,6 @@
           <span>Гель-лак · мармуровий розлив</span>
         </div>
       </div>
-
       <div class="look-card reveal" style="transition-delay:.06s">
         <div class="nail-row look-glitter">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -700,7 +638,6 @@
           <span>Гель-лак · акцент на безіменному</span>
         </div>
       </div>
-
       <div class="look-card reveal" style="transition-delay:.12s">
         <div class="nail-row look-negative">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -710,7 +647,6 @@
           <span>Гель-лак · мінімалістичний дизайн</span>
         </div>
       </div>
-
       <div class="look-card reveal">
         <div class="nail-row look-caramel">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -720,7 +656,6 @@
           <span>Гель-лак · перехід відтінків</span>
         </div>
       </div>
-
       <div class="look-card reveal" style="transition-delay:.06s">
         <div class="nail-row look-floral">
           <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
@@ -730,7 +665,6 @@
           <span>Гель-лак · акцентний дизайн вручну</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -798,7 +732,8 @@
   <div class="cta-banner reveal">
     <h2>Готові відчути смак ніжності на кінчиках пальців?</h2>
     <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
-      <button type="button" class="btn-primary" onclick="openBooking()">Замовити дзвінок</button>
+      <!-- Кнопка запису у банері -->
+      <a href="https://b1455950.alteg.io/" class="btn-primary b-widget-button" target="_blank" rel="nofollow">Записатися онлайн</a>
       <a href="tel:+380990000000" style="font-size:13.5px; font-weight:600; color:var(--cacao-dark); opacity:.75;">або зателефонуйте: +380 99 000 00 00</a>
     </div>
   </div>
@@ -842,40 +777,6 @@
   </div>
 </footer>
 
-<div class="modal-backdrop" id="bookingModal" aria-hidden="true">
-  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
-    <button type="button" class="modal-close" onclick="closeBooking()" aria-label="Закрити">✕</button>
-
-    <form class="modal-form" id="bookingForm" novalidate>
-      <div class="modal-eyebrow">Зворотній дзвінок</div>
-      <h3 id="bookingTitle">Запис на манікюр</h3>
-      <p class="sub">Залиште ім'я та номер телефону — наша адміністраторка зателефонує вам протягом робочого дня, щоб узгодити зручний час.</p>
-
-      <div class="field" id="nameField">
-        <label for="nameInput">Ваше ім'я</label>
-        <input type="text" id="nameInput" placeholder="Наприклад, Марина" autocomplete="given-name">
-        <div class="error-msg">Введіть, будь ласка, ваше ім'я</div>
-      </div>
-
-      <div class="field" id="phoneField">
-        <label for="phoneInput">Номер телефону</label>
-        <input type="tel" id="phoneInput" placeholder="+380 XX XXX XX XX" autocomplete="tel">
-        <div class="error-msg">Перевірте номер — формат +380 XX XXX XX XX</div>
-      </div>
-
-      <button type="submit" class="modal-submit">Зателефонуйте мені</button>
-      <p class="modal-note">Натискаючи кнопку, ви погоджуєтесь, що ми зателефонуємо вам лише щодо запису.</p>
-    </form>
-
-    <div class="modal-success" id="bookingSuccess">
-      <div class="success-icon">✓</div>
-      <h3>Дякуємо!</h3>
-      <p>Ми отримали вашу заявку і зателефонуємо найближчим часом, щоб узгодити зручний час візиту.</p>
-      <button type="button" class="modal-submit" style="margin-top:22px;" onclick="closeBooking()">Добре</button>
-    </div>
-  </div>
-</div>
-<script type="text/javascript" src="https://w1455950.alteg.io/widgetJS" charset="UTF-8"></script>
 <script>
   // header scroll state
   const header = document.getElementById('header');
@@ -889,72 +790,7 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // booking modal
-  const modal = document.getElementById('bookingModal');
-  const bookingForm = document.getElementById('bookingForm');
-  const bookingSuccess = document.getElementById('bookingSuccess');
-  const nameField = document.getElementById('nameField');
-  const phoneField = document.getElementById('phoneField');
-  const nameInput = document.getElementById('nameInput');
-  const phoneInput = document.getElementById('phoneInput');
-  let lastFocused = null;
-
-  function openBooking(){
-    lastFocused = document.activeElement;
-    bookingForm.classList.remove('hide');
-    bookingSuccess.classList.remove('show');
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => nameInput.focus(), 200);
-  }
-  function closeBooking(){
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    if(lastFocused) lastFocused.focus();
-  }
-  modal.addEventListener('click', (e) => { if(e.target === modal) closeBooking(); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('open')) closeBooking(); });
-
-  function validatePhone(value){
-    const digits = value.replace(/\D/g,'');
-    return digits.length >= 10 && digits.length <= 13;
-  }
-
-  bookingForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let valid = true;
-
-    if(nameInput.value.trim().length < 2){
-      nameField.classList.add('invalid');
-      valid = false;
-    } else {
-      nameField.classList.remove('invalid');
-    }
-
-    if(!validatePhone(phoneInput.value)){
-      phoneField.classList.add('invalid');
-      valid = false;
-    } else {
-      phoneField.classList.remove('invalid');
-    }
-
-    if(!valid) return;
-
-    // Simulated submission — in production this would POST to a booking endpoint.
-    bookingForm.classList.add('hide');
-    bookingSuccess.classList.add('show');
-    bookingForm.reset();
-  });
-
-  [nameInput, phoneInput].forEach(inp => {
-    inp.addEventListener('input', () => {
-      inp.closest('.field').classList.remove('invalid');
-    });
-  });
-
-  // mobile menu (simple toggle placeholder)
+  // mobile menu toggle
   const burger = document.getElementById('burgerBtn');
   burger.addEventListener('click', () => {
     const links = document.querySelector('.nav-links');
