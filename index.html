@@ -73,7 +73,6 @@ header {
   text-decoration: none;
 }
 
-/* SVG логотип — заміни вміст цього тегу на свій */
 .logo-svg {
   width: 40px;
   height: 40px;
@@ -330,44 +329,6 @@ nav a:hover { color: var(--blue-deep); }
 
 .card:hover::after { opacity: 1; }
 
-/* placeholder */
-.card.placeholder {
-  background: var(--surface2);
-  border-style: dashed;
-  border-color: var(--blue-pale);
-  cursor: default;
-  min-height: 260px;
-  align-items: center;
-  justify-content: center;
-}
-
-.card.placeholder:hover {
-  transform: none;
-  box-shadow: none;
-  border-color: var(--blue-pale);
-}
-
-.card.placeholder::after { display: none; }
-
-.placeholder-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  color: var(--text-faint);
-}
-
-.placeholder-inner svg { opacity: 0.5; }
-
-.placeholder-inner span {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-align: center;
-  line-height: 1.6;
-}
-
-/* card top */
 .card-top {
   display: flex;
   align-items: center;
@@ -572,6 +533,7 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
   <nav>
     <a href="#projects">Стоматологія</a>
     <a href="#beauty">Салони краси</a>
+    <a href="#hotels">Готелі</a>
     <a href="mailto:your@email.com" class="nav-cta">Контакт</a>
   </nav>
 </header>
@@ -584,7 +546,7 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
 
   <div class="hero-stats">
     <div class="hero-stat">
-      <strong>6+</strong>
+      <strong>7+</strong>
       <span>Проєкти</span>
     </div>
     <div class="hero-stat">
@@ -713,6 +675,36 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
       <p>Естетичний та сучасний сайт для манікюрного салону краси. Ніжна пастельна палітра, зручний онлайн-запис до майстрів, інтерактивний прайс-лист та портфоліо робіт, що підкреслює преміальний рівень сервісу.</p>
       <div>
         <a class="btn btn-primary" href="BONBON/bonbon-nails.html" target="_blank">
+          Переглянути
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS: HOTELS -->
+<section class="section" id="hotels">
+  <div class="section-header">
+    <span class="section-title">Готелі та сфера гостинності</span>
+    <span class="section-count">1 робота</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- CARD 7 -->
+    <div class="card">
+      <div class="card-top">
+        <span class="card-index">07</span>
+        <span class="card-tag">Бутик-готель</span>
+      </div>
+      <h2>LORNET</h2>
+      <p>Преміальний бутик-готель у самому серці Львова. Естетика класичної розкоші у глибоких тонах з елементами латуні, інтерактивний каталог номерів, живе онлайн-бронювання з інтеграцією бази даних та повноцінна система управління.</p>
+      <div>
+        <a class="btn btn-primary" href="LORNET/index.html" target="_blank">
           Переглянути
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
