@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BONBON — студія манікюру</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF1EA;
+    --cream-warm:#F7E9DF;
+    --pink-soft:#F4D6D9;
+    --pink-rose:#E8A7AE;
+    --pink-deep:#D98790;
+    --cacao:#6B4034;
+    --cacao-light:#9C6B4F;
+    --cacao-dark:#3E241D;
+    --white:#FFFDFB;
+    --line: rgba(107,64,52,0.15);
+    --shadow: 0 20px 50px -20px rgba(62,36,29,0.25);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--cacao-dark);
+    font-family:'Manrope',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:450;
+    letter-spacing:-0.01em;
+    color:var(--cacao-dark);
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+  ::selection{background:var(--pink-rose);color:var(--white);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:22px 0;
+    transition: background .4s ease, box-shadow .4s ease, padding .4s ease;
+  }
+  header.scrolled{
+    background:rgba(251,241,234,0.88);
+    backdrop-filter: blur(10px);
+    box-shadow:0 4px 24px rgba(62,36,29,0.08);
+    padding:14px 0;
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .logo{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    color:var(--cacao-dark);
+    display:flex; align-items:center; gap:10px;
+  }
+  .logo .dot{
+    width:9px;height:9px;border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #fff, var(--pink-rose) 55%, var(--cacao-light));
+    display:inline-block;
+  }
+  .nav-links{display:flex; gap:36px; list-style:none;}
+  .nav-links a{
+    font-size:14.5px; font-weight:500; letter-spacing:0.02em;
+    color:var(--cacao); position:relative; padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--pink-deep); transition:width .3s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--cacao-dark); color:var(--white);
+    padding:11px 24px; border-radius:100px;
+    font-size:14px; font-weight:600; letter-spacing:0.02em;
+    transition:transform .3s ease, background .3s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--pink-deep); transform:translateY(-2px);}
+  .burger{display:none; background:none; border:none; cursor:pointer; padding:6px;}
+  .burger span{display:block; width:24px; height:2px; background:var(--cacao-dark); margin:5px 0; transition:.3s;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:170px 0 110px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--pink-deep); font-weight:700; margin-bottom:22px;
+  }
+  .eyebrow::before{content:''; width:28px; height:1px; background:var(--pink-deep);}
+  .hero h1{
+    font-size:clamp(38px,5vw,64px);
+    line-height:1.06;
+    margin-bottom:26px;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:400; color:var(--pink-deep);
+  }
+  .hero p.lead{
+    font-size:17.5px; line-height:1.7; color:var(--cacao-light);
+    max-width:440px; margin-bottom:38px;
+  }
+  .hero-actions{display:flex; gap:16px; align-items:center; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--cacao-dark); color:var(--white);
+    padding:16px 32px; border-radius:100px; font-weight:600; font-size:15px;
+    transition:transform .3s ease, background .3s ease, box-shadow .3s ease;
+    box-shadow:0 12px 30px -10px rgba(62,36,29,0.4);
+  }
+  .btn-primary:hover{background:var(--pink-deep); transform:translateY(-3px);}
+  .btn-ghost{
+    display:flex; align-items:center; gap:10px;
+    font-weight:600; font-size:15px; color:var(--cacao-dark);
+    padding:16px 4px;
+  }
+  .btn-ghost .circle{
+    width:38px; height:38px; border-radius:50%; border:1.5px solid var(--cacao-dark);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .3s ease, border-color .3s ease;
+  }
+  .btn-ghost:hover .circle{background:var(--pink-soft); border-color:var(--pink-deep);}
+
+  /* signature: bonbon box of swatches */
+  .bonbon-box{
+    position:relative;
+    background:var(--white);
+    border-radius:28px;
+    padding:26px;
+    box-shadow:var(--shadow);
+    transform:rotate(2.5deg);
+    transition:transform .6s ease;
+  }
+  .bonbon-box:hover{transform:rotate(0deg);}
+  .bonbon-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  }
+  .bonbon{
+    aspect-ratio:1;
+    border-radius:16px;
+    position:relative;
+    cursor:pointer;
+    transition:transform .35s ease, box-shadow .35s ease;
+    box-shadow: inset 0 -6px 10px rgba(0,0,0,0.08), inset 0 6px 10px rgba(255,255,255,0.35);
+  }
+  .bonbon::after{
+    content:'';
+    position:absolute; top:14%; left:18%; width:30%; height:22%;
+    border-radius:50%;
+    background:rgba(255,255,255,0.55);
+    filter:blur(2px);
+  }
+  .bonbon:hover{transform:translateY(-6px) scale(1.05); box-shadow:0 14px 20px -8px rgba(62,36,29,0.35);}
+  .bonbon:nth-child(1){background:linear-gradient(160deg,#F6D3D8,#E8A7AE);}
+  .bonbon:nth-child(2){background:linear-gradient(160deg,#C99A7C,#9C6B4F);}
+  .bonbon:nth-child(3){background:linear-gradient(160deg,#F1E3DA,#E4C6B4);}
+  .bonbon:nth-child(4){background:linear-gradient(160deg,#E7B7BC,#D98790);}
+  .bonbon:nth-child(5){background:linear-gradient(160deg,#7C5040,#4A2E23);}
+  .bonbon:nth-child(6){background:linear-gradient(160deg,#F9E6E8,#EFC9CD);}
+  .bonbon:nth-child(7){background:linear-gradient(160deg,#B98565,#7C5238);}
+  .bonbon:nth-child(8){background:linear-gradient(160deg,#EAB9A8,#D9917A);}
+  .bonbon-caption{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:20px; padding-top:18px; border-top:1px dashed var(--line);
+    font-size:12.5px; color:var(--cacao-light); letter-spacing:0.03em;
+  }
+  .float-tag{
+    position:absolute; background:var(--white); padding:10px 16px; border-radius:14px;
+    box-shadow:var(--shadow); font-size:13px; font-weight:600;
+    display:flex; align-items:center; gap:8px;
+  }
+  .float-tag .heart{color:var(--pink-deep); font-size:15px;}
+  .float-tag.t1{ top:-22px; right:18px; transform:rotate(-4deg);}
+  .float-tag.t2{ bottom:-18px; left:-24px; transform:rotate(3deg);}
+
+  /* ---------- MARQUEE STRIP ---------- */
+  .strip{
+    background:var(--cacao-dark); color:var(--cream);
+    padding:16px 0; overflow:hidden; white-space:nowrap;
+  }
+  .strip-track{display:inline-flex; gap:48px; animation:scroll 26s linear infinite;}
+  .strip-track span{
+    font-family:'Fraunces',serif; font-style:italic; font-size:17px; letter-spacing:0.02em; color:var(--pink-soft);
+    display:inline-flex; align-items:center; gap:48px;
+  }
+  .strip-track span::after{content:'✦'; color:var(--pink-rose); font-style:normal;}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* ---------- SECTION shared ---------- */
+  section{padding:110px 0;}
+  .section-head{max-width:600px; margin-bottom:64px;}
+  .section-head .eyebrow{margin-bottom:16px;}
+  .section-head h2{font-size:clamp(30px,3.6vw,44px); line-height:1.15;}
+  .section-head p{color:var(--cacao-light); font-size:16px; margin-top:16px; line-height:1.7;}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--white);}
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:center;}
+  .about-visual{
+    position:relative; aspect-ratio:4/5; border-radius:32px;
+    background:
+      radial-gradient(circle at 30% 25%, rgba(255,255,255,0.5), transparent 45%),
+      linear-gradient(150deg, var(--pink-soft), var(--pink-rose) 55%, var(--cacao-light));
+    overflow:hidden;
+  }
+  .about-visual .swirl{
+    position:absolute; inset:0;
+    background: radial-gradient(circle at 75% 80%, rgba(62,36,29,0.35), transparent 55%);
+  }
+  .about-visual .ring{
+    position:absolute; border:1.5px solid rgba(255,255,255,0.5); border-radius:50%;
+  }
+  .about-visual .ring.r1{width:70%; height:70%; top:10%; left:15%;}
+  .about-visual .ring.r2{width:40%; height:40%; bottom:8%; right:10%;}
+  .about-text p{font-size:16.5px; line-height:1.85; color:var(--cacao-light); margin-bottom:20px;}
+  .about-text p:first-of-type::first-letter{
+    font-family:'Fraunces',serif; font-size:56px; float:left; line-height:0.8;
+    margin:6px 10px 0 0; color:var(--pink-deep); font-weight:500;
+  }
+  .stat-row{display:flex; gap:44px; margin-top:38px; padding-top:32px; border-top:1px solid var(--line);}
+  .stat b{font-family:'Fraunces',serif; font-size:32px; display:block; color:var(--cacao-dark);}
+  .stat span{font-size:13px; color:var(--cacao-light);}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--cream-warm);}
+  .service-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .service-card{
+    background:var(--white); border-radius:24px; padding:36px 30px;
+    box-shadow:0 10px 30px -18px rgba(62,36,29,0.18);
+    transition:transform .4s ease, box-shadow .4s ease;
+    position:relative; overflow:hidden;
+  }
+  .service-card:hover{transform:translateY(-8px); box-shadow:0 24px 40px -20px rgba(62,36,29,0.3);}
+  .service-icon{
+    width:52px; height:52px; border-radius:16px; margin-bottom:22px;
+    display:flex; align-items:center; justify-content:center; font-size:22px;
+  }
+  .service-card h3{font-size:20px; margin-bottom:10px; font-weight:500;}
+  .service-card p{color:var(--cacao-light); font-size:14.5px; line-height:1.65; margin-bottom:20px;}
+  .service-price{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:18px; border-top:1px dashed var(--line);
+    font-size:13.5px; font-weight:700; color:var(--cacao-dark);
+  }
+  .service-price span.from{font-weight:400; color:var(--cacao-light); font-size:12px;}
+
+  /* ---------- BOOKING MODAL ---------- */
+  .modal-backdrop{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(62,36,29,0.45);
+    backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    padding:20px;
+    opacity:0; pointer-events:none;
+    transition:opacity .35s ease;
+  }
+  .modal-backdrop.open{opacity:1; pointer-events:auto;}
+  .modal-card{
+    background:var(--white); border-radius:28px;
+    width:100%; max-width:420px;
+    padding:40px 36px 32px;
+    position:relative;
+    box-shadow:0 30px 70px -20px rgba(62,36,29,0.5);
+    transform:translateY(18px) scale(0.97);
+    transition:transform .4s ease;
+  }
+  .modal-backdrop.open .modal-card{transform:translateY(0) scale(1);}
+  .modal-close{
+    position:absolute; top:18px; right:18px;
+    width:34px; height:34px; border-radius:50%; border:1px solid var(--line);
+    background:none; cursor:pointer; font-size:15px; color:var(--cacao-light);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .3s ease, color .3s ease;
+  }
+  .modal-close:hover{background:var(--pink-soft); color:var(--cacao-dark);}
+  .modal-eyebrow{font-size:12.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--pink-deep); font-weight:700; margin-bottom:10px;}
+  .modal-card h3{font-size:24px; margin-bottom:8px;}
+  .modal-card p.sub{font-size:14px; color:var(--cacao-light); line-height:1.6; margin-bottom:26px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:12.5px; font-weight:700; color:var(--cacao-dark); margin-bottom:7px; letter-spacing:0.02em;}
+  .field input{
+    width:100%; padding:14px 16px; border-radius:14px;
+    border:1.5px solid var(--line); background:var(--cream);
+    font-family:'Manrope',sans-serif; font-size:15px; color:var(--cacao-dark);
+    transition:border-color .3s ease, background .3s ease;
+  }
+  .field input::placeholder{color:#C7ACA1;}
+  .field input:focus{outline:none; border-color:var(--pink-deep); background:var(--white);}
+  .field .error-msg{font-size:12px; color:#B5453B; margin-top:6px; display:none;}
+  .field.invalid input{border-color:#B5453B;}
+  .field.invalid .error-msg{display:block;}
+  .modal-submit{
+    width:100%; background:var(--cacao-dark); color:var(--white);
+    padding:15px; border:none; border-radius:100px; font-weight:700; font-size:15px;
+    cursor:pointer; margin-top:8px;
+    transition:background .3s ease, transform .3s ease;
+  }
+  .modal-submit:hover{background:var(--pink-deep); transform:translateY(-2px);}
+  .modal-note{font-size:11.5px; color:var(--cacao-light); text-align:center; margin-top:14px; line-height:1.5;}
+  .modal-success{display:none; text-align:center; padding:14px 0 4px;}
+  .modal-success.show{display:block;}
+  .modal-form.hide{display:none;}
+  .success-icon{
+    width:64px; height:64px; border-radius:50%; margin:0 auto 20px;
+    background:linear-gradient(160deg,var(--pink-soft),var(--pink-rose));
+    display:flex; align-items:center; justify-content:center; font-size:26px; color:var(--white);
+  }
+  .modal-success h3{margin-bottom:10px;}
+  .modal-success p{font-size:14.5px; color:var(--cacao-light); line-height:1.65;}
+
+  /* ---------- RESULTS GALLERY ---------- */
+  .results{background:var(--cream);}
+  .look-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:24px;}
+  .look-card{
+    background:var(--white); border-radius:22px; padding:26px 22px 22px;
+    box-shadow:0 10px 30px -18px rgba(62,36,29,0.18);
+    transition:transform .4s ease, box-shadow .4s ease;
+  }
+  .look-card:hover{transform:translateY(-6px); box-shadow:0 22px 38px -18px rgba(62,36,29,0.28);}
+  .nail-row{
+    display:flex; align-items:flex-end; justify-content:center; gap:8px;
+    height:110px; margin-bottom:18px; padding:10px 4px 0;
+    background:linear-gradient(180deg, transparent, rgba(107,64,52,0.04));
+    border-radius:14px;
+  }
+  .nail{
+    width:17%; height:78%; border-radius:50% 50% 14px 14px / 70% 70% 14px 14px;
+    box-shadow: inset 0 -5px 8px rgba(0,0,0,0.08), inset 0 5px 8px rgba(255,255,255,0.4);
+    transition:transform .35s ease;
+    position:relative; overflow:hidden;
+  }
+  .nail-row:hover .nail{transform:translateY(-4px);}
+  .nail:nth-child(2), .nail:nth-child(4){height:70%;}
+  .nail:nth-child(3){height:88%;}
+  .nail:nth-child(1), .nail:nth-child(5){height:64%;}
+  .look-info h3{font-size:16.5px; font-weight:500; margin-bottom:4px;}
+  .look-info span{font-size:12.5px; color:var(--cacao-light);}
+
+  .look-powder .nail{background:linear-gradient(160deg,#F9E6E8,#EFC9CD);}
+
+  .look-french .nail{background:#FBF1EA; position:relative;}
+  .look-french .nail::before{
+    content:''; position:absolute; left:8%; right:8%; bottom:-4%; height:34%;
+    background:var(--white); border-radius:50%/70%;
+    box-shadow:0 -1px 0 var(--pink-deep);
+  }
+
+  .look-ombre .nail:nth-child(1){background:linear-gradient(180deg,#F6D3D8,#E8A7AE);}
+  .look-ombre .nail:nth-child(2){background:linear-gradient(180deg,#E8A7AE,#D98790);}
+  .look-ombre .nail:nth-child(3){background:linear-gradient(180deg,#D98790,#B97A6E);}
+  .look-ombre .nail:nth-child(4){background:linear-gradient(180deg,#B97A6E,#9C6B4F);}
+  .look-ombre .nail:nth-child(5){background:linear-gradient(180deg,#9C6B4F,#6B4034);}
+
+  .look-marble .nail{
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.7) 0 8%, transparent 9%),
+      radial-gradient(circle at 65% 55%, rgba(107,64,52,0.35) 0 10%, transparent 11%),
+      radial-gradient(circle at 40% 80%, rgba(217,145,122,0.5) 0 12%, transparent 13%),
+      linear-gradient(160deg,#F1E3DA,#E4C6B4);
+  }
+
+  .look-glitter .nail{background:linear-gradient(160deg,#9C6B4F,#4A2E23);}
+  .look-glitter .nail:nth-child(4){
+    background:
+      radial-gradient(circle at 20% 30%, #fff 0 3px, transparent 4px),
+      radial-gradient(circle at 55% 15%, #fff 0 2px, transparent 3px),
+      radial-gradient(circle at 75% 45%, #fff 0 3px, transparent 4px),
+      radial-gradient(circle at 35% 65%, #fff 0 2px, transparent 3px),
+      radial-gradient(circle at 65% 80%, #fff 0 3px, transparent 4px),
+      linear-gradient(160deg,#D98790,#9C6B4F);
+  }
+
+  .look-negative .nail{background:linear-gradient(160deg,#F6D3D8,#E8A7AE); position:relative;}
+  .look-negative .nail::after{
+    content:''; position:absolute; top:30%; left:25%; width:26%; height:26%;
+    background:var(--white); border-radius:50%;
+  }
+
+  .look-caramel .nail:nth-child(odd){background:linear-gradient(160deg,#EAB9A8,#D9917A);}
+  .look-caramel .nail:nth-child(even){background:linear-gradient(160deg,#C99A7C,#9C6B4F);}
+
+  .look-floral .nail{background:linear-gradient(160deg,#FBF1EA,#F4D6D9);}
+  .look-floral .nail:nth-child(3){position:relative;}
+  .look-floral .nail:nth-child(3)::before{
+    content:''; position:absolute; top:22%; left:30%; width:10px; height:10px; border-radius:50%;
+    background:var(--pink-deep); box-shadow:
+      -9px 4px 0 -1px var(--pink-rose), 9px 4px 0 -1px var(--pink-rose),
+      0 -8px 0 -1px var(--pink-rose), 0 10px 0 -1px var(--pink-rose);
+  }
+
+  /* ---------- GALLERY / PALETTE ---------- */
+  .palette{background:var(--cacao-dark); color:var(--cream);}
+  .palette .section-head h2, .palette .section-head p{color:var(--cream);}
+  .palette .eyebrow{color:var(--pink-rose);}
+  .palette .eyebrow::before{background:var(--pink-rose);}
+  .swatch-wall{
+    display:grid; grid-template-columns:repeat(6,1fr); gap:16px;
+  }
+  .swatch{
+    aspect-ratio:1; border-radius:18px; position:relative; cursor:pointer;
+    transition:transform .4s ease;
+    display:flex; align-items:flex-end; padding:14px;
+  }
+  .swatch:hover{transform:scale(1.06) rotate(-2deg); z-index:2;}
+  .swatch span{
+    font-size:11px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase;
+    opacity:0; transform:translateY(6px); transition:opacity .3s ease, transform .3s ease;
+    color:var(--cacao-dark); background:rgba(255,255,255,0.75); padding:4px 8px; border-radius:8px;
+  }
+  .swatch:hover span{opacity:1; transform:translateY(0);}
+  .swatch:nth-child(1){background:#F6D3D8;}
+  .swatch:nth-child(2){background:#E8A7AE;}
+  .swatch:nth-child(3){background:#D98790;}
+  .swatch:nth-child(4){background:#C99A7C;}
+  .swatch:nth-child(5){background:#9C6B4F;}
+  .swatch:nth-child(6){background:#6B4034;}
+  .swatch:nth-child(7){background:#F1E3DA;}
+  .swatch:nth-child(8){background:#EAB9A8;}
+  .swatch:nth-child(9){background:#D9917A;}
+  .swatch:nth-child(10){background:#B98565;}
+  .swatch:nth-child(11){background:#7C5040;}
+  .swatch:nth-child(12){background:#4A2E23;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{background:var(--cream);}
+  .test-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .test-card{
+    background:var(--white); border-radius:22px; padding:32px 28px;
+    border:1px solid var(--line);
+  }
+  .test-stars{color:var(--pink-deep); font-size:14px; margin-bottom:16px; letter-spacing:2px;}
+  .test-card p{font-size:15px; line-height:1.75; color:var(--cacao-dark); margin-bottom:22px;}
+  .test-author{display:flex; align-items:center; gap:12px;}
+  .test-avatar{
+    width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; color:var(--white); font-size:15px;
+  }
+  .test-author b{display:block; font-size:14px;}
+  .test-author span{font-size:12px; color:var(--cacao-light);}
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    background:linear-gradient(120deg, var(--pink-soft), var(--pink-rose) 60%, var(--cacao-light));
+    border-radius:36px; padding:70px 60px;
+    margin:0 32px; max-width:1160px; margin-inline:auto;
+    display:flex; align-items:center; justify-content:space-between; gap:40px;
+    flex-wrap:wrap;
+    box-shadow:var(--shadow);
+  }
+  .cta-banner h2{font-size:clamp(26px,3vw,38px); max-width:460px; color:var(--cacao-dark);}
+  .cta-banner .btn-primary{background:var(--cacao-dark);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--cacao-dark); color:var(--pink-soft); padding:80px 0 30px;}
+  .footer-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:50px;
+    padding-bottom:50px; border-bottom:1px solid rgba(247,233,223,0.15);
+  }
+  .footer-logo{font-family:'Fraunces',serif; font-size:24px; color:var(--white); margin-bottom:16px; font-weight:600;}
+  .footer-grid p{font-size:14px; line-height:1.7; color:rgba(247,233,223,0.65); max-width:260px;}
+  .footer-col h4{font-size:13px; text-transform:uppercase; letter-spacing:0.1em; color:var(--white); margin-bottom:18px; font-weight:700;}
+  .footer-col a, .footer-col p{display:block; font-size:14.5px; color:rgba(247,233,223,0.7); margin-bottom:10px; transition:color .3s ease;}
+  .footer-col a:hover{color:var(--pink-rose);}
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:26px;
+    font-size:12.5px; color:rgba(247,233,223,0.45); flex-wrap:wrap; gap:12px;
+  }
+  .socials{display:flex; gap:14px;}
+  .socials a{
+    width:36px; height:36px; border-radius:50%; border:1px solid rgba(247,233,223,0.25);
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+    transition:background .3s ease, border-color .3s ease;
+  }
+  .socials a:hover{background:var(--pink-deep); border-color:var(--pink-deep);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+    .hero-grid, .about-grid{grid-template-columns:1fr;}
+    .about-grid{gap:40px;}
+    .about-visual{order:-1; aspect-ratio:16/9;}
+    .service-grid, .test-grid{grid-template-columns:1fr 1fr;}
+    .look-grid{grid-template-columns:1fr 1fr;}
+    .swatch-wall{grid-template-columns:repeat(4,1fr);}
+    .footer-grid{grid-template-columns:1fr 1fr; gap:36px;}
+    .cta-banner{padding:44px 30px; text-align:left;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .service-grid, .test-grid{grid-template-columns:1fr;}
+    .look-grid{grid-template-columns:1fr;}
+    .swatch-wall{grid-template-columns:repeat(3,1fr);}
+    .footer-grid{grid-template-columns:1fr;}
+    .hero{padding:140px 0 70px;}
+    section{padding:80px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <nav class="wrap">
+    <div class="logo"><span class="dot"></span>BONBON</div>
+    <ul class="nav-links">
+      <li><a href="#about">Про нас</a></li>
+      <li><a href="#services">Послуги</a></li>
+      <li><a href="#results">Роботи</a></li>
+      <li><a href="#palette">Палітра</a></li>
+      <li><a href="#reviews">Відгуки</a></li>
+      <li><a href="#contact">Контакти</a></li>
+    </ul>
+    <button type="button" class="nav-cta" onclick="openBooking()">Записатись</button>
+    <button class="burger" aria-label="Меню" id="burgerBtn"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <div class="eyebrow">Студія манікюру у Дніпрі</div>
+      <h1>Ніжність кольору троянди<br><em>і смак какао</em><br>на кінчиках пальців</h1>
+      <p class="lead">BONBON — це манікюрна студія, де кожен відтінок підібраний як цукерка в коробці: пудрові рожеві, карамель, молочний шоколад. Доглянуті руки — маленька щоденна розкіш.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn-primary" onclick="openBooking()">Записатися на манікюр</button>
+        <a href="#services" class="btn-ghost"><span class="circle">↓</span> Переглянути послуги</a>
+      </div>
+    </div>
+    <div class="reveal in" style="transition-delay:.15s">
+      <div class="bonbon-box">
+        <div class="float-tag t1"><span class="heart">♥</span> 4.9 · 380 відгуків</div>
+        <div class="bonbon-grid">
+          <div class="bonbon"></div><div class="bonbon"></div><div class="bonbon"></div><div class="bonbon"></div>
+          <div class="bonbon"></div><div class="bonbon"></div><div class="bonbon"></div><div class="bonbon"></div>
+        </div>
+        <div class="bonbon-caption">
+          <span>Колекція «Bonbon» · 24 відтінки</span>
+          <span>→</span>
+        </div>
+        <div class="float-tag t2">Гель-лак від 550 ₴</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-track">
+    <span>Манікюр <span>Педикюр</span> <span>Покриття гель-лак</span> <span>Дизайн нігтів</span> <span>Догляд за кутикулою</span> <span>Парафінотерапія</span></span>
+    <span>Манікюр <span>Педикюр</span> <span>Покриття гель-лак</span> <span>Дизайн нігтів</span> <span>Догляд за кутикулою</span> <span>Парафінотерапія</span></span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="about-visual reveal">
+      <div class="swirl"></div>
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+    </div>
+    <div class="about-text reveal">
+      <div class="eyebrow">Наша філософія</div>
+      <h2 style="font-size:clamp(28px,3.4vw,38px); margin-bottom:22px;">Манікюр — це не процедура, а маленьке побачення з собою</h2>
+      <p>У BONBON ми віримо, що доглянуті руки змінюють настрій дня. Тому в студії панує атмосфера затишної кондитерської: м'яке освітлення, аромат ванілі та кави, плюшеві пледи для очікування.</p>
+      <p>Наші майстрині проходять регулярне навчання у топових школах манікюру, а всі інструменти стерилізуються за європейськими стандартами. Ви приходите відпочити — і виходите з бездоганними нігтями.</p>
+      <div class="stat-row">
+        <div class="stat"><b>7</b><span>років на ринку</span></div>
+        <div class="stat"><b>12</b><span>майстринь у команді</span></div>
+        <div class="stat"><b>15k+</b><span>задоволених клієнток</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Меню послуг</div>
+      <h2>Кожна процедура — як окрема цукерка з коробки</h2>
+      <p>Оберіть свій ідеальний смак догляду: від класики до вишуканого дизайну.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card reveal">
+        <div class="service-icon" style="background:linear-gradient(160deg,#F6D3D8,#E8A7AE);">💅</div>
+        <h3>Класичний манікюр</h3>
+        <p>Обрізний манікюр з ідеальною формою кутикули та доглядовою олією в подарунок.</p>
+        <div class="service-price"><span class="from">від</span> 450 ₴</div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.08s">
+        <div class="service-icon" style="background:linear-gradient(160deg,#C99A7C,#9C6B4F);">✨</div>
+        <h3>Покриття гель-лак</h3>
+        <p>Стійке покриття до 3 тижнів у понад 60 пастельних та карамельних відтінках.</p>
+        <div class="service-price"><span class="from">від</span> 650 ₴</div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.16s">
+        <div class="service-icon" style="background:linear-gradient(160deg,#7C5040,#4A2E23);">🎨</div>
+        <h3>Дизайн нігтів</h3>
+        <p>Мінімалістичні візерунки, втирка, фольга та об'ємний декор ручної роботи.</p>
+        <div class="service-price"><span class="from">від</span> 150 ₴</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon" style="background:linear-gradient(160deg,#F1E3DA,#E4C6B4);">🦶</div>
+        <h3>Педикюр SPA</h3>
+        <p>Апаратний педикюр з парафіновою маскою та масажем стоп какао-маслом.</p>
+        <div class="service-price"><span class="from">від</span> 750 ₴</div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.08s">
+        <div class="service-icon" style="background:linear-gradient(160deg,#EAB9A8,#D9917A);">🌸</div>
+        <h3>Догляд за кутикулою</h3>
+        <p>Апаратне видалення кутикули без травмування шкіри для чутливих ручок.</p>
+        <div class="service-price"><span class="from">від</span> 300 ₴</div>
+      </div>
+      <div class="service-card reveal" style="transition-delay:.16s">
+        <div class="service-icon" style="background:linear-gradient(160deg,#E7B7BC,#D98790);">🤍</div>
+        <h3>Парафінотерапія</h3>
+        <p>Зволожуюча процедура з какао-маслом, яка робить шкіру рук ніжною, мов шовк.</p>
+        <div class="service-price"><span class="from">від</span> 350 ₴</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="results" id="results">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Галерея робіт</div>
+      <h2>Останні результати наших майстринь</h2>
+      <p>Кожен набір — маленька історія: від пудрової класики до карамельного мармуру. Наведіть курсор, щоб побачити деталі роботи.</p>
+    </div>
+    <div class="look-grid">
+
+      <div class="look-card reveal">
+        <div class="nail-row look-powder">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Пудрова класика</h3>
+          <span>Гель-лак · без дизайну</span>
+        </div>
+      </div>
+
+      <div class="look-card reveal" style="transition-delay:.06s">
+        <div class="nail-row look-french">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Френч де-люкс</h3>
+          <span>Гель-лак · тонка лінія усмішки</span>
+        </div>
+      </div>
+
+      <div class="look-card reveal" style="transition-delay:.12s">
+        <div class="nail-row look-ombre">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Омбре троянда-какао</h3>
+          <span>Гель-лак · градієнт вручну</span>
+        </div>
+      </div>
+
+      <div class="look-card reveal">
+        <div class="nail-row look-marble">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Крем-брюле мармур</h3>
+          <span>Гель-лак · мармуровий розлив</span>
+        </div>
+      </div>
+
+      <div class="look-card reveal" style="transition-delay:.06s">
+        <div class="nail-row look-glitter">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Шоколадний глітер</h3>
+          <span>Гель-лак · акцент на безіменному</span>
+        </div>
+      </div>
+
+      <div class="look-card reveal" style="transition-delay:.12s">
+        <div class="nail-row look-negative">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Негативний простір</h3>
+          <span>Гель-лак · мінімалістичний дизайн</span>
+        </div>
+      </div>
+
+      <div class="look-card reveal">
+        <div class="nail-row look-caramel">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Карамельний градієнт</h3>
+          <span>Гель-лак · перехід відтінків</span>
+        </div>
+      </div>
+
+      <div class="look-card reveal" style="transition-delay:.06s">
+        <div class="nail-row look-floral">
+          <div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div><div class="nail"></div>
+        </div>
+        <div class="look-info">
+          <h3>Ніжна квіткова</h3>
+          <span>Гель-лак · акцентний дизайн вручну</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="palette" id="palette">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Колекція відтінків</div>
+      <h2>Наша палітра «Bonbon»</h2>
+      <p>Від пудрового рожевого до насиченого молочного шоколаду — наведіть курсор, щоб побачити назву відтінку.</p>
+    </div>
+    <div class="swatch-wall">
+      <div class="swatch reveal"><span>Пудра</span></div>
+      <div class="swatch reveal"><span>Троянда</span></div>
+      <div class="swatch reveal"><span>Малина</span></div>
+      <div class="swatch reveal"><span>Карамель</span></div>
+      <div class="swatch reveal"><span>Мокачино</span></div>
+      <div class="swatch reveal"><span>Какао</span></div>
+      <div class="swatch reveal"><span>Крем-брюле</span></div>
+      <div class="swatch reveal"><span>Персик</span></div>
+      <div class="swatch reveal"><span>Тераккота</span></div>
+      <div class="swatch reveal"><span>Латте</span></div>
+      <div class="swatch reveal"><span>Шоколад</span></div>
+      <div class="swatch reveal"><span>Гіркий шоколад</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Відгуки клієнток</div>
+      <h2>Що кажуть ті, хто вже завітав</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">★★★★★</div>
+        <p>Найзатишніша студія в місті. Обожнюю атмосферу — наче й справді потрапляєш у кондитерську. А манікюр тримається бездоганно три тижні.</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(160deg,#E8A7AE,#D98790);">М</div>
+          <div><b>Марина К.</b><span>клієнтка з 2022 року</span></div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:.08s">
+        <div class="test-stars">★★★★★</div>
+        <p>Майстриня підібрала ідеальний відтінок карамелі під колір шкіри — навіть не думала, що таке можливо. Тепер записуюсь тільки сюди.</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(160deg,#9C6B4F,#6B4034);">О</div>
+          <div><b>Оксана П.</b><span>клієнтка з 2023 року</span></div>
+        </div>
+      </div>
+      <div class="test-card reveal" style="transition-delay:.16s">
+        <div class="test-stars">★★★★★</div>
+        <p>Педикюр SPA — окрема пісня. Парафінова маска з какао-маслом — це те, заради чого варто записатись саме сюди.</p>
+        <div class="test-author">
+          <div class="test-avatar" style="background:linear-gradient(160deg,#F1E3DA,#C99A7C);">Н</div>
+          <div><b>Наталія Б.</b><span>клієнтка з 2021 року</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:0;">
+  <div class="cta-banner reveal">
+    <h2>Готові відчути смак ніжності на кінчиках пальців?</h2>
+    <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+      <button type="button" class="btn-primary" onclick="openBooking()">Замовити дзвінок</button>
+      <a href="tel:+380990000000" style="font-size:13.5px; font-weight:600; color:var(--cacao-dark); opacity:.75;">або зателефонуйте: +380 99 000 00 00</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">BONBON</div>
+        <p>Студія манікюру, де кожен візит — маленьке солодке побачення із собою.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навігація</h4>
+        <a href="#about">Про нас</a>
+        <a href="#services">Послуги</a>
+        <a href="#gallery">Палітра</a>
+        <a href="#reviews">Відгуки</a>
+      </div>
+      <div class="footer-col">
+        <h4>Контакти</h4>
+        <p>вул. Троянди 12, Дніпро</p>
+        <a href="tel:+380990000000">+380 99 000 00 00</a>
+        <a href="mailto:hello@bonbon-nails.ua">hello@bonbon-nails.ua</a>
+      </div>
+      <div class="footer-col">
+        <h4>Графік роботи</h4>
+        <p>Пн–Пт: 09:00 – 20:00</p>
+        <p>Сб–Нд: 10:00 – 18:00</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="Viber">VB</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 BONBON Nail Studio. Всі права захищено.</span>
+      <span>Зроблено з ♥ для ваших рук</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-backdrop" id="bookingModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <button type="button" class="modal-close" onclick="closeBooking()" aria-label="Закрити">✕</button>
+
+    <form class="modal-form" id="bookingForm" novalidate>
+      <div class="modal-eyebrow">Зворотній дзвінок</div>
+      <h3 id="bookingTitle">Запис на манікюр</h3>
+      <p class="sub">Залиште ім'я та номер телефону — наша адміністраторка зателефонує вам протягом робочого дня, щоб узгодити зручний час.</p>
+
+      <div class="field" id="nameField">
+        <label for="nameInput">Ваше ім'я</label>
+        <input type="text" id="nameInput" placeholder="Наприклад, Марина" autocomplete="given-name">
+        <div class="error-msg">Введіть, будь ласка, ваше ім'я</div>
+      </div>
+
+      <div class="field" id="phoneField">
+        <label for="phoneInput">Номер телефону</label>
+        <input type="tel" id="phoneInput" placeholder="+380 XX XXX XX XX" autocomplete="tel">
+        <div class="error-msg">Перевірте номер — формат +380 XX XXX XX XX</div>
+      </div>
+
+      <button type="submit" class="modal-submit">Зателефонуйте мені</button>
+      <p class="modal-note">Натискаючи кнопку, ви погоджуєтесь, що ми зателефонуємо вам лише щодо запису.</p>
+    </form>
+
+    <div class="modal-success" id="bookingSuccess">
+      <div class="success-icon">✓</div>
+      <h3>Дякуємо!</h3>
+      <p>Ми отримали вашу заявку і зателефонуємо найближчим часом, щоб узгодити зручний час візиту.</p>
+      <button type="button" class="modal-submit" style="margin-top:22px;" onclick="closeBooking()">Добре</button>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="https://w1455950.alteg.io/widgetJS" charset="UTF-8"></script>
+<script>
+  // header scroll state
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // booking modal
+  const modal = document.getElementById('bookingModal');
+  const bookingForm = document.getElementById('bookingForm');
+  const bookingSuccess = document.getElementById('bookingSuccess');
+  const nameField = document.getElementById('nameField');
+  const phoneField = document.getElementById('phoneField');
+  const nameInput = document.getElementById('nameInput');
+  const phoneInput = document.getElementById('phoneInput');
+  let lastFocused = null;
+
+  function openBooking(){
+    lastFocused = document.activeElement;
+    bookingForm.classList.remove('hide');
+    bookingSuccess.classList.remove('show');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => nameInput.focus(), 200);
+  }
+  function closeBooking(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeBooking(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('open')) closeBooking(); });
+
+  function validatePhone(value){
+    const digits = value.replace(/\D/g,'');
+    return digits.length >= 10 && digits.length <= 13;
+  }
+
+  bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    if(nameInput.value.trim().length < 2){
+      nameField.classList.add('invalid');
+      valid = false;
+    } else {
+      nameField.classList.remove('invalid');
+    }
+
+    if(!validatePhone(phoneInput.value)){
+      phoneField.classList.add('invalid');
+      valid = false;
+    } else {
+      phoneField.classList.remove('invalid');
+    }
+
+    if(!valid) return;
+
+    // Simulated submission — in production this would POST to a booking endpoint.
+    bookingForm.classList.add('hide');
+    bookingSuccess.classList.add('show');
+    bookingForm.reset();
+  });
+
+  [nameInput, phoneInput].forEach(inp => {
+    inp.addEventListener('input', () => {
+      inp.closest('.field').classList.remove('invalid');
+    });
+  });
+
+  // mobile menu (simple toggle placeholder)
+  const burger = document.getElementById('burgerBtn');
+  burger.addEventListener('click', () => {
+    const links = document.querySelector('.nav-links');
+    const visible = links.style.display === 'flex';
+    links.style.cssText = visible
+      ? 'display:none;'
+      : 'display:flex; position:fixed; top:76px; left:20px; right:20px; background:#FFFDFB; flex-direction:column; gap:18px; padding:28px; border-radius:20px; box-shadow:0 20px 50px -20px rgba(62,36,29,0.3); z-index:99;';
+  });
+</script>
+
+</body>
+</html>
