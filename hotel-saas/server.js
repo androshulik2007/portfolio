@@ -10,12 +10,37 @@ const PORT = process.env.PORT || 5000;
 // Облікові дані адміністратора
 const ADMIN_USER = process.env.ADMIN_USER || 'admin';
 const ADMIN_PASS = process.env.ADMIN_PASS || 'hotel_lornet_2026';
+
+// Дозволені джерела (звідки можна робити запити до цього API).
+// Додано варіанти з www і без, а також http://127.0.0.1 для локальної розробки.
+// За потреби додайте сюди ще домени через кому.
+const ALLOWED_ORIGINS = [
+  'https://blackwoodstudio.org',
+  'https://www.blackwoodstudio.org',
+  'http://localhost:5500',
+  'http://127.0.0.1:5500'
+];
+
 const corsOptions = {
-  origin: 'https://blackwoodstudio.org', // ваш домен на GitHub Pages
+  origin: function (origin, callback) {
+    // дозволяємо запити без origin (наприклад, Postman, health-check)
+    if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.warn('CORS: заблоковано запит з origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
-}
+};
 app.use(cors(corsOptions));
 app.use(express.json());
+
+// Проста перевірка стану сервера — корисно, щоб перевірити,
+// чи сервер взагалі "прокинувся" і відповідає (актуально для Render free-tier)
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Lornet Hotel API працює', production: !!process.env.DATABASE_URL });
+});
 
 // Визначаємо, яку базу даних використовувати (PostgreSQL на Render чи SQLite локально)
 const isProduction = !!process.env.DATABASE_URL;
@@ -112,7 +137,10 @@ async function initDB() {
   }
 }
 
-initDB();
+initDB().catch((err) => {
+  console.error('Критична помилка ініціалізації бази даних:', err.message);
+  console.error('Сервер продовжує роботу, але запити до БД можуть не працювати, доки проблему не буде виправлено.');
+});
 
 // --- API МАРШРУТИ ---
 
