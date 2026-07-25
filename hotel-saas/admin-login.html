@@ -188,8 +188,9 @@
         const result = await response.json();
 
         if (response.ok) {
-          // Зберігаємо маркер успішного входу у пам'яті браузера
+          // Зберігаємо маркер успішного входу та ключ доступу для захищених запитів
           localStorage.setItem('admin_logged', 'true');
+          localStorage.setItem('admin_key', result.adminKey || '');
           // Перенаправляємо на сторінку таблиці бронювань
           window.location.href = 'admin.html';
         } else {

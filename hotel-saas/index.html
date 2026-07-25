@@ -15,6 +15,7 @@
 <link rel="canonical" href="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
 <style>
   :root{
     --ink:#0f0a0d;
@@ -608,6 +609,32 @@
   .field input::placeholder, .field textarea::placeholder{color:#5c574a;}
   .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--brass);}
   .field select option{background:var(--ink);}
+  .field-hint{font-size:0.68rem;color:var(--stone);letter-spacing:0.03em;}
+  .field input.field-invalid{border-color:#c0483f;}
+  .field input[readonly]{cursor:pointer;}
+  /* ---- flatpickr theming, щоб календар вписувався в дизайн сайту ---- */
+  .flatpickr-calendar{
+    background:var(--ink-2)!important;
+    border:1px solid var(--hair-strong)!important;
+    box-shadow:var(--gold-glow)!important;
+    font-family:'Jost',sans-serif!important;
+  }
+  .flatpickr-months .flatpickr-month,
+  .flatpickr-current-month .flatpickr-monthDropdown-months,
+  .flatpickr-weekday{color:var(--brass)!important; fill:var(--brass)!important;}
+  .flatpickr-current-month input.cur-year{color:var(--brass)!important;}
+  .flatpickr-day{color:var(--cream)!important;}
+  .flatpickr-day.flatpickr-disabled{color:#4a433a!important;text-decoration:line-through;cursor:not-allowed!important;}
+  .flatpickr-day.today{border-color:var(--brass)!important;}
+  .flatpickr-day.selected, .flatpickr-day.selected:hover{
+    background:var(--brass)!important;
+    border-color:var(--brass)!important;
+    color:var(--ink)!important;
+  }
+  .flatpickr-day:hover{background:rgba(217,180,92,0.15)!important;}
+  span.flatpickr-weekday{color:var(--brass-dim)!important;}
+  .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg{fill:var(--brass)!important;}
+  .flatpickr-prev-month svg, .flatpickr-next-month svg{fill:var(--stone)!important;}
   .booking-form .submit{
     grid-column:1/-1;
     margin-top:0.6rem;
@@ -900,12 +927,10 @@
     </div>
     <form class="booking-form" id="bookingForm">
       <div class="field">
-        <label for="checkin">Заїзд</label>
-        <input type="date" id="checkin" required>
-      </div>
-      <div class="field">
-        <label for="checkout">Виїзд</label>
-        <input type="date" id="checkout" required>
+        <label for="roomtype">Номер</label>
+        <select id="roomtype" required>
+          <option value="">Завантаження кімнат...</option>
+        </select>
       </div>
       <div class="field">
         <label for="guests">Гостей</label>
@@ -917,18 +942,29 @@
         </select>
       </div>
       <div class="field">
-        <label for="roomtype">Номер</label>
-        <select id="roomtype" required>
-          <option value="">Завантаження кімнат...</option>
-        </select>
+        <label for="checkin">Заїзд</label>
+        <input type="text" id="checkin" placeholder="Оберіть дату" required readonly autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="checkout">Виїзд</label>
+        <input type="text" id="checkout" placeholder="Оберіть дату" required readonly autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="firstname">Ім'я</label>
+        <input type="text" id="firstname" placeholder="Ваше ім'я" required>
+      </div>
+      <div class="field">
+        <label for="lastname">Прізвище</label>
+        <input type="text" id="lastname" placeholder="Ваше прізвище" required>
       </div>
       <div class="field full">
-        <label for="name">Ім'я</label>
-        <input type="text" id="name" placeholder="Ваше ім'я" required>
+        <label for="phone">Телефон</label>
+        <input type="tel" id="phone" placeholder="0971234567" inputmode="numeric" maxlength="10" required>
+        <span class="field-hint">10 цифр, без +38</span>
       </div>
       <div class="field full">
-        <label for="email">Пошта або телефон</label>
-        <input type="text" id="email" placeholder="you@example.com" required>
+        <label for="email">Пошта (необов'язково)</label>
+        <input type="email" id="email" placeholder="you@example.com">
       </div>
       <div class="field full">
         <label for="notes">Побажання (необов'язково)</label>
@@ -1020,6 +1056,7 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 <script>
   // ЗАМІНЕНО НА ВАШ РЕАЛЬНИЙ СЕРВЕР НА RENDER:
   const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
@@ -1030,13 +1067,16 @@
       const rooms = await response.json();
       const select = document.getElementById('roomtype');
       select.innerHTML = '';
-      
+
       rooms.forEach(room => {
         const option = document.createElement('option');
         option.value = room.id;
         option.textContent = `${room.name} (${room.type}) — ₴${room.price}`;
         select.appendChild(option);
       });
+
+      // одразу підвантажуємо зайняті дати для номера, який обрано за замовчуванням
+      if (select.value) refreshDisabledDates(select.value);
     } catch (e) {
       console.error('Не вдалося завантажити кімнати з сервера:', e);
       document.getElementById('roomtype').innerHTML = '<option>Помилка звʼязку з сервером</option>';
@@ -1053,8 +1093,74 @@
         break;
       }
     }
+    refreshDisabledDates(select.value);
     document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
   }
+
+  /* =========================================================
+     КАЛЕНДАР БРОНЮВАННЯ (Flatpickr)
+     -----------------------------------------------------------
+     Дати заїзду/виїзду обираються ТІЛЬКИ через календар (поля
+     readonly, ручний ввід заблоковано). Дати, які вже зайняті
+     для обраного номера, підвантажуються з публічного маршруту
+     /api/rooms/:id/availability і стають некликабельними.
+  ========================================================= */
+  let disabledRanges = [];
+
+  const checkinPicker = flatpickr('#checkin', {
+    dateFormat: 'Y-m-d',
+    altInput: true,
+    altFormat: 'd.m.Y',
+    minDate: 'today',
+    disable: disabledRanges,
+    onChange: function(selectedDates, dateStr) {
+      // виїзд не може бути раніше/того ж дня, що і заїзд
+      checkoutPicker.set('minDate', selectedDates[0] ? new Date(selectedDates[0].getTime() + 86400000) : 'today');
+    }
+  });
+
+  const checkoutPicker = flatpickr('#checkout', {
+    dateFormat: 'Y-m-d',
+    altInput: true,
+    altFormat: 'd.m.Y',
+    minDate: 'today',
+    disable: disabledRanges
+  });
+
+  async function refreshDisabledDates(roomId) {
+    if (!roomId) return;
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/rooms/${roomId}/availability`, { cache: 'no-store' });
+      const bookedRanges = await response.json();
+
+      // flatpickr очікує 'to' датою включно, а виїзд у нас є першим вільним днем,
+      // тож блокуємо аж до дня перед виїздом
+      disabledRanges = bookedRanges.map(b => {
+        const to = new Date(b.check_out);
+        to.setDate(to.getDate() - 1);
+        return { from: b.check_in, to: to.toISOString().slice(0, 10) };
+      });
+
+      checkinPicker.set('disable', disabledRanges);
+      checkoutPicker.set('disable', disabledRanges);
+
+      // якщо вже вибрана дата стала недоступною після зміни номера — скидаємо вибір
+      checkinPicker.clear();
+      checkoutPicker.clear();
+    } catch (e) {
+      console.error('Не вдалося завантажити зайняті дати:', e);
+    }
+  }
+
+  document.getElementById('roomtype').addEventListener('change', (e) => {
+    refreshDisabledDates(e.target.value);
+  });
+
+  // телефон: приймаємо тільки цифри, максимум 10
+  const phoneInput = document.getElementById('phone');
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+  });
 
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
@@ -1068,13 +1174,49 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+    note.classList.remove('show');
+
+    const firstName = document.getElementById('firstname').value.trim();
+    const lastName  = document.getElementById('lastname').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const checkIn   = document.getElementById('checkin').value;
+    const checkOut  = document.getElementById('checkout').value;
+    const roomId    = document.getElementById('roomtype').value;
+    const comment   = document.getElementById('notes').value.trim();
+
+    // клієнтська валідація — перш ніж узагалі стукати на сервер
+    if (!roomId || !firstName || !lastName || !phone || !checkIn || !checkOut) {
+      note.textContent = "Будь ласка, заповніть усі обов'язкові поля!";
+      note.classList.add('show');
+      note.scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+    if (!/^[0-9]{10}$/.test(phone)) {
+      note.textContent = 'Номер телефону має містити рівно 10 цифр (без +38).';
+      note.classList.add('show');
+      document.getElementById('phone').classList.add('field-invalid');
+      note.scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+    document.getElementById('phone').classList.remove('field-invalid');
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      note.textContent = 'Некоректна електронна адреса.';
+      note.classList.add('show');
+      note.scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+
     const bookingData = {
-      room_id: document.getElementById('roomtype').value,
-      guest_name: document.getElementById('name').value,
-      check_in: document.getElementById('checkin').value,
-      check_out: document.getElementById('checkout').value
+      room_id: roomId,
+      first_name: firstName,
+      last_name: lastName,
+      phone: phone,
+      check_in: checkIn,
+      check_out: checkOut
     };
+    if (email) bookingData.email = email;
+    if (comment) bookingData.guest_comment = comment;
 
     try {
       const response = await fetch(`${BACKEND_URL}/api/bookings`, {
@@ -1089,6 +1231,8 @@
         note.textContent = 'Дякуємо! Бронювання успішно збережено в базі даних готелю!';
         note.classList.add('show');
         form.reset();
+        checkinPicker.clear();
+        checkoutPicker.clear();
         loadRoomsToForm();
       } else {
         note.textContent = 'Помилка: ' + (result.error || 'Спробуйте ще раз');
@@ -1101,10 +1245,6 @@
 
     note.scrollIntoView({behavior:'smooth', block:'nearest'});
   });
-
-  const ci = document.getElementById('checkin');
-  const co = document.getElementById('checkout');
-  ci.addEventListener('change', () => { co.min = ci.value; });
 
   const GALLERY_IMAGES = [
     { src: 'images/1.jpg', caption: 'Сходова клітка' },

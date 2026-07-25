@@ -130,12 +130,24 @@
 
         function logout() {
             localStorage.removeItem('admin_logged');
+            localStorage.removeItem('admin_key');
             window.location.href = 'admin-login.html';
         }
 
         async function loadAdminBookings() {
             try {
-                const response = await fetch(`${BACKEND_URL}/api/bookings`, { cache: 'no-store' });
+                const adminKey = localStorage.getItem('admin_key') || '';
+                const response = await fetch(`${BACKEND_URL}/api/bookings`, {
+                    cache: 'no-store',
+                    headers: { 'x-admin-key': adminKey }
+                });
+                if (response.status === 401) {
+                    // ключ недійсний чи прострочений — повертаємо на екран логіну
+                    localStorage.removeItem('admin_logged');
+                    localStorage.removeItem('admin_key');
+                    window.location.href = 'admin-login.html';
+                    return;
+                }
                 const bookings = await response.json();
                 const tbody = document.getElementById('bookingsList');
                 

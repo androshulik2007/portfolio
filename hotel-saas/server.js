@@ -206,7 +206,8 @@ initDB().catch((err) => {
    ВАЛІДАЦІЯ
 ========================================================================= */
 function isValidPhone(phone) {
-  return typeof phone === 'string' && /^\+?[0-9\s\-()]{7,20}$/.test(phone.trim());
+  // Рівно 10 цифр, без коду країни (наприклад 0971234567)
+  return typeof phone === 'string' && /^[0-9]{10}$/.test(phone.trim());
 }
 function isValidEmail(email) {
   return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
@@ -295,17 +296,33 @@ app.delete('/api/rooms/:id', requireAdmin, async (req, res) => {
    API МАРШРУТИ — БРОНЮВАННЯ
 ========================================================================= */
 
+// Публічний маршрут: зайняті дати для конкретного номера (без жодних даних гостя).
+// Використовується календарем на сайті, щоб заблокувати вже заброньовані дати.
+app.get('/api/rooms/:id/availability', async (req, res) => {
+  res.set('Cache-Control', 'no-store');
+  try {
+    const rows = await dbAll(
+      `SELECT check_in, check_out FROM bookings WHERE room_id = ? AND status != 'cancelled'`,
+      [req.params.id]
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Створити нове бронювання (з сайту або вручну з десктоп-програми)
 app.post('/api/bookings', async (req, res) => {
   const { room_id, first_name, last_name, phone, email, check_in, check_out, guest_comment } = req.body;
 
-  if (!room_id || !first_name || !last_name || !phone || !email || !check_in || !check_out) {
+  // email тепер опційний — не входить у перелік обов'язкових полів
+  if (!room_id || !first_name || !last_name || !phone || !check_in || !check_out) {
     return res.status(400).json({ error: "Будь ласка, заповніть усі обов'язкові поля!" });
   }
   if (!isValidPhone(phone)) {
-    return res.status(400).json({ error: 'Некоректний номер телефону.' });
+    return res.status(400).json({ error: 'Номер телефону має містити рівно 10 цифр (без +38).' });
   }
-  if (!isValidEmail(email)) {
+  if (email && !isValidEmail(email)) {
     return res.status(400).json({ error: 'Некоректна електронна адреса.' });
   }
   if (new Date(check_in) >= new Date(check_out)) {
@@ -323,7 +340,7 @@ app.post('/api/bookings', async (req, res) => {
       `INSERT INTO bookings
         (room_id, guest_name, first_name, last_name, phone, email, check_in, check_out, guest_comment, status)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'new')`,
-      [room_id, guest_name, first_name, last_name, phone.trim(), email.trim(), check_in, check_out, guest_comment || null],
+      [room_id, guest_name, first_name, last_name, phone.trim(), email ? email.trim() : null, check_in, check_out, guest_comment || null],
       { returning: true }
     );
     console.log(`Нове бронювання #${result.id} збережено (room_id=${room_id}, guest=${guest_name})`);
@@ -335,7 +352,7 @@ app.post('/api/bookings', async (req, res) => {
 });
 
 // Отримати список усіх бронювань (для адмінки / десктоп-програми)
-app.get('/api/bookings', async (req, res) => {
+app.get('/api/bookings', requireAdmin, async (req, res) => {
   res.set('Cache-Control', 'no-store');
   try {
     const rows = await dbAll(`
