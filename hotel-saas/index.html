@@ -1021,12 +1021,12 @@
 </footer>
 
 <script>
-  // ЗАМІНЕНО НА ВАШ РЕАЛЬНИЙ СЕРВЕР НА :
+  // ЗАМІНЕНО НА ВАШ РЕАЛЬНИЙ СЕРВЕР НА RENDER:
   const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
 
   async function loadRoomsToForm() {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/rooms`);
+      const response = await fetch(`${BACKEND_URL}/api/rooms`, { cache: 'no-store' });
       const rooms = await response.json();
       const select = document.getElementById('roomtype');
       select.innerHTML = '';

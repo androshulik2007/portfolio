@@ -135,7 +135,7 @@
 
         async function loadAdminBookings() {
             try {
-                const response = await fetch('http://localhost:5000/api/bookings');
+                const response = await fetch(`${BACKEND_URL}/api/bookings`, { cache: 'no-store' });
                 const bookings = await response.json();
                 const tbody = document.getElementById('bookingsList');
                 

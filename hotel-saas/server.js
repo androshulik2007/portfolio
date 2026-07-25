@@ -158,6 +158,7 @@ initDB().catch((err) => {
 
 // 1. Отримати список усіх кімнат
 app.get('/api/rooms', async (req, res) => {
+  res.set('Cache-Control', 'no-store'); // завжди свіжі дані, без кешування
   try {
     if (isProduction) {
       const result = await db.query("SELECT * FROM rooms");
@@ -185,35 +186,44 @@ app.post('/api/bookings', async (req, res) => {
     if (isProduction) {
       const query = `INSERT INTO bookings (room_id, guest_name, check_in, check_out) VALUES ($1, $2, $3, $4) RETURNING id`;
       const result = await db.query(query, [room_id, guest_name, check_in, check_out]);
+      console.log(`Нове бронювання #${result.rows[0].id} збережено (room_id=${room_id}, guest=${guest_name})`);
       res.status(201).json({ message: 'Бронювання успішно створено!', bookingId: result.rows[0].id });
     } else {
       const query = `INSERT INTO bookings (room_id, guest_name, check_in, check_out) VALUES (?, ?, ?, ?)`;
       db.run(query, [room_id, guest_name, check_in, check_out], function(err) {
-        if (err) return res.status(500).json({ error: err.message });
+        if (err) {
+          console.error('Помилка вставки бронювання:', err.message);
+          return res.status(500).json({ error: err.message });
+        }
+        console.log(`Нове бронювання #${this.lastID} збережено (room_id=${room_id}, guest=${guest_name})`);
         res.status(201).json({ message: 'Бронювання успішно створено!', bookingId: this.lastID });
       });
     }
   } catch (err) {
+    console.error('Помилка вставки бронювання:', err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
 // 3. Отримати список усіх бронювань (для адмінки)
 app.get('/api/bookings', async (req, res) => {
+  res.set('Cache-Control', 'no-store'); // завжди свіжі дані, без кешування
   try {
     if (isProduction) {
       const query = `
-        SELECT bookings.id, rooms.name as room_name, bookings.guest_name, bookings.check_in, bookings.check_out 
+        SELECT bookings.id, COALESCE(rooms.name, 'Номер видалено/не знайдено #' || bookings.room_id) as room_name, bookings.guest_name, bookings.check_in, bookings.check_out 
         FROM bookings 
-        JOIN rooms ON bookings.room_id = rooms.id
+        LEFT JOIN rooms ON bookings.room_id = rooms.id
+        ORDER BY bookings.id DESC
       `;
       const result = await db.query(query);
       res.json(result.rows);
     } else {
       const query = `
-        SELECT bookings.id, rooms.name as room_name, bookings.guest_name, bookings.check_in, bookings.check_out 
+        SELECT bookings.id, COALESCE(rooms.name, 'Номер видалено/не знайдено #' || bookings.room_id) as room_name, bookings.guest_name, bookings.check_in, bookings.check_out 
         FROM bookings 
-        JOIN rooms ON bookings.room_id = rooms.id
+        LEFT JOIN rooms ON bookings.room_id = rooms.id
+        ORDER BY bookings.id DESC
       `;
       db.all(query, [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
