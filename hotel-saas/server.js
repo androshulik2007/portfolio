@@ -1,8 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const sqlite3 = require('sqlite3').verbose();
 const { Pool } = require('pg');
+// ВАЖЛИВО: 'sqlite3' підвантажується нижче лінивим require(), лише якщо
+// сервер реально запускається без DATABASE_URL (тобто локально для розробки).
+// На Render sqlite3 не потрібен (використовується PostgreSQL), а спроба
+// завантажити його нативний бінарник там викликала критичний збій через
+// несумісність версій GLIBC — сервер падав ще до старту Express.
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -54,7 +58,15 @@ if (isProduction) {
   });
   console.log('Підключено до хмарної бази даних PostgreSQL');
 } else {
-  // Налаштування для локальної SQLite
+  // Налаштування для локальної SQLite (лише для розробки на своєму компʼютері)
+  let sqlite3;
+  try {
+    sqlite3 = require('sqlite3').verbose();
+  } catch (err) {
+    console.error('Не вдалося завантажити модуль sqlite3:', err.message);
+    console.error('Якщо ви на Render — переконайтеся, що змінна DATABASE_URL задана в Environment.');
+    throw err;
+  }
   db = new sqlite3.Database('./hotel.db', (err) => {
     if (err) {
       console.error('Помилка підключення до SQLite:', err.message);
