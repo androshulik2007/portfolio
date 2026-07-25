@@ -397,6 +397,51 @@ app.patch('/api/bookings/:id/note', requireAdmin, async (req, res) => {
   }
 });
 
+// Видалити одне бронювання (тільки адмін)
+app.delete('/api/bookings/:id', requireAdmin, async (req, res) => {
+  try {
+    await dbRun('DELETE FROM bookings WHERE id = ?', [req.params.id]);
+    res.json({ message: 'Бронювання видалено.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Масово змінити статус декількох бронювань одразу (тільки адмін)
+app.patch('/api/bookings/bulk-status', requireAdmin, async (req, res) => {
+  const { ids, status } = req.body;
+  const allowedStatuses = ['new', 'confirmed', 'cancelled'];
+  if (!Array.isArray(ids) || ids.length === 0) {
+    return res.status(400).json({ error: 'Не передано жодного ID бронювання.' });
+  }
+  if (!allowedStatuses.includes(status)) {
+    return res.status(400).json({ error: 'Недопустимий статус.' });
+  }
+  try {
+    const placeholders = ids.map(() => '?').join(',');
+    await dbRun(`UPDATE bookings SET status = ? WHERE id IN (${placeholders})`, [status, ...ids]);
+    res.json({ message: `Статус оновлено для ${ids.length} бронювань.` });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Масово видалити декілька бронювань одразу (тільки адмін)
+// ПОСТ, а не DELETE — щоб шлях не збігався з "/api/bookings/:id" (де :id міг би стати "bulk-delete")
+app.post('/api/bookings/bulk-delete', requireAdmin, async (req, res) => {
+  const { ids } = req.body;
+  if (!Array.isArray(ids) || ids.length === 0) {
+    return res.status(400).json({ error: 'Не передано жодного ID бронювання.' });
+  }
+  try {
+    const placeholders = ids.map(() => '?').join(',');
+    await dbRun(`DELETE FROM bookings WHERE id IN (${placeholders})`, ids);
+    res.json({ message: `Видалено бронювань: ${ids.length}` });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 /* =========================================================================
    АВТОРИЗАЦІЯ АДМІНІСТРАТОРА
 ========================================================================= */
