@@ -15,7 +15,6 @@
 <link rel="canonical" href="">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
 <style>
   :root{
     --ink:#0f0a0d;
@@ -443,6 +442,7 @@
     text-transform:uppercase;
   }
   .room-select{
+    display:inline-block;
     border:1px solid var(--brass-dim);
     padding:0.7rem 1.4rem;
     font-size:0.7rem;
@@ -552,101 +552,30 @@
   }
   .carousel-dot.active{background:var(--brass);border-color:var(--brass-light);box-shadow:0 0 8px rgba(217,180,92,0.6);}
 
-  /* ===== BOOKING ===== */
-  .booking{
+  /* ===== BOOKING CTA (коротке запрошення, повна форма на booking.html) ===== */
+  .booking-cta{
     background:var(--ink-2);
     position:relative;
+    padding:6rem 0;
   }
-  .booking::before{
+  .booking-cta::before{
     content:'';
     position:absolute;top:0;left:0;right:0;height:1px;
     background:var(--hair);
   }
-  .booking-grid{
-    display:grid;
-    grid-template-columns:0.8fr 1.2fr;
-    gap:5vw;
+  .booking-cta-inner{
+    max-width:640px;
+    text-align:center;
+    padding:3.4rem 3vw;
+    position:relative;
   }
-  .booking .section-head::after{background:var(--ink-2);}
-  .booking-copy p{color:var(--stone);line-height:1.85;margin-bottom:1.4rem;}
-  .booking-quote{
-    margin-top:2.4rem;
-    padding-left:1.4rem;
-    border-left:1px solid var(--brass-dim);
-    font-family:'Fraunces',serif;
-    font-style:italic;
-    color:var(--brass);
-    font-size:1.15rem;
-    line-height:1.6;
-  }
-  form.booking-form{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:1.4rem;
-    background:linear-gradient(165deg, rgba(217,180,92,0.05), transparent 60%);
-    border:1px solid var(--hair);
-    padding:2.2rem;
-  }
-  .field{display:flex;flex-direction:column;gap:0.5rem;}
-  .field.full{grid-column:1/-1;}
-  .field label{
-    font-size:0.68rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
+  .booking-cta-inner h2{font-size:clamp(2rem,3.4vw,2.8rem);}
+  .booking-cta-sub{
     color:var(--stone);
+    line-height:1.8;
+    max-width:48ch;
+    margin:1.2rem auto 2.2rem;
   }
-  .field input, .field select, .field textarea{
-    background:transparent;
-    border:none;
-    border-bottom:1px solid var(--hair);
-    color:var(--cream);
-    font-family:'Jost',sans-serif;
-    font-size:0.95rem;
-    padding:0.6rem 0;
-    outline:none;
-    transition:border-color 0.25s;
-  }
-  .field input::placeholder, .field textarea::placeholder{color:#5c574a;}
-  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--brass);}
-  .field select option{background:var(--ink);}
-  .field-hint{font-size:0.68rem;color:var(--stone);letter-spacing:0.03em;}
-  .field input.field-invalid{border-color:#c0483f;}
-  .field input[readonly]{cursor:pointer;}
-  /* ---- flatpickr theming, щоб календар вписувався в дизайн сайту ---- */
-  .flatpickr-calendar{
-    background:var(--ink-2)!important;
-    border:1px solid var(--hair-strong)!important;
-    box-shadow:var(--gold-glow)!important;
-    font-family:'Jost',sans-serif!important;
-  }
-  .flatpickr-months .flatpickr-month,
-  .flatpickr-current-month .flatpickr-monthDropdown-months,
-  .flatpickr-weekday{color:var(--brass)!important; fill:var(--brass)!important;}
-  .flatpickr-current-month input.cur-year{color:var(--brass)!important;}
-  .flatpickr-day{color:var(--cream)!important;}
-  .flatpickr-day.flatpickr-disabled{color:#4a433a!important;text-decoration:line-through;cursor:not-allowed!important;}
-  .flatpickr-day.today{border-color:var(--brass)!important;}
-  .flatpickr-day.selected, .flatpickr-day.selected:hover{
-    background:var(--brass)!important;
-    border-color:var(--brass)!important;
-    color:var(--ink)!important;
-  }
-  .flatpickr-day:hover{background:rgba(217,180,92,0.15)!important;}
-  span.flatpickr-weekday{color:var(--brass-dim)!important;}
-  .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg{fill:var(--brass)!important;}
-  .flatpickr-prev-month svg, .flatpickr-next-month svg{fill:var(--stone)!important;}
-  .booking-form .submit{
-    grid-column:1/-1;
-    margin-top:0.6rem;
-  }
-  .form-note{
-    grid-column:1/-1;
-    font-size:0.85rem;
-    color:var(--brass);
-    margin-top:0.4rem;
-    display:none;
-  }
-  .form-note.show{display:block;}
 
   /* ===== REVIEWS ===== */
   .reviews-track{
@@ -745,34 +674,12 @@
   }
   .footer-links a:hover{color:var(--brass);}
   .footer-bottom-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top: 1.6rem;
-    flex-wrap: wrap;
-    gap: 1rem;
+    text-align: center;
   }
   .footer-copy{
     font-size:0.72rem;
     color:#5c574a;
-  }
-  .admin-panel-btn {
-    border: 1px solid var(--brass-dim);
-    padding: 0.45rem 1.1rem;
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--brass);
-    text-decoration: none;
-    transition: all 0.25s;
-    background: linear-gradient(180deg, rgba(217,180,92,0.08), transparent);
-    font-family: 'Jost', sans-serif;
-  }
-  .admin-panel-btn:hover {
-    background: linear-gradient(135deg, var(--brass-light), var(--brass), var(--brass-dim));
-    color: var(--ink);
-    box-shadow: 0 4px 16px rgba(217,180,92,0.3);
-    border-color: var(--brass-light);
   }
 
   @media (max-width:860px){
@@ -781,7 +688,7 @@
     .hero-grid{grid-template-columns:1fr;}
     .hero-lens{justify-self:start;text-align:left;margin-top:2rem;}
     .lens{margin-left:0;}
-    .about-grid, .booking-grid, .contact-grid{grid-template-columns:1fr;}
+    .about-grid, .contact-grid{grid-template-columns:1fr;}
     .room-row{grid-template-columns:1fr;text-align:left;gap:0.8rem;}
     .room-price{text-align:left;}
     .carousel{padding:0 0 3.4rem;}
@@ -791,7 +698,6 @@
     .carousel-arrow.next{right:0.4rem;}
     .carousel-caption{font-size:0.95rem;left:1.1rem;bottom:1rem;}
     .reviews-track{grid-template-columns:1fr;}
-    form.booking-form{grid-template-columns:1fr;}
     .section-head{flex-direction:column;align-items:flex-start;}
     .section-note{text-align:left;}
   }
@@ -805,12 +711,12 @@
     <ul>
       <li><a href="#rooms">Номери</a></li>
       <li><a href="#gallery">Галерея</a></li>
-      <li><a href="#booking">Бронювання</a></li>
+      <li><a href="booking.html">Бронювання</a></li>
       <li><a href="#reviews">Відгуки</a></li>
       <li><a href="#contact">Контакти</a></li>
     </ul>
   </nav>
-  <a href="#booking" class="nav-cta">Забронювати</a>
+  <a href="booking.html" class="nav-cta">Забронювати</a>
   <button class="burger" aria-label="Меню">☰</button>
 </header>
 
@@ -823,7 +729,7 @@
       <h1>Дев'ятнадцять<br>номерів.<br><em>Один погляд.</em></h1>
       <p class="hero-sub">Кожен номер ЛОРНЕТ — це окрема оптика на місто: свій вид, свій колір світла, своя тиша за старовинними вікнами в двох кроках від Ринку.</p>
       <div class="hero-actions">
-        <a href="#booking" class="btn-primary">Обрати дати</a>
+        <a href="booking.html" class="btn-primary">Обрати дати</a>
         <a href="#rooms" class="btn-ghost">Переглянути номери</a>
       </div>
     </div>
@@ -867,7 +773,7 @@
         <div class="room-name">Кабінет</div>
         <div class="room-desc">22 м². Робочий куточок, вікно у внутрішній двір, латунні деталі.</div>
         <div class="room-price"><div class="amount">€1200</div><div class="per">за ніч</div></div>
-        <button class="room-select" onclick="selectRoomType('Стандарт #101')">Обрати</button>
+        <a href="booking.html?type=Стандарт" class="room-select">Обрати</a>
       </div>
 
       <div class="room-row">
@@ -875,7 +781,7 @@
         <div class="room-name">Бельетаж</div>
         <div class="room-desc">30 м². Високі стелі, еркерне вікно з видом на бруковану вуличку.</div>
         <div class="room-price"><div class="amount">€1200</div><div class="per">за ніч</div></div>
-        <button class="room-select" onclick="selectRoomType('Стандарт #102')">Обрати</button>
+        <a href="booking.html?type=Стандарт" class="room-select">Обрати</a>
       </div>
 
       <div class="room-row">
@@ -883,7 +789,7 @@
         <div class="room-name">Кабінет Директора</div>
         <div class="room-desc">42 м². Окрема вітальня, камін (декоративний), ванна з мідною лійкою.</div>
         <div class="room-price"><div class="amount">€2500</div><div class="per">за ніч</div></div>
-        <button class="room-select" onclick="selectRoomType('Люкс #201')">Обрати</button>
+        <a href="booking.html?type=Люкс" class="room-select">Обрати</a>
       </div>
 
       <div class="room-row">
@@ -891,7 +797,7 @@
         <div class="room-name">Мансарда Лорнет</div>
         <div class="room-desc">55 м². Панорамний дах-вихід, найкращий вид на дзвіниці міста.</div>
         <div class="room-price"><div class="amount">€4000</div><div class="per">за ніч</div></div>
-        <button class="room-select" onclick="selectRoomType('Апартаменти #301')">Обрати</button>
+        <a href="booking.html?type=Апартаменти" class="room-select">Обрати</a>
       </div>
 
     </div>
@@ -916,67 +822,17 @@
   </div>
 </section>
 
-<!-- BOOKING -->
-<section id="booking" class="booking">
-  <div class="wrap booking-grid">
-    <div class="booking-copy">
-      <span class="eyebrow">Бронювання</span>
-      <h2 style="margin-bottom:1.2rem;">Оберіть дати —<br>ми підготуємо номер</h2>
-      <p>Підтвердження бронювання надходить протягом години. Для групових заїздів і подій пишіть напряму консьєржу.</p>
-      <div class="booking-quote">«Найтихіший готель у центрі — і найуважніший персонал, якого я зустрічала.»</div>
-    </div>
-    <form class="booking-form" id="bookingForm">
-      <div class="field">
-        <label for="roomtype">Номер</label>
-        <select id="roomtype" required>
-          <option value="">Завантаження кімнат...</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="guests">Гостей</label>
-        <select id="guests">
-          <option>1 гість</option>
-          <option>2 гості</option>
-          <option>3 гості</option>
-          <option>4+ гостей</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="checkin">Заїзд</label>
-        <input type="text" id="checkin" placeholder="Оберіть дату" required readonly autocomplete="off">
-      </div>
-      <div class="field">
-        <label for="checkout">Виїзд</label>
-        <input type="text" id="checkout" placeholder="Оберіть дату" required readonly autocomplete="off">
-      </div>
-      <div class="field">
-        <label for="firstname">Ім'я</label>
-        <input type="text" id="firstname" placeholder="Ваше ім'я" required>
-      </div>
-      <div class="field">
-        <label for="lastname">Прізвище</label>
-        <input type="text" id="lastname" placeholder="Ваше прізвище" required>
-      </div>
-      <div class="field full">
-        <label for="phone">Телефон</label>
-        <input type="tel" id="phone" placeholder="0971234567" inputmode="numeric" maxlength="10" required>
-        <span class="field-hint">10 цифр, без +38</span>
-      </div>
-      <div class="field full">
-        <label for="email">Пошта (необов'язково)</label>
-        <input type="email" id="email" placeholder="you@example.com">
-      </div>
-      <div class="field full">
-        <label for="notes">Побажання (необов'язково)</label>
-        <textarea id="notes" rows="2" placeholder="Пізній заїзд, дитяче ліжко, тощо"></textarea>
-      </div>
-      <div class="submit">
-        <button type="submit" class="btn-primary" style="border:1px solid var(--brass);">Надіслати запит</button>
-      </div>
-      <div class="form-note" id="formNote"></div>
-    </form>
+<!-- BOOKING CTA -->
+<section id="booking" class="booking-cta">
+  <div class="wrap booking-cta-inner corner-frame">
+    <span class="cf-bl"></span><span class="cf-br"></span>
+    <span class="eyebrow">Бронювання</span>
+    <h2>Оберіть дати —<br>ми підготуємо номер</h2>
+    <p class="booking-cta-sub">Підтвердження бронювання надходить протягом години. Для групових заїздів і подій пишіть напряму консьєржу.</p>
+    <a href="booking.html" class="btn-primary">Перейти до бронювання</a>
   </div>
 </section>
+
 
 <!-- REVIEWS -->
 <section id="reviews">
@@ -1045,205 +901,22 @@
       <ul class="footer-links">
         <li><a href="#rooms">Номери</a></li>
         <li><a href="#gallery">Галерея</a></li>
-        <li><a href="#booking">Бронювання</a></li>
+        <li><a href="booking.html">Бронювання</a></li>
         <li><a href="#contact">Контакти</a></li>
       </ul>
     </div>
     <div class="footer-bottom-row">
       <div class="footer-copy">© 2026 ЛОРНЕТ Boutique Hotel. Усі права захищено.</div>
-      <a href="admin-login.html" class="admin-panel-btn">Адмін-панель</a>
     </div>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 <script>
-  // ЗАМІНЕНО НА ВАШ РЕАЛЬНИЙ СЕРВЕР НА RENDER:
-  const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
-
-  async function loadRoomsToForm() {
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/rooms`, { cache: 'no-store' });
-      const rooms = await response.json();
-      const select = document.getElementById('roomtype');
-      select.innerHTML = '';
-
-      rooms.forEach(room => {
-        const option = document.createElement('option');
-        option.value = room.id;
-        option.textContent = `${room.name} (${room.type}) — ₴${room.price}`;
-        select.appendChild(option);
-      });
-
-      // одразу підвантажуємо зайняті дати для номера, який обрано за замовчуванням
-      if (select.value) refreshDisabledDates(select.value);
-    } catch (e) {
-      console.error('Не вдалося завантажити кімнати з сервера:', e);
-      document.getElementById('roomtype').innerHTML = '<option>Помилка звʼязку з сервером</option>';
-    }
-  }
-
-  loadRoomsToForm();
-
-  function selectRoomType(roomName) {
-    const select = document.getElementById('roomtype');
-    for (let option of select.options) {
-      if (option.textContent.includes(roomName)) {
-        select.value = option.value;
-        break;
-      }
-    }
-    refreshDisabledDates(select.value);
-    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  /* =========================================================
-     КАЛЕНДАР БРОНЮВАННЯ (Flatpickr)
-     -----------------------------------------------------------
-     Дати заїзду/виїзду обираються ТІЛЬКИ через календар (поля
-     readonly, ручний ввід заблоковано). Дати, які вже зайняті
-     для обраного номера, підвантажуються з публічного маршруту
-     /api/rooms/:id/availability і стають некликабельними.
-  ========================================================= */
-  let disabledRanges = [];
-
-  const checkinPicker = flatpickr('#checkin', {
-    dateFormat: 'Y-m-d',
-    altInput: true,
-    altFormat: 'd.m.Y',
-    minDate: 'today',
-    disable: disabledRanges,
-    onChange: function(selectedDates, dateStr) {
-      // виїзд не може бути раніше/того ж дня, що і заїзд
-      checkoutPicker.set('minDate', selectedDates[0] ? new Date(selectedDates[0].getTime() + 86400000) : 'today');
-    }
-  });
-
-  const checkoutPicker = flatpickr('#checkout', {
-    dateFormat: 'Y-m-d',
-    altInput: true,
-    altFormat: 'd.m.Y',
-    minDate: 'today',
-    disable: disabledRanges
-  });
-
-  async function refreshDisabledDates(roomId) {
-    if (!roomId) return;
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/rooms/${roomId}/availability`, { cache: 'no-store' });
-      const bookedRanges = await response.json();
-
-      // flatpickr очікує 'to' датою включно, а виїзд у нас є першим вільним днем,
-      // тож блокуємо аж до дня перед виїздом
-      disabledRanges = bookedRanges.map(b => {
-        const to = new Date(b.check_out);
-        to.setDate(to.getDate() - 1);
-        return { from: b.check_in, to: to.toISOString().slice(0, 10) };
-      });
-
-      checkinPicker.set('disable', disabledRanges);
-      checkoutPicker.set('disable', disabledRanges);
-
-      // якщо вже вибрана дата стала недоступною після зміни номера — скидаємо вибір
-      checkinPicker.clear();
-      checkoutPicker.clear();
-    } catch (e) {
-      console.error('Не вдалося завантажити зайняті дати:', e);
-    }
-  }
-
-  document.getElementById('roomtype').addEventListener('change', (e) => {
-    refreshDisabledDates(e.target.value);
-  });
-
-  // телефон: приймаємо тільки цифри, максимум 10
-  const phoneInput = document.getElementById('phone');
-  phoneInput.addEventListener('input', () => {
-    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
-  });
-
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
     header.style.background = window.scrollY > 40
       ? 'rgba(20,17,13,0.92)'
       : 'linear-gradient(to bottom, rgba(20,17,13,0.92), transparent)';
-  });
-
-  const form = document.getElementById('bookingForm');
-  const note = document.getElementById('formNote');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    note.classList.remove('show');
-
-    const firstName = document.getElementById('firstname').value.trim();
-    const lastName  = document.getElementById('lastname').value.trim();
-    const phone     = document.getElementById('phone').value.trim();
-    const email     = document.getElementById('email').value.trim();
-    const checkIn   = document.getElementById('checkin').value;
-    const checkOut  = document.getElementById('checkout').value;
-    const roomId    = document.getElementById('roomtype').value;
-    const comment   = document.getElementById('notes').value.trim();
-
-    // клієнтська валідація — перш ніж узагалі стукати на сервер
-    if (!roomId || !firstName || !lastName || !phone || !checkIn || !checkOut) {
-      note.textContent = "Будь ласка, заповніть усі обов'язкові поля!";
-      note.classList.add('show');
-      note.scrollIntoView({behavior:'smooth', block:'nearest'});
-      return;
-    }
-    if (!/^[0-9]{10}$/.test(phone)) {
-      note.textContent = 'Номер телефону має містити рівно 10 цифр (без +38).';
-      note.classList.add('show');
-      document.getElementById('phone').classList.add('field-invalid');
-      note.scrollIntoView({behavior:'smooth', block:'nearest'});
-      return;
-    }
-    document.getElementById('phone').classList.remove('field-invalid');
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      note.textContent = 'Некоректна електронна адреса.';
-      note.classList.add('show');
-      note.scrollIntoView({behavior:'smooth', block:'nearest'});
-      return;
-    }
-
-    const bookingData = {
-      room_id: roomId,
-      first_name: firstName,
-      last_name: lastName,
-      phone: phone,
-      check_in: checkIn,
-      check_out: checkOut
-    };
-    if (email) bookingData.email = email;
-    if (comment) bookingData.guest_comment = comment;
-
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/bookings`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(bookingData)
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        note.textContent = 'Дякуємо! Бронювання успішно збережено в базі даних готелю!';
-        note.classList.add('show');
-        form.reset();
-        checkinPicker.clear();
-        checkoutPicker.clear();
-        loadRoomsToForm();
-      } else {
-        note.textContent = 'Помилка: ' + (result.error || 'Спробуйте ще раз');
-        note.classList.add('show');
-      }
-    } catch (err) {
-      note.textContent = 'Не вдалося підключитися до сервера бронювання.';
-      note.classList.add('show');
-    }
-
-    note.scrollIntoView({behavior:'smooth', block:'nearest'});
   });
 
   const GALLERY_IMAGES = [

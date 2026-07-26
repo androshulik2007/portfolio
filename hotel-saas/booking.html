@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бронювання — ЛОРНЕТ</title>
+<meta name="description" content="Забронюйте номер у бутік-готелі ЛОРНЕТ: оберіть кімнату, дати заїзду й виїзду, залиште контакти.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+<style>
+  :root{
+    --ink:#0f0a0d;
+    --ink-2:#1d1116;
+    --ink-3:#241521;
+    --brass:#d9b45c;
+    --brass-light:#f4dfa0;
+    --brass-dim:#9c7a34;
+    --wine:#6b0f22;
+    --cream:#f1e8d6;
+    --stone:#a1937d;
+    --hair:rgba(217,180,92,0.28);
+    --hair-strong:rgba(217,180,92,0.5);
+    --gold-glow:0 0 0 1px rgba(217,180,92,0.35), 0 18px 50px rgba(0,0,0,0.55);
+    --green:#7fae7a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(107,15,34,0.24), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(217,180,92,0.06), transparent 60%),
+      var(--ink);
+    background-attachment:fixed;
+    color:var(--cream);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    min-height:100vh;
+    position:relative;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--brass);color:var(--ink);}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 6vw;}
+
+  /* ===== ornamental corner frame (reused motif from the site) ===== */
+  .corner-frame{position:relative;}
+  .corner-frame::before, .corner-frame::after,
+  .corner-frame .cf-br, .corner-frame .cf-bl{
+    content:'';position:absolute;width:22px;height:22px;
+    border:1px solid var(--brass);opacity:0.85;pointer-events:none;
+  }
+  .corner-frame::before{top:-8px;left:-8px;border-right:none;border-bottom:none;}
+  .corner-frame::after{top:-8px;right:-8px;border-left:none;border-bottom:none;}
+  .corner-frame .cf-bl{bottom:-8px;left:-8px;border-right:none;border-top:none;}
+  .corner-frame .cf-br{bottom:-8px;right:-8px;border-left:none;border-top:none;}
+
+  /* ===== HEADER ===== */
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.6rem 6vw;
+  }
+  .logo{
+    font-family:'Fraunces',serif;font-size:1.2rem;letter-spacing:0.26em;
+    display:flex;align-items:center;gap:0.6rem;
+  }
+  .logo .crown{color:var(--brass);font-size:1rem;filter:drop-shadow(0 0 6px rgba(217,180,92,0.5));}
+  .back-link{
+    font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;
+    color:var(--stone);transition:color 0.25s;display:flex;align-items:center;gap:0.5rem;
+  }
+  .back-link:hover{color:var(--brass);}
+
+  /* ===== PAGE LAYOUT ===== */
+  main{padding:2rem 0 6rem;}
+  .page-grid{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:5vw;
+    align-items:start;
+  }
+  .intro-eyebrow{
+    font-size:0.72rem;letter-spacing:0.32em;text-transform:uppercase;
+    color:var(--brass);display:inline-block;margin-bottom:1rem;
+  }
+  .intro h1{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.05;margin-bottom:1.2rem;}
+  .intro p{color:var(--stone);line-height:1.85;margin-bottom:1.2rem;max-width:42ch;}
+  .intro-quote{
+    margin-top:2rem;padding-left:1.4rem;border-left:1px solid var(--brass-dim);
+    font-family:'Fraunces',serif;font-style:italic;color:var(--brass);
+    font-size:1.05rem;line-height:1.6;max-width:38ch;
+  }
+  .intro-facts{
+    margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--hair);
+    display:flex;gap:2.2rem;flex-wrap:wrap;
+  }
+  .intro-facts div{font-size:0.82rem;color:var(--stone);}
+  .intro-facts strong{display:block;color:var(--brass-light);font-family:'Fraunces',serif;font-size:1.3rem;font-weight:400;margin-bottom:0.2rem;}
+
+  /* ===== BOOKING CARD ===== */
+  .booking-card{
+    background:linear-gradient(165deg, rgba(217,180,92,0.05), transparent 60%), var(--ink-2);
+    border:1px solid var(--hair);
+    padding:2.4rem clamp(1.4rem, 3vw, 2.6rem);
+    position:relative;
+  }
+  form.booking-form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem;
+  }
+  .field{display:flex;flex-direction:column;gap:0.5rem;}
+  .field.full{grid-column:1/-1;}
+  .field label{
+    font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone);
+  }
+  .field input, .field select, .field textarea{
+    background:transparent;border:none;border-bottom:1px solid var(--hair);
+    color:var(--cream);font-family:'Jost',sans-serif;font-size:0.95rem;
+    padding:0.6rem 0;outline:none;transition:border-color 0.25s;width:100%;
+  }
+  .field input::placeholder, .field textarea::placeholder{color:#5c574a;}
+  .field input:focus, .field select:focus, .field textarea:focus{border-color:var(--brass);}
+  .field-hint{font-size:0.68rem;color:var(--stone);letter-spacing:0.03em;}
+  .field input.field-invalid{border-color:#c0483f;}
+  .field input[readonly]{cursor:pointer;}
+
+  .booking-form .submit{grid-column:1/-1;margin-top:0.6rem;}
+  .btn-primary{
+    position:relative;overflow:hidden;width:100%;
+    background:linear-gradient(135deg, var(--brass-light), var(--brass) 45%, var(--brass-dim));
+    color:var(--ink);padding:1rem 2.1rem;font-size:0.78rem;letter-spacing:0.14em;
+    text-transform:uppercase;transition:transform 0.25s, box-shadow 0.25s;
+    border:1px solid var(--brass-light);box-shadow:0 6px 22px rgba(217,180,92,0.25);cursor:pointer;
+    font-family:'Jost',sans-serif;font-weight:400;
+  }
+  .btn-primary::after{
+    content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform:skewX(-20deg);transition:left 0.6s ease;
+  }
+  .btn-primary:hover::after{left:130%;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(217,180,92,0.4);}
+  .btn-primary:disabled{opacity:0.55;cursor:not-allowed;transform:none;box-shadow:none;}
+
+  .form-note{
+    grid-column:1/-1;font-size:0.85rem;color:var(--brass);margin-top:0.2rem;display:none;
+  }
+  .form-note.show{display:block;}
+  .form-note.error{color:#e08a80;}
+
+  /* ---- flatpickr theming ---- */
+  .flatpickr-calendar{
+    background:var(--ink-2)!important;border:1px solid var(--hair-strong)!important;
+    box-shadow:var(--gold-glow)!important;font-family:'Jost',sans-serif!important;
+  }
+  .flatpickr-months .flatpickr-month,
+  .flatpickr-current-month .flatpickr-monthDropdown-months,
+  .flatpickr-weekday{color:var(--brass)!important;fill:var(--brass)!important;}
+  .flatpickr-current-month input.cur-year{color:var(--brass)!important;}
+  .flatpickr-day{color:var(--cream)!important;}
+  .flatpickr-day.flatpickr-disabled{color:#4a433a!important;text-decoration:line-through;cursor:not-allowed!important;}
+  .flatpickr-day.today{border-color:var(--brass)!important;}
+  .flatpickr-day.selected, .flatpickr-day.selected:hover{
+    background:var(--brass)!important;border-color:var(--brass)!important;color:var(--ink)!important;
+  }
+  .flatpickr-day:hover{background:rgba(217,180,92,0.15)!important;}
+  span.flatpickr-weekday{color:var(--brass-dim)!important;}
+  .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg{fill:var(--brass)!important;}
+  .flatpickr-prev-month svg, .flatpickr-next-month svg{fill:var(--stone)!important;}
+
+  /* =====================================================================
+     ROOM PICKER — картковий "не звичайний" dropdown
+     Trigger виглядає як звичайне поле форми, але відкриває панель
+     із номерами-плитками (фото / назва / тип / ціна / опис / зручності).
+  ===================================================================== */
+  .room-picker{position:relative;grid-column:1/-1;}
+  .room-picker-trigger{
+    width:100%;
+    display:flex;align-items:center;gap:0.9rem;
+    background:rgba(217,180,92,0.04);
+    border:1px solid var(--hair);
+    padding:0.7rem 1rem;
+    cursor:pointer;
+    transition:border-color 0.25s, background 0.25s;
+    text-align:left;
+    font-family:'Jost',sans-serif;
+    color:var(--cream);
+  }
+  .room-picker-trigger:hover, .room-picker-trigger.open{border-color:var(--brass);background:rgba(217,180,92,0.08);}
+  .rpt-thumb{
+    width:44px;height:44px;flex-shrink:0;
+    border:1px solid var(--hair-strong);
+    background:var(--ink-3);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;position:relative;
+  }
+  .rpt-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .rpt-thumb .rpt-fallback{
+    font-family:'Fraunces',serif;font-style:italic;color:var(--brass);font-size:0.8rem;
+  }
+  .rpt-text{flex:1;min-width:0;}
+  .rpt-placeholder{color:var(--stone);font-size:0.9rem;}
+  .rpt-name{font-size:0.92rem;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .rpt-sub{font-size:0.72rem;color:var(--stone);letter-spacing:0.04em;margin-top:0.15rem;}
+  .rpt-price{
+    font-family:'Fraunces',serif;color:var(--brass);font-size:1rem;white-space:nowrap;flex-shrink:0;
+  }
+  .rpt-chevron{
+    flex-shrink:0;width:11px;height:11px;
+    border-right:1.5px solid var(--brass-dim);border-bottom:1.5px solid var(--brass-dim);
+    transform:rotate(45deg);transition:transform 0.25s;margin-left:0.2rem;
+  }
+  .room-picker-trigger.open .rpt-chevron{transform:rotate(-135deg);}
+
+  .room-picker-panel{
+    position:absolute;
+    top:calc(100% + 0.7rem);
+    left:0;right:0;
+    z-index:60;
+    background:var(--ink-2);
+    border:1px solid var(--hair-strong);
+    box-shadow:var(--gold-glow);
+    padding:1.2rem;
+    max-height:min(560px, 70vh);
+    display:none;
+    flex-direction:column;
+  }
+  .room-picker-panel.open{display:flex;}
+
+  .rp-filters{
+    display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;flex-shrink:0;
+  }
+  .rp-filter-btn{
+    background:transparent;border:1px solid var(--hair);color:var(--stone);
+    padding:0.4rem 0.9rem;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;
+    cursor:pointer;transition:all 0.2s;font-family:'Jost',sans-serif;
+  }
+  .rp-filter-btn:hover{color:var(--brass);border-color:var(--brass-dim);}
+  .rp-filter-btn.active{color:var(--ink);background:var(--brass);border-color:var(--brass);}
+
+  .rp-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0.9rem;
+    overflow-y:auto;
+    padding-right:0.3rem;
+  }
+  .rp-grid::-webkit-scrollbar{width:6px;}
+  .rp-grid::-webkit-scrollbar-track{background:transparent;}
+  .rp-grid::-webkit-scrollbar-thumb{background:var(--brass-dim);}
+
+  .rp-card{
+    background:var(--ink-3);
+    border:1px solid var(--hair);
+    cursor:pointer;
+    transition:border-color 0.25s, transform 0.2s;
+    display:flex;flex-direction:column;
+    position:relative;
+  }
+  .rp-card:hover{border-color:var(--brass);transform:translateY(-2px);}
+  .rp-card.selected{border-color:var(--brass-light);box-shadow:0 0 0 1px var(--brass-light) inset;}
+  .rp-card-media{
+    aspect-ratio:16/10;
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(107,15,34,0.35), transparent 60%),
+      linear-gradient(160deg, var(--ink-3), var(--ink));
+  }
+  .rp-card-media img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+  .rp-card-media .rp-media-fallback{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-style:italic;color:var(--brass-dim);font-size:1.6rem;
+    background:repeating-linear-gradient(45deg, rgba(217,180,92,0.04) 0 10px, transparent 10px 20px);
+  }
+  .rp-card-price{
+    position:absolute;top:0.6rem;right:0.6rem;z-index:2;
+    background:rgba(15,10,13,0.82);border:1px solid var(--brass-dim);
+    color:var(--brass-light);font-family:'Fraunces',serif;font-size:0.85rem;
+    padding:0.25rem 0.6rem;
+  }
+  .rp-card-type{
+    position:absolute;top:0.6rem;left:0.6rem;z-index:2;
+    background:rgba(15,10,13,0.82);border:1px solid var(--hair-strong);
+    color:var(--stone);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;
+    padding:0.25rem 0.55rem;
+  }
+  .rp-card-body{padding:0.85rem 0.9rem 1rem;display:flex;flex-direction:column;gap:0.5rem;flex:1;}
+  .rp-card-name{font-family:'Fraunces',serif;font-size:1.02rem;color:var(--cream);line-height:1.25;}
+  .rp-card-tagline{font-size:0.72rem;color:var(--brass);letter-spacing:0.03em;}
+  .rp-card-desc{font-size:0.78rem;color:var(--stone);line-height:1.5;}
+  .rp-card-amenities{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:auto;padding-top:0.4rem;}
+  .rp-tag{
+    font-size:0.62rem;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--stone);border:1px solid var(--hair);padding:0.18rem 0.5rem;
+  }
+  .rp-card.selected .rp-tag{color:var(--brass);border-color:var(--hair-strong);}
+  .rp-card-pick{
+    position:absolute;top:0.6rem;right:0.6rem;z-index:3;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--brass);color:var(--ink);
+    align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;
+    display:none;
+  }
+  .rp-card.selected .rp-card-pick{display:flex;}
+  .rp-empty{color:var(--stone);font-size:0.85rem;text-align:center;padding:2rem 0;grid-column:1/-1;}
+
+  @media (max-width:860px){
+    .page-grid{grid-template-columns:1fr;}
+    form.booking-form{grid-template-columns:1fr;}
+    .rp-grid{grid-template-columns:1fr;}
+    header{padding:1.4rem 6vw;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo"><span class="crown">&#9813;</span>ЛОРНЕТ</a>
+  <a href="index.html" class="back-link">&#8592; На головну</a>
+</header>
+
+<main>
+  <div class="wrap page-grid">
+
+    <div class="intro">
+      <span class="intro-eyebrow">Бронювання</span>
+      <h1>Оберіть номер —<br>ми підготуємо решту</h1>
+      <p>Виберіть кімнату з переліку нижче, вкажіть дати заїзду й виїзду та залиште контакти. Підтвердження надходить протягом години.</p>
+      <div class="intro-quote">«Найтихіший готель у центрі — і найуважніший персонал, якого я зустрічала.»</div>
+      <div class="intro-facts">
+        <div><strong>19</strong>номерів</div>
+        <div><strong>24/7</strong>консьєрж</div>
+        <div><strong>&lt;1г</strong>підтвердження</div>
+      </div>
+    </div>
+
+    <div class="booking-card corner-frame">
+      <span class="cf-bl"></span><span class="cf-br"></span>
+      <form class="booking-form" id="bookingForm">
+
+        <!-- ===== спеціальний картковий dropdown вибору номера ===== -->
+        <div class="field room-picker full" id="roomPicker">
+          <label>Номер</label>
+          <button type="button" class="room-picker-trigger" id="rpTrigger" aria-haspopup="listbox" aria-expanded="false">
+            <span class="rpt-thumb" id="rptThumb"><span class="rpt-fallback">?</span></span>
+            <span class="rpt-text">
+              <span class="rpt-placeholder" id="rptPlaceholder">Завантаження номерів...</span>
+              <div id="rptSelected" style="display:none;">
+                <div class="rpt-name" id="rptName"></div>
+                <div class="rpt-sub" id="rptSub"></div>
+              </div>
+            </span>
+            <span class="rpt-price" id="rptPrice"></span>
+            <span class="rpt-chevron"></span>
+          </button>
+
+          <div class="room-picker-panel" id="rpPanel" role="listbox">
+            <div class="rp-filters" id="rpFilters"></div>
+            <div class="rp-grid" id="rpGrid">
+              <div class="rp-empty">Завантаження номерів...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="guests">Гостей</label>
+          <select id="guests">
+            <option>1 гість</option>
+            <option>2 гості</option>
+            <option>3 гості</option>
+            <option>4+ гостей</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="checkin">Заїзд</label>
+          <input type="text" id="checkin" placeholder="Оберіть дату" required readonly autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="checkout">Виїзд</label>
+          <input type="text" id="checkout" placeholder="Оберіть дату" required readonly autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="firstname">Ім'я</label>
+          <input type="text" id="firstname" placeholder="Ваше ім'я" required>
+        </div>
+        <div class="field">
+          <label for="lastname">Прізвище</label>
+          <input type="text" id="lastname" placeholder="Ваше прізвище" required>
+        </div>
+        <div class="field full">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" placeholder="0971234567" inputmode="numeric" maxlength="10" required>
+          <span class="field-hint">10 цифр, без +38</span>
+        </div>
+        <div class="field full">
+          <label for="email">Пошта (необов'язково)</label>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+        <div class="field full">
+          <label for="notes">Побажання (необов'язково)</label>
+          <textarea id="notes" rows="2" placeholder="Пізній заїзд, дитяче ліжко, тощо"></textarea>
+        </div>
+
+        <input type="hidden" id="roomtype" required>
+
+        <div class="submit">
+          <button type="submit" class="btn-primary">Надіслати запит</button>
+        </div>
+        <div class="form-note" id="formNote"></div>
+      </form>
+    </div>
+
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+<script>
+  const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
+
+  /* =========================================================================
+     Клієнтське збагачення даних кімнати. Бекенд (/api/rooms) віддає лише
+     id / name / type / price. Опис, зручності та фото до бекенду поки не
+     прив'язані, тож формуємо їх тут за типом кімнати — легко замінити на
+     реальні поля (description / amenities / image_url), якщо їх додадуть
+     у таблицю rooms пізніше.
+  ========================================================================= */
+  const TYPE_INFO = {
+    'Економ': {
+      tagline: 'Затишно й практично',
+      description: 'Компактний номер для короткого перебування — усе необхідне під рукою.',
+      amenities: ['Wi-Fi', 'Душ', 'Щоденне прибирання']
+    },
+    'Стандарт': {
+      tagline: 'Класичний баланс комфорту',
+      description: 'Просторіший номер з видом на вуличку — для ділових поїздок і коротких відпусток.',
+      amenities: ['Wi-Fi', 'Сніданок', 'Кондиціонер', 'Сейф']
+    },
+    'Люкс': {
+      tagline: 'Простір і деталі',
+      description: 'Окрема зона відпочинку, ванна з латунними деталями та краєвид на дахи центру.',
+      amenities: ['Wi-Fi', 'Сніданок', 'Ванна', 'Мінібар', 'Вид на місто']
+    },
+    'Апартаменти': {
+      tagline: 'Дім у серці міста',
+      description: 'Повноцінні апартаменти з вітальнею та кухнею — для довшого перебування чи родини.',
+      amenities: ['Wi-Fi', 'Кухня', 'Вітальня', 'Панорамний вид', 'Консьєрж 24/7']
+    }
+  };
+  const DEFAULT_INFO = {
+    tagline: 'Номер готелю ЛОРНЕТ',
+    description: 'Затишний номер із фірмовим сервісом готелю.',
+    amenities: ['Wi-Fi', 'Щоденне прибирання']
+  };
+  function infoFor(type) { return TYPE_INFO[type] || DEFAULT_INFO; }
+
+  // Циклічно призначаємо одну з 7 наявних фотографій кожній кімнаті —
+  // реальних фото на кожен номер окремо поки немає.
+  function imageFor(index) {
+    return `images/${(index % 7) + 1}.jpg`;
+  }
+
+  let ROOMS = [];
+  let selectedRoom = null;
+  let activeTypeFilter = 'Усі';
+
+  const rpTrigger = document.getElementById('rpTrigger');
+  const rpPanel = document.getElementById('rpPanel');
+  const rpGrid = document.getElementById('rpGrid');
+  const rpFilters = document.getElementById('rpFilters');
+  const rptPlaceholder = document.getElementById('rptPlaceholder');
+  const rptSelected = document.getElementById('rptSelected');
+  const rptName = document.getElementById('rptName');
+  const rptSub = document.getElementById('rptSub');
+  const rptPrice = document.getElementById('rptPrice');
+  const rptThumb = document.getElementById('rptThumb');
+  const roomtypeInput = document.getElementById('roomtype');
+
+  async function loadRooms() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/rooms`, { cache: 'no-store' });
+      const rooms = await response.json();
+      ROOMS = rooms.map((r, i) => ({ ...r, ...infoFor(r.type), image: imageFor(i) }));
+
+      buildFilters();
+      renderGrid();
+      applyPreselection();
+    } catch (e) {
+      console.error('Не вдалося завантажити кімнати з сервера:', e);
+      rpGrid.innerHTML = '<div class="rp-empty">Не вдалося завантажити номери. Спробуйте оновити сторінку.</div>';
+      rptPlaceholder.textContent = 'Помилка зв\u2019язку з сервером';
+    }
+  }
+
+  function buildFilters() {
+    const types = ['Усі', ...new Set(ROOMS.map(r => r.type))];
+    rpFilters.innerHTML = types.map(t =>
+      `<button type="button" class="rp-filter-btn${t === activeTypeFilter ? ' active' : ''}" data-type="${t}">${t}</button>`
+    ).join('');
+    rpFilters.querySelectorAll('.rp-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeTypeFilter = btn.dataset.type;
+        rpFilters.querySelectorAll('.rp-filter-btn').forEach(b => b.classList.toggle('active', b === btn));
+        renderGrid();
+      });
+    });
+  }
+
+  function renderGrid() {
+    const rooms = activeTypeFilter === 'Усі' ? ROOMS : ROOMS.filter(r => r.type === activeTypeFilter);
+    if (rooms.length === 0) {
+      rpGrid.innerHTML = '<div class="rp-empty">У цій категорії поки немає номерів.</div>';
+      return;
+    }
+    rpGrid.innerHTML = rooms.map(r => `
+      <div class="rp-card${selectedRoom && selectedRoom.id === r.id ? ' selected' : ''}" data-id="${r.id}" role="option" tabindex="0">
+        <div class="rp-card-media">
+          <span class="rp-card-type">${escapeHtml(r.type)}</span>
+          <span class="rp-card-price">₴${r.price}</span>
+          <img src="${r.image}" alt="${escapeHtml(r.name)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="rp-media-fallback" style="display:none;">ЛОРНЕТ</div>
+        </div>
+        <div class="rp-card-body">
+          <div class="rp-card-name">${escapeHtml(r.name)}</div>
+          <div class="rp-card-tagline">${escapeHtml(r.tagline)}</div>
+          <div class="rp-card-desc">${escapeHtml(r.description)}</div>
+          <div class="rp-card-amenities">
+            ${r.amenities.map(a => `<span class="rp-tag">${escapeHtml(a)}</span>`).join('')}
+          </div>
+        </div>
+        <span class="rp-card-pick">&#10003;</span>
+      </div>
+    `).join('');
+
+    rpGrid.querySelectorAll('.rp-card').forEach(card => {
+      card.addEventListener('click', () => selectRoom(card.dataset.id));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRoom(card.dataset.id); }
+      });
+    });
+  }
+
+  function selectRoom(id) {
+    const room = ROOMS.find(r => String(r.id) === String(id));
+    if (!room) return;
+    selectedRoom = room;
+    roomtypeInput.value = room.id;
+
+    rptPlaceholder.style.display = 'none';
+    rptSelected.style.display = 'block';
+    rptName.textContent = room.name;
+    rptSub.textContent = `${room.type} · ${room.tagline}`;
+    rptPrice.textContent = `₴${room.price}`;
+    rptThumb.innerHTML = `<img src="${room.image}" alt="" onerror="this.remove(); this.parentElement.querySelector('.rpt-fallback')?.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\\'rpt-fallback\\'>Л</span>');">`;
+
+    renderGrid();
+    closePanel();
+    refreshDisabledDates(room.id);
+  }
+
+  function openPanel() {
+    rpPanel.classList.add('open');
+    rpTrigger.classList.add('open');
+    rpTrigger.setAttribute('aria-expanded', 'true');
+  }
+  function closePanel() {
+    rpPanel.classList.remove('open');
+    rpTrigger.classList.remove('open');
+    rpTrigger.setAttribute('aria-expanded', 'false');
+  }
+  rpTrigger.addEventListener('click', () => {
+    rpPanel.classList.contains('open') ? closePanel() : openPanel();
+  });
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('roomPicker').contains(e.target)) closePanel();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePanel();
+  });
+
+  function applyPreselection() {
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get('room');
+    const type = params.get('type');
+
+    if (roomId && ROOMS.some(r => String(r.id) === roomId)) {
+      selectRoom(roomId);
+      return;
+    }
+    if (type) {
+      const match = ROOMS.find(r => r.type === type);
+      if (match) {
+        activeTypeFilter = type;
+        buildFilters();
+        renderGrid();
+        // не вибираємо конкретний номер за гостя — лише відкриваємо
+        // потрібну категорію, вибір лишається за гостем
+        rptPlaceholder.textContent = `Оберіть номер категорії «${type}»`;
+        openPanel();
+      }
+    }
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  loadRooms();
+
+  /* =========================================================
+     КАЛЕНДАР БРОНЮВАННЯ (Flatpickr) — та сама логіка, що й раніше
+  ========================================================= */
+  let disabledRanges = [];
+
+  const checkinPicker = flatpickr('#checkin', {
+    dateFormat: 'Y-m-d',
+    altInput: true,
+    altFormat: 'd.m.Y',
+    minDate: 'today',
+    disable: disabledRanges,
+    onChange: function(selectedDates) {
+      checkoutPicker.set('minDate', selectedDates[0] ? new Date(selectedDates[0].getTime() + 86400000) : 'today');
+    }
+  });
+
+  const checkoutPicker = flatpickr('#checkout', {
+    dateFormat: 'Y-m-d',
+    altInput: true,
+    altFormat: 'd.m.Y',
+    minDate: 'today',
+    disable: disabledRanges
+  });
+
+  async function refreshDisabledDates(roomId) {
+    if (!roomId) return;
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/rooms/${roomId}/availability`, { cache: 'no-store' });
+      const bookedRanges = await response.json();
+
+      disabledRanges = bookedRanges.map(b => {
+        const to = new Date(b.check_out);
+        to.setDate(to.getDate() - 1);
+        return { from: b.check_in, to: to.toISOString().slice(0, 10) };
+      });
+
+      checkinPicker.set('disable', disabledRanges);
+      checkoutPicker.set('disable', disabledRanges);
+      checkinPicker.clear();
+      checkoutPicker.clear();
+    } catch (e) {
+      console.error('Не вдалося завантажити зайняті дати:', e);
+    }
+  }
+
+  // телефон: приймаємо тільки цифри, максимум 10
+  const phoneInput = document.getElementById('phone');
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  /* =========================================================
+     ВІДПРАВКА ФОРМИ
+  ========================================================= */
+  const form = document.getElementById('bookingForm');
+  const note = document.getElementById('formNote');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    note.classList.remove('show', 'error');
+
+    const firstName = document.getElementById('firstname').value.trim();
+    const lastName  = document.getElementById('lastname').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const checkIn   = document.getElementById('checkin').value;
+    const checkOut  = document.getElementById('checkout').value;
+    const roomId    = roomtypeInput.value;
+    const comment   = document.getElementById('notes').value.trim();
+
+    function showError(msg) {
+      note.textContent = msg;
+      note.classList.add('show', 'error');
+      note.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+
+    if (!roomId) { showError('Будь ласка, оберіть номер зі списку.'); openPanel(); return; }
+    if (!firstName || !lastName || !phone || !checkIn || !checkOut) {
+      showError("Будь ласка, заповніть усі обов'язкові поля!");
+      return;
+    }
+    if (!/^[0-9]{10}$/.test(phone)) {
+      showError('Номер телефону має містити рівно 10 цифр (без +38).');
+      document.getElementById('phone').classList.add('field-invalid');
+      return;
+    }
+    document.getElementById('phone').classList.remove('field-invalid');
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('Некоректна електронна адреса.');
+      return;
+    }
+
+    const bookingData = {
+      room_id: roomId,
+      first_name: firstName,
+      last_name: lastName,
+      phone: phone,
+      check_in: checkIn,
+      check_out: checkOut
+    };
+    if (email) bookingData.email = email;
+    if (comment) bookingData.guest_comment = comment;
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Надсилання...';
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData)
+      });
+      const result = await response.json();
+
+      if (response.ok) {
+        note.textContent = 'Дякуємо! Бронювання успішно збережено в базі даних готелю.';
+        note.classList.add('show');
+        form.reset();
+        selectedRoom = null;
+        roomtypeInput.value = '';
+        rptSelected.style.display = 'none';
+        rptPlaceholder.style.display = 'block';
+        rptPlaceholder.textContent = 'Оберіть номер зі списку';
+        rptPrice.textContent = '';
+        checkinPicker.clear();
+        checkoutPicker.clear();
+        renderGrid();
+      } else {
+        showError('Помилка: ' + (result.error || 'Спробуйте ще раз'));
+      }
+    } catch (err) {
+      showError('Не вдалося підключитися до сервера бронювання.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Надіслати запит';
+    }
+  });
+</script>
+
+</body>
+</html>
