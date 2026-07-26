@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Категорії номерів — ЛОРНЕТ</title>
+<meta name="description" content="Категорії номерів бутік-готелю ЛОРНЕТ: Економ, Стандарт, Люкс та Апартаменти — оберіть свою і перейдіть до бронювання.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f0a0d;
+    --ink-2:#1d1116;
+    --ink-3:#241521;
+    --brass:#d9b45c;
+    --brass-light:#f4dfa0;
+    --brass-dim:#9c7a34;
+    --wine:#6b0f22;
+    --cream:#f1e8d6;
+    --stone:#a1937d;
+    --hair:rgba(217,180,92,0.28);
+    --hair-strong:rgba(217,180,92,0.5);
+    --gold-glow:0 0 0 1px rgba(217,180,92,0.35), 0 18px 50px rgba(0,0,0,0.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
+  body{
+    background:
+      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(107,15,34,0.28), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 100%, rgba(217,180,92,0.06), transparent 60%),
+      var(--ink);
+    background-attachment:fixed;
+    color:var(--cream);
+    font-family:'Jost',sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    max-width:100%;
+    width:100%;
+    position:relative;
+  }
+  img, svg{max-width:100%;}
+  header, section, footer{position:relative; z-index:1;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;letter-spacing:0.01em;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--brass);color:var(--ink);}
+  .eyebrow{
+    font-size:0.72rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--brass);
+    display:inline-block;margin-bottom:1rem;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 6vw;}
+
+  /* ===== NAV (ідентична index.html) ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:220;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.6rem 6vw;
+    background:rgba(20,17,13,0.92);
+  }
+  .logo{font-family:'Fraunces',serif;font-size:1.3rem;letter-spacing:0.28em;display:flex;align-items:center;gap:0.6rem;}
+  .logo .crown{color:var(--brass);font-size:1rem;filter:drop-shadow(0 0 6px rgba(217,180,92,0.5));}
+  nav ul{display:flex;gap:2.4rem;list-style:none;}
+  nav a{font-size:0.76rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--stone);transition:color 0.25s;}
+  nav a:hover{color:var(--brass);}
+  nav a.current{color:var(--brass);}
+  .nav-cta{
+    border:1px solid var(--brass-dim);padding:0.55rem 1.3rem;font-size:0.72rem;
+    letter-spacing:0.14em;text-transform:uppercase;color:var(--brass);transition:all 0.25s;
+    background:linear-gradient(180deg, rgba(217,180,92,0.08), transparent);
+  }
+  .nav-cta:hover{
+    background:linear-gradient(135deg, var(--brass-light), var(--brass), var(--brass-dim));
+    color:var(--ink);box-shadow:0 4px 20px rgba(217,180,92,0.35);border-color:var(--brass-light);
+  }
+  .burger{display:none;background:none;border:0;color:var(--cream);font-size:1.4rem;cursor:pointer;z-index:210;position:relative;}
+
+  .mobile-nav-backdrop{
+    position:fixed;inset:0;z-index:150;background:rgba(10,7,6,0.6);
+    opacity:0;pointer-events:none;transition:opacity 0.3s;
+  }
+  .mobile-nav-backdrop.open{opacity:1;pointer-events:auto;}
+  .mobile-nav{
+    position:fixed;top:0;right:0;bottom:0;width:min(78vw, 340px);max-width:100%;z-index:200;
+    background:var(--ink-2);border-left:1px solid var(--hair-strong);
+    box-shadow:-10px 0 40px rgba(0,0,0,0.5);
+    padding:6.5rem 2rem 2.5rem;
+    transform:translateX(100%);transition:transform 0.35s cubic-bezier(.65,0,.24,1);
+    display:flex;flex-direction:column;gap:0.4rem;overflow-y:auto;
+  }
+  .mobile-nav.open{transform:translateX(0);}
+  .mobile-nav a{
+    font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--stone);
+    padding:0.9rem 0;border-bottom:1px solid var(--hair);transition:color 0.25s;
+  }
+  .mobile-nav a:hover, .mobile-nav a:active{color:var(--brass);}
+  .mobile-nav .nav-cta{
+    display:block;text-align:center;margin-top:1.4rem;border:1px solid var(--brass-dim);
+    padding:0.9rem;color:var(--brass);text-transform:uppercase;font-size:0.78rem;letter-spacing:0.14em;
+  }
+  body.nav-open{overflow:hidden;}
+
+  @media (max-width:860px){
+    nav, .nav-cta{display:none;}
+    .burger{display:block;}
+  }
+
+  /* ===== PAGE INTRO ===== */
+  .page-hero{
+    padding:9rem 0 3rem;
+    text-align:center;
+  }
+  .page-hero h1{font-size:clamp(2.3rem, 4.6vw, 3.6rem);margin-bottom:1.2rem;}
+  .page-hero p{
+    max-width:56ch;margin:0 auto;color:var(--stone);line-height:1.8;font-size:1rem;
+  }
+
+  /* ===== TYPE TILES ===== */
+  .types-list{padding:2rem 0 7rem;display:flex;flex-direction:column;gap:1.6rem;}
+  .type-tile{
+    display:grid;
+    grid-template-columns:240px 1.5fr auto auto;
+    align-items:center;
+    gap:2rem;
+    background:linear-gradient(165deg, rgba(217,180,92,0.04), transparent 60%), var(--ink-2);
+    border:1px solid var(--hair);
+    padding:1.2rem;
+    transition:border-color 0.25s, transform 0.25s;
+  }
+  .type-tile:hover{border-color:var(--brass-dim);transform:translateY(-2px);}
+  .type-tile-media{
+    aspect-ratio:16/10;
+    overflow:hidden;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(107,15,34,0.35), transparent 60%),
+      linear-gradient(160deg, var(--ink-3), var(--ink));
+  }
+  .type-tile-media img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+  .type-tile-media .media-fallback{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-style:italic;color:var(--brass-dim);font-size:1.3rem;
+    background:repeating-linear-gradient(45deg, rgba(217,180,92,0.04) 0 10px, transparent 10px 20px);
+  }
+  .type-tile-body{min-width:0;}
+  .type-tile-name{font-family:'Fraunces',serif;font-size:1.6rem;color:var(--cream);margin-bottom:0.3rem;}
+  .type-tile-tagline{font-size:0.8rem;color:var(--brass);letter-spacing:0.03em;margin-bottom:0.6rem;}
+  .type-tile-desc{font-size:0.9rem;color:var(--stone);line-height:1.6;max-width:48ch;margin-bottom:0.9rem;}
+  .type-tile-amenities{display:flex;flex-wrap:wrap;gap:0.4rem;}
+  .type-tag{
+    font-size:0.66rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--stone);
+    border:1px solid var(--hair);padding:0.22rem 0.6rem;
+  }
+  .type-tile-price{text-align:right;white-space:nowrap;}
+  .type-tile-price .amount{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--brass);}
+  .type-tile-price .per{font-size:0.66rem;color:var(--stone);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.2rem;}
+  .type-tile-cta{
+    display:inline-block;border:1px solid var(--brass-dim);padding:0.8rem 1.5rem;
+    font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--brass);
+    white-space:nowrap;transition:all 0.25s;background:none;cursor:pointer;
+  }
+  .type-tile-cta:hover{background:var(--brass);color:var(--ink);}
+  .types-empty{text-align:center;color:var(--stone);padding:3rem 0;}
+  .types-empty.error{color:#e08a80;}
+
+  @media (max-width:860px){
+    .type-tile{grid-template-columns:1fr;text-align:left;gap:1rem;}
+    .type-tile-media{aspect-ratio:16/9;}
+    .type-tile-price{text-align:left;}
+    .type-tile-cta{width:100%;text-align:center;}
+  }
+
+  /* ===== FOOTER (ідентичний index.html) ===== */
+  footer{border-top:1px solid var(--hair);padding:3.4rem 0 2.4rem;}
+  .footer-grid{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.6rem;}
+  .footer-logo{font-family:'Fraunces',serif;font-size:1.1rem;letter-spacing:0.28em;display:flex;align-items:center;gap:0.6rem;}
+  .footer-logo .crown{color:var(--brass);font-size:0.9rem;}
+  .footer-links{display:flex;gap:2rem;list-style:none;}
+  .footer-links a{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--stone);}
+  .footer-links a:hover{color:var(--brass);}
+  .footer-bottom-row{margin-top:1.6rem;text-align:center;}
+  .footer-copy{font-size:0.72rem;color:#5c574a;}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <a href="index.html" class="logo"><span class="crown">&#9813;</span>ЛОРНЕТ</a>
+  <nav>
+    <ul>
+      <li><a href="rooms.html" class="current">Номери</a></li>
+      <li><a href="index.html#gallery">Галерея</a></li>
+      <li><a href="booking.html">Бронювання</a></li>
+      <li><a href="index.html#reviews">Відгуки</a></li>
+      <li><a href="index.html#contact">Контакти</a></li>
+    </ul>
+  </nav>
+  <a href="booking.html" class="nav-cta">Забронювати</a>
+  <button class="burger" id="burgerBtn" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileNav">☰</button>
+</header>
+
+<div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a href="rooms.html">Номери</a>
+  <a href="index.html#gallery">Галерея</a>
+  <a href="booking.html">Бронювання</a>
+  <a href="index.html#reviews">Відгуки</a>
+  <a href="index.html#contact">Контакти</a>
+  <a href="booking.html" class="nav-cta">Забронювати</a>
+</nav>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">Номери</span>
+    <h1>Категорії номерів</h1>
+    <p>Кожна категорія — свій характер і свій вид з вікна. Оберіть категорію, а конкретний номер у ній підберете вже на сторінці бронювання.</p>
+  </div>
+</section>
+
+<section class="types-list">
+  <div class="wrap" id="typesWrap">
+    <div class="types-empty" id="typesEmpty">Завантаження категорій...</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-logo"><span class="crown">&#9813;</span>ЛОРНЕТ</div>
+      <ul class="footer-links">
+        <li><a href="rooms.html">Номери</a></li>
+        <li><a href="index.html#gallery">Галерея</a></li>
+        <li><a href="booking.html">Бронювання</a></li>
+        <li><a href="index.html#contact">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom-row">
+      <div class="footer-copy">© 2026 ЛОРНЕТ Boutique Hotel. Усі права захищено.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ===== БУРГЕР-МЕНЮ (та сама логіка, що на index.html) ===== */
+  (function initMobileNav(){
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (!burgerBtn || !mobileNav) return;
+
+    function openNav(){
+      mobileNav.classList.add('open');
+      backdrop.classList.add('open');
+      document.body.classList.add('nav-open');
+      burgerBtn.textContent = '✕';
+      burgerBtn.setAttribute('aria-expanded', 'true');
+      mobileNav.setAttribute('aria-hidden', 'false');
+    }
+    function closeNav(){
+      mobileNav.classList.remove('open');
+      backdrop.classList.remove('open');
+      document.body.classList.remove('nav-open');
+      burgerBtn.textContent = '☰';
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
+    }
+    burgerBtn.addEventListener('click', () => {
+      mobileNav.classList.contains('open') ? closeNav() : openNav();
+    });
+    backdrop.addEventListener('click', closeNav);
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 860) closeNav(); });
+  })();
+
+  /* =========================================================================
+     КАТЕГОРІЇ НОМЕРІВ
+     Бекенд (/api/rooms) віддає лише id / name / type / price для кожної
+     окремої кімнати. Тут ми групуємо їх за типом і показуємо ОДНУ плитку
+     на категорію — з мінімальною ціною в цій категорії, описом і
+     зручностями (та сама довідкова інформація, що й на booking.html,
+     щоб опис категорії був однаковим по всьому сайту).
+  ========================================================================= */
+  const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
+
+  const TYPE_ORDER = ['Економ', 'Стандарт', 'Люкс', 'Апартаменти'];
+
+  const TYPE_INFO = {
+    'Економ': {
+      tagline: 'Затишно й практично',
+      description: 'Компактний номер для короткого перебування — усе необхідне під рукою.',
+      amenities: ['Wi-Fi', 'Душ', 'Щоденне прибирання'],
+      image: 'images/1.jpg'
+    },
+    'Стандарт': {
+      tagline: 'Класичний баланс комфорту',
+      description: 'Просторіший номер з видом на вуличку — для ділових поїздок і коротких відпусток.',
+      amenities: ['Wi-Fi', 'Сніданок', 'Кондиціонер', 'Сейф'],
+      image: 'images/2.jpg'
+    },
+    'Люкс': {
+      tagline: 'Простір і деталі',
+      description: 'Окрема зона відпочинку, ванна з латунними деталями та краєвид на дахи центру.',
+      amenities: ['Wi-Fi', 'Сніданок', 'Ванна', 'Мінібар', 'Вид на місто'],
+      image: 'images/3.jpg'
+    },
+    'Апартаменти': {
+      tagline: 'Дім у серці міста',
+      description: 'Повноцінні апартаменти з вітальнею та кухнею — для довшого перебування чи родини.',
+      amenities: ['Wi-Fi', 'Кухня', 'Вітальня', 'Панорамний вид', 'Консьєрж 24/7'],
+      image: 'images/5.jpg'
+    }
+  };
+  const DEFAULT_INFO = {
+    tagline: 'Номер готелю ЛОРНЕТ',
+    description: 'Затишний номер із фірмовим сервісом готелю.',
+    amenities: ['Wi-Fi', 'Щоденне прибирання'],
+    image: 'images/4.jpg'
+  };
+  function infoFor(type) { return TYPE_INFO[type] || DEFAULT_INFO; }
+
+  function escapeHtml(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function renderTiles(types) {
+    const wrap = document.getElementById('typesWrap');
+    if (types.length === 0) {
+      wrap.innerHTML = '<div class="types-empty">Наразі немає доступних категорій номерів.</div>';
+      return;
+    }
+    wrap.innerHTML = types.map(t => {
+      const info = infoFor(t.type);
+      return `
+      <div class="type-tile">
+        <div class="type-tile-media">
+          <img src="${info.image}" alt="${escapeHtml(t.type)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="media-fallback" style="display:none;">ЛОРНЕТ</div>
+        </div>
+        <div class="type-tile-body">
+          <div class="type-tile-name">${escapeHtml(t.type)}</div>
+          <div class="type-tile-tagline">${escapeHtml(info.tagline)}</div>
+          <div class="type-tile-desc">${escapeHtml(info.description)}</div>
+          <div class="type-tile-amenities">
+            ${info.amenities.map(a => `<span class="type-tag">${escapeHtml(a)}</span>`).join('')}
+          </div>
+        </div>
+        <div class="type-tile-price">
+          <div class="amount">від ₴${t.minPrice}</div>
+          <div class="per">за ніч</div>
+        </div>
+        <a href="booking.html?type=${encodeURIComponent(t.type)}" class="type-tile-cta">Забронювати</a>
+      </div>`;
+    }).join('');
+  }
+
+  async function loadTypes() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/rooms`, { cache: 'no-store' });
+      const rooms = await response.json();
+
+      const byType = {};
+      rooms.forEach(r => {
+        if (!byType[r.type]) byType[r.type] = [];
+        byType[r.type].push(r);
+      });
+
+      // Спершу відомі категорії у фіксованому порядку, потім будь-які інші,
+      // яких немає у TYPE_ORDER (якщо в майбутньому додадуть нову категорію).
+      const knownTypes = TYPE_ORDER.filter(t => byType[t]);
+      const otherTypes = Object.keys(byType).filter(t => !TYPE_ORDER.includes(t));
+      const orderedTypes = [...knownTypes, ...otherTypes];
+
+      const types = orderedTypes.map(type => ({
+        type,
+        minPrice: Math.min(...byType[type].map(r => Number(r.price)))
+      }));
+
+      renderTiles(types);
+    } catch (e) {
+      console.error('Не вдалося завантажити категорії номерів:', e);
+      document.getElementById('typesWrap').innerHTML =
+        '<div class="types-empty error">Не вдалося завантажити номери. Спробуйте оновити сторінку.</div>';
+    }
+  }
+
+  loadTypes();
+</script>
+
+</body>
+</html>

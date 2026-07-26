@@ -32,7 +32,7 @@
     --gold-glow:0 0 0 1px rgba(217,180,92,0.35), 0 18px 50px rgba(0,0,0,0.55);
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
   body{
     background:
       radial-gradient(ellipse 70% 40% at 50% 0%, rgba(107,15,34,0.28), transparent 60%),
@@ -43,8 +43,11 @@
     font-family:'Jost',sans-serif;
     font-weight:300;
     overflow-x:hidden;
+    max-width:100%;
+    width:100%;
     position:relative;
   }
+  img, svg{max-width:100%;}
   body::before{
     content:'';
     position:fixed;
@@ -108,7 +111,7 @@
   header{
     position:fixed;
     top:0;left:0;right:0;
-    z-index:100;
+    z-index:220;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -159,7 +162,56 @@
     box-shadow:0 4px 20px rgba(217,180,92,0.35);
     border-color:var(--brass-light);
   }
-  .burger{display:none;background:none;border:0;color:var(--cream);font-size:1.4rem;cursor:pointer;}
+  .burger{display:none;background:none;border:0;color:var(--cream);font-size:1.4rem;cursor:pointer;z-index:210;position:relative;}
+
+  /* ===== MOBILE NAV (панель, яку відкриває "бургер") ===== */
+  .mobile-nav-backdrop{
+    position:fixed; inset:0; z-index:150;
+    background:rgba(10,7,6,0.6);
+    opacity:0; pointer-events:none;
+    transition:opacity 0.3s;
+  }
+  .mobile-nav-backdrop.open{opacity:1; pointer-events:auto;}
+  .mobile-nav{
+    position:fixed;
+    top:0; right:0; bottom:0;
+    width:min(78vw, 340px);
+    max-width:100%;
+    z-index:200;
+    background:var(--ink-2);
+    border-left:1px solid var(--hair-strong);
+    box-shadow:-10px 0 40px rgba(0,0,0,0.5);
+    padding:6.5rem 2rem 2.5rem;
+    transform:translateX(100%);
+    transition:transform 0.35s cubic-bezier(.65,0,.24,1);
+    display:flex;
+    flex-direction:column;
+    gap:0.4rem;
+    overflow-y:auto;
+  }
+  .mobile-nav.open{transform:translateX(0);}
+  .mobile-nav a{
+    font-size:0.95rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--stone);
+    padding:0.9rem 0;
+    border-bottom:1px solid var(--hair);
+    transition:color 0.25s;
+  }
+  .mobile-nav a:hover, .mobile-nav a:active{color:var(--brass);}
+  .mobile-nav .nav-cta{
+    display:block;
+    text-align:center;
+    margin-top:1.4rem;
+    border:1px solid var(--brass-dim);
+    padding:0.9rem;
+    color:var(--brass);
+    text-transform:uppercase;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+  }
+  body.nav-open{overflow:hidden;}
 
   /* ===== HERO ===== */
   .hero{
@@ -709,7 +761,7 @@
   <div class="logo"><span class="crown">&#9813;</span>ЛОРНЕТ</div>
   <nav>
     <ul>
-      <li><a href="#rooms">Номери</a></li>
+      <li><a href="rooms.html">Номери</a></li>
       <li><a href="#gallery">Галерея</a></li>
       <li><a href="booking.html">Бронювання</a></li>
       <li><a href="#reviews">Відгуки</a></li>
@@ -717,8 +769,18 @@
     </ul>
   </nav>
   <a href="booking.html" class="nav-cta">Забронювати</a>
-  <button class="burger" aria-label="Меню">☰</button>
+  <button class="burger" id="burgerBtn" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobileNav">☰</button>
 </header>
+
+<div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a href="rooms.html">Номери</a>
+  <a href="index.html#gallery">Галерея</a>
+  <a href="booking.html">Бронювання</a>
+  <a href="index.html#reviews">Відгуки</a>
+  <a href="index.html#contact">Контакти</a>
+  <a href="booking.html" class="nav-cta">Забронювати</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -764,7 +826,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Номери та ціни</h2>
-      <p class="section-note">Ціни вказано за добу, включно зі сніданком та податками.</p>
+      <p class="section-note">Ціни вказано за добу, включно зі сніданком та податками. <a href="rooms.html" style="color:var(--brass);text-decoration:underline;">Переглянути всі категорії →</a></p>
     </div>
     <div class="rooms-list">
 
@@ -772,7 +834,7 @@
         <div class="room-badge">01</div>
         <div class="room-name">Кабінет</div>
         <div class="room-desc">22 м². Робочий куточок, вікно у внутрішній двір, латунні деталі.</div>
-        <div class="room-price"><div class="amount">€1200</div><div class="per">за ніч</div></div>
+        <div class="room-price"><div class="amount">₴1300</div><div class="per">за ніч</div></div>
         <a href="booking.html?type=Стандарт" class="room-select">Обрати</a>
       </div>
 
@@ -780,7 +842,7 @@
         <div class="room-badge">02</div>
         <div class="room-name">Бельетаж</div>
         <div class="room-desc">30 м². Високі стелі, еркерне вікно з видом на бруковану вуличку.</div>
-        <div class="room-price"><div class="amount">€1200</div><div class="per">за ніч</div></div>
+        <div class="room-price"><div class="amount">₴1300</div><div class="per">за ніч</div></div>
         <a href="booking.html?type=Стандарт" class="room-select">Обрати</a>
       </div>
 
@@ -788,15 +850,15 @@
         <div class="room-badge">03</div>
         <div class="room-name">Кабінет Директора</div>
         <div class="room-desc">42 м². Окрема вітальня, камін (декоративний), ванна з мідною лійкою.</div>
-        <div class="room-price"><div class="amount">€2500</div><div class="per">за ніч</div></div>
+        <div class="room-price"><div class="amount">₴2200</div><div class="per">за ніч</div></div>
         <a href="booking.html?type=Люкс" class="room-select">Обрати</a>
       </div>
 
       <div class="room-row">
         <div class="room-badge">04</div>
-        <div class="room-name">Мансарда Лорнет</div>
+        <div class="room-name">Мансарда ЛОРНЕТ</div>
         <div class="room-desc">55 м². Панорамний дах-вихід, найкращий вид на дзвіниці міста.</div>
-        <div class="room-price"><div class="amount">€4000</div><div class="per">за ніч</div></div>
+        <div class="room-price"><div class="amount">₴3800</div><div class="per">за ніч</div></div>
         <a href="booking.html?type=Апартаменти" class="room-select">Обрати</a>
       </div>
 
@@ -899,10 +961,10 @@
     <div class="footer-grid">
       <div class="footer-logo"><span class="crown">&#9813;</span>ЛОРНЕТ</div>
       <ul class="footer-links">
-        <li><a href="#rooms">Номери</a></li>
-        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="rooms.html">Номери</a></li>
+        <li><a href="index.html#gallery">Галерея</a></li>
         <li><a href="booking.html">Бронювання</a></li>
-        <li><a href="#contact">Контакти</a></li>
+        <li><a href="index.html#contact">Контакти</a></li>
       </ul>
     </div>
     <div class="footer-bottom-row">
@@ -918,6 +980,40 @@
       ? 'rgba(20,17,13,0.92)'
       : 'linear-gradient(to bottom, rgba(20,17,13,0.92), transparent)';
   });
+
+  /* ===== БУРГЕР-МЕНЮ (мобільна навігація) ===== */
+  (function initMobileNav(){
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    if (!burgerBtn || !mobileNav) return;
+
+    function openNav(){
+      mobileNav.classList.add('open');
+      backdrop.classList.add('open');
+      document.body.classList.add('nav-open');
+      burgerBtn.textContent = '✕';
+      burgerBtn.setAttribute('aria-expanded', 'true');
+      mobileNav.setAttribute('aria-hidden', 'false');
+    }
+    function closeNav(){
+      mobileNav.classList.remove('open');
+      backdrop.classList.remove('open');
+      document.body.classList.remove('nav-open');
+      burgerBtn.textContent = '☰';
+      burgerBtn.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
+    }
+
+    burgerBtn.addEventListener('click', () => {
+      mobileNav.classList.contains('open') ? closeNav() : openNav();
+    });
+    backdrop.addEventListener('click', closeNav);
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeNav(); });
+    // якщо екран розширили за межі мобільної точки зламу — панель ховаємо
+    window.addEventListener('resize', () => { if (window.innerWidth > 860) closeNav(); });
+  })();
 
   const GALLERY_IMAGES = [
     { src: 'images/1.jpg', caption: 'Сходова клітка' },
@@ -993,7 +1089,7 @@
     let touchStartX = null;
     const viewport = root.querySelector('.carousel-viewport');
     viewport.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
-    viewport.addEventListener('touched', (e) => {
+    viewport.addEventListener('touchend', (e) => {
       if (touchStartX === null) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); restartAutoplay(); }

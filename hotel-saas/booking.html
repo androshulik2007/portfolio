@@ -26,7 +26,7 @@
     --green:#7fae7a;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
   body{
     background:
       radial-gradient(ellipse 70% 40% at 50% 0%, rgba(107,15,34,0.24), transparent 60%),
@@ -37,8 +37,12 @@
     font-family:'Jost',sans-serif;
     font-weight:300;
     min-height:100vh;
+    overflow-x:hidden;
+    max-width:100%;
+    width:100%;
     position:relative;
   }
+  img, svg{max-width:100%;}
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:400;}
   a{color:inherit;text-decoration:none;}
   ::selection{background:var(--brass);color:var(--ink);}
