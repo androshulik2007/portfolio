@@ -211,7 +211,7 @@
   <div class="wrap">
     <span class="eyebrow">Номери</span>
     <h1>Категорії номерів</h1>
-    <p>Кожна категорія — свій характер і свій вид з вікна. Оберіть категорію, а конкретний номер у ній підберете вже на сторінці бронювання.</p>
+    <p>Кожна категорія — свій характер і свій вид з вікна. Оберіть категорію, яка вам підходить, і переходьте одразу до бронювання.</p>
   </div>
 </section>
 
@@ -272,117 +272,63 @@
   })();
 
   /* =========================================================================
-     КАТЕГОРІЇ НОМЕРІВ
-     Бекенд (/api/rooms) віддає лише id / name / type / price для кожної
-     окремої кімнати. Тут ми групуємо їх за типом і показуємо ОДНУ плитку
-     на категорію — з мінімальною ціною в цій категорії, описом і
-     зручностями (та сама довідкова інформація, що й на booking.html,
-     щоб опис категорії був однаковим по всьому сайту).
+     КЛАСИ НОМЕРІВ
+     Бекенд (/api/room-classes) тепер віддає вже готові класи номерів —
+     назву, ціну, кількість номерів, опис, зручності й фото — усе одразу,
+     без потреби групувати окремі кімнати на клієнті.
   ========================================================================= */
   const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
-
-  const TYPE_ORDER = ['Економ', 'Стандарт', 'Люкс', 'Апартаменти'];
-
-  const TYPE_INFO = {
-    'Економ': {
-      tagline: 'Затишно й практично',
-      description: 'Компактний номер для короткого перебування — усе необхідне під рукою.',
-      amenities: ['Wi-Fi', 'Душ', 'Щоденне прибирання'],
-      image: 'images/1.jpg'
-    },
-    'Стандарт': {
-      tagline: 'Класичний баланс комфорту',
-      description: 'Просторіший номер з видом на вуличку — для ділових поїздок і коротких відпусток.',
-      amenities: ['Wi-Fi', 'Сніданок', 'Кондиціонер', 'Сейф'],
-      image: 'images/2.jpg'
-    },
-    'Люкс': {
-      tagline: 'Простір і деталі',
-      description: 'Окрема зона відпочинку, ванна з латунними деталями та краєвид на дахи центру.',
-      amenities: ['Wi-Fi', 'Сніданок', 'Ванна', 'Мінібар', 'Вид на місто'],
-      image: 'images/3.jpg'
-    },
-    'Апартаменти': {
-      tagline: 'Дім у серці міста',
-      description: 'Повноцінні апартаменти з вітальнею та кухнею — для довшого перебування чи родини.',
-      amenities: ['Wi-Fi', 'Кухня', 'Вітальня', 'Панорамний вид', 'Консьєрж 24/7'],
-      image: 'images/5.jpg'
-    }
-  };
-  const DEFAULT_INFO = {
-    tagline: 'Номер готелю ЛОРНЕТ',
-    description: 'Затишний номер із фірмовим сервісом готелю.',
-    amenities: ['Wi-Fi', 'Щоденне прибирання'],
-    image: 'images/4.jpg'
-  };
-  function infoFor(type) { return TYPE_INFO[type] || DEFAULT_INFO; }
+  const DEFAULT_PHOTO = 'images/4.jpg';
 
   function escapeHtml(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
-  function renderTiles(types) {
+  function renderTiles(classes) {
     const wrap = document.getElementById('typesWrap');
-    if (types.length === 0) {
+    if (classes.length === 0) {
       wrap.innerHTML = '<div class="types-empty">Наразі немає доступних категорій номерів.</div>';
       return;
     }
-    wrap.innerHTML = types.map(t => {
-      const info = infoFor(t.type);
+    wrap.innerHTML = classes.map(c => {
+      const amenities = Array.isArray(c.amenities) ? c.amenities : [];
+      const photo = (Array.isArray(c.photos) && c.photos[0]) ? c.photos[0] : DEFAULT_PHOTO;
+      const description = c.description || 'Затишний номер із фірмовим сервісом готелю.';
       return `
       <div class="type-tile">
         <div class="type-tile-media">
-          <img src="${info.image}" alt="${escapeHtml(t.type)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="${escapeHtml(photo)}" alt="${escapeHtml(c.name)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="media-fallback" style="display:none;">ЛОРНЕТ</div>
         </div>
         <div class="type-tile-body">
-          <div class="type-tile-name">${escapeHtml(t.type)}</div>
-          <div class="type-tile-tagline">${escapeHtml(info.tagline)}</div>
-          <div class="type-tile-desc">${escapeHtml(info.description)}</div>
+          <div class="type-tile-name">${escapeHtml(c.name)}</div>
+          <div class="type-tile-desc">${escapeHtml(description)}</div>
           <div class="type-tile-amenities">
-            ${info.amenities.map(a => `<span class="type-tag">${escapeHtml(a)}</span>`).join('')}
+            ${amenities.map(a => `<span class="type-tag">${escapeHtml(a)}</span>`).join('')}
           </div>
         </div>
         <div class="type-tile-price">
-          <div class="amount">від ₴${t.minPrice}</div>
+          <div class="amount">₴${c.price}</div>
           <div class="per">за ніч</div>
         </div>
-        <a href="booking.html?type=${encodeURIComponent(t.type)}" class="type-tile-cta">Забронювати</a>
+        <a href="booking.html?class=${encodeURIComponent(c.id)}" class="type-tile-cta">Забронювати</a>
       </div>`;
     }).join('');
   }
 
-  async function loadTypes() {
+  async function loadClasses() {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/rooms`, { cache: 'no-store' });
-      const rooms = await response.json();
-
-      const byType = {};
-      rooms.forEach(r => {
-        if (!byType[r.type]) byType[r.type] = [];
-        byType[r.type].push(r);
-      });
-
-      // Спершу відомі категорії у фіксованому порядку, потім будь-які інші,
-      // яких немає у TYPE_ORDER (якщо в майбутньому додадуть нову категорію).
-      const knownTypes = TYPE_ORDER.filter(t => byType[t]);
-      const otherTypes = Object.keys(byType).filter(t => !TYPE_ORDER.includes(t));
-      const orderedTypes = [...knownTypes, ...otherTypes];
-
-      const types = orderedTypes.map(type => ({
-        type,
-        minPrice: Math.min(...byType[type].map(r => Number(r.price)))
-      }));
-
-      renderTiles(types);
+      const response = await fetch(`${BACKEND_URL}/api/room-classes`, { cache: 'no-store' });
+      const classes = await response.json();
+      renderTiles(classes);
     } catch (e) {
-      console.error('Не вдалося завантажити категорії номерів:', e);
+      console.error('Не вдалося завантажити класи номерів:', e);
       document.getElementById('typesWrap').innerHTML =
         '<div class="types-empty error">Не вдалося завантажити номери. Спробуйте оновити сторінку.</div>';
     }
   }
 
-  loadTypes();
+  loadClasses();
 </script>
 
 </body>

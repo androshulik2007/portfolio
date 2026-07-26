@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Бронювання — ЛОРНЕТ</title>
-<meta name="description" content="Забронюйте номер у бутік-готелі ЛОРНЕТ: оберіть кімнату, дати заїзду й виїзду, залиште контакти.">
+<meta name="description" content="Забронюйте номер у бутік-готелі ЛОРНЕТ: оберіть клас номеру, дати заїзду й виїзду, залиште контакти.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -340,11 +340,11 @@
 
     <div class="intro">
       <span class="intro-eyebrow">Бронювання</span>
-      <h1>Оберіть номер —<br>ми підготуємо решту</h1>
-      <p>Виберіть кімнату з переліку нижче, вкажіть дати заїзду й виїзду та залиште контакти. Підтвердження надходить протягом години.</p>
+      <h1>Оберіть клас номеру —<br>ми підготуємо решту</h1>
+      <p>Виберіть клас номеру з переліку нижче, вкажіть дати заїзду й виїзду та залиште контакти. Підтвердження надходить протягом години.</p>
       <div class="intro-quote">«Найтихіший готель у центрі — і найуважніший персонал, якого я зустрічала.»</div>
       <div class="intro-facts">
-        <div><strong>19</strong>номерів</div>
+        <div><strong id="totalRoomsFact">—</strong>номерів</div>
         <div><strong>24/7</strong>консьєрж</div>
         <div><strong>&lt;1г</strong>підтвердження</div>
       </div>
@@ -356,11 +356,11 @@
 
         <!-- ===== спеціальний картковий dropdown вибору номера ===== -->
         <div class="field room-picker full" id="roomPicker">
-          <label>Номер</label>
+          <label>Клас номеру</label>
           <button type="button" class="room-picker-trigger" id="rpTrigger" aria-haspopup="listbox" aria-expanded="false">
             <span class="rpt-thumb" id="rptThumb"><span class="rpt-fallback">?</span></span>
             <span class="rpt-text">
-              <span class="rpt-placeholder" id="rptPlaceholder">Завантаження номерів<span class="loading-dots" id="loadingDots"></span></span>
+              <span class="rpt-placeholder" id="rptPlaceholder">Завантаження класів номерів<span class="loading-dots" id="loadingDots"></span></span>
               <div id="rptSelected" style="display:none;">
                 <div class="rpt-name" id="rptName"></div>
                 <div class="rpt-sub" id="rptSub"></div>
@@ -371,9 +371,8 @@
           </button>
 
           <div class="room-picker-panel" id="rpPanel" role="listbox">
-            <div class="rp-filters" id="rpFilters"></div>
             <div class="rp-grid" id="rpGrid">
-              <div class="rp-empty">Завантаження номерів...</div>
+              <div class="rp-empty">Завантаження класів номерів...</div>
             </div>
           </div>
         </div>
@@ -417,7 +416,7 @@
           <textarea id="notes" rows="2" placeholder="Пізній заїзд, дитяче ліжко, тощо"></textarea>
         </div>
 
-        <input type="hidden" id="roomtype" required>
+        <input type="hidden" id="classid" required>
 
         <div class="submit">
           <button type="submit" class="btn-primary">Надіслати запит</button>
@@ -432,149 +431,97 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 <script>
   const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
+  const DEFAULT_PHOTO = 'images/4.jpg';
 
-  /* =========================================================================
-     Клієнтське збагачення даних кімнати. Бекенд (/api/rooms) віддає лише
-     id / name / type / price. Опис, зручності та фото до бекенду поки не
-     прив'язані, тож формуємо їх тут за типом кімнати — легко замінити на
-     реальні поля (description / amenities / image_url), якщо їх додадуть
-     у таблицю rooms пізніше.
-  ========================================================================= */
-  const TYPE_INFO = {
-    'Економ': {
-      tagline: 'Затишно й практично',
-      description: 'Компактний номер для короткого перебування — усе необхідне під рукою.',
-      amenities: ['Wi-Fi', 'Душ', 'Щоденне прибирання']
-    },
-    'Стандарт': {
-      tagline: 'Класичний баланс комфорту',
-      description: 'Просторіший номер з видом на вуличку — для ділових поїздок і коротких відпусток.',
-      amenities: ['Wi-Fi', 'Сніданок', 'Кондиціонер', 'Сейф']
-    },
-    'Люкс': {
-      tagline: 'Простір і деталі',
-      description: 'Окрема зона відпочинку, ванна з латунними деталями та краєвид на дахи центру.',
-      amenities: ['Wi-Fi', 'Сніданок', 'Ванна', 'Мінібар', 'Вид на місто']
-    },
-    'Апартаменти': {
-      tagline: 'Дім у серці міста',
-      description: 'Повноцінні апартаменти з вітальнею та кухнею — для довшого перебування чи родини.',
-      amenities: ['Wi-Fi', 'Кухня', 'Вітальня', 'Панорамний вид', 'Консьєрж 24/7']
-    }
-  };
-  const DEFAULT_INFO = {
-    tagline: 'Номер готелю ЛОРНЕТ',
-    description: 'Затишний номер із фірмовим сервісом готелю.',
-    amenities: ['Wi-Fi', 'Щоденне прибирання']
-  };
-  function infoFor(type) { return TYPE_INFO[type] || DEFAULT_INFO; }
-
-  // Циклічно призначаємо одну з 7 наявних фотографій кожній кімнаті —
-  // реальних фото на кожен номер окремо поки немає.
-  function imageFor(index) {
-    return `images/${(index % 7) + 1}.jpg`;
-  }
-
-  let ROOMS = [];
-  let selectedRoom = null;
-  let activeTypeFilter = 'Усі';
+  let CLASSES = [];
+  let selectedClass = null;
 
   const rpTrigger = document.getElementById('rpTrigger');
   const rpPanel = document.getElementById('rpPanel');
   const rpGrid = document.getElementById('rpGrid');
-  const rpFilters = document.getElementById('rpFilters');
   const rptPlaceholder = document.getElementById('rptPlaceholder');
   const rptSelected = document.getElementById('rptSelected');
   const rptName = document.getElementById('rptName');
   const rptSub = document.getElementById('rptSub');
   const rptPrice = document.getElementById('rptPrice');
   const rptThumb = document.getElementById('rptThumb');
-  const roomtypeInput = document.getElementById('roomtype');
+  const classIdInput = document.getElementById('classid');
 
   const loadingDotsEl = document.getElementById('loadingDots');
   if (loadingDotsEl) loadingDotsEl.innerHTML = '<span>.</span><span>.</span><span>.</span>';
 
-  async function loadRooms() {
+  async function loadClasses() {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/rooms`, { cache: 'no-store' });
-      const rooms = await response.json();
-      ROOMS = rooms.map((r, i) => ({ ...r, ...infoFor(r.type), image: imageFor(i) }));
+      const response = await fetch(`${BACKEND_URL}/api/room-classes`, { cache: 'no-store' });
+      CLASSES = await response.json();
 
-      rptPlaceholder.textContent = 'Оберіть номер';
-      buildFilters();
+      const totalFact = document.getElementById('totalRoomsFact');
+      if (totalFact) totalFact.textContent = CLASSES.reduce((sum, c) => sum + (Number(c.quantity) || 0), 0);
+
+      rptPlaceholder.textContent = 'Оберіть клас номеру';
       renderGrid();
       applyPreselection();
     } catch (e) {
-      console.error('Не вдалося завантажити кімнати з сервера:', e);
-      rpGrid.innerHTML = '<div class="rp-empty">Не вдалося завантажити номери. Спробуйте оновити сторінку.</div>';
+      console.error('Не вдалося завантажити класи номерів з сервера:', e);
+      rpGrid.innerHTML = '<div class="rp-empty">Не вдалося завантажити класи номерів. Спробуйте оновити сторінку.</div>';
       rptPlaceholder.textContent = 'Помилка зв\u2019язку з сервером';
     }
   }
 
-  function buildFilters() {
-    const types = ['Усі', ...new Set(ROOMS.map(r => r.type))];
-    rpFilters.innerHTML = types.map(t =>
-      `<button type="button" class="rp-filter-btn${t === activeTypeFilter ? ' active' : ''}" data-type="${t}">${t}</button>`
-    ).join('');
-    rpFilters.querySelectorAll('.rp-filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeTypeFilter = btn.dataset.type;
-        rpFilters.querySelectorAll('.rp-filter-btn').forEach(b => b.classList.toggle('active', b === btn));
-        renderGrid();
-      });
-    });
-  }
-
   function renderGrid() {
-    const rooms = activeTypeFilter === 'Усі' ? ROOMS : ROOMS.filter(r => r.type === activeTypeFilter);
-    if (rooms.length === 0) {
-      rpGrid.innerHTML = '<div class="rp-empty">У цій категорії поки немає номерів.</div>';
+    if (CLASSES.length === 0) {
+      rpGrid.innerHTML = '<div class="rp-empty">Наразі немає доступних класів номерів.</div>';
       return;
     }
-    rpGrid.innerHTML = rooms.map(r => `
-      <div class="rp-card${selectedRoom && selectedRoom.id === r.id ? ' selected' : ''}" data-id="${r.id}" role="option" tabindex="0">
+    rpGrid.innerHTML = CLASSES.map(c => {
+      const amenities = Array.isArray(c.amenities) ? c.amenities : [];
+      const photo = (Array.isArray(c.photos) && c.photos[0]) ? c.photos[0] : DEFAULT_PHOTO;
+      const description = c.description || 'Затишний номер із фірмовим сервісом готелю.';
+      return `
+      <div class="rp-card${selectedClass && selectedClass.id === c.id ? ' selected' : ''}" data-id="${c.id}" role="option" tabindex="0">
         <div class="rp-card-media">
-          <span class="rp-card-type">${escapeHtml(r.type)}</span>
-          <span class="rp-card-price">₴${r.price}</span>
-          <img src="${r.image}" alt="${escapeHtml(r.name)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <span class="rp-card-type">${c.quantity} номер(и)</span>
+          <span class="rp-card-price">₴${c.price}</span>
+          <img src="${escapeHtml(photo)}" alt="${escapeHtml(c.name)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="rp-media-fallback" style="display:none;">ЛОРНЕТ</div>
         </div>
         <div class="rp-card-body">
-          <div class="rp-card-name">${escapeHtml(r.name)}</div>
-          <div class="rp-card-tagline">${escapeHtml(r.tagline)}</div>
-          <div class="rp-card-desc">${escapeHtml(r.description)}</div>
+          <div class="rp-card-name">${escapeHtml(c.name)}</div>
+          <div class="rp-card-desc">${escapeHtml(description)}</div>
           <div class="rp-card-amenities">
-            ${r.amenities.map(a => `<span class="rp-tag">${escapeHtml(a)}</span>`).join('')}
+            ${amenities.map(a => `<span class="rp-tag">${escapeHtml(a)}</span>`).join('')}
           </div>
         </div>
         <span class="rp-card-pick">&#10003;</span>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     rpGrid.querySelectorAll('.rp-card').forEach(card => {
-      card.addEventListener('click', () => selectRoom(card.dataset.id));
+      card.addEventListener('click', () => selectClass(card.dataset.id));
       card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectRoom(card.dataset.id); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectClass(card.dataset.id); }
       });
     });
   }
 
-  function selectRoom(id) {
-    const room = ROOMS.find(r => String(r.id) === String(id));
-    if (!room) return;
-    selectedRoom = room;
-    roomtypeInput.value = room.id;
+  function selectClass(id) {
+    const cls = CLASSES.find(c => String(c.id) === String(id));
+    if (!cls) return;
+    selectedClass = cls;
+    classIdInput.value = cls.id;
 
     rptPlaceholder.style.display = 'none';
     rptSelected.style.display = 'block';
-    rptName.textContent = room.name;
-    rptSub.textContent = `${room.type} · ${room.tagline}`;
-    rptPrice.textContent = `₴${room.price}`;
-    rptThumb.innerHTML = `<img src="${room.image}" alt="" onerror="this.remove(); this.parentElement.querySelector('.rpt-fallback')?.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\\'rpt-fallback\\'>Л</span>');">`;
+    rptName.textContent = cls.name;
+    rptSub.textContent = `${cls.quantity} номер(и) цього класу`;
+    rptPrice.textContent = `₴${cls.price}`;
+    const photo = (Array.isArray(cls.photos) && cls.photos[0]) ? cls.photos[0] : DEFAULT_PHOTO;
+    rptThumb.innerHTML = `<img src="${photo}" alt="" onerror="this.remove(); this.parentElement.querySelector('.rpt-fallback')?.remove(); this.parentElement.insertAdjacentHTML('beforeend','<span class=\\'rpt-fallback\\'>Л</span>');">`;
 
     renderGrid();
     closePanel();
-    refreshDisabledDates(room.id);
+    refreshDisabledDates(cls.id);
   }
 
   function openPanel() {
@@ -599,24 +546,16 @@
 
   function applyPreselection() {
     const params = new URLSearchParams(window.location.search);
-    const roomId = params.get('room');
-    const type = params.get('type');
+    const classId = params.get('class');
+    const type = params.get('type'); // зворотна сумісність зі старими посиланнями ?type=Назва
 
-    if (roomId && ROOMS.some(r => String(r.id) === roomId)) {
-      selectRoom(roomId);
+    if (classId && CLASSES.some(c => String(c.id) === classId)) {
+      selectClass(classId);
       return;
     }
     if (type) {
-      const match = ROOMS.find(r => r.type === type);
-      if (match) {
-        activeTypeFilter = type;
-        buildFilters();
-        renderGrid();
-        // не вибираємо конкретний номер за гостя — лише відкриваємо
-        // потрібну категорію, вибір лишається за гостем
-        rptPlaceholder.textContent = `Оберіть номер категорії «${type}»`;
-        openPanel();
-      }
+      const match = CLASSES.find(c => c.name === type);
+      if (match) selectClass(match.id);
     }
   }
 
@@ -624,7 +563,7 @@
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
-  loadRooms();
+  loadClasses();
 
   /* =========================================================
      КАЛЕНДАР БРОНЮВАННЯ (Flatpickr) — та сама логіка, що й раніше
@@ -650,10 +589,10 @@
     disable: disabledRanges
   });
 
-  async function refreshDisabledDates(roomId) {
-    if (!roomId) return;
+  async function refreshDisabledDates(classId) {
+    if (!classId) return;
     try {
-      const response = await fetch(`${BACKEND_URL}/api/rooms/${roomId}/availability`, { cache: 'no-store' });
+      const response = await fetch(`${BACKEND_URL}/api/room-classes/${classId}/availability`, { cache: 'no-store' });
       const bookedRanges = await response.json();
 
       disabledRanges = bookedRanges.map(b => {
@@ -693,7 +632,7 @@
     const email     = document.getElementById('email').value.trim();
     const checkIn   = document.getElementById('checkin').value;
     const checkOut  = document.getElementById('checkout').value;
-    const roomId    = roomtypeInput.value;
+    const classId   = classIdInput.value;
     const comment   = document.getElementById('notes').value.trim();
 
     function showError(msg) {
@@ -702,7 +641,7 @@
       note.scrollIntoView({behavior:'smooth', block:'nearest'});
     }
 
-    if (!roomId) { showError('Будь ласка, оберіть номер зі списку.'); openPanel(); return; }
+    if (!classId) { showError('Будь ласка, оберіть клас номеру зі списку.'); openPanel(); return; }
     if (!firstName || !lastName || !phone || !checkIn || !checkOut) {
       showError("Будь ласка, заповніть усі обов'язкові поля!");
       return;
@@ -719,7 +658,7 @@
     }
 
     const bookingData = {
-      room_id: roomId,
+      class_id: classId,
       first_name: firstName,
       last_name: lastName,
       phone: phone,
@@ -745,11 +684,11 @@
         note.textContent = 'Дякуємо! Бронювання успішно збережено в базі даних готелю.';
         note.classList.add('show');
         form.reset();
-        selectedRoom = null;
-        roomtypeInput.value = '';
+        selectedClass = null;
+        classIdInput.value = '';
         rptSelected.style.display = 'none';
         rptPlaceholder.style.display = 'block';
-        rptPlaceholder.textContent = 'Оберіть номер';
+        rptPlaceholder.textContent = 'Оберіть клас номеру';
         rptPrice.textContent = '';
         checkinPicker.clear();
         checkoutPicker.clear();
