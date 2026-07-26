@@ -508,6 +508,13 @@
     font-family:'Jost',sans-serif;
   }
   .room-select:hover{background:var(--brass);color:var(--ink);}
+  .room-row-loading{
+    color:var(--stone);
+    font-size:0.9rem;
+    padding:2.2rem 0;
+    text-align:center;
+  }
+  .room-row-loading.error{color:#e08a80;}
 
   /* ===== GALLERY ===== */
   .carousel{
@@ -828,40 +835,8 @@
       <h2>Номери та ціни</h2>
       <p class="section-note">Ціни вказано за добу, включно зі сніданком та податками. <a href="rooms.html" style="color:var(--brass);text-decoration:underline;">Переглянути всі категорії →</a></p>
     </div>
-    <div class="rooms-list">
-
-      <div class="room-row">
-        <div class="room-badge">01</div>
-        <div class="room-name">Кабінет</div>
-        <div class="room-desc">22 м². Робочий куточок, вікно у внутрішній двір, латунні деталі.</div>
-        <div class="room-price"><div class="amount">₴1300</div><div class="per">за ніч</div></div>
-        <a href="booking.html?type=Стандарт" class="room-select">Обрати</a>
-      </div>
-
-      <div class="room-row">
-        <div class="room-badge">02</div>
-        <div class="room-name">Бельетаж</div>
-        <div class="room-desc">30 м². Високі стелі, еркерне вікно з видом на бруковану вуличку.</div>
-        <div class="room-price"><div class="amount">₴1300</div><div class="per">за ніч</div></div>
-        <a href="booking.html?type=Стандарт" class="room-select">Обрати</a>
-      </div>
-
-      <div class="room-row">
-        <div class="room-badge">03</div>
-        <div class="room-name">Кабінет Директора</div>
-        <div class="room-desc">42 м². Окрема вітальня, камін (декоративний), ванна з мідною лійкою.</div>
-        <div class="room-price"><div class="amount">₴2200</div><div class="per">за ніч</div></div>
-        <a href="booking.html?type=Люкс" class="room-select">Обрати</a>
-      </div>
-
-      <div class="room-row">
-        <div class="room-badge">04</div>
-        <div class="room-name">Мансарда ЛОРНЕТ</div>
-        <div class="room-desc">55 м². Панорамний дах-вихід, найкращий вид на дзвіниці міста.</div>
-        <div class="room-price"><div class="amount">₴3800</div><div class="per">за ніч</div></div>
-        <a href="booking.html?type=Апартаменти" class="room-select">Обрати</a>
-      </div>
-
+    <div class="rooms-list" id="roomsList">
+      <div class="room-row-loading">Завантаження номерів...</div>
     </div>
   </div>
 </section>
@@ -1014,6 +989,51 @@
     // якщо екран розширили за межі мобільної точки зламу — панель ховаємо
     window.addEventListener('resize', () => { if (window.innerWidth > 860) closeNav(); });
   })();
+
+  /* =========================================================================
+     НОМЕРИ ТА ЦІНИ (динамічно, з бекенду)
+     Раніше тут було 4 захардкоджені номери. Тепер список класів номерів
+     (назва / ціна / опис) береться з /api/room-classes — той самий бекенд,
+     що й на rooms.html та booking.html. Нові класи, додані через
+     десктоп-адмінку, з'являються тут автоматично.
+  ========================================================================= */
+  const BACKEND_URL = 'https://portfolio-jvj5.onrender.com';
+
+  function escapeHtmlHome(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  async function loadHomeRoomClasses() {
+    const container = document.getElementById('roomsList');
+    if (!container) return;
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/room-classes`, { cache: 'no-store' });
+      const classes = await response.json();
+
+      if (!Array.isArray(classes) || classes.length === 0) {
+        container.innerHTML = '<div class="room-row-loading">Наразі немає доступних категорій номерів.</div>';
+        return;
+      }
+
+      container.innerHTML = classes.map((c, i) => {
+        const badge = String(i + 1).padStart(2, '0');
+        const description = c.description || 'Затишний номер із фірмовим сервісом готелю.';
+        return `
+        <div class="room-row">
+          <div class="room-badge">${badge}</div>
+          <div class="room-name">${escapeHtmlHome(c.name)}</div>
+          <div class="room-desc">${escapeHtmlHome(description)}</div>
+          <div class="room-price"><div class="amount">₴${c.price}</div><div class="per">за ніч</div></div>
+          <a href="booking.html?class=${encodeURIComponent(c.id)}" class="room-select">Обрати</a>
+        </div>`;
+      }).join('');
+    } catch (e) {
+      console.error('Не вдалося завантажити класи номерів:', e);
+      container.innerHTML = '<div class="room-row-loading error">Не вдалося завантажити номери. Спробуйте оновити сторінку.</div>';
+    }
+  }
+
+  loadHomeRoomClasses();
 
   const GALLERY_IMAGES = [
     { src: 'images/1.jpg', caption: 'Сходова клітка' },
