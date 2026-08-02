@@ -151,6 +151,58 @@
     50% { transform: translateY(-10px); }
   }
 
+  /* ===== PHOTO PLACEHOLDER (замість намальованих лікарів) ===== */
+  .photo-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 10px;
+    color: var(--green);
+    background:
+      repeating-linear-gradient(135deg, rgba(59,143,59,0.05) 0 10px, transparent 10px 20px);
+  }
+  .photo-placeholder::before {
+    content: '';
+    position: absolute; inset: 14px;
+    border: 2px dashed var(--green-mid);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .photo-placeholder svg { width: 25%; height: auto; max-width: 72px; opacity: 0.55; }
+  .photo-placeholder-label {
+    font-size: 13px; font-weight: 700; color: var(--green);
+    background: white; padding: 6px 14px; border-radius: 50px;
+    box-shadow: var(--shadow); text-align: center;
+  }
+  .photo-placeholder-hint { font-size: 11px; color: var(--gray); text-align: center; padding: 0 20px; }
+
+  /* ===== TOP BANNER ===== */
+  :root { --banner-h: 48px; }
+  .top-banner {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1001;
+    background: linear-gradient(90deg, var(--dark) 0%, var(--green) 55%, var(--green-light) 100%);
+    color: #fff;
+    padding: 11px 46px 11px 16px;
+    font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    flex-wrap: wrap; text-align: center;
+  }
+  .top-banner .emoji { font-size: 16px; }
+  .top-banner a.banner-link {
+    color: #fff; text-decoration: underline; text-underline-offset: 3px; font-weight: 800;
+  }
+  .top-banner-close {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.18); border: none; color: #fff;
+    width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 13px;
+    display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+  }
+  .top-banner-close:hover { background: rgba(255,255,255,0.32); }
+  .top-banner.hidden { display: none; }
+  nav { top: var(--banner-h); transition: top 0.3s; }
+  .hero { padding-top: calc(100px + var(--banner-h)); transition: padding-top 0.3s; }
+  body.banner-hidden nav { top: 0; }
+  body.banner-hidden .hero { padding-top: 100px; }
+
   /* ===== WAVE DIVIDER ===== */
   .wave-divider { display: block; width: 100%; line-height: 0; }
   .wave-divider svg { display: block; width: 100%; }
@@ -263,46 +315,85 @@
     font-size: 12px; font-weight: 800;
   }
 
-  /* ===== REVIEWS ===== */
+  /* ===== REVIEWS (рейтинг-зведення + "спотлайт" з плавною зміною відгуку) ===== */
   .reviews { background: var(--gray-light); position: relative; overflow: hidden; }
-  .carousel-wrap { max-width: 1200px; margin: 0 auto; position: relative; }
-  .carousel-track-wrap { overflow: hidden; }
-  .carousel-track {
-    display: flex; gap: 20px;
-    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  .reviews-layout {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 300px 1fr;
+    gap: 44px; align-items: start;
   }
-  .review-card {
-    min-width: calc(33.33% - 14px); background: white;
-    border-radius: var(--radius-card); padding: 28px 24px;
-    box-shadow: var(--shadow); flex-shrink: 0;
+  .reviews-summary {
+    background: white; border-radius: var(--radius-card);
+    padding: 32px 28px; box-shadow: var(--shadow); text-align: center;
+    position: sticky; top: calc(var(--banner-h) + 88px);
   }
-  .review-stars { color: #f59e0b; font-size: 18px; margin-bottom: 12px; }
-  .review-text { font-size: 15px; color: var(--dark); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-  .review-author { display: flex; align-items: center; gap: 12px; }
-  .review-avatar {
-    width: 44px; height: 44px; border-radius: 50%;
+  .rs-score { font-size: 56px; font-weight: 800; color: var(--dark); line-height: 1; }
+  .rs-stars { color: #f59e0b; font-size: 20px; margin: 8px 0 6px; }
+  .rs-count { font-size: 13px; color: var(--gray); margin-bottom: 22px; }
+  .rs-bars { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+  .rs-bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--gray); font-weight: 700; }
+  .rs-bar-row .rs-star-n { width: 10px; text-align: right; }
+  .rs-bar { flex: 1; height: 6px; background: var(--green-pale); border-radius: 4px; overflow: hidden; }
+  .rs-bar-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--green-light)); border-radius: 4px; }
+  .rs-bar-pct { width: 30px; text-align: left; }
+  .rs-cta { width: 100%; }
+
+  .reviews-spotlight { position: relative; }
+  .rsp-quote-mark {
+    position: absolute; top: -6px; left: 20px;
+    font-family: Georgia, serif; font-size: 90px; color: var(--green-mid);
+    line-height: 1; z-index: 0; user-select: none;
+  }
+  .rsp-card {
+    position: relative; z-index: 1;
+    background: white; border-radius: var(--radius-card);
+    padding: 44px 40px 32px; box-shadow: var(--shadow);
+    min-height: 200px;
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .rsp-card.fading { opacity: 0; transform: translateY(8px); }
+  .rsp-stars { color: #f59e0b; font-size: 17px; margin-bottom: 14px; }
+  .rsp-text { font-size: 16px; color: var(--dark); line-height: 1.75; font-style: italic; margin-bottom: 22px; min-height: 84px; }
+  .rsp-author { display: flex; align-items: center; gap: 12px; }
+  .rsp-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
     background: var(--green-pale); display: flex; align-items: center; justify-content: center;
-    font-size: 18px; font-weight: 800; color: var(--green);
+    font-size: 18px; font-weight: 800; color: var(--green); flex-shrink: 0;
   }
-  .review-name { font-weight: 700; font-size: 14px; color: var(--dark); }
-  .review-date { font-size: 12px; color: var(--gray); }
-  .carousel-controls {
-    display: flex; justify-content: center; gap: 12px; margin-top: 32px;
+  .rsp-name { font-weight: 700; font-size: 14px; color: var(--dark); }
+  .rsp-date { font-size: 12px; color: var(--gray); }
+  .rsp-service {
+    margin-left: auto; font-size: 11px; font-weight: 700; color: var(--green);
+    background: var(--green-pale); padding: 5px 12px; border-radius: 50px; white-space: nowrap;
   }
+  .rsp-nav { display: flex; align-items: center; gap: 14px; margin-top: 22px; }
   .car-btn {
-    width: 44px; height: 44px; border-radius: 50%;
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
     background: white; border: 2px solid var(--green-mid);
-    cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
     transition: all 0.2s; color: var(--green);
   }
   .car-btn:hover { background: var(--green); color: white; border-color: var(--green); }
-  .carousel-dots { display: flex; align-items: center; gap: 8px; }
-  .dot-indicator {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--green-mid); cursor: pointer; transition: all 0.2s;
-    border: none;
+  .rsp-thumbs { display: flex; gap: 8px; overflow-x: auto; flex: 1; padding: 4px 2px; scrollbar-width: none; }
+  .rsp-thumbs::-webkit-scrollbar { display: none; }
+  .rsp-thumb {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; cursor: pointer;
+    background: white; border: 2px solid var(--green-mid); color: var(--green);
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;
+    transition: all 0.2s;
   }
-  .dot-indicator.active { background: var(--green); width: 24px; border-radius: 4px; }
+  .rsp-thumb.active { border-color: var(--green); background: var(--green); color: white; transform: scale(1.08); }
+  .rsp-thumb:hover { border-color: var(--green); }
+
+  @media (max-width: 900px) {
+    .reviews-layout { grid-template-columns: 1fr; }
+    .reviews-summary { position: static; }
+  }
+  @media (max-width: 640px) {
+    .rsp-card { padding: 34px 22px 26px; }
+    .rsp-service { display: none; }
+  }
 
   /* ===== PRICES ===== */
   .prices { background: white; }
@@ -425,7 +516,6 @@
     .about-inner { grid-template-columns: 1fr; }
     .about-img-wrap { max-width: 340px; margin: 0 auto; }
     .about-badges { right: 0; }
-    .review-card { min-width: calc(50% - 10px); }
     .hero-inner { grid-template-columns: 1fr; text-align: center; }
     .hero-visual { display: none; }
     .hero { padding-top: 90px; min-height: auto; padding-bottom: 60px; }
@@ -439,10 +529,11 @@
     .nav-right { gap: 12px; }
     .services-grid { grid-template-columns: 1fr; }
     .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .review-card { min-width: 100%; }
     .footer-inner { flex-direction: column; text-align: center; }
     .hero h1 { font-size: 32px; }
     section { padding: 48px 4%; }
+    .top-banner { font-size: 12.5px; padding: 9px 40px 9px 12px; gap: 6px; }
+    .top-banner .banner-link { display: block; }
   }
   @media (max-width: 400px) {
     .popup { padding: 28px 20px; }
@@ -468,6 +559,14 @@
 </style>
 </head>
 <body>
+
+<!-- TOP BANNER -->
+<div class="top-banner" id="topBanner">
+  <span class="emoji">🎉</span>
+  <span>Знижка 20% на професійну гігієну порожнини рота — тільки до кінця місяця!</span>
+  <a href="#prices" class="banner-link">Дивитись ціни</a>
+  <button class="top-banner-close" id="bannerClose" aria-label="Закрити банер">&times;</button>
+</div>
 
 <!-- POPUP -->
 <div class="popup-overlay" id="popup">
@@ -529,37 +628,15 @@
       <div class="hero-img-wrap">
         <div class="hero-img-bg">
           <div class="doctor-placeholder">
-            <svg class="doctor-svg" viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
-              <!-- White coat body -->
-              <ellipse cx="160" cy="380" rx="110" ry="80" fill="#ffffff" opacity="0.9"/>
-              <rect x="70" y="240" width="220" height="180" rx="30" fill="#ffffff" opacity="0.9"/>
-              <!-- Green trim -->
-              <rect x="70" y="240" width="30" height="180" rx="10" fill="#3B8F3B" opacity="0.2"/>
-              <rect x="220" y="240" width="30" height="180" rx="10" fill="#3B8F3B" opacity="0.2"/>
-              <!-- Stethoscope -->
-              <path d="M120 270 Q140 300 160 290 Q180 280 190 270" stroke="#3B8F3B" stroke-width="4" fill="none" stroke-linecap="round"/>
-              <circle cx="160" cy="290" r="10" fill="#3B8F3B" opacity="0.5"/>
-              <!-- Head -->
-              <ellipse cx="160" cy="180" rx="65" ry="75" fill="#f5d0a9"/>
-              <!-- Hair -->
-              <ellipse cx="160" cy="120" rx="65" ry="40" fill="#4a3728"/>
-              <rect x="95" y="120" width="130" height="30" fill="#4a3728"/>
-              <!-- Eyes -->
-              <ellipse cx="135" cy="175" rx="8" ry="9" fill="white"/>
-              <ellipse cx="185" cy="175" rx="8" ry="9" fill="white"/>
-              <circle cx="137" cy="177" r="5" fill="#2c1810"/>
-              <circle cx="187" cy="177" r="5" fill="#2c1810"/>
-              <circle cx="139" cy="175" r="2" fill="white"/>
-              <circle cx="189" cy="175" r="2" fill="white"/>
-              <!-- Smile -->
-              <path d="M140 200 Q160 215 180 200" stroke="#c0876a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-              <!-- Mask hanging -->
-              <rect x="120" y="215" width="80" height="35" rx="10" fill="#3B8F3B" opacity="0.3"/>
-              <!-- Name tag -->
-              <rect x="115" y="290" width="90" height="30" rx="8" fill="#EAF5EA" stroke="#3B8F3B" stroke-width="1.5"/>
-              <rect x="122" y="298" width="60" height="4" rx="2" fill="#3B8F3B" opacity="0.5"/>
-              <rect x="122" y="308" width="40" height="3" rx="1.5" fill="#3B8F3B" opacity="0.3"/>
-            </svg>
+            <div class="photo-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M8 6l1.2-2h5.6L16 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="photo-placeholder-label">Фото лікаря</div>
+              <div class="photo-placeholder-hint">Рекомендований розмір 480×530px</div>
+            </div>
           </div>
         </div>
         <div class="hero-float-card">
@@ -694,27 +771,15 @@
     <div class="about-img-wrap fade-in">
       <div class="about-img-bg">
         <div class="doctor-placeholder" style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80%;height:92%;">
-          <svg viewBox="0 0 280 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
-            <ellipse cx="140" cy="360" rx="100" ry="60" fill="white" opacity="0.8"/>
-            <rect x="55" y="220" width="190" height="160" rx="28" fill="white" opacity="0.85"/>
-            <rect x="55" y="220" width="26" height="160" rx="8" fill="#3B8F3B" opacity="0.15"/>
-            <rect x="199" y="220" width="26" height="160" rx="8" fill="#3B8F3B" opacity="0.15"/>
-            <path d="M100 248 Q120 278 140 270 Q160 260 170 248" stroke="#3B8F3B" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-            <circle cx="140" cy="270" r="8" fill="#3B8F3B" opacity="0.4"/>
-            <ellipse cx="140" cy="162" rx="58" ry="66" fill="#f5d0a9"/>
-            <ellipse cx="140" cy="108" rx="58" ry="36" fill="#5c3d2e"/>
-            <rect x="82" y="108" width="116" height="26" fill="#5c3d2e"/>
-            <ellipse cx="117" cy="157" rx="7" ry="8" fill="white"/>
-            <ellipse cx="163" cy="157" rx="7" ry="8" fill="white"/>
-            <circle cx="119" cy="159" r="4.5" fill="#2c1810"/>
-            <circle cx="165" cy="159" r="4.5" fill="#2c1810"/>
-            <circle cx="121" cy="157" r="1.5" fill="white"/>
-            <circle cx="167" cy="157" r="1.5" fill="white"/>
-            <path d="M122 181 Q140 194 158 181" stroke="#c0876a" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <rect x="105" y="272" width="70" height="26" rx="7" fill="#EAF5EA" stroke="#3B8F3B" stroke-width="1.5"/>
-            <rect x="112" y="280" width="46" height="3" rx="1.5" fill="#3B8F3B" opacity="0.5"/>
-            <rect x="112" y="288" width="30" height="2.5" rx="1.2" fill="#3B8F3B" opacity="0.3"/>
-          </svg>
+          <div class="photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="6" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 6l1.2-2h5.6L16 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="photo-placeholder-label">Фото Олени Коваленко</div>
+            <div class="photo-placeholder-hint">Рекомендований розмір 280×380px</div>
+          </div>
         </div>
       </div>
       <div class="about-badges">
@@ -751,74 +816,32 @@
     <h2 class="section-title">Що кажуть наші <span>пацієнти</span></h2>
     <p class="section-sub">Понад 500 відгуків із рейтингом 4.9⭐ на Google Maps</p>
   </div>
-  <div class="carousel-wrap fade-in">
-    <div class="carousel-track-wrap">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">"Нарешті знайшла свого стоматолога! Олена Миколаївна — справжній професіонал. Лікування абсолютно безболісне, а результат перевершив усі очікування. Рекомендую всім без вагань!"</div>
-          <div class="review-author">
-            <div class="review-avatar">М</div>
-            <div>
-              <div class="review-name">Марина Дяченко</div>
-              <div class="review-date">Квітень 2025</div>
-            </div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">"Поставили імплант — навіть не відчув болю! Сервіс на рівні кращих клінік Європи. Персонал дуже уважний і турботливий. Ціни адекватні якості. Буду приходити тільки сюди."</div>
-          <div class="review-author">
-            <div class="review-avatar">А</div>
-            <div>
-              <div class="review-name">Андрій Мороз</div>
-              <div class="review-date">Березень 2025</div>
-            </div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">"Приводжу сюди всю сім'ю, включаючи дітей. Дитяча стоматологія тут — це окремий рівень! Дочка більше не боїться зубного. Дякую команді за таке відношення!"</div>
-          <div class="review-author">
-            <div class="review-avatar">О</div>
-            <div>
-              <div class="review-name">Оксана Іваненко</div>
-              <div class="review-date">Лютий 2025</div>
-            </div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">"Відбілювання Zoom 4 — зуби стали на 8 тонів світліші! Результат тримається вже пів року. Лікар детально пояснила весь процес і дала рекомендації по догляду. Дякую!"</div>
-          <div class="review-author">
-            <div class="review-avatar">В</div>
-            <div>
-              <div class="review-name">Вікторія Пономаренко</div>
-              <div class="review-date">Січень 2025</div>
-            </div>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <div class="review-text">"Поставили вініри — відчуваю себе зовсім іншою людиною! Посмішка змінилася кардинально. Технологія та якість матеріалів — топ. Окремо хочу подякувати за турботу та увагу."</div>
-          <div class="review-author">
-            <div class="review-avatar">К</div>
-            <div>
-              <div class="review-name">Катерина Литвин</div>
-              <div class="review-date">Грудень 2024</div>
-            </div>
-          </div>
-        </div>
+
+  <div class="reviews-layout fade-in">
+    <!-- Рейтинг-зведення -->
+    <div class="reviews-summary">
+      <div class="rs-score">4.9</div>
+      <div class="rs-stars">★★★★★</div>
+      <div class="rs-count">На основі 500+ відгуків Google</div>
+      <div class="rs-bars">
+        <div class="rs-bar-row"><span class="rs-star-n">5</span><div class="rs-bar"><div class="rs-bar-fill" style="width:88%"></div></div><span class="rs-bar-pct">88%</span></div>
+        <div class="rs-bar-row"><span class="rs-star-n">4</span><div class="rs-bar"><div class="rs-bar-fill" style="width:9%"></div></div><span class="rs-bar-pct">9%</span></div>
+        <div class="rs-bar-row"><span class="rs-star-n">3</span><div class="rs-bar"><div class="rs-bar-fill" style="width:2%"></div></div><span class="rs-bar-pct">2%</span></div>
+        <div class="rs-bar-row"><span class="rs-star-n">2</span><div class="rs-bar"><div class="rs-bar-fill" style="width:1%"></div></div><span class="rs-bar-pct">1%</span></div>
+        <div class="rs-bar-row"><span class="rs-star-n">1</span><div class="rs-bar"><div class="rs-bar-fill" style="width:0%"></div></div><span class="rs-bar-pct">0%</span></div>
       </div>
+      <button class="btn btn-outline rs-cta" onclick="openPopup()">Залишити відгук</button>
     </div>
-    <div class="carousel-controls">
-      <button class="car-btn" id="carPrev">&#8592;</button>
-      <div class="carousel-dots">
-        <button class="dot-indicator active" data-idx="0"></button>
-        <button class="dot-indicator" data-idx="1"></button>
-        <button class="dot-indicator" data-idx="2"></button>
+
+    <!-- "Спотлайт" — один відгук за раз, з плавною зміною -->
+    <div class="reviews-spotlight">
+      <div class="rsp-quote-mark">&ldquo;</div>
+      <div class="rsp-card" id="reviewSpotlight"></div>
+      <div class="rsp-nav">
+        <button class="car-btn" id="revPrev" aria-label="Попередній відгук">&#8592;</button>
+        <div class="rsp-thumbs" id="revThumbs"></div>
+        <button class="car-btn" id="revNext" aria-label="Наступний відгук">&#8594;</button>
       </div>
-      <button class="car-btn" id="carNext">&#8594;</button>
     </div>
   </div>
 </section>
@@ -951,35 +974,109 @@
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   document.querySelectorAll('.stats-inner').forEach(el => observer.observe(el));
 
-  // Carousel
-  const track = document.getElementById('carouselTrack');
-  const cards = track.querySelectorAll('.review-card');
-  const dots = document.querySelectorAll('.dot-indicator');
-  let current = 0;
-  let perView = window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
+  // Top banner: height sync (so fixed nav/hero always sit right below it) + dismiss
+  const topBanner = document.getElementById('topBanner');
+  const bannerCloseBtn = document.getElementById('bannerClose');
 
-  function getPerView() {
-    return window.innerWidth < 640 ? 1 : window.innerWidth < 900 ? 2 : 3;
+  function syncBannerHeight() {
+    if (topBanner && !topBanner.classList.contains('hidden')) {
+      document.documentElement.style.setProperty('--banner-h', topBanner.offsetHeight + 'px');
+    } else {
+      document.documentElement.style.setProperty('--banner-h', '0px');
+    }
   }
-  function maxIdx() { return Math.max(0, cards.length - getPerView()); }
+  function closeBanner() {
+    topBanner.classList.add('hidden');
+    document.body.classList.add('banner-hidden');
+    syncBannerHeight();
+    try { localStorage.setItem('smileclinic_banner_closed', '1'); } catch (_) {}
+  }
+  if (bannerCloseBtn) bannerCloseBtn.addEventListener('click', closeBanner);
+  try {
+    if (localStorage.getItem('smileclinic_banner_closed') === '1') {
+      topBanner.classList.add('hidden');
+      document.body.classList.add('banner-hidden');
+    }
+  } catch (_) {}
+  window.addEventListener('load', syncBannerHeight);
+  window.addEventListener('resize', syncBannerHeight);
+  syncBannerHeight();
 
-  function goTo(idx) {
-    current = Math.max(0, Math.min(idx, maxIdx()));
-    const cardW = cards[0].offsetWidth + 20;
-    track.style.transform = `translateX(-${current * cardW}px)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  // Reviews: single "spotlight" card that fades between reviews,
+  // plus a rail of clickable avatar thumbnails and prev/next arrows.
+  const REVIEWS = [
+    { initial: 'М', name: 'Марина Дяченко', date: 'Квітень 2025', stars: 5, service: 'Лікування карієсу', text: 'Нарешті знайшла свого стоматолога! Олена Миколаївна — справжній професіонал. Лікування абсолютно безболісне, а результат перевершив усі очікування. Рекомендую всім без вагань!' },
+    { initial: 'А', name: 'Андрій Мороз', date: 'Березень 2025', stars: 5, service: 'Імплантація', text: 'Поставили імплант — навіть не відчув болю! Сервіс на рівні кращих клінік Європи. Персонал дуже уважний і турботливий. Ціни адекватні якості. Буду приходити тільки сюди.' },
+    { initial: 'О', name: 'Оксана Іваненко', date: 'Лютий 2025', stars: 5, service: 'Дитяча стоматологія', text: 'Приводжу сюди всю сім\'ю, включаючи дітей. Дитяча стоматологія тут — це окремий рівень! Дочка більше не боїться зубного. Дякую команді за таке відношення!' },
+    { initial: 'В', name: 'Вікторія Пономаренко', date: 'Січень 2025', stars: 5, service: 'Відбілювання', text: 'Відбілювання Zoom 4 — зуби стали на 8 тонів світліші! Результат тримається вже пів року. Лікар детально пояснила весь процес і дала рекомендації по догляду. Дякую!' },
+    { initial: 'К', name: 'Катерина Литвин', date: 'Грудень 2024', stars: 5, service: 'Вініри', text: 'Поставили вініри — відчуваю себе зовсім іншою людиною! Посмішка змінилася кардинально. Технологія та якість матеріалів — топ. Окремо хочу подякувати за турботу та увагу.' },
+  ];
+
+  const spotlight = document.getElementById('reviewSpotlight');
+  const thumbsWrap = document.getElementById('revThumbs');
+  let revIdx = 0;
+  let revTimer = null;
+
+  function renderSpotlightContent(idx) {
+    const r = REVIEWS[idx];
+    spotlight.innerHTML = `
+      <div class="rsp-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
+      <div class="rsp-text">"${r.text}"</div>
+      <div class="rsp-author">
+        <div class="rsp-avatar">${r.initial}</div>
+        <div>
+          <div class="rsp-name">${r.name}</div>
+          <div class="rsp-date">${r.date}</div>
+        </div>
+        <div class="rsp-service">${r.service}</div>
+      </div>
+    `;
   }
 
-  document.getElementById('carPrev').onclick = () => goTo(current - 1);
-  document.getElementById('carNext').onclick = () => goTo(current + 1);
-  dots.forEach(d => d.addEventListener('click', () => goTo(parseInt(d.dataset.idx))));
+  function showReview(idx, { animate = true } = {}) {
+    revIdx = (idx + REVIEWS.length) % REVIEWS.length;
+    const apply = () => {
+      renderSpotlightContent(revIdx);
+      [...thumbsWrap.children].forEach((t, i) => t.classList.toggle('active', i === revIdx));
+      if (animate) requestAnimationFrame(() => spotlight.classList.remove('fading'));
+    };
+    if (animate) {
+      spotlight.classList.add('fading');
+      setTimeout(apply, 200);
+    } else {
+      apply();
+    }
+  }
 
-  window.addEventListener('resize', () => { goTo(0); });
+  function buildThumbs() {
+    thumbsWrap.innerHTML = '';
+    REVIEWS.forEach((r, i) => {
+      const t = document.createElement('button');
+      t.type = 'button';
+      t.className = 'rsp-thumb';
+      t.textContent = r.initial;
+      t.setAttribute('aria-label', r.name);
+      t.addEventListener('click', () => { showReview(i); restartAutoplay(); });
+      thumbsWrap.appendChild(t);
+    });
+  }
 
-  // Auto-advance carousel
-  setInterval(() => {
-    goTo(current >= maxIdx() ? 0 : current + 1);
-  }, 5000);
+  function restartAutoplay() {
+    clearInterval(revTimer);
+    revTimer = setInterval(() => showReview(revIdx + 1), 6000);
+  }
+
+  if (spotlight && thumbsWrap) {
+    buildThumbs();
+    showReview(0, { animate: false });
+    restartAutoplay();
+
+    document.getElementById('revPrev').addEventListener('click', () => { showReview(revIdx - 1); restartAutoplay(); });
+    document.getElementById('revNext').addEventListener('click', () => { showReview(revIdx + 1); restartAutoplay(); });
+
+    document.querySelector('.reviews-spotlight').addEventListener('mouseenter', () => clearInterval(revTimer));
+    document.querySelector('.reviews-spotlight').addEventListener('mouseleave', restartAutoplay);
+  }
 </script>
 </body>
 </html>
