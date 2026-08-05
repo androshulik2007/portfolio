@@ -301,33 +301,86 @@ nav a:hover { color: var(--blue-deep); }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
-  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   position: relative;
   overflow: hidden;
-}
-
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--blue-pale), var(--blue-mid));
-  border-radius: 20px 20px 0 0;
-  opacity: 0;
-  transition: opacity 0.25s;
+  cursor: pointer;
 }
 
 .card:hover {
   border-color: var(--border-hover);
   box-shadow: var(--shadow-hover);
-  transform: translateY(-3px);
+  transform: scale(1.015);
 }
 
-.card:hover::after { opacity: 1; }
+/* ── CARD IMAGE ── */
+.card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface2);
+}
+
+.card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card:hover .card-image-wrap img {
+  transform: scale(1.06);
+}
+
+.card-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(45, 91, 227, 0.05) 0%, rgba(45, 91, 227, 0.55) 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Заглушка, поки скріншот не додано в images/ */
+.card-image-wrap.no-image img { display: none; }
+
+.card-image-wrap.no-image::before {
+  content: 'Додайте скріншот у images/';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--surface2),
+    var(--surface2) 10px,
+    var(--bg2) 10px,
+    var(--bg2) 20px
+  );
+}
+
+.card:hover .card-image-overlay {
+  opacity: 1;
+}
+
+.card-body {
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
 
 .card-top {
   display: flex;
@@ -398,6 +451,11 @@ nav a:hover { color: var(--blue-deep); }
   background: var(--blue-mid);
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(45, 91, 227, 0.3);
+}
+
+.card:hover .btn-primary {
+  background: #ffffff;
+  color: var(--blue-deep);
 }
 
 .btn-primary svg { transition: transform 0.2s; }
@@ -572,82 +630,112 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
   <div class="grid">
 
     <!-- CARD 1 -->
-    <div class="card">
-      <div class="card-top">
-        <span class="card-index">01</span>
-        <span class="card-tag">Стоматологія</span>
+    <div class="card" data-href="1779054804308_dental-clinic.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/smile-clinic.jpg" alt="СмайлКлінік — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
       </div>
-      <h2>СмайлКлінік</h2>
-      <p>Сучасний сайт для стоматологічної клініки. Акцент на довірі та комфорті пацієнта — чиста структура, зелена палітра, зручна навігація.</p>
-      <div>
-        <a class="btn btn-primary" href="1779054804308_dental-clinic.html" target="_blank">
-          Переглянути
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">01</span>
+          <span class="card-tag">Стоматологія</span>
+        </div>
+        <h2>СмайлКлінік</h2>
+        <p>Сучасний сайт для стоматологічної клініки. Акцент на довірі та комфорті пацієнта — чиста структура, зелена палітра, зручна навігація.</p>
+        <div>
+          <a class="btn btn-primary" href="1779054804308_dental-clinic.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- CARD 2 -->
-    <div class="card">
-      <div class="card-top">
-        <span class="card-index">02</span>
-        <span class="card-tag">Стоматологія</span>
+    <div class="card" data-href="1779054804309_stomatologia_shevchenko__2_.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/shevchenko-dental.jpg" alt="Стоматологія імені Т. Шевченка — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
       </div>
-      <h2>Стоматологія імені Т. Шевченка</h2>
-      <p>Елегантний сайт для приватної клініки з класичним характером. Серіфні шрифти, стримана палітра і відчуття авторитету.</p>
-      <div>
-        <a class="btn btn-primary" href="1779054804309_stomatologia_shevchenko__2_.html" target="_blank">
-          Переглянути
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">02</span>
+          <span class="card-tag">Стоматологія</span>
+        </div>
+        <h2>Стоматологія імені Т. Шевченка</h2>
+        <p>Елегантний сайт для приватної клініки з класичним характером. Серіфні шрифти, стримана палітра і відчуття авторитету.</p>
+        <div>
+          <a class="btn btn-primary" href="1779054804309_stomatologia_shevchenko__2_.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- CARD 3 -->
-    <div class="card">
-      <div class="card-top">
-        <span class="card-index">03</span>
-        <span class="card-tag">Стоматологія</span>
+    <div class="card" data-href="dental-premium.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/aurum-dental.jpg" alt="AURUM DENTAL — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
       </div>
-      <h2>AURUM DENTAL</h2>
-      <p>Преміум стоматологія у темних тонах із золотими акцентами. Повний лендінг: послуги з цінами, команда лікарів, галерея до/після, онлайн-запис та відгуки.</p>
-      <div>
-        <a class="btn btn-primary" href="dental-premium.html" target="_blank">
-          Переглянути
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">03</span>
+          <span class="card-tag">Стоматологія</span>
+        </div>
+        <h2>AURUM DENTAL</h2>
+        <p>Преміум стоматологія у темних тонах із золотими акцентами. Повний лендінг: послуги з цінами, команда лікарів, галерея до/після, онлайн-запис та відгуки.</p>
+        <div>
+          <a class="btn btn-primary" href="dental-premium.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- CARD 4 -->
-    <div class="card">
-      <div class="card-top">
-        <span class="card-index">04</span>
-        <span class="card-tag">Стоматологія</span>
+    <div class="card" data-href="lvivdent/index.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/lvivdent.jpg" alt="LvivDent — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
       </div>
-      <h2>LvivDent</h2>
-      <p>Преміальна стоматологічна клініка у Львові. Класичний золотисто-кремовий дизайн, 5 сторінок, інтерактивна галерея До/Після, блог з адмін-панеллю на Firebase. Повне SEO та запис через Formspree.</p>
-      <div>
-        <a class="btn btn-primary" href="lvivdent\index.html" target="_blank">
-          Переглянути
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">04</span>
+          <span class="card-tag">Стоматологія</span>
+        </div>
+        <h2>LvivDent</h2>
+        <p>Преміальна стоматологічна клініка у Львові. Класичний золотисто-кремовий дизайн, 5 сторінок, інтерактивна галерея До/Після, блог з адмін-панеллю на Firebase. Повне SEO та запис через Formspree.</p>
+        <div>
+          <a class="btn btn-primary" href="lvivdent/index.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- CARD 5 -->
-    <div class="card">
-      <div class="card-top">
-        <span class="card-index">05</span>
-        <span class="card-tag">Стоматологія</span>
+    <div class="card" data-href="OBSIDIAN/obsidian-dental.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/obsidian.jpg" alt="OBSIDIAN — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
       </div>
-      <h2>OBSIDIAN</h2>
-      <p>Елітна стоматологічна клініка у глибоких темних тонах з акцентом на інноваційність та естетику. Висококонверсійний дизайн, інтерактивний прайс-лист, презентація цифрового обладнання та зручна система запису.</p>
-      <div>
-        <a class="btn btn-primary" href="OBSIDIAN/obsidian-dental.html" target="_blank">
-          Переглянути
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">05</span>
+          <span class="card-tag">Стоматологія</span>
+        </div>
+        <h2>OBSIDIAN</h2>
+        <p>Елітна стоматологічна клініка у глибоких темних тонах з акцентом на інноваційність та естетику. Висококонверсійний дизайн, інтерактивний прайс-лист, презентація цифрового обладнання та зручна система запису.</p>
+        <div>
+          <a class="btn btn-primary" href="OBSIDIAN/obsidian-dental.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -666,18 +754,24 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
   <div class="grid">
 
     <!-- CARD 6 -->
-    <div class="card">
-      <div class="card-top">
-        <span class="card-index">06</span>
-        <span class="card-tag">Манікюрний салон</span>
+    <div class="card" data-href="BONBON/bonbon-nails.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/bonbon.jpg" alt="BONBON — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
       </div>
-      <h2>BONBON</h2>
-      <p>Естетичний та сучасний сайт для манікюрного салону краси. Ніжна пастельна палітра, зручний онлайн-запис до майстрів, інтерактивний прайс-лист та портфоліо робіт, що підкреслює преміальний рівень сервісу.</p>
-      <div>
-        <a class="btn btn-primary" href="BONBON/bonbon-nails.html" target="_blank">
-          Переглянути
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">06</span>
+          <span class="card-tag">Манікюрний салон</span>
+        </div>
+        <h2>BONBON</h2>
+        <p>Естетичний та сучасний сайт для манікюрного салону краси. Ніжна пастельна палітра, зручний онлайн-запис до майстрів, інтерактивний прайс-лист та портфоліо робіт, що підкреслює преміальний рівень сервісу.</p>
+        <div>
+          <a class="btn btn-primary" href="BONBON/bonbon-nails.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -696,18 +790,24 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
   <div class="grid">
 
     <!-- CARD 7 -->
-    <div class="card">
-      <div class="card-top">
-        <span class="card-index">07</span>
-        <span class="card-tag">Бутик-готель</span>
+    <div class="card" data-href="hotel-saas/index.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/lornet.jpg" alt="LORNET — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
       </div>
-      <h2>LORNET</h2>
-      <p>Преміальний бутик-готель у самому серці Львова. Естетика класичної розкоші у глибоких тонах з елементами латуні, інтерактивний каталог номерів, живе онлайн-бронювання з інтеграцією бази даних та повноцінна система управління.</p>
-      <div>
-        <a class="btn btn-primary" href="hotel-saas/index.html" target="_blank">
-          Переглянути
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">07</span>
+          <span class="card-tag">Бутик-готель</span>
+        </div>
+        <h2>LORNET</h2>
+        <p>Преміальний бутик-готель у самому серці Львова. Естетика класичної розкоші у глибоких тонах з елементами латуні, інтерактивний каталог номерів, живе онлайн-бронювання з інтеграцією бази даних та повноцінна система управління.</p>
+        <div>
+          <a class="btn btn-primary" href="hotel-saas/index.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -729,6 +829,22 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
   </div>
   <div class="footer-copy">© 2025 · Всі права захищено</div>
 </footer>
+
+
+<script>
+  function openCard(card) {
+    const href = card.dataset.href;
+    if (href) window.open(href, '_blank');
+  }
+
+  // Якщо файл скріншоту ще не додано в папку images/ — показуємо
+  // акуратну заглушку замість "битої" картинки.
+  document.querySelectorAll('.card-image-wrap img').forEach(img => {
+    img.addEventListener('error', () => {
+      img.closest('.card-image-wrap').classList.add('no-image');
+    }, { once: true });
+  });
+</script>
 
 </body>
 </html>
