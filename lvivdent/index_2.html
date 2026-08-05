@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LvivDent — Стоматологічна клініка у Львові</title>
+<meta name="description" content="LvivDent — преміальна стоматологічна клініка у Львові. Лікування, імплантація, відбілювання, ортодонтія. Консультація безкоштовна. Запис онлайн.">
+<meta name="keywords" content="стоматологія Львів, зубний лікар Львів, імплантація зубів Львів, відбілювання, ортодонт Львів, LvivDent">
+<meta name="author" content="LvivDent">
+<meta property="og:title" content="LvivDent — Стоматологічна клініка у Львові">
+<meta property="og:description" content="Преміальна стоматологія у Львові. Сучасне обладнання, досвідчені лікарі, комфорт для кожного пацієнта.">
+<meta property="og:image" content="photos/clinic-og.jpg">
+<meta property="og:url" content="https://lvivdent.com.ua">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://lvivdent.com.ua">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#faf8f4;--cream2:#f4f0e8;--cream3:#ede8dc;
+  --white:#fff;--charcoal:#1a1814;--dark:#2d2a24;
+  --mid:#5c5648;--muted:#8c8274;--faint:#c4b9a8;
+  --gold:#b8922a;--gold-light:#d4a843;--gold-pale:#f0e4c4;--gold-wash:#faf4e4;
+  --border:rgba(184,146,42,.15);--border2:rgba(184,146,42,.3);
+  --shadow:0 4px 32px rgba(26,24,20,.06);--shadow-lg:0 16px 64px rgba(26,24,20,.12);
+  --nav-h:76px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:200;height:var(--nav-h);background:rgba(250,248,244,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--charcoal);text-decoration:none;letter-spacing:.02em}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff!important;padding:10px 22px;border-radius:100px;transition:background .2s,transform .15s!important}
+.nav-cta:hover{background:var(--gold-light)!important;transform:translateY(-1px)}
+.nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--charcoal)}
+.nav-burger svg{width:24px;height:24px;stroke:currentColor;stroke-width:2;fill:none}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:var(--cream);border-bottom:1px solid var(--border);padding:2rem 5%;flex-direction:column;gap:1.25rem;z-index:199}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:.9rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+/* HERO */
+.hero{min-height:90vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 5% 60px;gap:5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;right:0;width:52%;height:100%;background:var(--cream2);z-index:0;clip-path:polygon(10% 0,100% 0,100% 100%,0 100%)}
+.hero::after{content:'';position:absolute;top:0;right:0;width:52%;height:100%;z-index:2;background:var(--gold);clip-path:polygon(10% 0,calc(10% + 3px) 0,3px 100%,0 100%)}
+.hero-text{position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5vw,5rem);font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-desc{font-size:1rem;color:var(--mid);max-width:420px;line-height:1.8;font-weight:300;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all .2s;border:none}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,146,42,.3)}
+.btn-outline{background:none;color:var(--charcoal);border:1.5px solid var(--border2)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
+.hero-stat strong{display:block;font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1}
+.hero-stat span{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hero-visual{position:absolute;top:0;right:0;width:52%;height:100%;z-index:1;clip-path:polygon(10% 0,100% 0,100% 100%,0 100%);overflow:hidden}
+.hero-img-wrap{width:100%;height:100%}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-badge{position:absolute;bottom:24px;left:40px;z-index:2;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1rem 1.25rem;box-shadow:var(--shadow);display:flex;align-items:center;gap:.75rem}
+.hero-badge-icon{width:40px;height:40px;background:var(--gold-wash);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:1px solid var(--gold-pale)}
+.hero-badge strong{display:block;font-size:.85rem;font-weight:600;color:var(--charcoal)}
+.hero-badge span{font-size:.72rem;color:var(--muted)}
+
+/* SECTIONS */
+section{padding:100px 5%}
+.section-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+h2.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:600;line-height:1.15;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:.75rem}
+.section-sub{font-size:.95rem;color:var(--mid);max-width:500px;font-weight:300;line-height:1.8;margin-bottom:3rem}
+
+/* WHY */
+.why{background:var(--white)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.why-card{padding:2.25rem 2rem;border:1px solid var(--border);border-radius:20px;background:var(--cream);transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.why-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold-pale),var(--gold));opacity:0;transition:opacity .2s}
+.why-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.why-card:hover::after{opacity:1}
+.why-num{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;color:var(--gold-pale);line-height:1;margin-bottom:.75rem}
+.why-card h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--charcoal);margin-bottom:.5rem}
+.why-card p{font-size:.855rem;color:var(--mid);font-weight:300;line-height:1.75}
+
+/* SERVICES */
+.services-preview{background:var(--cream2)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.service-card{background:var(--white);border-radius:20px;padding:2rem;border:1px solid var(--border);transition:all .2s;text-decoration:none;display:block;color:inherit}
+.service-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.service-icon{width:52px;height:52px;background:var(--gold-wash);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.25rem;border:1px solid var(--gold-pale)}
+.service-card h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--charcoal);margin-bottom:.4rem}
+.service-card p{font-size:.83rem;color:var(--mid);font-weight:300;line-height:1.7;margin-bottom:.9rem}
+.service-price{font-size:.75rem;font-weight:600;letter-spacing:.08em;color:var(--gold);text-transform:uppercase}
+.center{text-align:center;margin-top:2.5rem}
+
+/* TEAM */
+.team{background:var(--white)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.doctor-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--cream);transition:transform .2s,box-shadow .2s}
+.doctor-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.doctor-photo{height:260px;background:var(--cream2);display:flex;align-items:center;justify-content:center;color:var(--faint);overflow:hidden}
+.doctor-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.doctor-info{padding:1.25rem 1.25rem 1.5rem;border-top:2px solid var(--gold-pale)}
+.doctor-info h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--charcoal);margin-bottom:.2rem}
+.doctor-spec{font-size:.72rem;font-weight:500;letter-spacing:.06em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem;display:block}
+.doctor-exp{display:inline-block;font-size:.7rem;background:var(--gold-wash);color:var(--gold);padding:2px 10px;border-radius:100px;border:1px solid var(--gold-pale)}
+
+/* REVIEWS */
+.reviews{background:var(--cream2)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.review-card{background:var(--white);border-radius:20px;padding:2rem;border:1px solid var(--border);position:relative}
+.review-quote{font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--gold-pale);line-height:1;position:absolute;top:1rem;right:1.5rem}
+.stars{color:var(--gold-light);font-size:.9rem;margin-bottom:.75rem;letter-spacing:.08em}
+.review-text{font-size:.875rem;color:var(--dark);font-weight:300;line-height:1.75;margin-bottom:1.25rem;font-style:italic}
+.reviewer{display:flex;align-items:center;gap:.75rem}
+.reviewer-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold-wash);border:1px solid var(--gold-pale);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.reviewer-name{font-size:.85rem;font-weight:600;color:var(--charcoal)}
+.reviewer-date{font-size:.72rem;color:var(--muted)}
+
+/* BLOG PREVIEW */
+.blog-preview{background:var(--white)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.blog-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);background:var(--cream);transition:all .2s;text-decoration:none;color:inherit;display:block;word-break:break-word}
+.blog-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.blog-thumb{height:200px;background:var(--cream2);display:flex;align-items:center;justify-content:center;color:var(--faint);overflow:hidden}
+.blog-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.blog-body{padding:1.5rem}
+.blog-tag{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:block}
+.blog-card h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:600;color:var(--charcoal);line-height:1.35;margin-bottom:.5rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-wrap:break-word}
+.blog-card p{font-size:.82rem;color:var(--mid);font-weight:300;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;word-wrap:break-word}
+.blog-date{font-size:.72rem;color:var(--muted);margin-top:.75rem;display:block}
+
+/* BOOKING */
+.booking{background:var(--charcoal)}
+.booking .section-eyebrow{color:var(--gold-pale)}
+.booking .section-eyebrow::before{background:var(--gold-pale)}
+.booking h2.section-title{color:var(--white)}
+.booking .section-sub{color:rgba(255,255,255,.5)}
+.booking-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.booking-form-wrap{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:2.5rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;font-family:'Inter',sans-serif;font-size:.875rem;color:#fff;outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(184,146,42,.5)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.2)}
+.form-group select option{background:var(--dark)}
+.form-group textarea{resize:none;height:85px}
+.btn-submit{width:100%;background:var(--gold);color:#fff;border:none;padding:14px;border-radius:100px;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:.5rem;transition:background .2s,transform .15s}
+.btn-submit:hover{background:var(--gold-light);transform:translateY(-2px)}
+.booking-info h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--white);margin-bottom:2rem}
+.info-item{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.5rem}
+.info-icon{width:44px;height:44px;background:rgba(184,146,42,.12);border:1px solid rgba(184,146,42,.22);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.info-item strong{display:block;font-size:.875rem;color:var(--white);font-weight:500;margin-bottom:.1rem}
+.info-item span{font-size:.82rem;color:rgba(255,255,255,.4)}
+.form-success{text-align:center;padding:2.5rem 1rem;color:#fff}
+.form-success .check{font-size:2.5rem;margin-bottom:1rem}
+.form-success h3{font-family:'Cormorant Garamond',serif;font-size:1.75rem;margin-bottom:.5rem}
+.form-success p{color:rgba(255,255,255,.5);font-size:.9rem}
+
+/* FOOTER */
+footer{background:#120f0a;color:rgba(255,255,255,.4);padding:60px 5% 32px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem}
+.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.83rem;line-height:1.75;max-width:240px}
+footer h4{color:rgba(255,255,255,.6);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.5rem}
+footer ul a{color:rgba(255,255,255,.3);text-decoration:none;font-size:.83rem;transition:color .2s}
+footer ul a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;font-size:.78rem;flex-wrap:wrap;gap:.5rem}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+  .nav-links{display:none}.nav-burger{display:block}
+  .hero{grid-template-columns:1fr;min-height:auto;padding:60px 5% 50px;gap:3rem}
+  .hero::before{display:none}.hero::after{display:none}
+  .hero-visual{position:relative;order:-1;width:auto;height:auto;top:auto;right:auto;clip-path:none;border-radius:20px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow-lg)}
+  .hero-badge{left:20px}
+  .why-grid,.services-grid{grid-template-columns:1fr 1fr}
+  .reviews-grid,.blog-grid{grid-template-columns:1fr}
+  .booking-layout{grid-template-columns:1fr;gap:2.5rem}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:600px){
+  section{padding:70px 4%}.hero{padding:50px 4% 40px}
+  .why-grid,.services-grid,.team-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}.footer-top{grid-template-columns:1fr}
+  .hero-badge{display:none}.hero-stats{gap:1.5rem}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-eyebrow{animation:fadeUp .5s ease both}
+.hero h1{animation:fadeUp .5s .1s ease both}
+.hero-desc{animation:fadeUp .5s .2s ease both}
+.hero-actions{animation:fadeUp .5s .3s ease both}
+.hero-stats{animation:fadeUp .5s .4s ease both}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Lviv<span>Dent</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html">Послуги</a></li>
+    <li><a href="prices.html">Ціни</a></li>
+    <li><a href="gallery.html">Галерея</a></li>
+    <li><a href="blog.html">Блог</a></li>
+    <li><a href="#booking" class="nav-cta">Записатися</a></li>
+  </ul>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Меню">
+    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="services.html" onclick="toggleMenu()">Послуги</a>
+  <a href="prices.html" onclick="toggleMenu()">Ціни</a>
+  <a href="gallery.html" onclick="toggleMenu()">Галерея</a>
+  <a href="blog.html" onclick="toggleMenu()">Блог</a>
+  <a href="#booking" onclick="toggleMenu()" style="color:var(--gold)">Записатися →</a>
+</div>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Стоматологія у Львові</div>
+    <h1>Ваша посмішка — <em>наша гордість</em></h1>
+    <p class="hero-desc">LvivDent — клініка, де кожен пацієнт відчуває турботу. Сучасне обладнання, кваліфіковані лікарі та комфорт на кожному кроці.</p>
+    <div class="hero-actions">
+      <a class="btn btn-gold" href="#booking">Записатися на прийом</a>
+      <a class="btn btn-outline" href="services.html">Наші послуги</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>12+</strong><span>Років досвіду</span></div>
+      <div class="hero-stat"><strong>4 800+</strong><span>Пацієнтів</span></div>
+      <div class="hero-stat"><strong>8</strong><span>Лікарів</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <img src="photos/mainpage-clinic.jpg" alt="Клініка LvivDent — сучасний стоматологічний кабінет у Львові">
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-icon">🦷</div>
+      <div><strong>Безболісне лікування</strong><span>Сучасна анестезія</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="section-eyebrow">Чому обирають нас</div>
+  <h2 class="section-title">Стандарти, яким ви довіряєте</h2>
+  <p class="section-sub">Поєднуємо класичні цінності медицини з сучасними технологіями.</p>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">01</div><h3>Досвідчена команда</h3><p>Усі лікарі мають вищу медичну освіту, міжнародні сертифікати та постійно підвищують кваліфікацію.</p></div>
+    <div class="why-card"><div class="why-num">02</div><h3>Сучасне обладнання</h3><p>Цифровий рентген, 3D-томограф, лазерне лікування — найновіші технології для точної діагностики.</p></div>
+    <div class="why-card"><div class="why-num">03</div><h3>Комфорт і безпека</h3><p>Стерильні умови, м'яка анестезія та уважне ставлення роблять кожен візит приємним.</p></div>
+    <div class="why-card"><div class="why-num">04</div><h3>Прозорі ціни</h3><p>Вартість лікування узгоджується до початку процедури. Жодних прихованих доплат.</p></div>
+    <div class="why-card"><div class="why-num">05</div><h3>Зручний графік</h3><p>Приймаємо щодня з 8:00 до 20:00 включно з вихідними. Запис онлайн або за телефоном.</p></div>
+    <div class="why-card"><div class="why-num">06</div><h3>Гарантія якості</h3><p>Гарантія на всі реставраційні роботи та безкоштовний огляд протягом гарантійного терміну.</p></div>
+  </div>
+</section>
+
+<section class="services-preview">
+  <div class="section-eyebrow">Послуги</div>
+  <h2 class="section-title">Повний спектр стоматології</h2>
+  <p class="section-sub">Від профілактики до складної хірургії — вирішуємо будь-які стоматологічні завдання.</p>
+  <div class="services-grid">
+    <a class="service-card" href="services.html"><div class="service-icon">🦷</div><h3>Лікування зубів</h3><p>Карієс, пульпіт, захворювання ясен — лікуємо швидко і безболісно.</p><div class="service-price">від 650 грн</div></a>
+    <a class="service-card" href="services.html"><div class="service-icon">✨</div><h3>Відбілювання</h3><p>ZOOM 4 та домашні системи для яскравої, природньої посмішки.</p><div class="service-price">від 3 200 грн</div></a>
+    <a class="service-card" href="services.html"><div class="service-icon">🔩</div><h3>Імплантація</h3><p>Імпланти Nobel Biocare та Straumann з гарантією на 10 років.</p><div class="service-price">від 12 000 грн</div></a>
+    <a class="service-card" href="services.html"><div class="service-icon">💎</div><h3>Вініри та коронки</h3><p>Ультратонкі керамічні вініри та цирконієві коронки E.max.</p><div class="service-price">від 4 500 грн</div></a>
+    <a class="service-card" href="services.html"><div class="service-icon">😁</div><h3>Ортодонтія</h3><p>Брекети, елайнери та ретейнери для дітей і дорослих.</p><div class="service-price">від 8 000 грн</div></a>
+    <a class="service-card" href="services.html"><div class="service-icon">🧹</div><h3>Профілактика</h3><p>Ультразвукова чистка, Air Flow, фторування — здоров'я щодня.</p><div class="service-price">від 1 200 грн</div></a>
+  </div>
+  <div class="center"><a class="btn btn-outline" href="services.html">Всі послуги →</a></div>
+</section>
+
+<section class="team">
+  <div class="section-eyebrow">Наша команда</div>
+  <h2 class="section-title">Лікарі, яким довіряють</h2>
+  <p class="section-sub">Кожен спеціаліст — це роки практики, міжнародне навчання і щира турбота про пацієнта.</p>
+  <div class="team-grid">
+    <div class="doctor-card"><div class="doctor-photo"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="doctor-info"><h3>Олена Коваль</h3><span class="doctor-spec">Терапевт · Головний лікар</span><span class="doctor-exp">Стаж: 18 років</span></div></div>
+    <div class="doctor-card"><div class="doctor-photo"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="doctor-info"><h3>Андрій Мельник</h3><span class="doctor-spec">Хірург · Імплантолог</span><span class="doctor-exp">Стаж: 14 років</span></div></div>
+    <div class="doctor-card"><div class="doctor-photo"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="doctor-info"><h3>Марія Савчук</h3><span class="doctor-spec">Ортодонт</span><span class="doctor-exp">Стаж: 10 років</span></div></div>
+    <div class="doctor-card"><div class="doctor-photo"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="doctor-info"><h3>Ігор Петренко</h3><span class="doctor-spec">Естетична стоматологія</span><span class="doctor-exp">Стаж: 12 років</span></div></div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="section-eyebrow">Відгуки</div>
+  <h2 class="section-title">Що кажуть пацієнти</h2>
+  <p class="section-sub">Понад 4 800 пацієнтів обрали LvivDent. Ось що вони розповідають.</p>
+  <div class="reviews-grid">
+    <div class="review-card"><span class="review-quote">"</span><div class="stars">★★★★★</div><p class="review-text">Нарешті знайшла клініку, де не страшно. Олена Коваль — фантастичний лікар. Все пояснила, без болю.</p><div class="reviewer"><div class="reviewer-avatar">👩</div><div><div class="reviewer-name">Ірина Бойко</div><div class="reviewer-date">Квітень 2025</div></div></div></div>
+    <div class="review-card"><span class="review-quote">"</span><div class="stars">★★★★★</div><p class="review-text">Робив імплант у Андрія Мельника. Через рік — як рідний зуб. Дуже задоволений якістю роботи.</p><div class="reviewer"><div class="reviewer-avatar">👨</div><div><div class="reviewer-name">Олексій Франко</div><div class="reviewer-date">Березень 2025</div></div></div></div>
+    <div class="review-card"><span class="review-quote">"</span><div class="stars">★★★★★</div><p class="review-text">Поставила вініри — результат перевершив очікування. Посмішка мрії стала реальністю!</p><div class="reviewer"><div class="reviewer-avatar">👩</div><div><div class="reviewer-name">Наталія Гречко</div><div class="reviewer-date">Травень 2025</div></div></div></div>
+  </div>
+</section>
+
+<section class="blog-preview">
+  <div class="section-eyebrow">Блог</div>
+  <h2 class="section-title">Корисні статті</h2>
+  <p class="section-sub">Поради від наших лікарів про здоров'я зубів і сучасні технології.</p>
+  <div class="blog-grid" id="blog-preview-list"></div>
+  <div class="center" style="margin-top:2.5rem"><a class="btn btn-outline" href="blog.html">Всі статті →</a></div>
+</section>
+
+<section class="booking" id="booking">
+  <div class="section-eyebrow">Запис</div>
+  <h2 class="section-title">Запишіться онлайн</h2>
+  <p class="section-sub">Консультація безкоштовна. Оберіть зручний час — ми підтвердимо запис.</p>
+  <div class="booking-layout">
+    <div class="booking-form-wrap">
+      <div id="form-wrap">
+        <form id="booking-form">
+          <div class="form-row">
+            <div class="form-group"><label>Ім'я</label><input type="text" name="name" placeholder="Ваше ім'я" required></div>
+            <div class="form-group"><label>Телефон</label><input type="tel" name="phone" placeholder="+38 (0__)" required></div>
+          </div>
+          <div class="form-group"><label>Послуга</label>
+            <select name="service" required>
+              <option value="">Оберіть послугу</option>
+              <option>Консультація (безкоштовно)</option><option>Лікування карієсу</option>
+              <option>Відбілювання</option><option>Імплантація</option>
+              <option>Ортодонтія</option><option>Чистка зубів</option><option>Вініри та коронки</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Дата</label><input type="date" name="date" required></div>
+            <div class="form-group"><label>Час</label>
+              <select name="time" required>
+                <option value="">Час</option>
+                <option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option>
+                <option>12:00</option><option>14:00</option><option>15:00</option><option>16:00</option>
+                <option>17:00</option><option>18:00</option><option>19:00</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label>Коментар</label><textarea name="message" placeholder="Опишіть запит..."></textarea></div>
+          <button type="submit" class="btn-submit" id="submit-btn">Підтвердити запис →</button>
+        </form>
+      </div>
+    </div>
+    <div class="booking-info">
+      <h3>Ми чекаємо на вас</h3>
+      <div class="info-item"><div class="info-icon">📍</div><div><strong>Адреса</strong><span>вул. Городоцька, 1, Львів</span></div></div>
+      <div class="info-item"><div class="info-icon">📞</div><div><strong>Телефон</strong><span>+38 (032) 000-00-00</span></div></div>
+      <div class="info-item"><div class="info-icon">🕐</div><div><strong>Графік</strong><span>Пн–Пт: 8:00–20:00 · Сб–Нд: 9:00–18:00</span></div></div>
+      <div class="info-item"><div class="info-icon">✉️</div><div><strong>Email</strong><span>info@lvivdent.com.ua</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div><div class="footer-logo">Lviv<span>Dent</span></div><p class="footer-desc">Преміальна стоматологічна клініка у Львові. Дбаємо про вашу посмішку з 2012 року.</p></div>
+    <div><h4>Послуги</h4><ul><li><a href="services.html">Лікування</a></li><li><a href="services.html">Відбілювання</a></li><li><a href="services.html">Імплантація</a></li><li><a href="services.html">Ортодонтія</a></li></ul></div>
+    <div><h4>Клініка</h4><ul><li><a href="gallery.html">Галерея</a></li><li><a href="prices.html">Ціни</a></li><li><a href="blog.html">Блог</a></li><li><a href="#booking">Запис</a></li></ul></div>
+    <div><h4>Контакти</h4><ul><li><a href="#">вул. Городоцька, 1</a></li><li><a href="#">+38 (032) 000-00-00</a></li><li><a href="#">info@lvivdent.com.ua</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 LvivDent. Всі права захищено.</span><span>Львів, Україна 🇺🇦</span></div>
+
+  <div style="text-align:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.05)"><a href="admin.html" style="font-size:.68rem;color:rgba(255,255,255,.2);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s" onmouseover="this.style.color='#b8922a'" onmouseout="this.style.color='rgba(255,255,255,.2)'">Адмін-панель</a></div>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs, orderBy, query, limit } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBYF_3t84vTJYaPeFOPyOiSEaAGEeQdzqw",
+  authDomain: "lvivdent.firebaseapp.com",
+  projectId: "lvivdent",
+  storageBucket: "lvivdent.firebasestorage.app",
+  messagingSenderId: "267260669030",
+  appId: "1:267260669030:web:2fc4df55432b8fac2491a7"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.toggleMenu = function(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+};
+
+document.getElementById('booking-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Надсилаємо...';
+  try {
+    const r = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    if(r.ok){
+      document.getElementById('form-wrap').innerHTML = '<div class="form-success"><div class="check">✅</div><h3>Запис підтверджено!</h3><p>Ми зв\'яжемося з вами найближчим часом.</p></div>';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Підтвердити запис →';
+      alert('Помилка. Зателефонуйте нам.');
+    }
+  } catch {
+    btn.disabled = false;
+    btn.textContent = 'Підтвердити запис →';
+    alert('Помилка. Зателефонуйте нам.');
+  }
+});
+
+async function loadBlogPreview(){
+  const sample = [
+    {title:'Як правильно чистити зуби: поради від лікаря', excerpt:'Більшість людей чистять зуби неправильно. Дізнайтесь техніку, яка захищає від карієсу.', tag:'Поради', date:'15 травня 2025'},
+    {title:'Імплантація зубів: що потрібно знати', excerpt:'Відповідаємо на найпоширеніші запитання пацієнтів про імплантацію зубів у Львові.', tag:'Імплантація', date:'2 травня 2025'},
+    {title:'Відбілювання ZOOM 4: реальний результат', excerpt:'Як проходить процедура, скільки тонів досягти і як зберегти результат надовго.', tag:'Відбілювання', date:'20 квітня 2025'},
+  ];
+  
+  let stored = [];
+  try {
+    const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(3));
+    const snap = await getDocs(q);
+    stored = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  } catch(e){
+    console.error('Firebase error:', e);
+  }
+  
+  const posts = [...stored, ...sample].slice(0, 3);
+  document.getElementById('blog-preview-list').innerHTML = posts.map(p => `
+    <a class="blog-card" href="blog.html">
+      <div class="blog-thumb">${p.image ? `<img src="${p.image}" alt="${p.title}">` : '<svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 9 4-4 4 4 4-4 4 4"/></svg>'}</div>
+      <div class="blog-body">
+        <span class="blog-tag">${p.tag||'Стаття'}</span>
+        <h3>${p.title}</h3>
+        <p>${p.excerpt}</p>
+        <span class="blog-date">${p.date||''}</span>
+      </div>
+    </a>`).join('');
+}
+
+loadBlogPreview();
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBYF_3t84vTJYaPeFOPyOiSEaAGEeQdzqw",
+  authDomain: "lvivdent.firebaseapp.com",
+  projectId: "lvivdent",
+  storageBucket: "lvivdent.firebasestorage.app",
+  messagingSenderId: "267260669030",
+  appId: "1:267260669030:web:2fc4df55432b8fac2491a7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadBlogPreview(){
+  const list = document.getElementById('blog-preview-list');
+  try {
+    const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(3));
+    const snap = await getDocs(q);
+    const posts = [];
+    snap.forEach(d => posts.push({id: d.id, ...d.data()}));
+    
+    if(posts.length === 0){
+      list.parentElement.style.display = 'none';
+      return;
+    }
+    
+    list.innerHTML = posts.map(p => `
+      <a class="blog-card" href="blog.html">
+        <div class="blog-thumb">${p.image ? `<img src="${escapeAttr(p.image)}" alt="${escapeAttr(p.title)}" onerror="this.style.display='none'">` : '<svg width="36" height="36" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 9 4-4 4 4 4-4 4 4"/></svg>'}</div>
+        <div class="blog-body">
+          <span class="blog-tag">${escapeHtml(p.tag||'Стаття')}</span>
+          <h3>${escapeHtml(p.title)}</h3>
+          <p>${escapeHtml(p.excerpt||'')}</p>
+          <span class="blog-date">${escapeHtml(p.date||'')}</span>
+        </div>
+      </a>`).join('');
+  } catch(err){
+    console.error(err);
+    list.parentElement.style.display = 'none';
+  }
+}
+
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function escapeAttr(s){return String(s).replace(/"/g,'&quot;')}
+
+loadBlogPreview();
+</script>
+</body>
+</html>
