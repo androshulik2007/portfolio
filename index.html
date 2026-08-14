@@ -297,6 +297,82 @@ nav a:hover { color: var(--blue-deep); }
   gap: 20px;
 }
 
+/* ── ABOUT ME ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 44px;
+  align-items: center;
+}
+
+.about-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.about-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Заглушка, поки фото не додано в images/ — той самий прийом, що й для карток проєктів */
+.about-photo-wrap.no-image img { display: none; }
+
+.about-photo-wrap.no-image::before {
+  content: 'Додайте фото в images/about-me.jpg';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--surface2),
+    var(--surface2) 10px,
+    var(--bg2) 10px,
+    var(--bg2) 20px
+  );
+}
+
+.about-copy h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.about-copy p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  font-weight: 400;
+  max-width: 560px;
+}
+
+.about-copy p + p { margin-top: 12px; }
+
+@media (max-width: 820px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo-wrap { max-width: 240px; margin: 0 auto; }
+}
+
 /* ── CARD ── */
 .card {
   background: var(--surface);
@@ -672,6 +748,7 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
     </div>
   </a>
   <nav>
+    <a href="#about">Про мене</a>
     <a href="#projects">Стоматологія</a>
     <a href="#beauty">Салони краси</a>
     <a href="#hotels">Готелі</a>
@@ -718,6 +795,29 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
       <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6Z"/><path d="m22 6-10 7L2 6"/></svg>
       androshulik2007@gmail.com
     </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT ME -->
+<section class="section" id="about">
+  <div class="section-header">
+    <span class="section-title">Про мене</span>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-photo-wrap">
+      <!-- Щоб додати фото — просто покладіть файл у папку images/
+           з назвою about-me.jpg (або змініть шлях у src нижче) -->
+      <img src="images/about-me.jpg" alt="Фото засновника BLACKWOOD Studio" loading="lazy">
+    </div>
+    <div class="about-copy">
+      <h2>Я - Андрошулік Володимир</h2>
+      <p>Технічну базу здобував послідовно: у 2017–2023 роках я пройшов повний курс молодшої та курс старшої комп'ютерної академії IT STEP, а на теперішній час навчаюсь на 2 курсі кафедри систем штучного інтелекту Львівської політехніки (НУЛП).</p>
+      <p>Веду кожен проєкт особисто - від макета до верстки, коду, оптимізації під будь який пристрій, та SEO оптимізації. Такий підхід дає мені змогу напряму відповідати за результат перед клієнтом.</p>
+      <p>Спеціалізуюсь на створенні преміальних сайтів для стоматологічної та будь якої іншої ніші. Якщо ви зацікавлені - напишіть мені, і ми обговоримо деталі!</p>
+    </div>
   </div>
 </section>
 
@@ -952,9 +1052,9 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
 
   // Якщо файл скріншоту ще не додано в папку images/ — показуємо
   // акуратну заглушку замість "битої" картинки.
-  document.querySelectorAll('.card-image-wrap img').forEach(img => {
+  document.querySelectorAll('.card-image-wrap img, .about-photo-wrap img').forEach(img => {
     img.addEventListener('error', () => {
-      img.closest('.card-image-wrap').classList.add('no-image');
+      img.closest('.card-image-wrap, .about-photo-wrap').classList.add('no-image');
     }, { once: true });
   });
 </script>
