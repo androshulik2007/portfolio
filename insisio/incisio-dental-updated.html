@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="INCISIO — хірургічна стоматологія та імплантологія повного циклу: 3D-діагностика, встановлення імплантів, синус-ліфтинг, протезування.">
+<meta name="keywords" content="імплантологія, стоматологічна хірургія, зубні імпланти, синус-ліфтинг, all-on-4">
+<meta name="author" content="INCISIO">
+<meta property="og:title" content="INCISIO — Імплантологія та хірургічна стоматологія">
+<meta property="og:description" content="Імплант, який не помітно. Повний хірургічний цикл під наглядом одного лікаря.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="">
+<meta property="og:url" content="">
+<link rel="canonical" href="">
+<title>INCISIO — Імплантологія та хірургічна стоматологія</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#060606;
+    --black-2:#111111;
+    --white:#fafafa;
+    --white-2:#efefef;
+    --gray-on-white:#6e6e6e;
+    --gray-on-black:#9a9a9a;
+    --line-on-white:rgba(6,6,6,0.16);
+    --line-on-black:rgba(250,250,250,0.2);
+    --cut:64px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:hidden;width:100%;max-width:100vw;}
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:'Manrope',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    width:100%;
+    max-width:100vw;
+    position:relative;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+  }
+  h1,h2,h3,.mono{font-family:'Unbounded',sans-serif;}
+  h1,h2,h3{font-weight:800;line-height:1.05;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--black);color:var(--white);}
+  .mono{font-family:'JetBrains Mono',monospace;font-weight:500;}
+
+  /* reveal-on-scroll: застосовується до контентних блоків нижче першого екрана */
+  .trust-stat, .process-list li, .service-row, .team-card, .faq-item,
+  .contact-info, .contact-map, .booking-panel, section h2{
+    opacity:0;transform:translateY(28px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .trust-stat.in, .process-list li.in, .service-row.in, .team-card.in, .faq-item.in,
+  .contact-info.in, .contact-map.in, .booking-panel.in, section h2.in{
+    opacity:1;transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .trust-stat, .process-list li, .service-row, .team-card, .faq-item,
+    .contact-info, .contact-map, .booking-panel, section h2{
+      transition:none!important;opacity:1!important;transform:none!important;
+    }
+  }
+
+  /* ===== HEADER ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1.2rem 5vw;
+    background:var(--black);
+    border-bottom:2px solid var(--white);
+  }
+  .logo{
+    font-family:'Unbounded',sans-serif;font-weight:800;font-size:1.15rem;
+    letter-spacing:0.04em;color:var(--white);
+  }
+  nav ul{display:flex;gap:2.2rem;list-style:none;}
+  nav a{
+    font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--gray-on-black);transition:color 0.2s;position:relative;
+  }
+  nav a:hover{color:var(--white);}
+  .nav-cta{
+    background:var(--white);color:var(--black);
+    padding:0.6rem 1.3rem;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;
+    font-weight:600;
+    clip-path:polygon(0 0, 100% 0, 100% 70%, 88% 100%, 0 100%);
+    transition:clip-path 0.2s, background 0.2s;
+  }
+  .nav-cta:hover{clip-path:polygon(0 0, 100% 0, 100% 100%, 88% 100%, 0 70%);}
+  .burger{
+    display:none;background:none;border:2px solid var(--white);color:var(--white);
+    font-size:1.1rem;width:42px;height:42px;cursor:pointer;line-height:1;
+  }
+
+  .mobile-nav{
+    position:fixed;inset:0;background:var(--black);z-index:190;
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+    gap:1.6rem;padding:0 8vw;
+    transform:translateX(100%);transition:transform 0.35s ease;
+  }
+  .mobile-nav.open{transform:translateX(0);}
+  .mobile-nav a{
+    font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.6rem;color:var(--white);
+    text-transform:uppercase;border-bottom:2px solid transparent;
+  }
+  .mobile-nav a:active{border-color:var(--white);}
+  .mobile-nav .nav-cta{margin-top:1rem;}
+
+  section{position:relative;padding:7rem 0;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 5vw;}
+
+  /* ===== diagonal blade-cut dividers: alternating direction ===== */
+  .trust, .services, .faq{
+    clip-path:polygon(0 var(--cut), 100% 0, 100% 100%, 0 100%);
+    margin-top:calc(-1 * var(--cut));
+    padding-top:calc(var(--cut) + 5rem);
+  }
+  .process, .team, .contact{
+    clip-path:polygon(0 0, 100% var(--cut), 100% 100%, 0 100%);
+    margin-top:calc(-1 * var(--cut));
+    padding-top:calc(var(--cut) + 5rem);
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    background:var(--black);color:var(--white);
+    min-height:100svh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-top:9rem;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.6rem);
+    max-width:14ch;
+  }
+  .hero p{
+    color:var(--gray-on-black);font-size:1.05rem;line-height:1.75;
+    max-width:46ch;margin:1.6rem 0 2.4rem;
+  }
+  .btn-primary{
+    display:inline-block;
+    background:var(--white);color:var(--black);
+    padding:1rem 2.2rem;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;
+    clip-path:polygon(0 0, 100% 0, 100% 75%, 92% 100%, 0 100%);
+    transition:clip-path 0.25s, transform 0.25s;
+    width:fit-content;
+  }
+  .btn-primary:hover{clip-path:polygon(0 0, 100% 0, 100% 100%, 92% 100%, 0 75%);transform:translateY(-2px);}
+
+  /* ===== TRUST ===== */
+  .trust{background:var(--white);}
+  .trust .wrap{
+    display:flex;flex-wrap:wrap;gap:0;
+    justify-content:center;
+    text-align:center;
+  }
+  .trust-stat{
+    flex:1 1 200px;padding:1.4rem 1rem;
+    border-left:1px solid var(--line-on-white);
+    font-size:0.82rem;color:var(--gray-on-white);letter-spacing:0.02em;
+  }
+  .trust-stat:first-child{border-left:none;}
+  .trust-stat span{
+    display:block;font-family:'Unbounded',sans-serif;font-weight:800;
+    font-size:clamp(2rem,4vw,2.8rem);color:var(--black);margin-bottom:0.3rem;
+  }
+
+  /* ===== PROCESS ===== */
+  .process{background:var(--black);color:var(--white);}
+  .process h2{color:var(--white);}
+  .process-list{
+    list-style:none;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    margin-top:3rem;border-top:1px solid var(--line-on-black);
+  }
+  .process-list li{
+    padding:2.2rem 1.6rem 1rem;
+    border-right:1px solid var(--line-on-black);
+  }
+  .process-list li:last-child{border-right:none;}
+  .step-num{
+    display:block;font-family:'JetBrains Mono',monospace;color:var(--gray-on-black);
+    font-size:0.85rem;margin-bottom:1.2rem;
+  }
+  .process-list h3{font-size:1.15rem;margin-bottom:0.6rem;color:var(--white);}
+  .process-list p{color:var(--gray-on-black);font-size:0.88rem;line-height:1.6;}
+
+  h2{
+    font-size:clamp(1.9rem,3.4vw,2.6rem);
+    text-transform:uppercase;
+  }
+
+  /* ===== SERVICES ===== */
+  .services{background:var(--white);}
+  .services-list{margin-top:3rem;border-top:2px solid var(--black);}
+  .service-row{
+    display:grid;grid-template-columns:1fr 2fr auto;gap:2rem;align-items:center;
+    padding:1.6rem 0;border-bottom:1px solid var(--line-on-white);
+    transition:background 0.2s;
+  }
+  .service-row:hover{background:var(--white-2);}
+  .service-row h3{font-size:1.05rem;font-weight:700;}
+  .service-row p{color:var(--gray-on-white);font-size:0.88rem;line-height:1.5;}
+  .price{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:1rem;white-space:nowrap;}
+
+  /* ===== TEAM ===== */
+  .team{background:var(--black);color:var(--white);}
+  .team h2{color:var(--white);}
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem;}
+  .team-card{border:1px solid var(--line-on-black);transition:border-color 0.25s;}
+  .team-card:hover{border-color:var(--white);}
+  .team-photo{aspect-ratio:3/4;background:var(--black-2);overflow:hidden;position:relative;}
+  .team-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);}
+  .team-photo::after{
+    content:'ФОТО';
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Unbounded',sans-serif;font-size:0.7rem;letter-spacing:0.15em;color:var(--gray-on-black);
+    background:var(--black-2);
+    pointer-events:none;
+  }
+  .team-photo img[src]:not([src=""]){position:relative;z-index:1;}
+  .team-card h3{padding:1rem 1.2rem 0.2rem;font-size:1rem;}
+  .team-role{display:block;padding:0 1.2rem 1.2rem;color:var(--gray-on-black);font-size:0.78rem;letter-spacing:0.03em;}
+
+  /* ===== FAQ ===== */
+  .faq{background:var(--white);}
+  .faq-list{margin-top:3rem;border-top:2px solid var(--black);}
+  .faq-item{border-bottom:1px solid var(--line-on-white);}
+  .faq-q{
+    width:100%;display:flex;justify-content:space-between;align-items:center;
+    background:none;border:none;text-align:left;cursor:pointer;
+    padding:1.4rem 0;font-family:'Unbounded',sans-serif;font-size:1rem;font-weight:600;color:var(--black);
+  }
+  .faq-toggle{
+    font-family:'JetBrains Mono',monospace;font-size:1.4rem;flex-shrink:0;margin-left:1rem;
+    transition:transform 0.25s;
+  }
+  .faq-item.open .faq-toggle{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+  .faq-item.open .faq-a{max-height:200px;}
+  .faq-a p{color:var(--gray-on-white);font-size:0.92rem;line-height:1.7;padding-bottom:1.4rem;max-width:60ch;}
+
+  /* ===== CONTACT / BOOKING ===== */
+  .contact{background:var(--black);color:var(--white);}
+  .contact .wrap{display:grid;grid-template-columns:0.85fr 1.15fr;gap:4vw;align-items:start;}
+  .contact-info h2{color:var(--white);margin-bottom:2rem;}
+  .contact-line{
+    display:flex;justify-content:space-between;padding:1.1rem 0;
+    border-bottom:1px solid var(--line-on-black);font-size:0.92rem;
+  }
+  .contact-line span:first-child{color:var(--gray-on-black);text-transform:uppercase;letter-spacing:0.06em;font-size:0.72rem;}
+
+  .booking-panel{
+    border:1px solid var(--line-on-black);background:var(--black-2);
+    padding:clamp(1.6rem,3.4vw,2.6rem);
+  }
+  .booking-eyebrow{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+    letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-on-black);
+    margin-bottom:1.6rem;
+  }
+  .booking-row{display:grid;grid-template-columns:1fr 1fr;gap:0 1.6rem;}
+  .field{margin-bottom:1.4rem;position:relative;}
+  .field label{
+    display:block;font-family:'JetBrains Mono',monospace;font-size:0.66rem;
+    letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-on-black);margin-bottom:0.55rem;
+  }
+  .field input, .field select{
+    width:100%;background:transparent;border:none;border-bottom:1px solid var(--line-on-black);
+    color:var(--white);font-family:'Manrope',sans-serif;font-size:0.94rem;
+    padding:0.5rem 0 0.55rem;border-radius:0;appearance:none;-webkit-appearance:none;
+    transition:border-color 0.25s;
+  }
+  .field input::placeholder{color:var(--gray-on-black);}
+  .field input:focus, .field select:focus{outline:none;border-color:var(--white);}
+  .field input:disabled, .field select:disabled{opacity:0.35;cursor:not-allowed;}
+  .field select{cursor:pointer;}
+  .field select option{background:var(--black-2);color:var(--white);}
+  .field.select-field::after{
+    content:'▾';position:absolute;right:0;bottom:0.65rem;color:var(--gray-on-black);
+    font-size:0.72rem;pointer-events:none;
+  }
+
+  .slot-section{
+    margin-top:0.2rem;padding-top:0;border-top:0 solid var(--line-on-black);
+    overflow:hidden;max-height:0;opacity:0;
+    transition:max-height 0.5s ease, opacity 0.4s ease, padding-top 0.5s ease, border-color 0.5s ease, margin-top .5s ease;
+  }
+  .slot-section.open{max-height:640px;opacity:1;padding-top:1.5rem;border-top-width:1px;margin-top:0.6rem;}
+  .slot-legend{display:flex;gap:1.2rem;margin:0 0 1.1rem;flex-wrap:wrap;}
+  .slot-legend span{
+    display:flex;align-items:center;gap:0.45rem;font-family:'JetBrains Mono',monospace;
+    font-size:0.66rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--gray-on-black);
+  }
+  .slot-legend i{width:3px;height:14px;display:inline-block;background:var(--white);opacity:0.55;}
+  .slot-legend i.busy{background:none;border-left:2px dashed var(--gray-on-black);width:0;height:12px;opacity:1;}
+  .slot-legend i.sel{background:var(--white);opacity:1;box-shadow:0 0 8px 1px rgba(250,250,250,0.6);}
+
+  /* ---- пульс-лінія вибору часу: горизонтальна EKG-стрічка замість звичайної сітки кнопок ---- */
+  .pulse-wrap{position:relative;}
+  .pulse-scroll{
+    display:flex;align-items:flex-end;gap:1.5rem;
+    overflow-x:auto;overflow-y:hidden;
+    padding:0.6rem 0.2rem 0.9rem;
+    scrollbar-width:thin;
+  }
+  .pulse-scroll::-webkit-scrollbar{height:3px;}
+  .pulse-scroll::-webkit-scrollbar-thumb{background:var(--line-on-black);}
+  .pulse-baseline{
+    position:absolute;left:0;right:0;bottom:0.9rem;height:1px;
+    background:repeating-linear-gradient(90deg, var(--line-on-black) 0, var(--line-on-black) 4px, transparent 4px, transparent 9px);
+    pointer-events:none;
+  }
+  .pulse-hour{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;position:relative;z-index:1;}
+  .pulse-hour-label{
+    font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;color:var(--gray-on-black);
+    margin-top:0.55rem;
+  }
+  .pulse-bars{display:flex;align-items:flex-end;gap:5px;height:56px;}
+  .pulse{
+    appearance:none;-webkit-appearance:none;border:none;padding:0;cursor:pointer;
+    width:15px;min-width:15px;height:16px;
+    background:var(--white);opacity:0.16;
+    clip-path:polygon(50% 0%, 100% 30%, 100% 100%, 0 100%, 0 30%);
+    transition:height 0.22s ease, opacity 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    position:relative;
+  }
+  .pulse:hover:not(.busy):not(.selected){height:34px;opacity:0.45;}
+  .pulse.busy{
+    height:8px;opacity:0.85;cursor:not-allowed;
+    background:none;clip-path:none;
+    border-top:1px dashed var(--gray-on-black);
+  }
+  .pulse.selected{
+    height:56px;opacity:1;
+    box-shadow:0 0 16px 2px rgba(250,250,250,0.55);
+  }
+  .pulse:focus-visible{outline:1px solid var(--white);outline-offset:3px;}
+  .pulse-time-tip{
+    position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+    font-family:'JetBrains Mono',monospace;font-size:0.64rem;color:var(--white);
+    background:var(--black-2);border:1px solid var(--line-on-black);padding:0.2rem 0.45rem;
+    white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.18s ease;
+  }
+  .pulse:hover .pulse-time-tip,.pulse.selected .pulse-time-tip{opacity:1;}
+
+  .pulse-readout{
+    margin-top:1.2rem;font-family:'JetBrains Mono',monospace;font-size:0.74rem;color:var(--gray-on-black);
+    min-height:1.2em;
+  }
+  .pulse-readout strong{color:var(--white);font-weight:500;}
+
+  .slot-hint{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--gray-on-black);}
+  .slot-loading{display:flex;gap:0.4rem;padding:0.2rem 0;}
+  .slot-loading i{width:6px;height:6px;background:var(--white);display:inline-block;animation:slotblink 1s ease-in-out infinite;}
+  .slot-loading i:nth-child(2){animation-delay:0.15s;}
+  .slot-loading i:nth-child(3){animation-delay:0.3s;}
+  @keyframes slotblink{0%,80%,100%{opacity:0.2;}40%{opacity:1;}}
+
+  button.btn-primary{
+    border:none;font-family:'Unbounded',sans-serif;cursor:pointer;
+  }
+  .btn-primary.block{width:100%;text-align:center;margin-top:1.8rem;}
+  .btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+  .btn-primary:disabled:hover{clip-path:polygon(0 0, 100% 0, 100% 75%, 92% 100%, 0 100%);}
+
+  .form-toast{
+    margin-top:1rem;padding:0.85rem 1rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;
+    display:none;align-items:center;gap:0.5rem;border-left:3px solid var(--white);
+    background:var(--white);color:var(--black);
+  }
+  .form-toast.show{display:flex;}
+  .form-toast.error{background:var(--black-2);color:#ff8a8a;border-left-color:#ff8a8a;}
+
+  .contact-map{
+    background:var(--black-2);border:1px solid var(--line-on-black);min-height:280px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Unbounded',sans-serif;color:var(--gray-on-black);font-size:0.8rem;letter-spacing:0.06em;
+  }
+
+  footer{
+    background:var(--black);color:var(--gray-on-black);
+    padding:2.2rem 0;border-top:1px solid var(--line-on-black);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+    max-width:1200px;margin:0 auto;padding-left:5vw;padding-right:5vw;
+  }
+  .footer-logo{font-family:'Unbounded',sans-serif;font-weight:800;color:var(--white);letter-spacing:0.04em;}
+  .footer-copy{font-size:0.76rem;}
+
+  @media (max-width:900px){
+    :root{--cut:36px;}
+    nav, .nav-cta{display:none;}
+    .burger{display:block;}
+    .process-list{grid-template-columns:1fr 1fr;}
+    .process-list li{border-bottom:1px solid var(--line-on-black);}
+    .team-grid{grid-template-columns:1fr 1fr;}
+    .service-row{grid-template-columns:1fr;gap:0.4rem;}
+    .contact .wrap{grid-template-columns:1fr;}
+    .booking-row{grid-template-columns:1fr;}
+    section{padding:4.5rem 0;}
+  }
+  @media (max-width:560px){
+    .process-list{grid-template-columns:1fr;}
+    .process-list li{border-right:none;}
+    .team-grid{grid-template-columns:1fr;}
+    .trust-stat{flex:1 1 45%;border-left:none;border-top:1px solid var(--line-on-white);}
+  }
+  @media (max-width:380px){
+    .hero h1{font-size:2.2rem;}
+    .hero p{font-size:0.95rem;}
+    .btn-primary{padding:0.9rem 1.6rem;font-size:0.76rem;}
+    h2{font-size:1.6rem;}
+    :root{--cut:24px;}
+  }
+</style>
+<noscript><style>
+  .trust-stat, .process-list li, .service-row, .team-card, .faq-item,
+  .contact-info, .contact-map, section h2{opacity:1!important;transform:none!important;}
+</style></noscript>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="logo">INCISIO</div>
+  <nav>
+    <ul>
+      <li><a href="#process">Процес</a></li>
+      <li><a href="#services">Послуги</a></li>
+      <li><a href="#team">Лікарі</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Контакти</a></li>
+    </ul>
+  </nav>
+  <a href="#contact" class="nav-cta">Консультація</a>
+  <button class="burger" aria-label="Меню" id="burgerBtn">☰</button>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#process">Процес</a>
+  <a href="#services">Послуги</a>
+  <a href="#team">Лікарі</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Контакти</a>
+  <a href="#contact" class="nav-cta">Консультація</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Імплант, який<br>не помітно.</h1>
+    <p>Хірургічна імплантологія повного циклу — від 3D-діагностики до постійної коронки. Один хірург веде пацієнта від першого сканування до останнього огляду.</p>
+    <a href="#contact" class="btn-primary">Записатись на консультацію</a>
+  </div>
+</section>
+
+<!-- TRUST / EXPERTISE -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-stat"><span>2400+</span>встановлених імплантів</div>
+    <div class="trust-stat"><span>11</span>років хірургічної практики</div>
+    <div class="trust-stat"><span>98%</span>приживлюваність</div>
+    <div class="trust-stat"><span>5</span>років гарантії</div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="process">
+  <div class="wrap">
+    <h2>Шлях імпланту</h2>
+    <ol class="process-list">
+      <li><span class="step-num">01</span><h3>Діагностика</h3><p>3D КТ-знімок щелепи, оцінка щільності кістки, план лікування.</p></li>
+      <li><span class="step-num">02</span><h3>Хірургічний етап</h3><p>Встановлення імпланту під місцевою анестезією або седацією.</p></li>
+      <li><span class="step-num">03</span><h3>Приживлення</h3><p>Період остеоінтеграції, контрольні огляди кожні 4 тижні.</p></li>
+      <li><span class="step-num">04</span><h3>Протезування</h3><p>Формувач ясен, зліпки, постійна коронка з індивідуальним відтінком.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- SERVICES & PRICES -->
+<section id="services" class="services">
+  <div class="wrap">
+    <h2>Послуги та ціни</h2>
+    <div class="services-list">
+      <div class="service-row">
+        <h3>Імплант під ключ</h3>
+        <p>Титановий імплант + абатмент + коронка, повний цикл</p>
+        <span class="price">від 28 000 ₴</span>
+      </div>
+      <div class="service-row">
+        <h3>Синус-ліфтинг</h3>
+        <p>Нарощення кісткової тканини верхньої щелепи</p>
+        <span class="price">від 12 000 ₴</span>
+      </div>
+      <div class="service-row">
+        <h3>Видалення зуба складне</h3>
+        <p>Хірургічне видалення, ретеновані та зруйновані зуби</p>
+        <span class="price">від 3 500 ₴</span>
+      </div>
+      <div class="service-row">
+        <h3>3D КТ-діагностика</h3>
+        <p>Комп'ютерна томографія щелепи з описом</p>
+        <span class="price">900 ₴</span>
+      </div>
+      <div class="service-row">
+        <h3>All-on-4 / All-on-6</h3>
+        <p>Повне протезування щелепи на імплантах</p>
+        <span class="price">від 185 000 ₴</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="team">
+  <div class="wrap">
+    <h2>Хірурги</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo"><img src="images/doctor-1.jpg" alt="Олег Вербицький — хірург-імплантолог"></div>
+        <h3>Олег Вербицький</h3>
+        <span class="team-role">Хірург-імплантолог</span>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><img src="images/doctor-2.jpg" alt="Марина Костенко — щелепно-лицевий хірург"></div>
+        <h3>Марина Костенко</h3>
+        <span class="team-role">Щелепно-лицевий хірург</span>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><img src="images/doctor-3.jpg" alt="Андрій Салюк — лікар-ортопед"></div>
+        <h3>Андрій Салюк</h3>
+        <span class="team-role">Лікар-ортопед</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Це боляче?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Операція проходить під анестезією, пацієнт не відчуває болю. Дискомфорт після загоєння знімається звичайним знеболювальним 1-2 дні.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Скільки триває приживлення?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>Зазвичай 3-6 місяців залежно від щелепи та стану кістки. Точний термін визначається на діагностиці.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Чи можна ставити імплант одразу після видалення?</button>
+        <div class="faq-a"><p>У більшості випадків так — це називається одномоментна імплантація. Рішення приймається на консультації.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Яка гарантія на імплант?<span class="faq-toggle">+</span></button>
+        <div class="faq-a"><p>5 років на сам імплант і систему, за умови дотримання рекомендацій та регулярних оглядів.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-info">
+      <h2>Консультація —<br>перший крок</h2>
+      <div class="contact-line"><span>Адреса</span><span>вул. Хірургічна, 12</span></div>
+      <div class="contact-line"><span>Телефон</span><span>+380 00 000 00 00</span></div>
+      <div class="contact-line"><span>Графік</span><span>Пн–Сб, 9:00–19:00</span></div>
+    </div>
+
+    <div class="booking-panel" id="bookingPanel">
+      <span class="booking-eyebrow">Форма запису · Пн–Сб</span>
+      <form id="bookingForm" novalidate>
+        <div class="booking-row">
+          <div class="field">
+            <label for="fName">Ім'я</label>
+            <input type="text" id="fName" placeholder="Ім'я" required>
+          </div>
+          <div class="field">
+            <label for="fSurname">Прізвище</label>
+            <input type="text" id="fSurname" placeholder="Прізвище" required>
+          </div>
+        </div>
+        <div class="booking-row">
+          <div class="field">
+            <label for="fPhone">Телефон</label>
+            <input type="tel" id="fPhone" placeholder="+380 00 000 00 00" required>
+          </div>
+          <div class="field select-field">
+            <label for="fDoctor">Лікар</label>
+            <select id="fDoctor" required>
+              <option value="" disabled selected>Оберіть лікаря</option>
+            </select>
+          </div>
+        </div>
+        <div class="booking-row">
+          <div class="field select-field">
+            <label for="fProcedure">Процедура</label>
+            <select id="fProcedure" required>
+              <option value="" disabled selected>Оберіть процедуру</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fDate">Дата</label>
+            <input type="date" id="fDate" required>
+          </div>
+        </div>
+
+        <div class="slot-section open" id="slotSection">
+          <label style="display:block;font-family:'JetBrains Mono';font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-on-black);margin-bottom:0.7rem;">Час прийому</label>
+          <div class="slot-legend">
+            <span><i></i>вільно</span>
+            <span><i class="busy"></i>зайнято</span>
+            <span><i class="sel"></i>обрано</span>
+          </div>
+          <div id="slotArea"><p class="slot-hint">Оберіть лікаря та дату — покажемо вільний час.</p></div>
+          <div class="pulse-readout" id="pulseReadout"></div>
+        </div>
+
+        <input type="hidden" id="fTime">
+        <button type="submit" class="btn-primary block" id="submitBtn" disabled>Записатися на прийом</button>
+        <div class="form-toast" id="formToast"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">INCISIO</div>
+  <div class="footer-copy">© 2026 INCISIO. Хірургічна стоматологія.</div>
+</footer>
+
+<script>
+  /* ---- бургер-меню ---- */
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  burgerBtn.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    burgerBtn.textContent = isOpen ? '✕' : '☰';
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      burgerBtn.textContent = '☰';
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---- скрол-рев'юли ---- */
+  const revealTargets = document.querySelectorAll(
+    '.trust-stat, .process-list li, .service-row, .team-card, .faq-item, .contact-info, .booking-panel, section h2'
+  );
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('in'), i * 40);
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealTargets.forEach(el => io.observe(el));
+  } else {
+    revealTargets.forEach(el => el.classList.add('in'));
+  }
+
+  /* ---- FAQ акордеон ---- */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    btn.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o => o.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* ---- фото лікарів: якщо файлу в images/ ще немає, показуємо
+         заглушку "ФОТО" замість зламаної іконки браузера ---- */
+  document.querySelectorAll('.team-photo img').forEach(img => {
+    img.addEventListener('error', () => {
+      img.style.display = 'none';
+    });
+  });
+
+  /* =====================================================================
+     BOOKING DATA LAYER
+     Зараз усе працює на моках + localStorage (щоб форма і сітка часу
+     повністю працювали вже зараз, без бекенду).
+
+     Коли з'явиться безкоштовна база на Render — потрібно замінити ЛИШЕ
+     тіла двох функцій нижче (fetchAvailability і submitBooking) на
+     реальні запити fetch() до вашого API. Решта коду (рендер сітки,
+     валідація, стан кнопки) чіпати не треба — вона працює з тим, що
+     повертають ці дві функції.
+  ===================================================================== */
+
+  // TODO: коли буде готовий бекенд на Render — вкажіть тут його адресу,
+  // наприклад "https://incisio-api.onrender.com/api"
+  const API_BASE_URL = null; // null = працюємо в режимі мок-даних (localStorage)
+
+  // Лікарі клініки. id — стабільний ключ для майбутньої бази/застосунку.
+  // Імена узгоджені із секцією "Хірурги" вище на сторінці.
+  const DOCTORS = [
+    { id: 'doctor-1', name: 'Олег Вербицький — хірург-імплантолог' },
+    { id: 'doctor-2', name: 'Марина Костенко — щелепно-лицевий хірург' },
+    { id: 'doctor-3', name: 'Андрій Салюк — лікар-ортопед' },
+  ];
+
+  const PROCEDURES = [
+    'Консультація',
+    'Імплант під ключ',
+    'Синус-ліфтинг',
+    'Видалення зуба складне',
+    '3D КТ-діагностика',
+    'All-on-4 / All-on-6',
+  ];
+
+  // Робочі години клініки (з блоку "Графік": Пн–Сб, 9:00–19:00).
+  const WORK_START = '09:00';
+  const WORK_END   = '19:00';
+  const SLOT_STEP_MIN = 30;
+
+  function buildTimeSlots(){
+    const [h1,m1] = WORK_START.split(':').map(Number);
+    const [h2,m2] = WORK_END.split(':').map(Number);
+    let cur = h1*60+m1, end = h2*60+m2;
+    const slots = [];
+    while(cur < end){
+      const h = String(Math.floor(cur/60)).padStart(2,'0');
+      const m = String(cur%60).padStart(2,'0');
+      slots.push(`${h}:${m}`);
+      cur += SLOT_STEP_MIN;
+    }
+    return slots;
+  }
+  const TIME_SLOTS = buildTimeSlots();
+
+  // Детермінований "випадковий" вибір — щоб для однієї й тієї ж пари
+  // лікар+дата зайняті слоти виглядали стабільно (для демонстрації),
+  // а не переміщались при кожному оновленні сторінки.
+  function seededBusySlots(doctorId, dateStr){
+    let seed = 0;
+    const str = doctorId + dateStr;
+    for(let i=0;i<str.length;i++) seed = (seed * 31 + str.charCodeAt(i)) >>> 0;
+    const busy = new Set();
+    TIME_SLOTS.forEach(slot=>{
+      seed = (seed * 1103515245 + 12345) >>> 0;
+      if(seed % 5 === 0) busy.add(slot); // ~20% слотів позначені зайнятими для демо
+    });
+    return busy;
+  }
+
+  function getLocalBookings(){
+    try{ return JSON.parse(localStorage.getItem('incisioBookings') || '[]'); }
+    catch{ return []; }
+  }
+  function saveLocalBooking(booking){
+    const all = getLocalBookings();
+    all.push(booking);
+    localStorage.setItem('incisioBookings', JSON.stringify(all));
+  }
+
+  /**
+   * Повертає розклад зайнятості лікаря на конкретну дату.
+   * Формат: { "09:00": "free"|"busy", ... }
+   *
+   * ЗАМІНА НА RENDER:
+   *   const res = await fetch(`${API_BASE_URL}/availability?doctorId=${doctorId}&date=${dateStr}`);
+   *   const data = await res.json(); // очікується той самий формат { "09:00": "free"|"busy" }
+   *   return data;
+   */
+  async function fetchAvailability(doctorId, dateStr){
+    if(API_BASE_URL){
+      const res = await fetch(`${API_BASE_URL}/availability?doctorId=${doctorId}&date=${dateStr}`);
+      if(!res.ok) throw new Error('Не вдалося завантажити розклад');
+      return res.json();
+    }
+    // ---- мок-режим ----
+    await new Promise(r=>setTimeout(r, 260)); // імітація мережевої затримки
+    const busy = seededBusySlots(doctorId, dateStr);
+    getLocalBookings()
+      .filter(b => b.doctorId === doctorId && b.date === dateStr)
+      .forEach(b => busy.add(b.time));
+    const result = {};
+    TIME_SLOTS.forEach(slot => { result[slot] = busy.has(slot) ? 'busy' : 'free'; });
+    return result;
+  }
+
+  /**
+   * Надсилає новий запис на прийом.
+   *
+   * ЗАМІНА НА RENDER:
+   *   const res = await fetch(`${API_BASE_URL}/bookings`, {
+   *     method: 'POST',
+   *     headers: { 'Content-Type': 'application/json' },
+   *     body: JSON.stringify(booking)
+   *   });
+   *   if(!res.ok) throw new Error('Booking failed');
+   *   return res.json();
+   */
+  async function submitBooking(booking){
+    if(API_BASE_URL){
+      const res = await fetch(`${API_BASE_URL}/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(booking)
+      });
+      if(!res.ok) throw new Error('Booking failed');
+      return res.json();
+    }
+    // ---- мок-режим ----
+    await new Promise(r=>setTimeout(r, 300));
+    saveLocalBooking(booking);
+    return booking;
+  }
+
+  /* =====================================================================
+     FORM UI
+  ===================================================================== */
+
+  const bookingForm = document.getElementById('bookingForm');
+  const formToast    = document.getElementById('formToast');
+  const fName        = document.getElementById('fName');
+  const fSurname     = document.getElementById('fSurname');
+  const fPhone       = document.getElementById('fPhone');
+  const fDoctor      = document.getElementById('fDoctor');
+  const fProcedure   = document.getElementById('fProcedure');
+  const fDate        = document.getElementById('fDate');
+  const fTime        = document.getElementById('fTime');
+  const slotSection  = document.getElementById('slotSection');
+  const slotArea     = document.getElementById('slotArea');
+  const pulseReadout = document.getElementById('pulseReadout');
+  const submitBtn    = document.getElementById('submitBtn');
+
+  if(bookingForm){
+    // populate selects
+    DOCTORS.forEach(d=>{
+      const opt = document.createElement('option');
+      opt.value = d.id; opt.textContent = d.name;
+      fDoctor.appendChild(opt);
+    });
+    PROCEDURES.forEach(p=>{
+      const opt = document.createElement('option');
+      opt.value = p; opt.textContent = p;
+      fProcedure.appendChild(opt);
+    });
+
+    // date bounds: сьогодні .. +45 днів
+    const today = new Date();
+    const maxDate = new Date(today.getTime() + 45*24*60*60*1000);
+    const toISO = d => d.toISOString().slice(0,10);
+    fDate.min = toISO(today);
+    fDate.max = toISO(maxDate);
+
+    let loadToken = 0; // захист від "гонки" застарілих запитів
+
+    async function refreshSlots(){
+      fTime.value = '';
+      updateSubmitState();
+
+      const doctorId = fDoctor.value;
+      const dateStr = fDate.value;
+
+      if(!doctorId || !dateStr){
+        slotArea.innerHTML = `<p class="slot-hint">Оберіть лікаря та дату — покажемо вільний час.</p>`;
+        pulseReadout.textContent = '';
+        return;
+      }
+
+      const chosenDate = new Date(dateStr + 'T00:00:00');
+      if(chosenDate.getDay() === 0){ // неділя — вихідний
+        slotArea.innerHTML = `<p class="slot-hint">У неділю клініка не працює — оберіть інший день.</p>`;
+        return;
+      }
+
+      slotArea.innerHTML = `<div class="slot-loading"><i></i><i></i><i></i></div>`;
+
+      const myToken = ++loadToken;
+      let availability;
+      try{
+        availability = await fetchAvailability(doctorId, dateStr);
+      }catch(err){
+        if(myToken !== loadToken) return;
+        slotArea.innerHTML = `<p class="slot-hint">Не вдалося завантажити розклад. Спробуйте ще раз.</p>`;
+        return;
+      }
+      if(myToken !== loadToken) return;
+
+      const grid = document.createElement('div');
+      grid.className = 'pulse-wrap';
+
+      const baseline = document.createElement('div');
+      baseline.className = 'pulse-baseline';
+      grid.appendChild(baseline);
+
+      const scroll = document.createElement('div');
+      scroll.className = 'pulse-scroll';
+      grid.appendChild(scroll);
+
+      // Групуємо слоти по годинах (09:00, 09:30 → одна "година" з двома пульсами),
+      // щоб стрічка читалась як таймлайн дня, а не як безлика сітка кнопок.
+      const hourGroups = new Map();
+      TIME_SLOTS.forEach(slot=>{
+        const hour = slot.split(':')[0];
+        if(!hourGroups.has(hour)) hourGroups.set(hour, []);
+        hourGroups.get(hour).push(slot);
+      });
+
+      hourGroups.forEach((slots, hour)=>{
+        const hourEl = document.createElement('div');
+        hourEl.className = 'pulse-hour';
+
+        const bars = document.createElement('div');
+        bars.className = 'pulse-bars';
+
+        slots.forEach(slot=>{
+          const isBusy = availability[slot] === 'busy';
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'pulse' + (isBusy ? ' busy' : '');
+          btn.disabled = isBusy;
+          btn.setAttribute('aria-label', `${slot} — ${isBusy ? 'зайнято' : 'вільно'}`);
+          btn.setAttribute('aria-pressed','false');
+
+          const tip = document.createElement('span');
+          tip.className = 'pulse-time-tip';
+          tip.textContent = slot;
+          btn.appendChild(tip);
+
+          if(!isBusy){
+            btn.addEventListener('click', ()=>{
+              scroll.querySelectorAll('.pulse.selected').forEach(s=>{s.classList.remove('selected'); s.setAttribute('aria-pressed','false');});
+              btn.classList.add('selected');
+              btn.setAttribute('aria-pressed','true');
+              fTime.value = slot;
+              updateSubmitState();
+              pulseReadout.innerHTML = `Обрано: <strong>${slot}</strong>`;
+            });
+          }
+          bars.appendChild(btn);
+        });
+
+        const label = document.createElement('div');
+        label.className = 'pulse-hour-label';
+        label.textContent = `${hour}:00`;
+
+        hourEl.appendChild(bars);
+        hourEl.appendChild(label);
+        scroll.appendChild(hourEl);
+      });
+
+      slotArea.innerHTML = '';
+      slotArea.appendChild(grid);
+      pulseReadout.textContent = '';
+    }
+
+    fDoctor.addEventListener('change', refreshSlots);
+    fDate.addEventListener('change', refreshSlots);
+
+    function updateSubmitState(){
+      const ok = fName.value.trim() && fSurname.value.trim() && fPhone.value.trim()
+        && fDoctor.value && fProcedure.value && fDate.value && fTime.value;
+      submitBtn.disabled = !ok;
+    }
+    [fName, fSurname, fPhone, fProcedure].forEach(el=>el.addEventListener('input', updateSubmitState));
+    [fDoctor, fDate].forEach(el=>el.addEventListener('change', updateSubmitState));
+
+    function showToast(msg, isError){
+      formToast.textContent = msg;
+      formToast.classList.toggle('error', !!isError);
+      formToast.classList.add('show');
+      setTimeout(()=>formToast.classList.remove('show'), 4500);
+    }
+
+    bookingForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      updateSubmitState();
+      if(submitBtn.disabled) return;
+
+      const doctor = DOCTORS.find(d=>d.id === fDoctor.value);
+      const booking = {
+        firstName: fName.value.trim(),
+        lastName: fSurname.value.trim(),
+        phone: fPhone.value.trim(),
+        doctorId: doctor.id,
+        procedure: fProcedure.value,
+        date: fDate.value,
+        time: fTime.value
+      };
+      // id, статус і дата створення тепер призначаються сервером —
+      // це важливо, щоб уникнути колізій id, коли записи роблять
+      // одночасно кілька відвідувачів.
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Надсилаємо…';
+      try{
+        await submitBooking(booking);
+        showToast(`✓ Записали вас на ${booking.date} о ${booking.time}. Ми зателефонуємо для підтвердження.`);
+        bookingForm.reset();
+        fTime.value = '';
+        slotArea.innerHTML = `<p class="slot-hint">Оберіть лікаря та дату — покажемо вільний час.</p>`;
+        pulseReadout.textContent = '';
+      }catch(err){
+        showToast('Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам.', true);
+      }finally{
+        submitBtn.textContent = 'Записатися на прийом';
+        updateSubmitState();
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
