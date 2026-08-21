@@ -304,8 +304,11 @@
   .pulse-scroll{
     display:flex;align-items:flex-end;gap:1.5rem;
     overflow-x:auto;overflow-y:hidden;
-    padding:0.6rem 0.2rem 0.9rem;
+    padding:2.6rem 0.2rem 0.9rem;
     scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x;
+    scroll-snap-type:x proximity;
   }
   .pulse-scroll::-webkit-scrollbar{height:3px;}
   .pulse-scroll::-webkit-scrollbar-thumb{background:var(--line-on-black);}
@@ -314,7 +317,14 @@
     background:repeating-linear-gradient(90deg, var(--line-on-black) 0, var(--line-on-black) 4px, transparent 4px, transparent 9px);
     pointer-events:none;
   }
-  .pulse-hour{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;position:relative;z-index:1;}
+  .pulse-fade{
+    position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none;
+    opacity:0;transition:opacity 0.25s ease;
+  }
+  .pulse-fade.left{left:0;background:linear-gradient(90deg, var(--black-2) 0%, transparent 100%);}
+  .pulse-fade.right{right:0;background:linear-gradient(270deg, var(--black-2) 0%, transparent 100%);}
+  .pulse-fade.show{opacity:1;}
+  .pulse-hour{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;position:relative;z-index:1;scroll-snap-align:start;}
   .pulse-hour-label{
     font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;color:var(--gray-on-black);
     margin-top:0.55rem;
@@ -898,6 +908,14 @@
       baseline.className = 'pulse-baseline';
       grid.appendChild(baseline);
 
+      const fadeLeft = document.createElement('div');
+      fadeLeft.className = 'pulse-fade left';
+      grid.appendChild(fadeLeft);
+
+      const fadeRight = document.createElement('div');
+      fadeRight.className = 'pulse-fade right';
+      grid.appendChild(fadeRight);
+
       const scroll = document.createElement('div');
       scroll.className = 'pulse-scroll';
       grid.appendChild(scroll);
@@ -914,6 +932,7 @@
       hourGroups.forEach((slots, hour)=>{
         const hourEl = document.createElement('div');
         hourEl.className = 'pulse-hour';
+        hourEl.dataset.hour = hour;
 
         const bars = document.createElement('div');
         bars.className = 'pulse-bars';
@@ -957,6 +976,23 @@
       slotArea.innerHTML = '';
       slotArea.appendChild(grid);
       pulseReadout.textContent = '';
+
+      // Показуємо градієнт-натяк з того боку, куди ще можна погортати —
+      // щоб було візуально зрозуміло, що стрічка не закінчується на видимій частині.
+      function updateFades(){
+        const maxScroll = scroll.scrollWidth - scroll.clientWidth;
+        fadeLeft.classList.toggle('show', scroll.scrollLeft > 4);
+        fadeRight.classList.toggle('show', scroll.scrollLeft < maxScroll - 4);
+      }
+      updateFades();
+      scroll.addEventListener('scroll', updateFades, { passive:true });
+      window.addEventListener('resize', updateFades);
+
+      // Прокручуємо стрічку так, щоб поточна година (або перший вільний час)
+      // одразу була у видимій зоні, а не губилась за межами екрана.
+      const nowHour = String(new Date().getHours()).padStart(2,'0');
+      const targetHourEl = scroll.querySelector(`[data-hour="${nowHour}"]`);
+      if(targetHourEl) targetHourEl.scrollIntoView({ inline:'start', block:'nearest' });
     }
 
     fDoctor.addEventListener('change', refreshSlots);
