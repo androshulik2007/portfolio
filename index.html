@@ -225,6 +225,7 @@ nav a:hover { color: var(--blue-deep); }
 
 .hero-stat {
   flex: 1;
+  min-width: 0;
   padding: 24px 28px;
   border-right: 1px solid var(--border);
 }
@@ -242,11 +243,14 @@ nav a:hover { color: var(--blue-deep); }
 }
 
 .hero-stat span {
+  display: block;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-soft);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* ── DIVIDER ── */
@@ -667,6 +671,9 @@ footer {
   .hero { padding-top: 64px; }
   .grid { grid-template-columns: 1fr; }
   .hero-stats { max-width: 100%; }
+  .hero-stat { padding: 18px 10px; }
+  .hero-stat strong { font-size: 22px; }
+  .hero-stat span { font-size: 9.5px; letter-spacing: 0.04em; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
   .footer-contacts { justify-content: center; }
