@@ -319,12 +319,16 @@
     pointer-events:none;
   }
   .pulse-fade{
-    position:absolute;top:0;bottom:0;width:32px;z-index:2;pointer-events:none;
-    opacity:0;transition:opacity 0.25s ease;
+    position:absolute;top:0;bottom:0;width:34px;z-index:3;
+    display:flex;align-items:center;justify-content:center;
+    border:none;padding:0;cursor:pointer;
+    opacity:0;pointer-events:none;transition:opacity 0.25s ease;
+    color:var(--white);font-size:1rem;
   }
-  .pulse-fade.left{left:0;background:linear-gradient(90deg, var(--black-2) 0%, transparent 100%);}
-  .pulse-fade.right{right:0;background:linear-gradient(270deg, var(--black-2) 0%, transparent 100%);}
-  .pulse-fade.show{opacity:1;}
+  .pulse-fade.left{left:0;background:linear-gradient(90deg, var(--black-2) 30%, transparent 100%);}
+  .pulse-fade.right{right:0;background:linear-gradient(270deg, var(--black-2) 30%, transparent 100%);}
+  .pulse-fade.show{opacity:1;pointer-events:auto;}
+  .pulse-fade:active{opacity:0.6;}
   .pulse-hour{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;position:relative;z-index:1;scroll-snap-align:start;}
   .pulse-hour-label{
     font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;color:var(--gray-on-black);
@@ -910,12 +914,18 @@
       baseline.className = 'pulse-baseline';
       grid.appendChild(baseline);
 
-      const fadeLeft = document.createElement('div');
+      const fadeLeft = document.createElement('button');
+      fadeLeft.type = 'button';
       fadeLeft.className = 'pulse-fade left';
+      fadeLeft.setAttribute('aria-label', 'Гортати назад');
+      fadeLeft.textContent = '‹';
       grid.appendChild(fadeLeft);
 
-      const fadeRight = document.createElement('div');
+      const fadeRight = document.createElement('button');
+      fadeRight.type = 'button';
       fadeRight.className = 'pulse-fade right';
+      fadeRight.setAttribute('aria-label', 'Гортати вперед');
+      fadeRight.textContent = '›';
       grid.appendChild(fadeRight);
 
       const scroll = document.createElement('div');
@@ -989,6 +999,15 @@
       updateFades();
       scroll.addEventListener('scroll', updateFades, { passive:true });
       window.addEventListener('resize', updateFades);
+
+      // Клік по стрілці гортає стрічку на "сторінку" (приблизно 3 години) —
+      // працює завжди, незалежно від того, чи спрацював свайп на конкретному пристрої.
+      fadeLeft.addEventListener('click', () => {
+        scroll.scrollBy({ left: -180, behavior: 'smooth' });
+      });
+      fadeRight.addEventListener('click', () => {
+        scroll.scrollBy({ left: 180, behavior: 'smooth' });
+      });
 
       // Прокручуємо ЛИШЕ саму стрічку (не сторінку!) так, щоб поточна
       // година одразу була видимою — керуємо scrollLeft напряму, без
