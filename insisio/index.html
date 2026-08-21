@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="description" content="INCISIO — хірургічна стоматологія та імплантологія повного циклу: 3D-діагностика, встановлення імплантів, синус-ліфтинг, протезування.">
 <meta name="keywords" content="імплантологія, стоматологічна хірургія, зубні імпланти, синус-ліфтинг, all-on-4">
 <meta name="author" content="INCISIO">
@@ -308,6 +308,7 @@
     scrollbar-width:thin;
     -webkit-overflow-scrolling:touch;
     touch-action:pan-x;
+    overscroll-behavior-x:contain;
     scroll-snap-type:x proximity;
   }
   .pulse-scroll::-webkit-scrollbar{height:3px;}
@@ -337,6 +338,7 @@
     clip-path:polygon(50% 0%, 100% 30%, 100% 100%, 0 100%, 0 30%);
     transition:height 0.22s ease, opacity 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     position:relative;
+    touch-action:manipulation;
   }
   .pulse:hover:not(.busy):not(.selected){height:34px;opacity:0.45;}
   .pulse.busy{
