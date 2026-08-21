@@ -988,11 +988,15 @@
       scroll.addEventListener('scroll', updateFades, { passive:true });
       window.addEventListener('resize', updateFades);
 
-      // Прокручуємо стрічку так, щоб поточна година (або перший вільний час)
-      // одразу була у видимій зоні, а не губилась за межами екрана.
+      // Прокручуємо ЛИШЕ саму стрічку (не сторінку!) так, щоб поточна
+      // година одразу була видимою — керуємо scrollLeft напряму, без
+      // scrollIntoView, бо той у мобільних браузерах іноді зсуває
+      // прокрутку всієї сторінки, а не тільки цього контейнера.
       const nowHour = String(new Date().getHours()).padStart(2,'0');
       const targetHourEl = scroll.querySelector(`[data-hour="${nowHour}"]`);
-      if(targetHourEl) targetHourEl.scrollIntoView({ inline:'start', block:'nearest' });
+      if(targetHourEl){
+        scroll.scrollLeft = Math.max(0, targetHourEl.offsetLeft - 16);
+      }
     }
 
     fDoctor.addEventListener('change', refreshSlots);
