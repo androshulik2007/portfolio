@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INCISIO Admin · Програми · BLACKWOOD Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon.png?v=2">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #eef3fb;
+  --bg2:          #e2eaf8;
+  --surface:      #ffffff;
+  --surface2:     #f4f8ff;
+  --blue-deep:    #2d5be3;
+  --blue-mid:     #4e7af0;
+  --blue-soft:    #7ba4f8;
+  --blue-pale:    #c5d8ff;
+  --blue-wash:    #dce8ff;
+  --blue-mist:    #eef3ff;
+  --text-dark:    #1c2b4a;
+  --text-mid:     #4a5f8a;
+  --text-soft:    #8099c4;
+  --text-faint:   #b8cae8;
+  --border:       rgba(77, 122, 240, 0.15);
+  --border-hover: rgba(77, 122, 240, 0.4);
+  --shadow:       0 4px 24px rgba(45, 91, 227, 0.08);
+  --shadow-hover: 0 12px 40px rgba(45, 91, 227, 0.16);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+  line-height: 1.65;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  height: 76px;
+  background: rgba(238, 243, 251, 0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-svg { width: 40px; height: 40px; flex-shrink: 0; }
+.logo-text { display: flex; flex-direction: column; line-height: 1; }
+
+.logo-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+
+.logo-name span { color: var(--blue-deep); }
+
+.logo-sub {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-top: 2px;
+}
+
+nav { display: flex; gap: 32px; align-items: center; }
+
+nav a {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+nav a:hover { color: var(--blue-deep); }
+nav a.active { color: var(--blue-deep); }
+
+.nav-contacts { display: flex; align-items: center; gap: 10px; }
+
+.nav-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-contact-btn:hover { border-color: var(--border-hover); color: var(--blue-deep); }
+
+.nav-contact-btn.primary {
+  background: var(--blue-deep);
+  border-color: var(--blue-deep);
+  color: #fff !important;
+}
+
+.nav-contact-btn.primary:hover {
+  background: var(--blue-mid);
+  border-color: var(--blue-mid);
+  transform: translateY(-1px);
+}
+
+/* ── BACK LINK ── */
+.back-bar {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.back-link:hover { color: var(--blue-deep); transform: translateX(-3px); }
+
+/* ── DETAIL HERO ── */
+.detail-hero {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.detail-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.card-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--blue-mist);
+  color: var(--blue-mid);
+  border: 1px solid var(--blue-pale);
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #2f9e5b;
+  background: #e7f8ee;
+  border: 1px solid #bfeacd;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2f9e5b;
+}
+
+.detail-hero h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.detail-sub {
+  font-size: 16px;
+  color: var(--text-mid);
+  max-width: 640px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+/* ── VIDEO ── */
+.video-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Заглушка, поки посилання на відео не додано (замініть YOUR_VIDEO_ID нижче) */
+.video-wrap.no-video iframe { display: none; }
+
+.video-wrap.no-video::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--surface2),
+    var(--surface2) 10px,
+    var(--bg2) 10px,
+    var(--bg2) 20px
+  );
+}
+
+.video-wrap.no-video::after {
+  content: 'Додайте посилання на відео на YouTube (замініть YOUR_VIDEO_ID у коді сторінки)';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 60px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text-faint);
+}
+
+/* ── CONTENT ── */
+.content-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 56px 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 48px;
+  align-items: start;
+}
+
+.content-block + .content-block { margin-top: 40px; }
+
+.content-block h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 18px;
+}
+
+.content-block p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.8;
+  font-weight: 400;
+  max-width: 620px;
+}
+
+.content-block p + p { margin-top: 12px; }
+
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.feature-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--blue-mist);
+  color: var(--blue-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-text strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 3px;
+}
+
+.feature-text span {
+  font-size: 13.5px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ── SIDEBAR ── */
+.side-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 100px;
+}
+
+.side-panel h3 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 18px;
+}
+
+.side-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.side-row:last-of-type { border-bottom: none; }
+
+.side-row-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-soft);
+  white-space: nowrap;
+}
+
+.side-row-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: right;
+}
+
+.side-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.stack-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--surface2);
+  color: var(--text-soft);
+  border: 1px solid var(--border);
+}
+
+.side-cta {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── BUTTON ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 100px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  width: 100%;
+}
+
+.btn-primary { background: var(--blue-deep); color: #fff; }
+
+.btn-primary:hover {
+  background: var(--blue-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(45, 91, 227, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-mid);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--border-hover);
+  color: var(--blue-deep);
+  transform: translateY(-1px);
+}
+
+/* ── DIVIDER ── */
+.divider {
+  max-width: 1000px;
+  margin: 56px auto 0;
+  padding: 0 60px;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 56px;
+  border-top: 1px solid var(--border);
+  padding: 32px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-logo-svg { width: 28px; height: 28px; opacity: 0.5; }
+
+.footer-logo-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.footer-logo-text span { color: var(--blue-soft); }
+
+.footer-contacts { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+
+.footer-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-contact-link:hover { color: var(--blue-deep); }
+
+.footer-copy { font-size: 12px; font-weight: 500; color: var(--text-faint); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .content-grid { grid-template-columns: 1fr; }
+  .side-panel { position: static; }
+}
+
+@media (max-width: 820px) {
+  header { padding: 0 24px; }
+  nav a:not(.nav-contact-btn) { display: none; }
+  .nav-contact-btn span.label-text { display: none; }
+  .back-bar, .detail-hero, .video-section, .content-section, .divider { padding-left: 24px; padding-right: 24px; }
+  footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+  .footer-contacts { justify-content: center; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.detail-hero, .video-section, .content-section { animation: fadeUp 0.5s ease both; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="index.html">
+    <svg class="logo-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080.000000 1080.000000" preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,1080.000000) scale(0.100000,-0.100000)" fill="#2d5be3" stroke="none">
+<path d="M5024 9486 c-227 -43 -336 -109 -398 -241 -63 -131 -42 -288 64 -501
+133 -264 392 -541 790 -841 390 -294 875 -575 1385 -803 161 -72 199 -94 203
+-117 2 -17 -8 -22 -77 -37 -44 -9 -167 -41 -273 -70 -106 -30 -208 -57 -226
+-61 -36 -7 -51 -30 -33 -48 6 -6 177 -32 381 -57 232 -30 375 -52 385 -60 25
+-21 12 -50 -79 -178 -79 -110 -136 -208 -136 -232 0 -19 73 26 216 132 180
+134 185 138 205 138 12 0 32 -38 72 -137 30 -76 70 -174 87 -218 18 -44 36
+-90 41 -102 10 -27 45 -31 53 -5 3 9 26 114 51 232 47 220 62 260 94 260 10 0
+87 -36 171 -80 209 -111 217 -100 60 80 -50 58 -96 113 -101 122 -18 33 36 32
+230 -5 243 -47 316 -57 496 -64 233 -9 460 24 579 84 110 56 192 166 203 276
+16 158 -97 404 -294 637 -279 330 -653 624 -1247 979 -323 193 -371 220 -578
+317 -683 322 -1220 502 -1763 591 -127 20 -471 26 -561 9z m1317 -536 c311
+-32 724 -147 1096 -306 754 -322 1374 -766 1641 -1176 93 -144 148 -307 140
+-418 -12 -163 -133 -279 -346 -332 -196 -49 -748 -16 -686 41 9 8 121 39 299
+83 124 31 162 57 113 78 -13 5 -138 28 -278 50 -297 47 -326 54 -340 80 -13
+24 -6 39 46 101 20 24 81 106 135 184 55 77 113 158 129 179 31 40 39 76 18
+76 -7 -1 -121 -86 -253 -190 -132 -105 -248 -190 -257 -190 -22 0 -28 18 -167
+572 -66 262 -125 486 -131 498 -6 11 -15 20 -20 20 -19 0 -28 -38 -35 -145 -3
+-60 -20 -243 -36 -405 -16 -162 -34 -344 -40 -405 -16 -166 -23 -171 -139 -99
+-391 241 -572 346 -582 336 -8 -8 51 -72 205 -225 119 -118 213 -218 210 -221
+-16 -16 -59 1 -217 88 -431 236 -666 405 -922 660 -218 219 -323 382 -360 559
+-28 132 11 278 97 367 109 112 386 169 680 140z"/>
+<path d="M5768 8584 c-16 -16 -7 -99 19 -162 77 -195 266 -411 540 -619 151
+-115 140 -109 163 -80 45 57 176 88 250 59 14 -6 117 -67 230 -136 113 -69
+206 -122 207 -118 5 17 45 424 58 592 13 173 25 241 46 264 18 19 7 26 -98 60
+-179 57 -378 101 -583 127 -102 12 -822 24 -832 13z"/>
+<path d="M7827 7852 c42 -163 77 -299 79 -301 2 -2 80 57 198 151 l21 17 -24
+43 c-63 112 -229 303 -318 366 l-31 22 75 -298z"/>
+<path d="M2340 7920 l0 -670 208 -2 207 -3 3 -1847 2 -1848 -207 -2 -208 -3
+-3 -673 -2 -673 2047 4 c2148 4 2122 3 2398 47 444 69 814 204 1105 404 96 66
+241 211 308 309 185 268 262 573 249 982 -16 503 -169 837 -478 1040 -274 180
+-642 317 -944 350 -93 10 -95 11 -95 55 0 38 2 40 43 50 365 92 654 244 875
+460 82 81 232 261 232 278 0 4 -17 15 -38 24 -20 9 -49 25 -64 34 -15 10 -30
+16 -33 13 -3 -3 -19 -68 -35 -143 -33 -153 -43 -177 -92 -223 -131 -126 -341
+-59 -395 126 -13 47 -68 179 -77 189 -2 2 -35 -20 -72 -49 -101 -76 -196 -119
+-262 -119 -63 0 -107 17 -145 56 -48 48 -61 83 -61 155 0 59 5 77 47 158 30
+60 42 93 34 95 -7 2 -113 16 -237 31 -124 15 -241 34 -259 41 -58 24 -98 61
+-125 116 -73 146 16 301 195 339 l51 11 -153 80 c-634 331 -1197 732 -1530
+1088 -109 116 -233 275 -271 347 l-23 43 -1097 0 -1098 0 0 -670z m3265 -680
+c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
+-300 -62 -22 -84 -24 -353 -27 l-288 -3 0 675 0 676 238 0 c130 0 269 -5 307
+-10z m108 -2295 c82 -21 133 -50 188 -105 56 -56 93 -125 116 -217 25 -101 25
+-636 0 -737 -45 -181 -143 -282 -309 -321 -48 -11 -133 -15 -355 -15 l-293 0
+0 705 0 705 298 0 c232 0 310 -3 355 -15z"/>
+</g>
+</svg>
+    <div class="logo-text">
+      <div class="logo-name">BLACK<span>WOOD</span></div>
+      <div class="logo-sub">Studio</div>
+    </div>
+  </a>
+  <nav>
+    <a href="index.html#about">Про мене</a>
+    <a href="index.html#projects">Сайти</a>
+    <a href="programs.html" class="active">Програми</a>
+    <div class="nav-contacts">
+      <a href="tel:+380964456509" class="nav-contact-btn">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="label-text">+38 (096) 445 65 09</span>
+      </a>
+      <a href="mailto:androshulik2007@gmail.com" class="nav-contact-btn primary">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6c0-1.1-.9-2-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6Z"/><path d="m22 6-10 7L2 6"/></svg>
+        <span class="label-text">Написати</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- BACK -->
+<div class="back-bar">
+  <a class="back-link" href="programs.html">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Усі програми
+  </a>
+</div>
+
+<!-- DETAIL HERO -->
+<section class="detail-hero">
+  <div class="detail-top">
+    <span class="card-tag">Desktop CRM</span>
+    <span class="status-pill">Готово до використання</span>
+  </div>
+  <h1>INCISIO Admin</h1>
+  <p class="detail-sub">Десктопний застосунок-адмінка для стоматологічної клініки INCISIO. Керівник чи адміністратор бачить усі записи, пацієнтів і завантаженість лікарів в одному вікні на комп'ютері — без браузера і без зайвих кліків.</p>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <!-- Щоб додати відео: вставте свій YouTube ID замість YOUR_VIDEO_ID у рядку нижче -->
+  <div class="video-wrap" id="videoWrap">
+    <iframe id="videoFrame" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Відеопрезентація INCISIO Admin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="content-section">
+  <div class="content-grid">
+    <div>
+
+      <div class="content-block">
+        <h2>Про програму</h2>
+        <p>INCISIO Admin — це десктопна CRM-система, яку я розробив для власника стоматологічної клініки, щоб він міг керувати записами пацієнтів, не заходячи в браузер і не тримаючи відкритою купу вкладок. Застосунок побудований на Electron, тож працює як звичайна Windows-програма з ярликом на робочому столі — але всередині це повноцінна адмін-панель з живим підключенням до бази даних клініки.</p>
+        <p>Головна ідея — синхронізація в реальному часі: коли клієнт залишає заявку на сайті клініки, вона одразу з'являється в застосунку на комп'ютері адміністратора, а якщо вікно згорнуте — прилітає нативне сповіщення операційної системи. Це прибирає потребу постійно оновлювати сторінку чи перевіряти пошту вручну.</p>
+      </div>
+
+      <div class="content-block">
+        <h2>Можливості</h2>
+        <div class="feature-list">
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>
+            </div>
+            <div class="feature-text">
+              <strong>Дашборд з аналітикою</strong>
+              <span>Кількість записів за сьогодні, приріст відносно вчора, унікальні пацієнти за місяць, графік завантаженості по днях і стрічка останньої активності — усе на одному екрані.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 12h6M9 16h6"/></svg>
+            </div>
+            <div class="feature-text">
+              <strong>Управління бронюваннями</strong>
+              <span>Список усіх записів з фільтрами за статусом (очікування, підтверджено, завершено, скасовано), швидким пошуком за пацієнтом і докладною карткою кожного запису.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
+            </div>
+            <div class="feature-text">
+              <strong>Розклад лікарів</strong>
+              <span>Візуальний календар завантаженості кожного лікаря по годинах — видно вільні й зайняті слоти без потреби гортати список записів вручну.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="feature-text">
+              <strong>База пацієнтів і команда лікарів</strong>
+              <span>Окремі розділи з пошуком за іменем і телефоном для пацієнтів, а також список лікарів клініки з їхньою спеціалізацією.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 8h10c0-3 2-5 2-8a7 7 0 0 0-7-7zM9 21h6"/></svg>
+            </div>
+            <div class="feature-text">
+              <strong>ШІ-асистент по даних клініки</strong>
+              <span>Окрема сторінка, де можна поставити запитання своїми словами — наприклад, «які години найзавантаженіші?» — і отримати відповідь на основі реальних даних клініки.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M13.73 21a2 2 0 0 1-3.46 0M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>
+            </div>
+            <div class="feature-text">
+              <strong>Push-сповіщення про нових клієнтів</strong>
+              <span>Застосунок опитує сервер кожні 30 секунд і показує нативне сповіщення ОС про новий запис, навіть якщо вікно програми згорнуте. Клік по сповіщенню одразу відкриває деталі запису.</span>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 2v6m0 8v6m10-10h-6M8 12H2m15.36-7.36-4.24 4.24M8.88 15.12l-4.24 4.24m0-14.72 4.24 4.24m6.24 6.24 4.24 4.24"/></svg>
+            </div>
+            <div class="feature-text">
+              <strong>Налаштування й безпека даних</strong>
+              <span>Перемикачі для сповіщень і звуку, а також захищене очищення бази — кнопка активується лише після того, як вручну введено фразу підтвердження, щоб виключити випадкове видалення.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>Як це влаштовано технічно</h2>
+        <p>Застосунок зібраний на Electron: інтерфейс — це та сама адмін-панель, яка може працювати і в браузері, але «загорнута» в нативний Windows-застосунок зі своїм вікном, іконкою та інсталятором. Дані клієнт клініки отримує через REST API, підключений до бази на Render (PostgreSQL), тож інформація в застосунку й на сайті клініки завжди синхронізована.</p>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="side-panel">
+      <h3>Про проєкт</h3>
+      <div class="side-row">
+        <span class="side-row-label">Тип</span>
+        <span class="side-row-value">Desktop CRM</span>
+      </div>
+      <div class="side-row">
+        <span class="side-row-label">Платформа</span>
+        <span class="side-row-value">Windows (.exe)</span>
+      </div>
+      <div class="side-row">
+        <span class="side-row-label">Ніша</span>
+        <span class="side-row-value">Стоматологія</span>
+      </div>
+      <div class="side-row">
+        <span class="side-row-label">Стек</span>
+        <span class="side-row-value">
+          <div class="side-stack">
+            <span class="stack-pill">Electron</span>
+            <span class="stack-pill">JavaScript</span>
+            <span class="stack-pill">REST API</span>
+            <span class="stack-pill">PostgreSQL</span>
+          </div>
+        </span>
+      </div>
+
+      <div class="side-cta">
+        <a class="btn btn-primary" href="mailto:androshulik2007@gmail.com">
+          Замовити схожу програму
+        </a>
+        <a class="btn btn-outline" href="programs.html">
+          Усі програми
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <svg class="footer-logo-svg" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080.000000 1080.000000" preserveAspectRatio="xMidYMid meet">
+<g transform="translate(0.000000,1080.000000) scale(0.100000,-0.100000)" fill="#8099c4" stroke="none">
+<path d="M5024 9486 c-227 -43 -336 -109 -398 -241 -63 -131 -42 -288 64 -501 133 -264 392 -541 790 -841 390 -294 875 -575 1385 -803 161 -72 199 -94 203 -117 2 -17 -8 -22 -77 -37 -44 -9 -167 -41 -273 -70 -106 -30 -208 -57 -226 -61 -36 -7 -51 -30 -33 -48 6 -6 177 -32 381 -57 232 -30 375 -52 385 -60 25 -21 12 -50 -79 -178 -79 -110 -136 -208 -136 -232 0 -19 73 26 216 132 180 134 185 138 205 138 12 0 32 -38 72 -137 30 -76 70 -174 87 -218 18 -44 36 -90 41 -102 10 -27 45 -31 53 -5 3 9 26 114 51 232 47 220 62 260 94 260 10 0 87 -36 171 -80 209 -111 217 -100 60 80 -50 58 -96 113 -101 122 -18 33 36 32 230 -5 243 -47 316 -57 496 -64 233 -9 460 24 579 84 110 56 192 166 203 276 16 158 -97 404 -294 637 -279 330 -653 624 -1247 979 -323 193 -371 220 -578 317 -683 322 -1220 502 -1763 591 -127 20 -471 26 -561 9z m1317 -536 c311 -32 724 -147 1096 -306 754 -322 1374 -766 1641 -1176 93 -144 148 -307 140 -418 -12 -163 -133 -279 -346 -332 -196 -49 -748 -16 -686 41 9 8 121 39 299 83 124 31 162 57 113 78 -13 5 -138 28 -278 50 -297 47 -326 54 -340 80 -13 24 -6 39 46 101 20 24 81 106 135 184 55 77 113 158 129 179 31 40 39 76 18 76 -7 -1 -121 -86 -253 -190 -132 -105 -248 -190 -257 -190 -22 0 -28 18 -167 572 -66 262 -125 486 -131 498 -6 11 -15 20 -20 20 -19 0 -28 -38 -35 -145 -3 -60 -20 -243 -36 -405 -16 -162 -34 -344 -40 -405 -16 -166 -23 -171 -139 -99 -391 241 -572 346 -582 336 -8 -8 51 -72 205 -225 119 -118 213 -218 210 -221 -16 -16 -59 1 -217 88 -431 236 -666 405 -922 660 -218 219 -323 382 -360 559 -28 132 11 278 97 367 109 112 386 169 680 140z"/>
+<path d="M5768 8584 c-16 -16 -7 -99 19 -162 77 -195 266 -411 540 -619 151 -115 140 -109 163 -80 45 57 176 88 250 59 14 -6 117 -67 230 -136 113 -69 206 -122 207 -118 5 17 45 424 58 592 13 173 25 241 46 264 18 19 7 26 -98 60 -179 57 -378 101 -583 127 -102 12 -822 24 -832 13z"/>
+<path d="M7827 7852 c42 -163 77 -299 79 -301 2 -2 80 57 198 151 l21 17 -24 43 c-63 112 -229 303 -318 366 l-31 22 75 -298z"/>
+<path d="M2340 7920 l0 -670 208 -2 207 -3 3 -1847 2 -1848 -207 -2 -208 -3 -3 -673 -2 -673 2047 4 c2148 4 2122 3 2398 47 444 69 814 204 1105 404 96 66 241 211 308 309 185 268 262 573 249 982 -16 503 -169 837 -478 1040 -274 180 -642 317 -944 350 -93 10 -95 11 -95 55 0 38 2 40 43 50 365 92 654 244 875 460 82 81 232 261 232 278 0 4 -17 15 -38 24 -20 9 -49 25 -64 34 -15 10 -30 16 -33 13 -3 -3 -19 -68 -35 -143 -33 -153 -43 -177 -92 -223 -131 -126 -341 -59 -395 126 -13 47 -68 179 -77 189 -2 2 -35 -20 -72 -49 -101 -76 -196 -119 -262 -119 -63 0 -107 17 -145 56 -48 48 -61 83 -61 155 0 59 5 77 47 158 30 60 42 93 34 95 -7 2 -113 16 -237 31 -124 15 -241 34 -259 41 -58 24 -98 61 -125 116 -73 146 16 301 195 339 l51 11 -153 80 c-634 331 -1197 732 -1530 1088 -109 116 -233 275 -271 347 l-23 43 -1097 0 -1098 0 0 -670z m3265 -680 c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256 -300 -62 -22 -84 -24 -353 -27 l-288 -3 0 675 0 676 238 0 c130 0 269 -5 307 -10z m108 -2295 c82 -21 133 -50 188 -105 56 -56 93 -125 116 -217 25 -101 25 -636 0 -737 -45 -181 -143 -282 -309 -321 -48 -11 -133 -15 -355 -15 l-293 0 0 705 0 705 298 0 c232 0 310 -3 355 -15z"/>
+</g>
+</svg>
+    <div class="footer-logo-text">BLACK<span>WOOD</span> Studio</div>
+  </div>
+  <div class="footer-contacts">
+    <a href="tel:+380964456509" class="footer-contact-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +38 (096) 445 65 09
+    </a>
+    <a href="mailto:androshulik2007@gmail.com" class="footer-contact-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6Z"/><path d="m22 6-10 7L2 6"/></svg>
+      androshulik2007@gmail.com
+    </a>
+  </div>
+  <div class="footer-copy">© 2025 · Всі права захищено</div>
+</footer>
+
+<script>
+  // Якщо посилання на відео ще не вставлено (лишився YOUR_VIDEO_ID) — показуємо акуратну заглушку
+  const wrap = document.getElementById('videoWrap');
+  const frame = document.getElementById('videoFrame');
+  if (frame.src.includes('YOUR_VIDEO_ID')) {
+    wrap.classList.add('no-video');
+  }
+</script>
+
+</body>
+</html>
