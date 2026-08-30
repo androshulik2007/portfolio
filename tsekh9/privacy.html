@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Політика конфіденційності — ЦЕХ №9 Барбершоп</title>
+<meta name="description" content="Політика конфіденційності ЦЕХ №9: які дані ми збираємо через форму запису та cookies, навіщо, і з ким ними ділимось.">
+<link rel="canonical" href="https://tsekh9.com.ua/privacy.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Політика конфіденційності — ЦЕХ №9 Барбершоп">
+<meta property="og:description" content="Які дані збирає ЦЕХ №9, навіщо, і з ким ними ділиться.">
+<meta property="og:url" content="https://tsekh9.com.ua/privacy.html">
+<meta property="og:image" content="https://tsekh9.com.ua/og-image.jpg">
+<meta property="og:locale" content="uk_UA">
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Archivo:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ЦЕХ №9 BARBERSHOP — Brutalist / Industrial design system
+   ========================================================= */
+
+:root {
+  /* Color — 4 named tokens + 2 derived */
+  --concrete-dark: #17171598;
+  --concrete-dark: #161615;   /* raw shadow / near-black */
+  --concrete-mid:  #4A4844;   /* steel / rebar grey */
+  --concrete-light:#B8B4A8;   /* cast concrete */
+  --paper:         #EDEAE0;   /* bleached kraft paper */
+  --hazard:        #FF4400;   /* safety-tape orange */
+  --hazard-dark:   #C23400;   /* pressed / hover orange */
+  --line:          #2A2926;   /* hairline on dark */
+  --ok:            #6E8F5A;   /* small "open" indicator, muted industrial green */
+
+  --font-display: "Bungee", "Arial Black", sans-serif;
+  --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+
+  --border-thick: 4px;
+  --border-thin: 1px;
+  --radius: 0px; /* brutalism: no rounding, ever */
+  --gap: clamp(1rem, 2vw, 2rem);
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+body {
+  margin: 0;
+  background: var(--concrete-dark);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; letter-spacing: -0.01em; line-height: 0.95; margin: 0 0 0.5em; overflow-wrap: break-word; }
+p { margin: 0 0 1em; color: var(--concrete-light); }
+ul { padding-left: 1.2em; }
+button, input, select, textarea { font-family: inherit; font-size: 1rem; color: inherit; }
+
+/* ---------- Focus / a11y ---------- */
+:focus-visible {
+  outline: 3px solid var(--hazard);
+  outline-offset: 2px;
+}
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--hazard);
+  color: var(--concrete-dark);
+  padding: 0.75em 1.2em;
+  z-index: 200;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.skip-link:focus {
+  left: var(--gap);
+  top: var(--gap);
+}
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Texture: concrete grain overlay ---------- */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- Hazard stripe divider (signature element) ---------- */
+.hazard-strip {
+  height: 14px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--hazard),
+    var(--hazard) 18px,
+    var(--concrete-dark) 18px,
+    var(--concrete-dark) 36px
+  );
+  background-size: 50.9px 50.9px;
+  border-top: var(--border-thin) solid var(--line);
+  border-bottom: var(--border-thin) solid var(--line);
+  animation: hazardCrawl 2.4s linear infinite;
+}
+@keyframes hazardCrawl {
+  from { background-position: 0 0; }
+  to   { background-position: 50.9px 0; }
+}
+
+/* ---------- Layout shell ---------- */
+.wrap {
+  width: min(1200px, 100% - 2 * var(--gap));
+  margin-inline: auto;
+}
+main { display: block; }
+section { border-bottom: var(--border-thin) solid var(--line); }
+
+/* ---------- Header / nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--concrete-dark);
+  border-bottom: var(--border-thick) solid var(--paper);
+}
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.9rem;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4em;
+}
+.brand span.tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--hazard);
+  border: var(--border-thin) solid var(--hazard);
+  padding: 0.15em 0.4em;
+}
+.nav-links {
+  display: flex;
+  gap: 1.6rem;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  padding: 0.3em 0.1em;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.nav-links a:hover, .nav-links a:focus-visible { border-bottom-color: var(--hazard); }
+.nav-cta {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  background: var(--hazard);
+  color: var(--concrete-dark);
+  padding: 0.6em 1.1em;
+  text-decoration: none;
+  border: var(--border-thin) solid var(--hazard);
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.nav-cta:hover, .nav-cta:focus-visible { background: var(--concrete-dark); color: var(--hazard); }
+.nav-cta:active { transform: scale(0.96); }
+
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: var(--border-thin) solid var(--paper);
+  padding: 0.5em 0.6em;
+  cursor: pointer;
+}
+.nav-toggle span, .nav-toggle::before, .nav-toggle::after { display: none; }
+.nav-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--paper);
+  margin: 4px 0;
+}
+
+@media (max-width: 860px) {
+  .nav-links { 
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--concrete-dark);
+    border-top: var(--border-thin) solid var(--line);
+    border-bottom: var(--border-thick) solid var(--paper);
+    padding: 1.2rem var(--gap);
+    gap: 1rem;
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+  .nav-cta { display: none; }
+  .nav-links.open .nav-cta-mobile {
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  padding-block: clamp(2.5rem, 8vw, 6rem);
+  overflow: hidden;
+  border-bottom: var(--border-thick) solid var(--paper);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--hazard);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.1s;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 7.5vw, 5.4rem);
+  color: var(--paper);
+}
+.hero h1 .accent { color: var(--hazard); }
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line-inner {
+  display: block;
+  transform: translateY(105%);
+  animation: lineUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.hero h1 .line:nth-child(1) .line-inner { animation-delay: 0.25s; }
+.hero h1 .line:nth-child(2) .line-inner { animation-delay: 0.4s; }
+.hero-sub {
+  font-family: var(--font-mono);
+  color: var(--concrete-light);
+  max-width: 46ch;
+  font-size: 0.95rem;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.65s;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  align-items: center;
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.8s;
+}
+@keyframes lineUp {
+  to { transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.9rem;
+  padding: 1em 1.6em;
+  text-decoration: none;
+  border: var(--border-thin) solid currentColor;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.btn-primary { background: var(--hazard); color: var(--concrete-dark); border-color: var(--hazard); }
+.btn-primary:hover, .btn-primary:focus-visible { background: var(--paper); color: var(--concrete-dark); border-color: var(--paper); }
+.btn-ghost { color: var(--paper); }
+.btn-ghost:hover, .btn-ghost:focus-visible { color: var(--hazard); border-color: var(--hazard); }
+.btn:active { transform: scale(0.96); }
+
+/* Stamp badge — signature element */
+.stamp {
+  position: absolute;
+  top: clamp(1rem, 5vw, 3rem);
+  right: clamp(0.5rem, 5vw, 4rem);
+  width: clamp(84px, 12vw, 130px);
+  height: clamp(84px, 12vw, 130px);
+  border: 3px solid var(--hazard);
+  border-radius: 50%;
+  transform: rotate(-10deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--hazard);
+  font-size: clamp(0.6rem, 1.3vw, 0.8rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5em;
+  opacity: 0;
+  animation: stampDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.9s;
+}
+@keyframes stampDown {
+  0%   { opacity: 0; transform: rotate(-34deg) scale(1.9); }
+  70%  { opacity: 1; transform: rotate(-8deg) scale(0.96); }
+  100% { opacity: 1; transform: rotate(-10deg) scale(1); }
+}
+
+/* Hero illustration block (SVG, no raster photo) */
+.hero-visual {
+  border: var(--border-thin) solid var(--concrete-mid);
+  aspect-ratio: 16/10;
+  background: var(--concrete-mid);
+}
+
+/* ---------- Section heads ---------- */
+.section-pad { padding-block: clamp(2.5rem, 6vw, 5rem); }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.section-num {
+  font-family: var(--font-mono);
+  color: var(--hazard);
+  font-size: 0.85rem;
+}
+.section-head h2 { font-size: clamp(2rem, 5vw, 3.4rem); }
+
+/* ---------- Services ---------- */
+.services-list { border-top: var(--border-thin) solid var(--line); }
+.service-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.1rem 0;
+  border-bottom: var(--border-thin) solid var(--line);
+  transition: background 0.2s ease, padding-left 0.2s ease;
+}
+.service-row:hover { background: rgba(255, 68, 0, 0.07); padding-left: 0.6rem; }
+.service-row .name { font-family: var(--font-display); font-size: 1.3rem; text-transform: uppercase; }
+.service-row .time { font-family: var(--font-mono); color: var(--concrete-light); font-size: 0.85rem; }
+.service-row .price { font-family: var(--font-mono); font-weight: 700; color: var(--hazard); font-size: 1.1rem; white-space: nowrap; transition: transform 0.2s ease; }
+.service-row:hover .price { transform: scale(1.08); }
+
+/* ---------- Cards grid (masters, features) ---------- */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--border-thin);
+  background: var(--line);
+  border: var(--border-thin) solid var(--line);
+}
+@media (max-width: 760px) { .grid-3 { grid-template-columns: 1fr; } }
+.card {
+  background: var(--concrete-dark);
+  padding: 1.6rem;
+  transition: background 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.card:hover, .card:focus-within {
+  background: #1c1c19;
+  transform: translateX(6px);
+  box-shadow: -6px 0 0 var(--hazard);
+}
+.card .avatar {
+  aspect-ratio: 1;
+  background: var(--concrete-mid);
+  border: var(--border-thin) solid var(--paper);
+  margin-bottom: 1rem;
+  transition: filter 0.25s ease;
+}
+.card:hover .avatar { filter: brightness(1.15); }
+.card h3 { font-size: 1.3rem; margin-bottom: 0.2em; }
+.card .role { font-family: var(--font-mono); font-size: 0.78rem; color: var(--hazard); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.6em; }
+
+/* ---------- Testimonial placeholder ---------- */
+.testi {
+  border: var(--border-thin) dashed var(--concrete-mid);
+  padding: 1.4rem;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.testi-word {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  color: var(--concrete-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- FAQ ---------- */
+.faq-item {
+  border-bottom: var(--border-thin) solid var(--line);
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-family: var(--font-mono);
+  color: var(--hazard);
+  font-size: 1.6rem;
+  flex-shrink: 0;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary { transition: color 0.2s ease; }
+.faq-item summary:hover { color: var(--hazard); }
+.faq-item .a { padding-bottom: 1.2rem; max-width: 65ch; animation: fadeUp 0.35s ease; }
+
+/* ---------- Booking form ---------- */
+.booking {
+  border: var(--border-thick) solid var(--paper);
+  padding: clamp(1.4rem, 4vw, 2.6rem);
+  background: var(--concrete-dark);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+.field { display: flex; flex-direction: column; gap: 0.4em; }
+.field.full { grid-column: 1 / -1; }
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--concrete-light);
+}
+.field .req { color: var(--hazard); }
+.field input, .field select, .field textarea {
+  background: var(--concrete-dark);
+  border: var(--border-thin) solid var(--concrete-mid);
+  color: var(--paper);
+  padding: 0.75em 0.8em;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--hazard); }
+.field textarea { resize: vertical; min-height: 90px; }
+.field .err {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--hazard);
+  min-height: 1em;
+}
+.form-note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--concrete-light);
+  margin-top: 1rem;
+}
+.form-status[data-state="success"] { color: var(--ok); }
+.form-status[data-state="error"] { color: var(--hazard); }
+.form-status { font-family: var(--font-mono); font-size: 0.85rem; margin-top: 1rem; }
+
+/* ---------- Contact / map block ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
+.map-block {
+  border: var(--border-thin) solid var(--concrete-mid);
+  aspect-ratio: 4/3;
+  background:
+    linear-gradient(var(--concrete-mid) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--concrete-mid) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--concrete-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info-list { list-style: none; margin: 0; padding: 0; }
+.info-list li {
+  padding: 0.9rem 0;
+  border-bottom: var(--border-thin) solid var(--line);
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1rem;
+}
+.info-list .k { font-family: var(--font-mono); color: var(--hazard); text-transform: uppercase; font-size: 0.78rem; }
+.info-list .v { font-family: var(--font-body); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding-block: 2.4rem;
+  background: var(--concrete-dark);
+}
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--concrete-light);
+}
+.footer-links { display: flex; gap: 1.4rem; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; }
+.footer-links a { text-decoration: none; }
+.footer-links a:hover, .footer-links a:focus-visible { color: var(--hazard); }
+
+/* ---------- Cookie consent banner ---------- */
+.cookie-banner {
+  position: fixed;
+  left: var(--gap); right: var(--gap); bottom: var(--gap);
+  z-index: 150;
+  max-width: 640px;
+  margin-inline: auto;
+  background: var(--paper);
+  color: var(--concrete-dark);
+  border: var(--border-thick) solid var(--concrete-dark);
+  padding: 1.2rem 1.4rem;
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+.cookie-banner.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.cookie-banner p { color: var(--concrete-dark); font-size: 0.85rem; margin-bottom: 1rem; }
+.cookie-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.cookie-actions button {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  padding: 0.7em 1.1em;
+  border: var(--border-thin) solid var(--concrete-dark);
+  cursor: pointer;
+  background: transparent;
+}
+.cookie-actions .accept { background: var(--hazard); border-color: var(--hazard); color: var(--concrete-dark); }
+.cookie-actions .reject { background: transparent; }
+
+/* ---------- Legal pages ---------- */
+.legal { padding-block: clamp(2rem, 6vw, 4rem); }
+.legal .eyebrow { opacity: 0; animation: fadeUp 0.5s ease forwards 0.05s; }
+.legal h1 { opacity: 0; animation: fadeUp 0.6s ease forwards 0.15s; }
+.legal .updated { opacity: 0; animation: fadeUp 0.5s ease forwards 0.3s; }
+.legal > *:not(.eyebrow):not(h1):not(.updated) { opacity: 0; animation: fadeUp 0.6s ease forwards 0.4s; }
+.legal h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); }
+.legal h2 { font-size: 1.4rem; margin-top: 1.6em; }
+.legal p, .legal li { color: var(--concrete-light); max-width: 72ch; }
+.legal .updated { font-family: var(--font-mono); color: var(--hazard); font-size: 0.8rem; margin-bottom: 2rem; text-transform: uppercase; }
+
+/* ---------- 404 ---------- */
+.error-page {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.error-page .code {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 20vw, 12rem);
+  color: var(--hazard);
+  line-height: 0.85;
+}
+
+/* ---------- Scroll-reveal (JS toggles .in-view via IntersectionObserver) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.reveal-stagger.in-view > * { opacity: 1; transform: translateY(0); }
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-stagger > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 0.15s; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 0.25s; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 0.35s; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 0.45s; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 0.55s; }
+
+/* ---------- Ambient grain flicker ---------- */
+.grain { animation: grainFlicker 8s steps(2) infinite; }
+@keyframes grainFlicker {
+  0%, 100% { opacity: 0.04; }
+  50% { opacity: 0.065; }
+}
+
+/* ---------- 404 entrance ---------- */
+.error-page .code { opacity: 0; animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.1s; }
+.error-page h1 { opacity: 0; animation: fadeUp 0.6s ease forwards 0.35s; }
+.error-page p { opacity: 0; animation: fadeUp 0.6s ease forwards 0.5s; }
+.error-page .btn { opacity: 0; animation: fadeUp 0.6s ease forwards 0.65s; }
+
+/* ---------- Utility ---------- */
+.mono { font-family: var(--font-mono); }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--hazard);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти до змісту</a>
+
+<header class="site-header">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html" aria-label="ЦЕХ №9 Барбершоп — головна">ЦЕХ №9 <span class="tag">RVN</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Відкрити меню">
+      <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#services">Послуги</a></li>
+      <li><a href="index.html#masters">Майстри</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#contacts">Контакти</a></li>
+      <li><a class="nav-cta nav-cta-mobile" href="index.html#booking">Записатися</a></li>
+    </ul>
+    <a class="nav-cta" href="index.html#booking">Записатися</a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap legal">
+    <p class="eyebrow">ЮРИДИЧНА ІНФОРМАЦІЯ</p>
+    <h1>Політика конфіденційності</h1>
+    <p class="updated">Востаннє оновлено: 30 серпня 2026</p>
+
+    <p>Ця Політика описує, які дані збирає сайт ЦЕХ №9 (tsekh9.com.ua), навіщо, і як ви можете ними керувати. Це шаблонний документ — перед публікацією його має переглянути юрист з урахуванням вашої фактичної юрисдикції та обробки даних.</p>
+
+    <h2>1. Які дані ми збираємо</h2>
+    <ul>
+      <li><strong>Дані форми запису:</strong> імʼя, телефон, email (необовʼязково), обрана послуга, бажані дата й час, коментар.</li>
+      <li><strong>Технічні дані:</strong> тип пристрою та браузера, приблизна геолокація за IP — збираються лише за умови вашої згоди на аналітику (див. розділ 3).</li>
+      <li><strong>Cookies:</strong> службові (для роботи форм і навігації) та, за згодою, аналітичні.</li>
+    </ul>
+
+    <h2>2. Навіщо ми збираємо ці дані</h2>
+    <p>Дані форми запису використовуються виключно для підтвердження й проведення вашого візиту до барбершопу — зв'язку з вами телефоном або email щодо запису. Технічні/аналітичні дані використовуються для розуміння відвідуваності сайту та покращення його роботи.</p>
+
+    <h2>3. Треті сторони</h2>
+    <ul>
+      <li><strong>Аналітика:</strong> на сайті передбачено місце для підключення сервісу на кшталт Google Analytics 4 або Plausible — наразі це заглушка, реальний збір даних не відбувається, доки скрипт не буде увімкнено і підтверджено вашою згодою через банер cookies.</li>
+      <li><strong>Хостинг:</strong> сайт розміщується на хостинг-провайдері, обраному власником барбершопу (вказати конкретного провайдера тут).</li>
+      <li><strong>Платежі:</strong> оплата послуг наразі відбувається офлайн (картка/готівка в салоні); онлайн-платежів цей сайт не обробляє.</li>
+    </ul>
+
+    <h2>4. Термін зберігання</h2>
+    <p>Дані форми запису зберігаються не довше, ніж це потрібно для організації візиту та ведення базового обліку клієнтів, і видаляються за запитом (див. розділ 7).</p>
+
+    <h2>5. Ваші права</h2>
+    <p>Ви маєте право запросити перегляд, виправлення або видалення своїх персональних даних, а також відкликати згоду на аналітику в будь-який момент через банер cookies або написавши на <a href="mailto:hello@tsekh9.com.ua">hello@tsekh9.com.ua</a>.</p>
+
+    <h2>6. Видалення даних</h2>
+    <p>Щоб видалити свої дані (наприклад, історію заявок на запис), напишіть на <a href="mailto:hello@tsekh9.com.ua">hello@tsekh9.com.ua</a> — ми підтвердимо видалення протягом розумного строку.</p>
+
+    <h2>7. Контакти</h2>
+    <p>Питання щодо цієї Політики: <a href="mailto:hello@tsekh9.com.ua">hello@tsekh9.com.ua</a>, +380 67 123 45 67.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <span>© 2026 ЦЕХ №9 БАРБЕРШОП. УСІ ПРАВА ЗАХИЩЕНО.</span>
+    <ul class="footer-links">
+      <li><a href="privacy.html">Політика конфіденційності</a></li>
+      <li><a href="terms.html">Умови користування</a></li>
+      <li><a href="sitemap.xml">Sitemap</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+// ЦЕХ №9 BARBERSHOP — shared behaviour
+// Note: this runs inside a preview sandbox that does not support
+// localStorage/sessionStorage, so consent state below is kept in a
+// plain in-memory variable for the session. In a real production
+// deployment (own hosting), replace `let consentState` persistence
+// with a first-party cookie or localStorage so the choice survives reloads.
+
+(function () {
+  "use strict";
+
+  /* ---------- Mobile nav ---------- */
+  var toggle = document.querySelector(".nav-toggle");
+  var links = document.querySelector(".nav-links");
+  if (toggle && links) {
+    toggle.addEventListener("click", function () {
+      var isOpen = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+    links.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  /* ---------- Booking form validation ---------- */
+  var form = document.getElementById("booking-form");
+  if (form) {
+    var status = document.getElementById("form-status");
+    var phonePattern = /^[+0-9()\s-]{7,20}$/;
+
+    function setError(field, message) {
+      var errEl = document.getElementById(field.name + "-err");
+      if (errEl) errEl.textContent = message || "";
+      field.setAttribute("aria-invalid", message ? "true" : "false");
+    }
+
+    function validateField(field) {
+      if (field.hasAttribute("required") && !field.value.trim()) {
+        setError(field, "Обов'язкове поле.");
+        return false;
+      }
+      if (field.type === "email" && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value)) {
+        setError(field, "Перевірте формат email.");
+        return false;
+      }
+      if (field.name === "phone" && field.value && !phonePattern.test(field.value)) {
+        setError(field, "Перевірте формат телефону, напр. +380 67 123 45 67.");
+        return false;
+      }
+      setError(field, "");
+      return true;
+    }
+
+    form.querySelectorAll("input, select, textarea").forEach(function (field) {
+      field.addEventListener("blur", function () { validateField(field); });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var valid = true;
+      form.querySelectorAll("input, select, textarea").forEach(function (field) {
+        if (!validateField(field)) valid = false;
+      });
+      if (!valid) {
+        status.textContent = "Виправте позначені поля перед відправкою.";
+        status.dataset.state = "error";
+        return;
+      }
+      // NOTE: no real backend is wired up in this template.
+      // Wire this up to your booking API / CRM before going live.
+      status.textContent = "Заявку прийнято. Ми зателефонуємо для підтвердження часу.";
+      status.dataset.state = "success";
+      form.reset();
+    });
+  }
+
+  /* ---------- Scroll-triggered reveals ---------- */
+  var revealTargets = document.querySelectorAll(".reveal, .reveal-stagger");
+  if (revealTargets.length && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+    );
+    revealTargets.forEach(function (el) { io.observe(el); });
+  } else {
+    // No IntersectionObserver support: show content immediately, no animation.
+    revealTargets.forEach(function (el) { el.classList.add("in-view"); });
+  }
+
+  /* ---------- Cookie consent (session-only, see note above) ---------- */
+  var consentState = null; // null = not decided, "accepted" | "rejected"
+  var banner = document.getElementById("cookie-banner");
+  var acceptBtn = document.getElementById("cookie-accept");
+  var rejectBtn = document.getElementById("cookie-reject");
+
+  function loadAnalyticsIfConsented() {
+    if (consentState !== "accepted") return;
+    // ------------------------------------------------------------
+    // GA4 / Plausible placeholder — intentionally NOT wired to a
+    // real property. Uncomment and add a real ID before launch.
+    // ------------------------------------------------------------
+    // var s = document.createElement("script");
+    // s.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
+    // s.async = true;
+    // document.head.appendChild(s);
+    // window.dataLayer = window.dataLayer || [];
+    // function gtag(){ dataLayer.push(arguments); }
+    // gtag('js', new Date());
+    // gtag('config', 'G-XXXXXXX');
+    console.info("[analytics] consent accepted — analytics snippet is a placeholder, not loaded.");
+  }
+
+  if (banner) {
+    if (consentState === null) {
+      // Small delay so the banner slides in after the hero has settled,
+      // instead of popping in instantly on load.
+      window.setTimeout(function () { banner.classList.add("visible"); }, 900);
+    }
+    if (acceptBtn) acceptBtn.addEventListener("click", function () {
+      consentState = "accepted";
+      banner.classList.remove("visible");
+      loadAnalyticsIfConsented();
+    });
+    if (rejectBtn) rejectBtn.addEventListener("click", function () {
+      consentState = "rejected";
+      banner.classList.remove("visible");
+    });
+  }
+})();
+
+</script>
+</body>
+</html>
