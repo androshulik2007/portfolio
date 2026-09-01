@@ -1,6 +1,0 @@
-{
-  "name": "Barbershop",
-  "description": "Сучасний вебсайт барбершопу з галереєю майстрів, прайс-листом, відгуками та модулем інтеграції онлайн-запису Altegio",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
