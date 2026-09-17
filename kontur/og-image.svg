@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0A0A0A" />
+  <!-- Grid overlay -->
+  <line x1="0" y1="120" x2="1200" y2="120" stroke="#222222" stroke-width="1" />
+  <line x1="0" y1="510" x2="1200" y2="510" stroke="#222222" stroke-width="1" />
+  <line x1="120" y1="0" x2="120" y2="630" stroke="#222222" stroke-width="1" />
+  <line x1="1080" y1="0" x2="1080" y2="630" stroke="#222222" stroke-width="1" />
+  <!-- Diagonal Slash -->
+  <polygon points="1100,0 1200,0 800,630 700,630" fill="#1A1A1A" />
+  
+  <!-- Content -->
+  <text x="140" y="220" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="20" fill="#888888" letter-spacing="6">CONCEPTUAL MALE GROOMING LAB</text>
+  <text x="140" y="340" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="86" fill="#FFFFFF" letter-spacing="-2">KONTUR /</text>
+  <text x="140" y="430" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="86" fill="#888888" letter-spacing="-2">MONOCHROME LAB</text>
+  
+  <rect x="140" y="470" width="340" height="48" fill="#FFFFFF" />
+  <text x="160" y="502" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="18" fill="#0A0A0A" letter-spacing="3">SWISS NEO-BRUTALISM // 2026</text>
+</svg>
