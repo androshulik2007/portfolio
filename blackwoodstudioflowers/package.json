@@ -1,0 +1,8 @@
+{
+  "name": "polina-photo-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Фотопортфоліо з адмінкою для додавання фото та каруселей",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

@@ -5,15 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Поліна Старосвіцька — фотопортфоліо</title>
 <meta name="description" content="Фотопортфоліо Поліни Старосвіцької: стріт, портретна та концертна фотографія. Дивіться роботи та пишіть у Telegram.">
-<link rel="canonical" href="https://your-domain.com/">
+<link rel="canonical" href="https://blackwoodstudio.org/blackwoodstudioflowers/">
 <meta name="theme-color" content="#150f0b">
-<!-- TODO: замініть your-domain.com на реальний домен у canonical, og:url, og:image, robots.txt та sitemap.xml -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="uk_UA">
 <meta property="og:title" content="Поліна Старосвіцька — фотопортфоліо">
 <meta property="og:description" content="Фотопортфоліо Поліни Старосвіцької: стріт, портретна та концертна фотографія. Дивіться роботи та пишіть у Telegram.">
-<meta property="og:image" content="https://your-domain.com/images/og-cover.jpg">
-<meta property="og:url" content="https://your-domain.com/">
+<meta property="og:image" content="https://blackwoodstudio.org/blackwoodstudioflowers/images/og-cover.jpg">
+<meta property="og:url" content="https://blackwoodstudio.org/blackwoodstudioflowers/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -53,11 +52,11 @@
 
   <div class="hero-stats">
     <div class="hero-stat">
-      <strong data-stat="photos">12</strong>
+      <strong data-stat="photos">0</strong>
       <span>Фото в галереї</span>
     </div>
     <div class="hero-stat">
-      <strong data-stat="cats">3</strong>
+      <strong data-stat="cats">0</strong>
       <span>Напрямки</span>
     </div>
   </div>
@@ -76,94 +75,15 @@
 <section class="section" id="gallery" aria-labelledby="gallery-title">
   <div class="section-header">
     <h2 class="section-title" id="gallery-title">Галерея</h2>
-    <span class="section-count" id="gallery-count" aria-live="polite">12 фото</span>
+    <span class="section-count" id="gallery-count" aria-live="polite">0 фото</span>
   </div>
 
-  <div class="filters" role="group" aria-label="Фільтр за категорією">
-    <button class="chip" type="button" data-filter="all" aria-pressed="true">Усі</button>
-    <button class="chip" type="button" data-filter="street" aria-pressed="false">Стріт</button>
-    <button class="chip" type="button" data-filter="portrait" aria-pressed="false">Портретні</button>
-    <button class="chip" type="button" data-filter="concert" aria-pressed="false">Концерти</button>
-  </div>
+  <div class="filters" id="filters" role="group" aria-label="Фільтр за категорією"></div>
 
-  <!-- ПРИКЛАДИ: покладіть свої файли в images/gallery/ (photo-01.jpg … photo-12.jpg)
-       або змініть src, alt, назву й розміри у кожному блоці <figure>.
-       Щоб додати фото — скопіюйте будь-який <figure> і змініть дані.
-       Категорії (data-cat): street, portrait, concert — вони збігаються з кнопками фільтра вище. -->
-  <div class="gallery">
-    <figure class="tile" data-cat="portrait" data-w="1200" data-h="1500" style="--ar:1200/1500;--h:28">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-01.jpg" aria-label="Відкрити фото: Портрет дівчини у теплому світлі заходу сонця">
-        <img src="images/gallery/photo-01.jpg" width="1200" height="1500" alt="Портрет дівчини у теплому світлі заходу сонця" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Золота година</span><span class="tile-tag">Портретні</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="street" data-w="1500" data-h="1000" style="--ar:1500/1000;--h:300">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-02.jpg" aria-label="Відкрити фото: Мокра вулиця міста вночі з відблисками вогнів">
-        <img src="images/gallery/photo-02.jpg" width="1500" height="1000" alt="Мокра вулиця міста вночі з відблисками вогнів" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Нічні вулиці</span><span class="tile-tag">Стріт</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="concert" data-w="1500" data-h="1000" style="--ar:1500/1000;--h:330">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-03.jpg" aria-label="Відкрити фото: Вокаліст на сцені в променях кольорового світла">
-        <img src="images/gallery/photo-03.jpg" width="1500" height="1000" alt="Вокаліст на сцені в променях кольорового світла" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Світло сцени</span><span class="tile-tag">Концерти</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="street" data-w="1000" data-h="1500" style="--ar:1000/1500;--h:40">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-04.jpg" aria-label="Відкрити фото: Люди на переході у вечірньому світлі">
-        <img src="images/gallery/photo-04.jpg" width="1000" height="1500" alt="Люди на переході у вечірньому світлі" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Перехожі</span><span class="tile-tag">Стріт</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="portrait" data-w="1000" data-h="1500" style="--ar:1000/1500;--h:20">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-05.jpg" aria-label="Відкрити фото: Силует людини на тлі яскравого сонця">
-        <img src="images/gallery/photo-05.jpg" width="1000" height="1500" alt="Силует людини на тлі яскравого сонця" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Контражур</span><span class="tile-tag">Портретні</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="concert" data-w="1200" data-h="1200" style="--ar:1200/1200;--h:270">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-06.jpg" aria-label="Відкрити фото: Гітарист під прожекторами та димом на сцені">
-        <img src="images/gallery/photo-06.jpg" width="1200" height="1200" alt="Гітарист під прожекторами та димом на сцені" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Прожектори</span><span class="tile-tag">Концерти</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="street" data-w="1200" data-h="1200" style="--ar:1200/1200;--h:170">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-07.jpg" aria-label="Відкрити фото: Пасажири на зупинці під дощем">
-        <img src="images/gallery/photo-07.jpg" width="1200" height="1200" alt="Пасажири на зупинці під дощем" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Зупинка</span><span class="tile-tag">Стріт</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="portrait" data-w="1200" data-h="1500" style="--ar:1200/1500;--h:350">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-08.jpg" aria-label="Відкрити фото: Крупний портрет із кольоровим боковим світлом">
-        <img src="images/gallery/photo-08.jpg" width="1200" height="1500" alt="Крупний портрет із кольоровим боковим світлом" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Крупний план</span><span class="tile-tag">Портретні</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="concert" data-w="1500" data-h="1000" style="--ar:1500/1000;--h:210">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-09.jpg" aria-label="Відкрити фото: Підняті руки глядачів на концерті">
-        <img src="images/gallery/photo-09.jpg" width="1500" height="1000" alt="Підняті руки глядачів на концерті" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Натовп</span><span class="tile-tag">Концерти</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="street" data-w="1500" data-h="1000" style="--ar:1500/1000;--h:190">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-10.jpg" aria-label="Відкрити фото: Довгі тіні на бруківці старого міста">
-        <img src="images/gallery/photo-10.jpg" width="1500" height="1000" alt="Довгі тіні на бруківці старого міста" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Тіні міста</span><span class="tile-tag">Стріт</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="portrait" data-w="1200" data-h="1200" style="--ar:1200/1200;--h:12">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-11.jpg" aria-label="Відкрити фото: Портрет біля вікна з теплим відблиском">
-        <img src="images/gallery/photo-11.jpg" width="1200" height="1200" alt="Портрет біля вікна з теплим відблиском" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Погляд</span><span class="tile-tag">Портретні</span></span>
-      </button>
-    </figure>
-    <figure class="tile" data-cat="concert" data-w="1000" data-h="1500" style="--ar:1000/1500;--h:130">
-      <button class="tile-btn" type="button" data-file="images/gallery/photo-12.jpg" aria-label="Відкрити фото: Музикант у світлі софітів наприкінці виступу">
-        <img src="images/gallery/photo-12.jpg" width="1000" height="1500" alt="Музикант у світлі софітів наприкінці виступу" loading="lazy" decoding="async">
-        <span class="tile-cap"><span class="tile-title">Фінал</span><span class="tile-tag">Концерти</span></span>
-      </button>
-    </figure>
-  </div>
+  <!-- Фото додаються через адмінку (node server.js → /admin/) і зберігаються в gallery-data.js -->
+  <div class="gallery" id="gallery-grid"></div>
+  <p class="gallery-empty" id="gallery-empty" hidden>Фото скоро з'являться. Загляньте пізніше або напишіть мені в Telegram.</p>
+  <noscript><p class="gallery-empty">Для перегляду галереї потрібен JavaScript.</p></noscript>
 </section>
 
 <div class="divider"></div>
@@ -185,6 +105,37 @@
       <p>Я знімаю вулицю, портрети та концерти. Мене цікавлять моменти, коли світло, колір і емоція збігаються в одному кадрі.</p>
       <p>Якщо вам сподобалися роботи в галереї — напишіть мені в Telegram, і ми обговоримо вашу зйомку.</p>
     </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="section-header">
+    <h2 class="section-title" id="faq-title">Часті питання</h2>
+  </div>
+  <div class="faq">
+    <details>
+      <summary>Як замовити зйомку?</summary>
+      <p>Напишіть мені в Telegram <a href="https://t.me/jarfullofpeanuts" target="_blank" rel="noopener noreferrer">@jarfullofpeanuts</a>: коротко опишіть, що хочете зняти, і ми все обговоримо.</p>
+    </details>
+    <details>
+      <summary>Які жанри ви знімаєте?</summary>
+      <p>Стріт-фотографію, портрети та концерти. Приклади робіт є в галереї вище — їх можна фільтрувати за категорією.</p>
+    </details>
+    <details>
+      <summary>Що означає карусель у галереї?</summary>
+      <p>Це серія фото з однієї зйомки або теми. Гортайте її стрілками, свайпом чи крапками внизу, а натиснувши на фото — відкрийте на весь екран.</p>
+    </details>
+    <details>
+      <summary>Чи можна використати ваші фото?</summary>
+      <p>Усі фото захищені авторським правом. Якщо хочете використати роботу, спершу напишіть мені в Telegram.</p>
+    </details>
+    <details>
+      <summary>Чи збирає сайт мої дані?</summary>
+      <p>Аналітика вмикається лише після вашої згоди в банері cookie, і цей вибір можна змінити будь-коли. Докладніше — у <a href="privacy.html">Політиці конфіденційності</a>.</p>
+    </details>
   </div>
 </section>
 
@@ -226,6 +177,7 @@
 </dialog>
 
 <script src="app.js" defer></script>
+<script src="gallery-data.js" defer></script>
 <script src="gallery.js" defer></script>
 </body>
 </html>

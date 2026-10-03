@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://blackwoodstudio.org/blackwoodstudioflowers/sitemap.xml

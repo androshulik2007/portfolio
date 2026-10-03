@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Адмінка галереї</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="top">
+  <h1>Адмінка галереї</h1>
+  <a class="btn btn-outline" href="/" target="_blank" rel="noopener">Відкрити сайт ↗</a>
+</header>
+
+<main>
+  <!-- ДОДАТИ ФОТО -->
+  <section class="card" aria-labelledby="add-title">
+    <h2 id="add-title">Додати фото</h2>
+
+    <div class="drop" id="drop">
+      <input type="file" id="file-input" accept="image/*" multiple hidden>
+      <p><strong>Перетягніть фото сюди</strong> або</p>
+      <button type="button" class="btn btn-primary" id="pick">Обрати фото</button>
+      <p class="hint">JPG, PNG, WebP. Розмір зменшується автоматично, метадані (геолокація) видаляються.</p>
+    </div>
+
+    <form id="stage-form" hidden novalidate>
+      <fieldset class="modes">
+        <legend>Як додати ці фото?</legend>
+        <label class="radio"><input type="radio" name="mode" value="single" checked>
+          <span><strong>Кожне фото окремо</strong><small>на сайті — окремі картки</small></span></label>
+        <label class="radio"><input type="radio" name="mode" value="carousel">
+          <span><strong>Одна карусель</strong><small>усі фото в одній картці, що гортається</small></span></label>
+      </fieldset>
+
+      <div class="row">
+        <label class="field">Категорія
+          <select id="stage-cat" required></select>
+        </label>
+        <button type="button" class="btn btn-outline btn-sm" data-new-cat>+ Нова категорія</button>
+      </div>
+
+      <label class="field" id="carousel-title-wrap" hidden>Назва каруселі
+        <input type="text" id="carousel-title" maxlength="120" placeholder="Наприклад: Концерт у клубі">
+      </label>
+
+      <ul class="stage" id="stage" aria-label="Фото до публікації"></ul>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary" id="publish">Опублікувати на сайті</button>
+        <button type="button" class="btn btn-outline" id="more">Додати ще фото</button>
+        <button type="button" class="btn btn-outline" id="clear">Скасувати</button>
+      </div>
+      <progress id="progress" max="1" value="0" hidden></progress>
+    </form>
+  </section>
+
+  <!-- СПИСОК -->
+  <section class="card" aria-labelledby="list-title">
+    <div class="list-head">
+      <h2 id="list-title">Галерея на сайті</h2>
+      <span class="muted" id="list-count"></span>
+    </div>
+    <p class="muted" id="empty" hidden>Поки порожньо. Додайте перші фото вище.</p>
+    <ul class="items" id="items"></ul>
+
+    <details class="cats">
+      <summary>Керування категоріями</summary>
+      <ul id="cat-list" class="cat-list"></ul>
+      <button type="button" class="btn btn-outline btn-sm" data-new-cat>+ Нова категорія</button>
+    </details>
+  </section>
+</main>
+
+<!-- РЕДАГУВАННЯ -->
+<dialog id="edit" aria-labelledby="edit-title">
+  <form id="edit-form" novalidate>
+    <h2 id="edit-title">Редагувати</h2>
+    <label class="field">Назва
+      <input type="text" id="edit-name" maxlength="120" required>
+    </label>
+    <label class="field">Категорія
+      <select id="edit-cat" required></select>
+    </label>
+    <p class="muted">Фото. Якщо їх кілька — на сайті це карусель.</p>
+    <ul class="stage" id="edit-stage"></ul>
+    <input type="file" id="edit-file" accept="image/*" multiple hidden>
+    <div class="actions">
+      <button type="submit" class="btn btn-primary" id="edit-save">Зберегти</button>
+      <button type="button" class="btn btn-outline" id="edit-add">Додати фото</button>
+      <button type="button" class="btn btn-outline" id="edit-cancel">Скасувати</button>
+    </div>
+    <progress id="edit-progress" max="1" value="0" hidden></progress>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="admin.js"></script>
+</body>
+</html>
