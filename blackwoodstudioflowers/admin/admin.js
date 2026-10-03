@@ -364,6 +364,18 @@
     }).catch(function (e) { toast(e.message, true); });
   }
 
+  /* ── публікація на GitHub ── */
+  $('#publish-site').addEventListener('click', function () {
+    var btn = $('#publish-site');
+    if (!confirm('Опублікувати всі зміни на справжній сайт?')) return;
+    btn.disabled = true;
+    btn.textContent = 'Публікація…';
+    api('POST', '/api/publish').then(function (r) {
+      toast(r.message);
+    }).catch(function (e) { toast(e.message, true); })
+      .then(function () { btn.disabled = false; btn.textContent = 'Опублікувати на сайті'; });
+  });
+
   window.addEventListener('beforeunload', function (e) { if (staged.length) { e.preventDefault(); e.returnValue = ''; } });
   redrawStage();
   refresh();

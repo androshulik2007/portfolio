@@ -15,6 +15,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { execFile } = require('child_process');
 
 const ROOT = __dirname;
 const PORT = Number(process.env.PORT) || 3000;
@@ -289,6 +290,45 @@ function handleAdminStatic(req, res, pathname) {
   serveFile(res, file, { 'X-Robots-Tag': 'noindex, nofollow' });
 }
 
+/* ───────────── публікація через git ───────────── */
+
+function git(args, timeout) {
+  return new Promise((resolve) => {
+    execFile('git', args, {
+      cwd: ROOT, timeout: timeout || 120000, windowsHide: true,
+      env: Object.assign({}, process.env, { GIT_TERMINAL_PROMPT: '0' }),   // не зависати на запиті пароля
+    }, (err, stdout, stderr) => {
+      resolve({ ok: !err, code: err && err.code, out: String(stdout || '').trim(), err: String(stderr || '').trim(), missing: err && err.code === 'ENOENT' });
+    });
+  });
+}
+
+async function publishToGit() {
+  const fail = (m) => { throw new HttpError(400, m); };
+  const inside = await git(['rev-parse', '--is-inside-work-tree'], 15000);
+  if (inside.missing) fail('Git не встановлено на цьому комп\'ютері. Встановіть його з git-scm.com.');
+  if (!inside.ok) fail('Ця папка не є частиною git-репозиторію. Клонуйте репозиторій portfolio і запускайте server.js із папки blackwoodstudioflowers усередині нього.');
+
+  const add = await git(['add', '-A', '--', '.'], 60000);
+  if (!add.ok) fail('git add: ' + (add.err || add.out));
+
+  const staged = await git(['diff', '--cached', '--quiet', '--', '.'], 30000);
+  let committed = false;
+  if (!staged.ok) {   // код 1 = є зміни для коміту
+    const c = await git(['commit', '-m', 'Оновлення галереї', '--', '.'], 60000);
+    if (!c.ok) fail('git commit: ' + (c.err || c.out));
+    committed = true;
+  }
+
+  // Підтягуємо зміни з GitHub (в репозиторії є й інші сайти, які могли змінитися), потім відправляємо.
+  const pull = await git(['pull', '--rebase', '--autostash'], 120000);
+  if (!pull.ok) fail('git pull: ' + (pull.err || pull.out));
+  const push = await git(['push'], 120000);
+  if (!push.ok) fail('git push: ' + (push.err || push.out) + ' — перевірте, що ви увійшли в GitHub (git credential / GitHub Desktop).');
+
+  return { ok: true, committed, message: committed ? 'Опубліковано. Сайт оновиться за 1–2 хвилини.' : 'Нових змін немає — усе вже на GitHub.' };
+}
+
 /* ───────────── API ───────────── */
 
 async function handleApi(req, res, url) {
@@ -319,6 +359,12 @@ async function handleApi(req, res, url) {
     fs.mkdirSync(IMG_DIR, { recursive: true });
     fs.writeFileSync(path.join(IMG_DIR, id + (kind === 'thumb' ? '-t' : '') + '.jpg'), buf);
     return sendJson(res, 200, { id });
+  }
+
+  /* Публікація: git add + commit + push лише для цієї папки (працює, коли папка сайту — частина git-репозиторію). */
+  if (method === 'POST' && p === '/api/publish') {
+    const result = await locked(() => publishToGit());
+    return sendJson(res, 200, result);
   }
 
   if (method === 'POST' && p === '/api/items') {
