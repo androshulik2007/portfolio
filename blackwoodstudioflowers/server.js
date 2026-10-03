@@ -242,7 +242,7 @@ function csrfOk(req) {
 /* ───────────── статичні файли ───────────── */
 
 const PUBLIC_FILES = new Set([
-  'index.html', 'privacy.html', 'terms.html', '404.html', 'style.css', 'app.js', 'gallery.js',
+  'index.html', 'privacy.html', 'terms.html', '404.html', 'style.css', 'app.js', 'gallery.js', 'motion.js', 'logo.svg',
   'gallery-data.js', 'favicon.ico', 'favicon.svg', 'apple-touch-icon.png', 'robots.txt', 'sitemap.xml',
 ]);
 

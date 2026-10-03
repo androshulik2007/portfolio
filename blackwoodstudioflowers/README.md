@@ -19,7 +19,7 @@
 **Варіант А: сервер з адмінкою онлайн.** Розмістіть проєкт на Node-хостингу (VPS, Render, Railway…) і задайте змінні середовища: `ADMIN_PASSWORD=довгий-пароль` (обов'язково), за потреби `ADMIN_USER`, `PORT`. Запуск: `node server.js`. Зміни з адмінки з'являються на сайті одразу. Папки `images/gallery` і `data` мають зберігатися між перезапусками (persistent disk) — інакше фото зникнуть.
 Без `ADMIN_PASSWORD` адмінка працює лише на localhost; з інтернету такий сервер не запуститься.
 
-**Варіант Б: статичний хостинг.** Додавайте фото локально, потім завантажте на хостинг: `index.html`, `privacy.html`, `terms.html`, `404.html`, `style.css`, `app.js`, `gallery.js`, `gallery-data.js`, favicon-файли, `robots.txt`, `sitemap.xml` і папку `images/`. Файли `server.js`, `admin/`, `data/` на хостинг не потрібні.
+**Варіант Б: статичний хостинг.** Додавайте фото локально, потім завантажте на хостинг: `index.html`, `privacy.html`, `terms.html`, `404.html`, `style.css`, `app.js`, `gallery.js`, `motion.js`, `gallery-data.js`, favicon-файли, `robots.txt`, `sitemap.xml` і папку `images/`. Файли `server.js`, `admin/`, `data/` на хостинг не потрібні.
 
 ## Перед запуском
 Перед публікацією змініть у `index.html` текст у розділі «Про мене» на свій.

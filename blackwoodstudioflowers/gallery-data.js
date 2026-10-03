@@ -1,1 +1,1 @@
-window.GALLERY_DATA = {"categories":[{"id":"street","label":"Стріт"},{"id":"portrait","label":"Портретні"},{"id":"concert","label":"Концерти"}],"items":[{"id":"008c8e11ab84","title":"тест фото","cat":"street","photos":[{"src":"images/gallery/f3ab85491abf2a10.jpg","thumb":"images/gallery/f3ab85491abf2a10-t.jpg","w":1240,"h":1748,"alt":"тест фото"}]}]};
+window.GALLERY_DATA = {"categories":[{"id":"street","label":"Стріт"},{"id":"portrait","label":"Портретні"},{"id":"concert","label":"Концерти"}],"items":[]};
