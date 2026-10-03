@@ -253,18 +253,6 @@ nav.main-nav > a.nav-link:hover { color: var(--accent-soft); }
 
 /* ── ABOUT ── */
 .about-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
-.about-photo-wrap {
-  position: relative; width: 100%; max-width: 260px; margin: 0 auto; aspect-ratio: 3 / 4;
-  border-radius: 20px; overflow: hidden; background: var(--surface2); border: 1px solid var(--border); box-shadow: var(--shadow);
-}
-.about-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
-.about-photo-wrap.no-image img { display: none; }
-.about-photo-wrap.no-image::before {
-  content: 'Додайте фото в images/about-me.jpg';
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
-  padding: 0 20px; font-size: 12px; font-weight: 700; color: var(--text-soft);
-  background: repeating-linear-gradient(45deg, var(--surface2), var(--surface2) 10px, #21170f 10px, #21170f 20px);
-}
 .about-copy h3 { font-family: 'Nunito', sans-serif; font-size: clamp(26px, 7vw, 34px); font-weight: 900; letter-spacing: -0.01em; color: var(--text); margin-bottom: 14px; }
 .about-copy p { font-size: 16px; color: var(--text-mid); line-height: 1.75; max-width: 560px; }
 .about-copy p + p { margin-top: 12px; }
@@ -344,7 +332,6 @@ footer.page-footer {
 .legal ul { padding-left: 22px; margin-top: 8px; display: grid; gap: 6px; }
 .legal a { color: var(--accent); }
 .legal code { font-size: 13px; background: var(--surface2); padding: 1px 6px; border-radius: 6px; }
-.legal .placeholder { color: #ffd479; }
 
 /* ── ANIMATION: одна поява hero ── */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
@@ -385,8 +372,6 @@ footer.page-footer {
   .filters { position: static; margin: 0 0 32px; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; overflow: visible; flex-wrap: wrap; gap: 10px; }
   .gallery { column-count: 3; column-gap: 16px; }
   .tile { margin-bottom: 16px; border-radius: 16px; }
-  .about-grid { grid-template-columns: 280px 1fr; gap: 44px; }
-  .about-photo-wrap { max-width: none; margin: 0; }
   .about-copy p { font-size: 15px; }
   footer.page-footer { flex-direction: row; flex-wrap: wrap; justify-content: space-between; padding-left: var(--pad); padding-right: var(--pad); text-align: left; }
   .footer-copy { max-width: none; width: 100%; }

@@ -19,4 +19,4 @@
 **Варіант Б: статичний хостинг.** Додавайте фото локально, потім завантажте на хостинг: `index.html`, `privacy.html`, `terms.html`, `404.html`, `style.css`, `app.js`, `gallery.js`, `gallery-data.js`, favicon-файли, `robots.txt`, `sitemap.xml` і папку `images/`. Файли `server.js`, `admin/`, `data/` на хостинг не потрібні.
 
 ## Перед запуском
-Додайте `images/og-cover.jpg` та `images/about-me.jpg`.
+Перед публікацією змініть у `index.html` текст у розділі «Про мене» на свій.

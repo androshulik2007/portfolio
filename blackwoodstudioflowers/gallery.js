@@ -254,10 +254,4 @@
     applyFilter('all');
   }
 
-  /* ── Заглушка для фото «Про мене» ── */
-  [].slice.call(document.querySelectorAll('.about-photo-wrap img')).forEach(function (img) {
-    function miss() { img.closest('.about-photo-wrap').classList.add('no-image'); }
-    if (img.complete && img.naturalWidth === 0) miss();
-    else img.addEventListener('error', miss, { once: true });
-  });
 })();
