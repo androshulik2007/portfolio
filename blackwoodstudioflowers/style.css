@@ -1,0 +1,367 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  color-scheme: dark;
+  --bg:           #150f0b;
+  --surface:      #1e1611;
+  --surface2:     #281d16;
+  --accent:       #d9a470;
+  --accent-hover: #e6b886;
+  --accent-soft:  #ebc79c;
+  --on-accent:    #1a110b;
+  --accent-wash:  rgba(217, 164, 112, 0.12);
+  --accent-line:  rgba(217, 164, 112, 0.40);
+  --text:         #f5ece2;
+  --text-mid:     #cdbfb0;
+  --text-soft:    #aa9b8b;
+  --text-faint:   #917f6e;
+  --border:       rgba(245, 232, 218, 0.11);
+  --border-hover: rgba(217, 164, 112, 0.55);
+  --shadow:       0 4px 24px rgba(10, 6, 3, 0.5);
+  --shadow-hover: 0 14px 44px rgba(10, 6, 3, 0.7);
+  --pad:          16px;
+  --header-h:     64px;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 64px); -webkit-text-size-adjust: 100%; }
+html.lb-open { overflow: hidden; }
+
+body {
+  font-family: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; }
+button { touch-action: manipulation; }
+:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: 16px; top: -64px; z-index: 500;
+  background: var(--accent); color: var(--on-accent);
+  padding: 10px 18px; border-radius: 100px;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px; text-decoration: none;
+}
+.skip-link:focus { top: 12px; }
+
+/* ── HEADER ── */
+header.page-header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) max(var(--pad), env(safe-area-inset-right, 0px)) 0 max(var(--pad), env(safe-area-inset-left, 0px));
+  background: rgba(21, 15, 11, 0.92);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; min-height: 44px; }
+.logo-svg { width: 36px; height: 36px; flex-shrink: 0; }
+.logo-text { display: flex; flex-direction: column; line-height: 1; min-width: 0; }
+
+.logo-name {
+  font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 900;
+  letter-spacing: 0.05em; color: var(--text); text-transform: uppercase; white-space: nowrap;
+}
+.logo-sub {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-soft); margin-top: 4px;
+}
+
+nav.main-nav { display: flex; gap: 28px; align-items: center; flex-shrink: 0; }
+nav.main-nav > a.nav-link {
+  display: none;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-mid); text-decoration: none; transition: color 0.2s;
+}
+nav.main-nav > a.nav-link:hover { color: var(--accent-soft); }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 11px 22px; border-radius: 100px;
+  font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.04em;
+  text-decoration: none; cursor: pointer; transition: all 0.2s; border: 1px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(217, 164, 112, 0.28); }
+.btn-outline { background: transparent; color: var(--text-mid); border-color: var(--border); }
+.btn-outline:hover { border-color: var(--border-hover); color: var(--accent-soft); }
+
+.btn-tg { padding: 10px 18px; font-size: 13px; }
+.tg-long { display: none; }
+
+/* ── HERO ── */
+.hero { max-width: 1200px; margin: 0 auto; padding: 40px var(--pad) 32px; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-wash); border: 1px solid var(--accent-line);
+  padding: 6px 14px; border-radius: 100px; margin-bottom: 22px;
+}
+.hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+.hero h1 {
+  font-family: 'Nunito', sans-serif; font-size: clamp(36px, 10.5vw, 72px); font-weight: 900;
+  line-height: 1.06; letter-spacing: -0.025em; color: var(--text); margin-bottom: 20px; max-width: 760px;
+}
+
+.hero-desc { font-size: 16px; color: var(--text-mid); max-width: 540px; line-height: 1.7; }
+
+.hero-stats {
+  display: flex; margin-top: 32px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 18px; overflow: hidden; max-width: 380px; box-shadow: var(--shadow);
+}
+.hero-stat { flex: 1; min-width: 0; padding: 18px 20px; border-right: 1px solid var(--border); }
+.hero-stat:last-child { border-right: none; }
+.hero-stat strong { display: block; font-family: 'Nunito', sans-serif; font-size: 26px; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.hero-stat span { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); }
+
+.hero-actions { display: flex; flex-direction: column; margin: 26px 0 0; }
+
+/* ── DIVIDER / SECTION ── */
+.divider { max-width: 1200px; margin: 0 auto; padding: 0 var(--pad); }
+.divider::before { content: ''; display: block; border-top: 1px solid var(--border); }
+
+.section { max-width: 1200px; margin: 0 auto; padding: 36px var(--pad) 40px; }
+.section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+.section-title { font-family: 'Nunito', sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-soft); }
+.section-count { font-size: 12px; font-weight: 600; color: var(--text-faint); }
+
+/* ── FILTERS (липка смуга під шапкою на телефоні) ── */
+.filters {
+  position: sticky; top: calc(var(--header-h) + env(safe-area-inset-top, 0px)); z-index: 50;
+  display: flex; gap: 6px; margin: 0 calc(var(--pad) * -1) 14px; padding: 10px var(--pad);
+  background: rgba(21, 15, 11, 0.94); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.filters::-webkit-scrollbar { display: none; }
+
+.chip {
+  flex: 0 0 auto; min-height: 44px; padding: 8px 15px; border-radius: 100px;
+  font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.03em;
+  border: 1px solid var(--border); background: transparent; color: var(--text-mid);
+  cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent;
+}
+.chip:hover { border-color: var(--border-hover); color: var(--accent-soft); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+/* ── GALLERY (masonry) ── */
+.gallery { column-count: 2; column-gap: 8px; }
+
+.tile {
+  break-inside: avoid; margin: 0 0 8px; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); background: var(--surface); position: relative;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.tile[hidden] { display: none; }
+
+.tile-btn {
+  display: block; position: relative; width: 100%; padding: 0; border: 0; background: none;
+  color: inherit; font: inherit; text-align: left; cursor: zoom-in; -webkit-tap-highlight-color: transparent;
+}
+.tile-btn:focus-visible { outline-offset: -4px; }
+.tile-btn img { display: block; width: 100%; height: auto; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* Підписи на фото — лише коли є наведення мишею або фокус з клавіатури; на телефоні фото чисте */
+.tile-cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 44px 16px 14px;
+  background: linear-gradient(180deg, rgba(15, 10, 7, 0) 0%, rgba(15, 10, 7, 0.88) 100%);
+  opacity: 0; transition: opacity 0.25s; pointer-events: none;
+}
+.tile-btn:focus-visible .tile-cap { opacity: 1; }
+.tile-title { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; color: #fff; line-height: 1.25; }
+.tile-tag {
+  flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px; background: rgba(15, 10, 7, 0.6); color: var(--accent-soft); border: 1px solid var(--accent-line);
+}
+
+/* Заглушка, поки файл фото не додано в images/gallery/ */
+.tile.no-image .tile-btn {
+  aspect-ratio: var(--ar);
+  background: linear-gradient(135deg, hsl(var(--h) 90% 58%), hsl(calc(var(--h) + 70) 95% 40%));
+}
+.tile.no-image img { display: none; }
+.tile.no-image .tile-btn::before {
+  content: attr(data-file);
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  max-width: calc(100% - 12px); text-align: center; font-size: 10px; font-weight: 800; letter-spacing: 0.02em;
+  padding: 5px 10px; border-radius: 10px; background: rgba(15, 10, 7, 0.65); color: #fff; overflow-wrap: anywhere;
+}
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
+.about-photo-wrap {
+  position: relative; width: 100%; max-width: 260px; margin: 0 auto; aspect-ratio: 3 / 4;
+  border-radius: 20px; overflow: hidden; background: var(--surface2); border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.about-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.about-photo-wrap.no-image img { display: none; }
+.about-photo-wrap.no-image::before {
+  content: 'Додайте фото в images/about-me.jpg';
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 0 20px; font-size: 12px; font-weight: 700; color: var(--text-soft);
+  background: repeating-linear-gradient(45deg, var(--surface2), var(--surface2) 10px, #21170f 10px, #21170f 20px);
+}
+.about-copy h3 { font-family: 'Nunito', sans-serif; font-size: clamp(26px, 7vw, 34px); font-weight: 900; letter-spacing: -0.01em; color: var(--text); margin-bottom: 14px; }
+.about-copy p { font-size: 16px; color: var(--text-mid); line-height: 1.75; max-width: 560px; }
+.about-copy p + p { margin-top: 12px; }
+.about-copy .btn { margin-top: 22px; }
+
+/* ── FOOTER ── */
+footer.page-footer {
+  margin-top: 24px; border-top: 1px solid var(--border);
+  padding: 28px max(var(--pad), env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) max(var(--pad), env(safe-area-inset-left, 0px));
+  display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center;
+}
+.footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.footer-logo-svg { width: 28px; height: 28px; opacity: 0.85; }
+.footer-logo-text { font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); }
+.footer-links { display: flex; align-items: center; justify-content: center; gap: 6px 20px; flex-wrap: wrap; }
+.footer-link {
+  display: inline-flex; align-items: center; min-height: 44px; font: inherit; font-size: 13px; font-weight: 600;
+  color: var(--text-soft); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(245, 232, 218, 0.22);
+  background: none; border: 0; padding: 0; cursor: pointer; transition: color 0.2s;
+}
+.footer-link:hover { color: var(--accent-soft); }
+.footer-copy { font-size: 12px; color: var(--text-faint); max-width: 420px; }
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  border: 0; padding: 0; margin: 0; width: 100vw; height: 100vh; height: 100dvh; max-width: none; max-height: none;
+  background: rgba(15, 10, 7, 0.98); color: var(--text); overscroll-behavior: contain;
+}
+.lightbox[open] { display: flex; }
+.lightbox::backdrop { background: #0f0a07; }
+
+.lb-stage {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  padding: calc(64px + env(safe-area-inset-top, 0px)) 8px calc(88px + env(safe-area-inset-bottom, 0px));
+  touch-action: pan-y pinch-zoom;
+}
+.lb-img { display: block; max-width: 100%; max-height: calc(100vh - 230px); max-height: calc(100dvh - 230px); width: auto; height: auto; border-radius: 8px; object-fit: contain; }
+.lb-fallback {
+  width: min(100%, calc(60vh * var(--arn, 1.5))); width: min(100%, calc(60dvh * var(--arn, 1.5)));
+  aspect-ratio: var(--ar, 3 / 2); border-radius: 8px;
+  background: linear-gradient(135deg, hsl(var(--h, 30) 90% 58%), hsl(calc(var(--h, 30) + 70) 95% 40%));
+}
+.lb-fallback[hidden], .lb-img[hidden] { display: none; }
+
+.lb-info { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; text-align: center; }
+.lb-info strong { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; }
+.lb-count { font-size: 13px; font-weight: 700; color: var(--text-soft); }
+
+.lb-btn {
+  position: absolute; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid var(--border); background: rgba(245, 232, 218, 0.1); color: var(--text); cursor: pointer;
+  transition: background 0.2s; z-index: 2; -webkit-tap-highlight-color: transparent;
+}
+.lb-btn:hover { background: var(--accent); color: var(--on-accent); }
+.lb-btn[hidden] { display: none; }
+.lb-close { top: calc(12px + env(safe-area-inset-top, 0px)); right: 12px; }
+.lb-prev { left: 16px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
+.lb-next { right: 16px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
+
+/* ── COOKIE BANNER ── */
+.cookie-banner {
+  position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 300;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 18px 18px 16px; box-shadow: var(--shadow-hover);
+}
+.cookie-banner h2 { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900; margin-bottom: 6px; }
+.cookie-banner p { font-size: 13.5px; color: var(--text-mid); line-height: 1.6; margin-bottom: 14px; }
+.cookie-banner a { color: var(--accent); }
+.cookie-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ── LEGAL ── */
+.legal { max-width: 820px; margin: 0 auto; padding: 40px var(--pad) 24px; }
+.legal h1 { font-family: 'Nunito', sans-serif; font-size: clamp(30px, 8vw, 46px); font-weight: 900; letter-spacing: -0.02em; line-height: 1.12; margin-bottom: 10px; }
+.legal .updated { font-size: 13px; color: var(--text-faint); margin-bottom: 32px; }
+.legal h2 { font-family: 'Nunito', sans-serif; font-size: 19px; font-weight: 800; margin: 30px 0 10px; color: var(--text); }
+.legal p, .legal li { font-size: 15.5px; color: var(--text-mid); line-height: 1.75; }
+.legal p + p { margin-top: 10px; }
+.legal ul { padding-left: 22px; margin-top: 8px; display: grid; gap: 6px; }
+.legal a { color: var(--accent); }
+.legal code { font-size: 13px; background: var(--surface2); padding: 1px 6px; border-radius: 6px; }
+.legal .placeholder { color: #ffd479; }
+
+/* ── ANIMATION: одна поява hero ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.hero-eyebrow { animation: fadeUp 0.5s ease both; }
+.hero h1      { animation: fadeUp 0.5s 0.1s ease both; }
+.hero-desc    { animation: fadeUp 0.5s 0.2s ease both; }
+.hero-stats   { animation: fadeUp 0.5s 0.3s ease both; }
+
+/* ── ≥ 480: великі телефони ── */
+@media (min-width: 480px) {
+  .logo-name { font-size: 15px; }
+  .logo-svg { width: 38px; height: 38px; }
+  .hero-actions { flex-direction: row; }
+}
+
+/* ── ≥ 600: планшети ── */
+@media (min-width: 600px) {
+  :root { --pad: 28px; }
+  .gallery { column-gap: 12px; }
+  .tile { margin-bottom: 12px; border-radius: 14px; }
+  .chip { padding: 8px 20px; }
+  .tg-long { display: inline; }
+  .tg-short { display: none; }
+  .btn-tg { padding: 10px 22px; }
+}
+
+/* ── ≥ 821: комп'ютер ── */
+@media (min-width: 821px) {
+  :root { --pad: 60px; --header-h: 76px; }
+  nav.main-nav > a.nav-link { display: inline; }
+  .logo-svg { width: 40px; height: 40px; }
+  .logo-name { font-size: 16px; }
+  .hero { padding: 96px var(--pad) 64px; }
+  .hero-stats { margin-top: 48px; }
+  .hero-desc { font-size: 17px; }
+  .section { padding: 72px var(--pad); }
+  .section-header { margin-bottom: 28px; }
+  .filters { position: static; margin: 0 0 32px; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; overflow: visible; flex-wrap: wrap; gap: 10px; }
+  .gallery { column-count: 3; column-gap: 16px; }
+  .tile { margin-bottom: 16px; border-radius: 16px; }
+  .about-grid { grid-template-columns: 280px 1fr; gap: 44px; }
+  .about-photo-wrap { max-width: none; margin: 0; }
+  .about-copy p { font-size: 15px; }
+  footer.page-footer { flex-direction: row; flex-wrap: wrap; justify-content: space-between; padding-left: var(--pad); padding-right: var(--pad); text-align: left; }
+  .footer-copy { max-width: none; width: 100%; }
+  .legal { padding: 72px var(--pad) 40px; }
+  .lb-stage { padding: 72px 84px 28px; }
+  .lb-img { max-height: calc(100vh - 190px); max-height: calc(100dvh - 190px); }
+  .lb-fallback { width: min(100%, calc(68vh * var(--arn, 1.5))); width: min(100%, calc(68dvh * var(--arn, 1.5))); }
+  .lb-btn { width: 48px; height: 48px; }
+  .lb-close { top: 18px; right: 18px; }
+  .lb-prev, .lb-next { top: 50%; bottom: auto; transform: translateY(-50%); }
+  .lb-prev { left: 18px; }
+  .lb-next { right: 18px; }
+  .cookie-banner { left: auto; right: 20px; bottom: 20px; width: 540px; }
+}
+
+/* ── hover лише там, де він є ── */
+@media (hover: hover) {
+  .tile:hover { border-color: var(--border-hover); box-shadow: var(--shadow-hover); }
+  .tile:hover .tile-btn img { transform: scale(1.04); }
+  .tile:hover .tile-cap { opacity: 1; }
+}
+
+/* ── Дуже вузькі екрани ── */
+@media (max-width: 359px) {
+  .logo-sub { display: none; }
+  .logo-name { font-size: 12px; letter-spacing: 0.03em; }
+  .btn-tg { padding: 10px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
