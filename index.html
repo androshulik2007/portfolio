@@ -125,6 +125,7 @@ nav a {
 }
 
 nav a:hover { color: var(--blue-deep); }
+nav a { white-space: nowrap; }
 
 .nav-programs-link {
   display: flex;
@@ -804,6 +805,20 @@ footer {
   display: none;
 }
 
+/* ── MID-WIDTH HEADER (821–1240px): компактніша шапка, щоб меню не переповнювалось ── */
+@media (min-width: 821px) and (max-width: 1480px) {
+  header { padding: 0 28px; }
+  nav { gap: 18px; }
+  nav a { font-size: 12px; letter-spacing: 0.04em; white-space: nowrap; }
+  .nav-contact-btn span.label-text { display: none; }
+}
+@media (min-width: 821px) and (max-width: 980px) {
+  header { padding: 0 20px; }
+  nav { gap: 12px; }
+  nav a { font-size: 11px; }
+  .nav-programs-link span.label-text { display: none; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 820px) {
   header { padding: 0 24px; }
@@ -918,6 +933,7 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
     </div>
   </a>
   <nav>
+    <a href="#veterinary">Ветеринарія</a>
     <a href="#about">Про мене</a>
     <a href="#projects">Стоматологія</a>
     <a href="#beauty">Салони краси</a>
@@ -988,6 +1004,42 @@ c178 -26 302 -139 353 -323 26 -93 25 -578 -1 -688 -35 -151 -123 -254 -256
       Переглянути програми
       <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS: VETERINARY -->
+<section class="section" id="veterinary">
+  <div class="section-header">
+    <span class="section-title">Ветеринарні клініки</span>
+    <span class="section-count">1 робота</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- CARD 9 -->
+    <div class="card" data-href="vetclinic/index.html" onclick="openCard(this)">
+      <div class="card-image-wrap">
+        <img src="images/vetclinic.jpg" alt="Ветклініка — прев'ю сайту" loading="lazy">
+        <div class="card-image-overlay"></div>
+      </div>
+      <div class="card-body">
+        <div class="card-top">
+          <span class="card-index">09</span>
+          <span class="card-tag">Ветеринарна клініка</span>
+        </div>
+        <h2>Ветклініка</h2>
+        <p>Сучасний мінімалістичний лендінг для ветеринарної клініки у Львові. Червоно-біла палітра, номер телефону як головна дія, список послуг, FAQ, форма зворотного дзвінка з валідацією, cookie-згода та юридичні сторінки.</p>
+        <div>
+          <a class="btn btn-primary" href="vetclinic/index.html" target="_blank" onclick="event.stopPropagation()">
+            Переглянути
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
