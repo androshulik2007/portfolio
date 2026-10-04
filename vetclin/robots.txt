@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+
+# TODO: замініть example.com на ваш справжній домен
+Sitemap: https://example.com/sitemap.xml

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-labelledby="t"><title id="t">Ілюстрація: червона лапа тварини та медичний хрест</title>
+<circle cx="240" cy="240" r="228" fill="#fdf0f2"/>
+<g fill="#c8102e">
+<ellipse cx="240" cy="296" rx="82" ry="66"/>
+<ellipse cx="136" cy="214" rx="30" ry="40" transform="rotate(-18 136 214)"/>
+<ellipse cx="200" cy="150" rx="31" ry="42" transform="rotate(-6 200 150)"/>
+<ellipse cx="280" cy="150" rx="31" ry="42" transform="rotate(6 280 150)"/>
+<ellipse cx="344" cy="214" rx="30" ry="40" transform="rotate(18 344 214)"/>
+</g>
+<path fill="#fff" d="M228 268h24v22h22v24h-22v22h-24v-22h-22v-24h22z"/>
+</svg>
